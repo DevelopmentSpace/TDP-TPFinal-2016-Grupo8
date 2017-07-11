@@ -10,7 +10,7 @@ namespace TPFinal.DAL
     interface ICampaignRespository: IRepository<Campaign>
     {
 
-        IList<Campaign> GetActives(DateTime pDate, DateTime pTinit, DateTime pTfinish);
+        IList<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo);
         
     }
 }

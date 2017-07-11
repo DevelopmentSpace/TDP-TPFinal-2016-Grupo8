@@ -40,9 +40,9 @@ public DigitalSignage() : base("DigitalSignage")
         protected override void OnModelCreating(DbModelBuilder pModelBuilder)
         {
             pModelBuilder.Configurations.Add(new CampaignMap());
-            //pModelBuilder.Configurations.Add(new BannerMap());
-            //pModelBuilder.Configurations.Add(new RssBannerMap());
-            //pModelBuilder.Configurations.Add(new TextBannerMap());
+            pModelBuilder.Configurations.Add(new BannerMap());
+            pModelBuilder.Configurations.Add(new RssBannerMap());
+            pModelBuilder.Configurations.Add(new TextBannerMap());
             pModelBuilder.Configurations.Add(new RssItemMap());
 
 

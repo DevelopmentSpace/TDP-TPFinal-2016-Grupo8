@@ -76,10 +76,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\EntityFramework\CamapignRepository.cs" />
     <Compile Include="DAL\EntityFramework\DigitalSignageDbContext.cs" />
     <Compile Include="DAL\EntityFramework\EFRepository.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\BannerMap.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\CapaignMap.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\RssItemMap.cs" />
+    <Compile Include="DAL\EntityFramework\RssBannerRepository.cs" />
     <Compile Include="DAL\EntityFramework\TextBannerRepository.cs" />
     <Compile Include="DAL\IBannerRepository.cs" />
     <Compile Include="DAL\ICampaignRespository.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="DAL\IRssBannerRepository.cs" />
     <Compile Include="DAL\ITextBannerRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Domain\Banner.cs" />
     <Compile Include="Domain\Campaign.cs" />
     <Compile Include="Domain\RssBanner.cs" />

@@ -13,10 +13,10 @@ namespace TPFinal.DAL.EntityFramework.Mappings
 
         public CampaignMap()
         {
-            // Nombre de la tabla que tendrá la entidad, en este caso 'AccountMovement'.
+            // Nombre de la tabla que tendrá la entidad, en este caso 'Campaign'.
             this.ToTable("Campaign");
 
-            // Clave primaria de la entidad, indicando que la columna se llama 'AccountMovementId' y que es autoincremental.
+            // Clave primaria de la entidad, indicando que la columna se llama 'CampaignId' y que es autoincremental.
             this.HasKey(pCampaign => pCampaign.id)
                 .Property(pCampaign => pCampaign.id)
                 .HasColumnName("CampaignId")
