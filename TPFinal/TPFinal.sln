@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPFinal", "TPFinal\TPFinal.csproj", "{3D56154A-961A-40E3-B9E2-90F17B672012}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPFinal-Test", "TPFinal-Test\TPFinal-Test.csproj", "{26D54D58-BC2E-4341-833E-098D071F5C5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,26 @@ Global
 		{3D56154A-961A-40E3-B9E2-90F17B672012}.Release|x64.Build.0 = Release|Any CPU
 		{3D56154A-961A-40E3-B9E2-90F17B672012}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D56154A-961A-40E3-B9E2-90F17B672012}.Release|x86.Build.0 = Release|Any CPU
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|ARM.Build.0 = Debug|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x64.ActiveCfg = Debug|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x64.Build.0 = Debug|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x64.Deploy.0 = Debug|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x86.ActiveCfg = Debug|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x86.Build.0 = Debug|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Debug|x86.Deploy.0 = Debug|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|Any CPU.ActiveCfg = Release|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|ARM.ActiveCfg = Release|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|ARM.Build.0 = Release|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|ARM.Deploy.0 = Release|ARM
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x64.ActiveCfg = Release|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x64.Build.0 = Release|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x64.Deploy.0 = Release|x64
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x86.ActiveCfg = Release|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x86.Build.0 = Release|x86
+		{26D54D58-BC2E-4341-833E-098D071F5C5D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,10 +18,10 @@ namespace TPFinal.DAL.EntityFramework
             this.iDbContext = pContext;
         }
 
-        public IList<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo)
+        public IEnumerable<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo)
         {
             return from campaign in this.iDbContext.Set<Campaign>()
-                   where  ()  || () 
+                   where  ((campaign.initDateTime.Date <= pDateFrom.Date && campaign.endDateTime.Date >= pDateTo.Date) || (campaign.initDateTime >= pDateFrom.Date && campaign.initDateTime.Date <= pDateTo.Date))
                    select campaign;
 
             /*return from campaign in this.iDbContext.Set<Campaign>()

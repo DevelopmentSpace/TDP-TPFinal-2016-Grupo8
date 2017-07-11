@@ -16,13 +16,11 @@ namespace TPFinal.Domain
         
         public int interval { get; set; }
 
-        public DateTime initDate { get; set; }
+        public DateTime initDateTime { get; set; }
 
-        public DateTime endDate { get; set; }
+        public DateTime endDateTime { get; set; }
 
-        public DateTime initTime { get; set; }
 
-        public DateTime endTime { get; set; }
 
         public virtual IList<Byte[]> imagesList { get; set; }
 

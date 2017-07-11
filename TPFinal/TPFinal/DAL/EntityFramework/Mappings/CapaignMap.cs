@@ -27,20 +27,13 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                 .IsRequired();
 
             // Se establece la columna obligatoria (NOT NULL) 'initDate'.
-            this.Property(pCampaign => pCampaign.initDate)
+            this.Property(pCampaign => pCampaign.initDateTime)
                 .IsRequired();
 
             // Se establece la columna obligatoria (NOT NULL) 'endDate'.
-            this.Property(pCampaign => pCampaign.endDate)
+            this.Property(pCampaign => pCampaign.endDateTime)
                 .IsRequired();
 
-            // Se establece la columna obligatoria (NOT NULL) 'initTime'.
-            this.Property(pCampaign => pCampaign.initTime)
-                .IsRequired();
-
-            // Se establece la columna obligatoria (NOT NULL) 'endTime'.
-            this.Property(pCampaign => pCampaign.endTime)
-                .IsRequired();
 
             // Se establece la relación de uno a cero o muchos entre Campaign y Images,
             // permitiendo solamente la navegación desde Campaign hacia Images, con eliminación en cascada.
