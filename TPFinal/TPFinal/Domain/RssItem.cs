@@ -8,9 +8,11 @@ namespace TPFinal.Domain
 {
     public class RssItem
     {
+        public int id { get; set; }
+
         public String description { get; set; }
 
-        public Uri url { get; set; }
+        public String url { get; set; }
 
         public DateTime publishingDate { get; set; }
     }

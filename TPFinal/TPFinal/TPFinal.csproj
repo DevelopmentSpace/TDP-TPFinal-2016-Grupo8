@@ -76,6 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\EntityFramework\DigitalSignageDbContext.cs" />
+    <Compile Include="DAL\EntityFramework\EFRepository.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\CapaignMap.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\RssItemMap.cs" />
+    <Compile Include="DAL\EntityFramework\TextBannerRepository.cs" />
     <Compile Include="DAL\IBannerRepository.cs" />
     <Compile Include="DAL\ICampaignRespository.cs" />
     <Compile Include="DAL\IRepository.cs" />
