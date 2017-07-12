@@ -104,9 +104,9 @@ namespace TPFinal.Model
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
         /// <returns>Imagen actual</returns>
-        public ByteImage GetActualImage()
+        public byte[] GetActualImage()
         {
-            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage);
+            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
         }
 
         /// <summary>
