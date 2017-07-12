@@ -80,7 +80,7 @@ namespace TPFinal.Model
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
         /// <returns>Imagen actual</returns>
-        public byte[] GetActualImage()
+        public ByteImage GetActualImage()
         {
             return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage);
         }
@@ -157,7 +157,7 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.CampaignRepository.GetActives(pDateFrom, pDateTo);
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(pDateFrom, pDateTo);
         }
 
         /// <summary>
