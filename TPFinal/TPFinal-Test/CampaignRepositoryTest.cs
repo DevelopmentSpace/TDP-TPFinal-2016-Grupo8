@@ -10,11 +10,6 @@ namespace TPFinal_Test
     [TestClass]
     public class CampaignRepositoryTest
     {
-        /*public void FixEfProviderServicesProblem()
-        {
-            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-        }*/
-
         [TestMethod]
         public void TestMethod1()
         {
@@ -30,7 +25,22 @@ namespace TPFinal_Test
             uow.campaignRepository.Add(c);
             uow.Complete();
 
-            Assert.IsTrue(true);
+            IEnumerator<Campaign> e = uow.campaignRepository.GetAll().GetEnumerator();
+
+            bool x = false;
+            while (e.MoveNext())
+            {
+                if(e.Current.initDateTime==c.initDateTime 
+                    && e.Current.endDateTime==c.endDateTime
+                    && e.Current.interval==c.interval
+                    && e.Current.imagesList==c.imagesList)
+                {
+                    x = true;
+                }
+            }
+
+            
+            Assert.IsTrue(x);
         }
     }
 }

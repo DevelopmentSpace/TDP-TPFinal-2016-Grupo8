@@ -4,6 +4,7 @@ using System.Linq;
 using TPFinal.DAL;
 using TPFinal.Domain;
 using System.Timers;
+using TPFinal.DTO;
 
 namespace TPFinal.Model
 {
@@ -82,7 +83,7 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
-            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage);
+            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
         }
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.CampaignRepository.GetActives(pDateFrom, pDateTo);
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(pDateFrom, pDateTo);
         }
 
         private bool ActiveCampaign()
