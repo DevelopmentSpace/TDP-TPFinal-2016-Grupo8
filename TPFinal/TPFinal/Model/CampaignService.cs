@@ -84,7 +84,7 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public ByteImage GetActualImage()
         {
-            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage);
         }
 
         /// <summary>

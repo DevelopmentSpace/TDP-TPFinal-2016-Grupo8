@@ -28,12 +28,12 @@ namespace TPFinal.DAL.EntityFramework
         public DbSet<ByteImage> byteImages { get; set; }
 
 
-        /*
-public DigitalSignage() : base("DigitalSignage")
-{
-    // Se establece la estrategia personalizada de inicialización de la BBDD.
-    Database.SetInitializer<DigitalSignage>(new DatabaseInitializationStrategy());
-}*/
+
+        public DigitalSignageDbContext() : base("DigitalSignageDbContext")
+        {
+            // Se establece la estrategia personalizada de inicialización de la BBDD.
+            Database.SetInitializer<DigitalSignageDbContext>(new DatabaseInitializationStrategy());
+        }
 
         /// <summary>
         /// Sustitucion del metodo OnModelCreating

@@ -22,6 +22,10 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                 .HasColumnName("CampaignId")
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            // Se establece la columna obligatoria (NOT NULL) 'name'.
+            this.Property(pCampaign => pCampaign.name)
+                .IsRequired();
+
             // Se establece la columna obligatoria (NOT NULL) 'interval'.
             this.Property(pCampaign => pCampaign.interval)
                 .IsRequired();

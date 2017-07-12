@@ -10,6 +10,8 @@ namespace TPFinal.Domain
     {
         public int id { get; set; }
 
+        public String name { get; set; }
+
         public int interval { get; set; }
     
         public DateTime initDate { get; set; }

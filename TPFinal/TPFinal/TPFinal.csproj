@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\EntityFramework\CamapignRepository.cs" />
+    <Compile Include="DAL\EntityFramework\DatabaseInitializationStrategy.cs" />
     <Compile Include="DAL\EntityFramework\DigitalSignageDbContext.cs" />
     <Compile Include="DAL\EntityFramework\EFRepository.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\BannerMap.cs" />

@@ -21,6 +21,10 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                 .HasColumnName("BannerId")
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            // Se establece la columna obligatoria (NOT NULL) 'name'.
+            this.Property(pBanner => pBanner.name)
+                .IsRequired();
+
             // Se establece la columna obligatoria (NOT NULL) 'interval'.
             this.Property(pBanner => pBanner.interval)
                 .IsRequired();
