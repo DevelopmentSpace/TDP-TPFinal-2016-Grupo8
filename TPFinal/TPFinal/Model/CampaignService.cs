@@ -15,7 +15,7 @@ namespace TPFinal.Model
     class CampaignService
     {
         /// <summary>
-        /// Lista donde se almacenaran todas las campañas actuales (1 hora)
+        /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
         /// </summary>
         private IEnumerable<Campaign> iCampaignList;
 
@@ -62,27 +62,49 @@ namespace TPFinal.Model
 
         public void Create(CampaignDTO pCampaignDTO)
         {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            CampaignMapper campaignMapper = new CampaignMapper();
+            Campaign campaign = new Campaign();
 
+            campaignMapper.MapToModel(pCampaignDTO, campaign);
+
+            iUnitOfWork.campaignRepository.Add(campaign);
 
         }
 
         public void Update(CampaignDTO pCampaignDTO)
         {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            CampaignMapper campaignMapper = new CampaignMapper();
+            Campaign campaign = new Campaign();
+            Campaign oldCampaign = new Campaign();
 
+            campaignMapper.MapToModel(pCampaignDTO, campaign);
+
+            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
+
+            iUnitOfWork.campaignRepository.Remove(oldCampaign);
+
+            iUnitOfWork.campaignRepository.Add(campaign);
 
         }
 
         public void Delete(CampaignDTO pCampaignDTO)
         {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            CampaignMapper campaignMapper = new CampaignMapper();
+            Campaign oldCampaign = new Campaign();
 
+            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
 
+            iUnitOfWork.campaignRepository.Remove(oldCampaign);
         }
 
         /// <summary>
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
         /// <returns>Imagen actual</returns>
-        public ByteImage GetActualImage()
+        public byte[] GetActualImage()
         {
             return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage);
         }

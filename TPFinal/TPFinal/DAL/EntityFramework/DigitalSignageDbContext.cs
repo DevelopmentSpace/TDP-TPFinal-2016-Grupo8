@@ -29,7 +29,7 @@ namespace TPFinal.DAL.EntityFramework
 
 
 
-        public DigitalSignageDbContext() : base("DigitalSignageDbContextTest")
+        public DigitalSignageDbContext() : base("DigitalSignageDbContext")
         {
             // Se establece la estrategia personalizada de inicialización de la BBDD.
             Database.SetInitializer<DigitalSignageDbContext>(new DatabaseInitializationStrategy());
