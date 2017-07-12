@@ -102,7 +102,13 @@
     <Compile Include="Domain\RssBanner.cs" />
     <Compile Include="Domain\RssItem.cs" />
     <Compile Include="Domain\TextBanner.cs" />
+    <Compile Include="DTO\BannerDTO.cs" />
+    <Compile Include="DTO\ByteImageDTO.cs" />
     <Compile Include="DTO\CampaignDTO.cs" />
+    <Compile Include="DTO\Infrastructure\MapperBase.cs" />
+    <Compile Include="DTO\RssBannerDTO.cs" />
+    <Compile Include="DTO\RssItemDTO.cs" />
+    <Compile Include="DTO\TextBannerDTO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

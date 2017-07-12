@@ -9,47 +9,50 @@ using TPFinal.Domain;
 
 namespace TPFinal.DTO
 {
-    public class CampaignDTO
+    public class BannerDTO
     {
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
         public int id { get; set; }
         public int interval { get; set; }
-        public DateTime initDateTime { get; set; }
-        public DateTime endDateTime { get; set; }
-        public IEnumerable<ByteImageDTO> imagesList { get; set; }
+        public DateTime initDate { get; set; }
+        public DateTime endDate { get; set; }
+        public DateTime initTime { get; set; }
+        public DateTime endTime { get; set; }
     }
 
-    public class CampaignMapper : MapperBase<Campaign, CampaignDTO>
+    public class BannerMapper : MapperBase<Banner, BannerDTO>
     {
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
-        private ByteImageMapper _byteImageMapper = new ByteImageMapper();
-        public override Expression<Func<Campaign, CampaignDTO>> SelectorExpression
+        public override Expression<Func<Banner, BannerDTO>> SelectorExpression
         {
             get
             {
-                return ((Expression<Func<Campaign, CampaignDTO>>)(p => new CampaignDTO()
+                return ((Expression<Func<Banner, BannerDTO>>)(p => new BannerDTO()
                 {
                     ////BCC/ BEGIN CUSTOM CODE SECTION 
                     ////ECC/ END CUSTOM CODE SECTION 
                     id = p.id,
                     interval = p.interval,
-                    initDateTime = p.initDateTime,
-                    endDateTime = p.endDateTime,
-                    imagesList = p.imagesList.AsQueryable().Select(this._byteImageMapper.SelectorExpression)
+                    initDate = p.initDate,
+                    endDate = p.endDate,
+                    initTime = p.initTime,
+                    endTime = p.endTime
                 }));
             }
         }
 
-        public override void MapToModel(CampaignDTO dto, Campaign model)
+        public override void MapToModel(BannerDTO dto, Banner model)
         {
             ////BCC/ BEGIN CUSTOM CODE SECTION 
             ////ECC/ END CUSTOM CODE SECTION 
             model.id = dto.id;
             model.interval = dto.interval;
-            model.initDateTime = dto.initDateTime;
-            model.endDateTime = dto.endDateTime;
+            model.initDate = dto.initDate;
+            model.endDate = dto.endDate;
+            model.initTime = dto.initTime;
+            model.endTime = dto.endTime;
 
         }
     }
