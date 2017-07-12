@@ -38,7 +38,7 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             // Se establece la relación de uno a cero o muchos entre Campaign y Images,
             // permitiendo solamente la navegación desde Campaign hacia Images, con eliminación en cascada.
             // El nombre de la columna de la FK se nombra 'CampaignId'.
-            this.HasMany(pCampaign => pCampaign.imagesList)
+            this.HasMany<ByteImage>(pCampaign => pCampaign.imagesList)
                 .WithRequired()
                 .Map(pMapping => pMapping.MapKey("CampaignId"))
                 .WillCascadeOnDelete();

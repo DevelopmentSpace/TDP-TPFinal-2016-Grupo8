@@ -7,7 +7,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL
 {
-    interface ICampaignRespository: IRepository<Campaign>
+    public interface ICampaignRespository : IRepository<Campaign>
     {
 
         IEnumerable<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo);
