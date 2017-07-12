@@ -8,7 +8,7 @@ using System.Timers;
 namespace TPFinal.Model
 {
     /// <summary>
-    /// Servicio de campañas
+    /// Servicio de campañas. Se encarga de ser servicio de todos.
     /// </summary>
     class CampaignService
     {
@@ -86,22 +86,31 @@ namespace TPFinal.Model
         }
 
         /// <summary>
-        /// 
+        /// Empieza un servicio de campañas. Pone a correr los timers.
         /// </summary>
         public void Start()
         {
+            
             iIntervalTimer.Start();
             iRefreshTimer.Start();
 
+            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
             iIntervalTimer.Elapsed += OnIntervalTimer;
             iRefreshTimer.Elapsed += OnRefreshTimer;
         }
 
+        /// <summary>
+        /// Frena ambos timers.
+        /// </summary>
         public void Stop()
         {
             iIntervalTimer.Stop();
             iRefreshTimer.Stop();
         }
+
+        /// <summary>
+        /// Cuando se llega al tiempo de cada intervalo (segun la campaña).
+        /// </summary>
 
         private void OnIntervalTimer(object sender, ElapsedEventArgs e)
      
@@ -135,6 +144,9 @@ namespace TPFinal.Model
             }
         }
 
+        /// <summary>
+        /// Cuando se llega al tiempo de cada refresco con la base de datos.
+        /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
@@ -148,6 +160,10 @@ namespace TPFinal.Model
             iCampaignList = iUnitOfWork.CampaignRepository.GetActives(pDateFrom, pDateTo);
         }
 
+        /// <summary>
+        /// Da informacion del estado de la campaña
+        /// </summary>
+        /// <returns>Verdadero si la campaña estaba activa o falso si no lo estaba</returns>
         private bool ActiveCampaign()
         {
             return ((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
