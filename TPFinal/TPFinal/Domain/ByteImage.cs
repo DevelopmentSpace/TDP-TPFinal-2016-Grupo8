@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TPFinal.Domain;
 
-namespace TPFinal.DAL
+namespace TPFinal.Domain
 {
-    public interface ITextBannerRepository: IRepository<TextBanner>
+    public class ByteImage
     {
+
+        public int id { get; set; }
+
+        public Byte[] bytes { get; set; }
     }
 }

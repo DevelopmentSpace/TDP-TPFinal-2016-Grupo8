@@ -7,7 +7,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL
 {
-    interface IBannerRepository : IRepository<Banner>
+    public interface IBannerRepository : IRepository<Banner>
     {
         IList<Banner> GetActives(DateTime pDate, DateTime pTinit, DateTime pTfinish);
 

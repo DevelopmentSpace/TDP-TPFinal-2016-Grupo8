@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPFinal.DAL
 {
-    interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Agrega un elemento al repositorio

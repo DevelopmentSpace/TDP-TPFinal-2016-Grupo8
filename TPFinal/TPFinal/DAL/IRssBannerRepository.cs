@@ -7,7 +7,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL
 {
-    interface IRssBannerRepository : IRepository<RssBanner>
+    public interface IRssBannerRepository : IRepository<RssBanner>
     {
     }
 }

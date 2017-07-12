@@ -7,7 +7,7 @@ using TPFinal.DAL.EntityFramework;
 
 namespace TPFinal.DAL
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         //Almacena el Contexto a utilizar en los repositorios
         private readonly DigitalSignageDbContext iDbContext;
@@ -25,7 +25,6 @@ namespace TPFinal.DAL
 
             this.iDbContext = pContext;
             this.campaignRepository = new CampaignRepository(this.iDbContext);
-            this.AccountRepository = new AccountRepository(this.iDbContext);
         }
 
         /// <summary>

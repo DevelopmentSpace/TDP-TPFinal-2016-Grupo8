@@ -9,7 +9,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework
 {
-    internal class DigitalSignageDbContext:DbContext
+    public class DigitalSignageDbContext:DbContext
     {
     
         /// <summary>
@@ -24,6 +24,8 @@ namespace TPFinal.DAL.EntityFramework
         public DbSet<TextBanner> textBanners { get; set; }
 
         public DbSet<RssItem> rssItems { get; set; }
+
+        public DbSet<ByteImage> byteImages { get; set; }
 
 
         /*
@@ -40,9 +42,10 @@ public DigitalSignage() : base("DigitalSignage")
         protected override void OnModelCreating(DbModelBuilder pModelBuilder)
         {
             pModelBuilder.Configurations.Add(new CampaignMap());
+            pModelBuilder.Configurations.Add(new ByteImageMap());
             pModelBuilder.Configurations.Add(new BannerMap());
-            pModelBuilder.Configurations.Add(new RssBannerMap());
-            pModelBuilder.Configurations.Add(new TextBannerMap());
+            //pModelBuilder.Configurations.Add(new RssBannerMap());
+           // pModelBuilder.Configurations.Add(new TextBannerMap());
             pModelBuilder.Configurations.Add(new RssItemMap());
 
 

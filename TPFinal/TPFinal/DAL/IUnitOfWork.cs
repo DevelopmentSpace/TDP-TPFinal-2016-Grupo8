@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace TPFinal.DAL
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
 
-        IBannerRepository BannerRepository { get;}
+        IBannerRepository bannerRepository { get;}
 
-        ICampaignRespository CampaignRepository { get; }
+        ICampaignRespository campaignRepository { get; }
 
-        IRssBannerRepository RssBannerRepository { get; }
+        IRssBannerRepository rssBannerRepository { get; }
 
-        ITextBannerRepository TextBannerRepository { get; }
+        ITextBannerRepository textBannerRepository { get; }
 
         void Complete();
     }

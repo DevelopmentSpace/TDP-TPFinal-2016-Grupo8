@@ -22,7 +22,7 @@ namespace TPFinal.Domain
 
 
 
-        public virtual IList<Byte[]> imagesList { get; set; }
+        public virtual IList<ByteImage> imagesList { get; set; }
 
     }
 }

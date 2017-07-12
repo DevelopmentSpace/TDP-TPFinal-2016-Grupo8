@@ -11,7 +11,7 @@ namespace TPFinal.Model
 {
     class CampaignService
     {
-        private IList<Campaign> iCampaignList;
+        /*private IList<Campaign> iCampaignList;
         private int iActualImage = 0;
         private int iActualCampaign = 0;
 
@@ -65,7 +65,7 @@ namespace TPFinal.Model
         {
 
         }
-
+        */
 
     }
 }
