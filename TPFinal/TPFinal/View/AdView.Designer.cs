@@ -51,6 +51,7 @@
             this.textBanner.Name = "textBanner";
             this.textBanner.Size = new System.Drawing.Size(626, 20);
             this.textBanner.TabIndex = 1;
+            this.textBanner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // refreshTimer
             // 
