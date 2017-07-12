@@ -28,24 +28,28 @@ namespace TPFinal.Model
         private int iActualCampaign;
 
         /// <summary>
-        /// Reloj de tiempo para controlar los intervalos.
+        /// Reloj de tiempo para controlar los intervalos. Los intervalos de los timers estan en milisegundos.
         /// </summary>
         private Timer iIntervalTimer;
 
         /// <summary>
-        /// Reloj de tiempo para controlar el tiempo de refresco con la base de datos.
+        /// Reloj de tiempo para controlar el tiempo de refresco con la base de datos. Los intervalos de los timers estan en milisegundos.
         /// </summary>
         private Timer iRefreshTimer;
 
+        /// <summary>
+        /// Creador del servicio de campañas
+        /// </summary>
+        /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public CampaignService(int pRefreshTime)
         {
             iIntervalTimer = new System.Timers.Timer();
-            iIntervalTimer.Interval = 10;
+            iIntervalTimer.Interval = 1000;
             iIntervalTimer.AutoReset = true;
             iIntervalTimer.Enabled = false;
 
             iRefreshTimer = new System.Timers.Timer();
-            iRefreshTimer.Interval = pRefreshTime;
+            iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
 
@@ -135,7 +139,7 @@ namespace TPFinal.Model
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddSeconds(iRefreshTimer.Interval);
+            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
 
             iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
 
