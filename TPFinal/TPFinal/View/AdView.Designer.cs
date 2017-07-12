@@ -47,6 +47,8 @@
             // 
             // textBanner
             // 
+            this.textBanner.Enabled = false;
+            this.textBanner.HideSelection = false;
             this.textBanner.Location = new System.Drawing.Point(12, 320);
             this.textBanner.Name = "textBanner";
             this.textBanner.Size = new System.Drawing.Size(626, 20);

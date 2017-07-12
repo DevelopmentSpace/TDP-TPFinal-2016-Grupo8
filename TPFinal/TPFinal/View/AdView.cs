@@ -1,44 +1,41 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using System.Windows.Forms;
 using TPFinal.Model;
 
 namespace TPFinal.View
 {
-    public partial class AdView : Form
+    public partial class AdView : Form, IObserver
     {
-        CampaignService campaña;
+        CampaignService campaignService;
 
         public AdView()
         {
             InitializeComponent();
         }
 
-
-
         private void AdView_Load(object sender, EventArgs e)
         {
-            campaña = new CampaignService(50);
-            campaña.Start();
-            refreshTimer.Start();
-            refreshTimer.Tick += OnRefresh;
-        }
+            campaignService = new CampaignService(50); //ESTE TIEMPO SE TIENE QUE SELECCIONAR EN OTRA VISTA 
+            campaignService.AddListener(this);
+            campaignService.Start();
 
-        private void OnRefresh(object sender, EventArgs e)
-        {
-            MemoryStream ms = new MemoryStream(campaña.GetActualImage());
-            imageBox.Image = Image.FromStream(ms);
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void Update(String des)
         {
-
+            if (des == "Campaign")
+            {
+                MemoryStream ms = new MemoryStream(campaignService.GetActualImage());
+                imageBox.Image = Image.FromStream(ms);
+            }
+            else if (des == "Banner")
+            {
+                //textBanner.Text = bannerService.GetText();
+                //textBanner.ForeColor = new Color(); // - PARA CAMBIAR EL COLOR DEL TEXTO.
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -50,5 +47,6 @@ namespace TPFinal.View
         {
         
         }
+
     }
 }
