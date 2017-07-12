@@ -8,7 +8,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework.Mappings
 {
-    class RssItemMap: EntityTypeConfiguration<RssItem>
+    public class RssItemMap: EntityTypeConfiguration<RssItem>
     {
         public RssItemMap()
         {

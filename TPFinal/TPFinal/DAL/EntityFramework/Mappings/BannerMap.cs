@@ -8,7 +8,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework.Mappings
 {
-    class BannerMap:EntityTypeConfiguration<Banner>
+    public class BannerMap:EntityTypeConfiguration<Banner>
     {
         public BannerMap()
         {
@@ -20,6 +20,10 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                 .Property(pBanner => pBanner.id)
                 .HasColumnName("BannerId")
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            // Se establece la columna obligatoria (NOT NULL) 'name'.
+            this.Property(pBanner => pBanner.name)
+                .IsRequired();
 
             // Se establece la columna obligatoria (NOT NULL) 'interval'.
             this.Property(pBanner => pBanner.interval)

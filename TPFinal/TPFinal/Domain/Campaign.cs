@@ -13,7 +13,9 @@ namespace TPFinal.Domain
     public class Campaign
     {
         public int id { get; set; }
-        
+
+        public String name { get; set; }
+
         public int interval { get; set; }
 
         public DateTime initDateTime { get; set; }

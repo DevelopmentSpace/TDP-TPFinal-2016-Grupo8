@@ -14,6 +14,7 @@ namespace TPFinal.DTO
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
         public int id { get; set; }
+        public String name { get; set; }
         public int interval { get; set; }
         public DateTime initDateTime { get; set; }
         public DateTime endDateTime { get; set; }
@@ -34,6 +35,7 @@ namespace TPFinal.DTO
                     ////BCC/ BEGIN CUSTOM CODE SECTION 
                     ////ECC/ END CUSTOM CODE SECTION 
                     id = p.id,
+                    name = p.name,
                     interval = p.interval,
                     initDateTime = p.initDateTime,
                     endDateTime = p.endDateTime,
@@ -47,6 +49,7 @@ namespace TPFinal.DTO
             ////BCC/ BEGIN CUSTOM CODE SECTION 
             ////ECC/ END CUSTOM CODE SECTION 
             model.id = dto.id;
+            model.name = dto.name;
             model.interval = dto.interval;
             model.initDateTime = dto.initDateTime;
             model.endDateTime = dto.endDateTime;

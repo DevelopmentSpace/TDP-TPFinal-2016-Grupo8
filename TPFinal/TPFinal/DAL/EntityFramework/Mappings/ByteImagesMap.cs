@@ -8,7 +8,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework.Mappings
 {
-    class ByteImageMap : EntityTypeConfiguration<ByteImage>
+    public class ByteImageMap : EntityTypeConfiguration<ByteImage>
     {
         public ByteImageMap()
         {
