@@ -5,19 +5,23 @@ using TPFinal.DAL;
 using TPFinal.Domain;
 using TPFinal.DTO;
 using System.Timers;
-using TPFinal.DTO;
 
 namespace TPFinal.Model
 {
     /// <summary>
     /// Servicio de campañas. Se encarga de ser servicio de todos.
     /// </summary>
-    class CampaignService
+    class CampaignService : IObservable
     {
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
         /// </summary>
         private IEnumerable<Campaign> iCampaignList;
+
+        /// <summary>
+        /// Lista de escuchadores
+        /// </summary>
+        private List<IObserver> iObserver;
 
         /// <summary>
         /// Indice de la imagen actual de una campaña
@@ -59,6 +63,23 @@ namespace TPFinal.Model
             iActualImage = 0;
         }
 
+        public void AddListener(IObserver pListener)
+        {
+            iObserver.Add(pListener);
+        }
+
+        public void RemoveListener(IObserver pListener)
+        {
+            iObserver.Remove(pListener);
+        }
+
+        public void NotifyListeners()
+        {
+            foreach (IObserver view in iObserver)
+                {
+                view.Update("Campaign");
+                }              
+        }
 
         public void Create(CampaignDTO pCampaignDTO)
         {
@@ -69,6 +90,8 @@ namespace TPFinal.Model
             campaignMapper.MapToModel(pCampaignDTO, campaign);
 
             iUnitOfWork.campaignRepository.Add(campaign);
+
+            iUnitOfWork.Complete();
 
         }
 
@@ -81,11 +104,11 @@ namespace TPFinal.Model
 
             campaignMapper.MapToModel(pCampaignDTO, campaign);
 
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
+            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id); //REVISAR SI FUNCIONA
 
-            iUnitOfWork.campaignRepository.Remove(oldCampaign);
+            oldCampaign = campaign;
 
-            iUnitOfWork.campaignRepository.Add(campaign);
+            iUnitOfWork.Complete();
 
         }
 
@@ -98,6 +121,8 @@ namespace TPFinal.Model
             oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
 
             iUnitOfWork.campaignRepository.Remove(oldCampaign);
+
+            iUnitOfWork.Complete();
         }
 
         /// <summary>
@@ -139,6 +164,8 @@ namespace TPFinal.Model
         private void OnIntervalTimer(object sender, ElapsedEventArgs e)
      
         {
+            NotifyListeners();
+
             if (ActiveCampaign())
             {
                 iActualImage++;
@@ -173,6 +200,8 @@ namespace TPFinal.Model
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
+            NotifyListeners();
+
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime pDateFrom = DateTime.Now;
             DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
