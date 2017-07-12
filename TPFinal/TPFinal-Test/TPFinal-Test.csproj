@@ -59,8 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CampaignRepositoryTest.cs" />
-    <Compile Include="DatabaseInitializationStrategyTest.cs" />
-    <Compile Include="DigitalSignageDbContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

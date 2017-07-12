@@ -14,7 +14,7 @@ namespace TPFinal_Test
         [TestMethod]
         public void AddCampaign()
         {
-            IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
 
             Campaign c = new Campaign();
             c.name = "Mi campañaaaaa";
@@ -28,26 +28,28 @@ namespace TPFinal_Test
             uow.Complete();
 
             IEnumerator<Campaign> e = uow.campaignRepository.GetAll().GetEnumerator();
-
             bool x = false;
             while (e.MoveNext())
             {
-                if (e.Current.name == c.name) {
-                    uow.campaignRepository.Remove(c);
-                    uow.Complete();
+                if (e.Current.name == c.name)
+                {
+                    x = true;
                     Assert.AreEqual(e.Current.interval, c.interval);
                     Assert.AreEqual(e.Current.initDateTime, c.initDateTime);
                     Assert.AreEqual(e.Current.endDateTime, c.endDateTime);
                     CollectionAssert.AreEquivalent((ICollection)e.Current.imagesList, (ICollection)c.imagesList);
-                    x = true;
+                    uow.campaignRepository.Remove(e.Current);
+                    uow.Complete();
+                    break;
                 }
-            }
 
+            }
             Assert.IsTrue(x);
         }
 
+
         [TestMethod]
-        public void getCampaign()
+        public void removeCampaign()
         {
             byte[] b= { 0x44, 0x55 };
 
@@ -61,29 +63,86 @@ namespace TPFinal_Test
             c.endDateTime = DateTime.Now.AddDays(50);
             c.interval = 4;
 
-            IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
             uow.campaignRepository.Add(c);
 
             uow.Complete();
 
             IEnumerator<Campaign> e = uow.campaignRepository.GetAll().GetEnumerator();
+
             e.MoveNext();
 
+            Campaign get = e.Current;
+
+            uow.campaignRepository.Remove(get);
+            uow.Complete();
+            Assert.IsNull(uow.campaignRepository.Get(get.id));
+
+        }
+
+        [TestMethod]
+        public void GetActivesCampaigns()
+        {
+            Campaign c;
+
+            IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
+
+            //Campañaa que finalizo antes
+            c = new Campaign();
+            c.name = "c1";
+            c.initDateTime = new DateTime(2017, 06, 06, 10, 0, 0);
+            c.endDateTime = new DateTime(2017, 06, 06, 10, 30, 0);
+            uow.campaignRepository.Add(c);
+
+            //Campañaa que empezo antes y finaliza en el intervalo
+            c = new Campaign();
+            c.name = "c2";
+            c.initDateTime = new DateTime(2017, 06, 06, 11, 0, 0);
+            c.endDateTime = new DateTime(2017, 06, 06, 12, 31, 0);
+            uow.campaignRepository.Add(c);
+
+            //Campañaa que empezo adentro y finaliza adentro del intervalo
+            c = new Campaign();
+            c.name = "c3";
+            c.initDateTime = new DateTime(2017, 06, 06, 12, 45, 0);
+            c.endDateTime = new DateTime(2017, 06, 06, 12, 50, 0);
+            uow.campaignRepository.Add(c);
+
+            //Campañaa que empezo adentro y finaliza afuera del intervalo
+            c = new Campaign();
+            c.name = "c4";
+            c.initDateTime = new DateTime(2017, 06, 06, 12, 45, 0);
+            c.endDateTime = new DateTime(2017, 06, 06, 16, 50, 0);
+            uow.campaignRepository.Add(c);
+
+            //Campañaa que empieza despues y finaliza despues del intervalo
+            c = new Campaign();
+            c.name = "c5";
+            c.initDateTime = new DateTime(2017, 06, 06, 14, 00, 0);
+            c.endDateTime = new DateTime(2017, 06, 06, 16, 50, 0);
+            uow.campaignRepository.Add(c);
+
+
+            uow.Complete();
+
+
+            DateTime dateFrom = new DateTime(2017, 06, 06, 12, 30, 0);
+            DateTime dateTo = new DateTime(2017, 06, 06, 13, 30, 0);
+
+            IEnumerator<Campaign> e = uow.campaignRepository.GetActives(dateFrom, dateTo).GetEnumerator();
+            e.MoveNext();
             Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c2", e.Current.name);
+            e.MoveNext();
+            Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c3", e.Current.name);
+            e.MoveNext();
+            Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c4", e.Current.name);
 
-            Campaign get = uow.campaignRepository.Get(e.Current.id);
-            uow.Complete();
 
 
-            Assert.AreEqual(e.Current.id, get.id);
-            Assert.AreEqual(e.Current.name, get.name);
-            Assert.AreEqual(e.Current.interval, get.interval);
-            Assert.AreEqual(e.Current.initDateTime, get.initDateTime);
-            Assert.AreEqual(e.Current.endDateTime, get.endDateTime);
-            CollectionAssert.AreEquivalent((ICollection)e.Current.imagesList, (ICollection)get.imagesList);
-
-            uow.campaignRepository.Remove(e.Current);
-            uow.Complete();
+            
 
         }
     }

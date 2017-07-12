@@ -21,13 +21,14 @@ namespace TPFinal.DAL.EntityFramework
         public IEnumerable<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo)
         {
             return from campaign in this.iDbContext.Set<Campaign>()
-                   where  ((campaign.initDateTime.Date <= pDateFrom.Date && campaign.endDateTime.Date >= pDateTo.Date) || (campaign.initDateTime >= pDateFrom.Date && campaign.initDateTime.Date <= pDateTo.Date))
+                   where ((DbFunctions.TruncateTime(campaign.initDateTime) <= pDateFrom.Date && DbFunctions.TruncateTime(campaign.endDateTime) >= pDateTo.Date) 
+                   || (DbFunctions.TruncateTime(campaign.initDateTime) >= pDateFrom.Date && DbFunctions.TruncateTime(campaign.initDateTime) <= pDateTo.Date))
                    select campaign;
+            /*
 
-            /*return from campaign in this.iDbContext.Set<Campaign>()
-                   select new { Campaign = campaign, InitDate = campaign.Movements.Sum(pMovement => pMovement.Amount) } into accountWithBalance
-                   where accountWithBalance.Balance < 0 && Math.Abs(accountWithBalance.Balance) > accountWithBalance.Account.OverdraftLimit
-                   select accountWithBalance.Account;*/
+            return from campaign in this.iDbContext.Set<Campaign>()
+                   where  ((campaign.initDateTime.Date <= pDateFrom.Date && campaign.endDateTime.Date >= pDateTo.Date) || (campaign.initDateTime >= pDateFrom.Date && campaign.initDateTime.Date <= pDateTo.Date))
+                   select campaign;*/
         }
     }
 }
