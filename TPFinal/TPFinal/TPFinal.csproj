@@ -116,6 +116,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Program.cs" />
