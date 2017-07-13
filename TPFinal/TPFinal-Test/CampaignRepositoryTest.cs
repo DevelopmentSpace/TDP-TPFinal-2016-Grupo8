@@ -129,7 +129,11 @@ namespace TPFinal_Test
             DateTime dateFrom = new DateTime(2017, 06, 06, 12, 30, 0);
             DateTime dateTo = new DateTime(2017, 06, 06, 13, 30, 0);
 
-            IEnumerator<Campaign> e = uow.campaignRepository.GetActives(dateFrom, dateTo).GetEnumerator();
+            IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(dateFrom, dateTo);
+
+
+
+            IEnumerator<Campaign> e = enume.GetEnumerator();
             e.MoveNext();
             Assert.IsNotNull(e.Current);
             Assert.AreEqual("c2", e.Current.name);
