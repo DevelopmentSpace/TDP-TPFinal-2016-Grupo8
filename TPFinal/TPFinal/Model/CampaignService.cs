@@ -218,9 +218,10 @@ namespace TPFinal.Model
         /// <summary>
         /// Da informacion del estado de la campaña
         /// </summary>
-        /// <returns>Verdadero si la campaña estaba activa o falso si no lo estaba</returns>
+        /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
         private bool ActiveCampaign()
         {
+            //REEMPLAZA POR TU CODIGO AGUSTIN
             return ((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
         }
     }

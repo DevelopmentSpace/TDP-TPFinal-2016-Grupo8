@@ -20,13 +20,26 @@ namespace TPFinal.Model
             iRefreshTime = pRefreshTIme;
         }
 
+        /// <summary>
+        /// Da informacion del estado de un banner
+        /// </summary>
+        /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
+        public bool IsActive(Banner pBanner)
+        {
+            //REEMPLAZA POR TU CODIGO AGUSTIN
+            return ((pBanner.initDate <= DateTime.Now) && (pBanner.endDate >= DateTime.Now));
+        }
+
         public String GetText()
         {
             String text = "";
-
+       
             foreach (TextBanner textBanner in iTextBannerList)
             {
-                text = text + " - " + textBanner.text;
+                if (IsActive(textBanner))
+                { 
+                    text = text + " - " + textBanner.text;
+                }
             }
 
             return text;

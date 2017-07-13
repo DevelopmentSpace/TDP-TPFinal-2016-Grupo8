@@ -21,6 +21,16 @@ namespace TPFinal.Model
             iRefreshTime = pRefreshTIme;
         }
 
+        /// <summary>
+        /// Da informacion del estado de un banner
+        /// </summary>
+        /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
+        public bool IsActive(Banner pBanner)
+        {
+            //REEMPLAZA POR TU CODIGO AGUSTIN
+            return ((pBanner.initTime <= DateTime.Now) && (pBanner.endTime>= DateTime.Now));
+        }
+
         public String GetText()
         {
             String text = "";
@@ -28,12 +38,15 @@ namespace TPFinal.Model
 
             foreach (RssBanner rssBanner in iRssBannerList)
             {
+                if (IsActive(rssBanner))
+                    { 
                 IEnumerable<RssItem> rssItems;
                 rssItems =  feed.Read(rssBanner.url);
                     foreach (RssItem item in rssItems)
                     {
                     text = text + " - " + item.description;
                     }
+                }
             }
 
             return text;

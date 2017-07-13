@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TPFinal.DAL;
-using TPFinal.Domain;
-using TPFinal.DTO;
 using System.Timers;
 
 namespace TPFinal.Model
