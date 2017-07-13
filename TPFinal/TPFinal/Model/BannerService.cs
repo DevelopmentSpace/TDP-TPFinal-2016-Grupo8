@@ -39,6 +39,13 @@ namespace TPFinal.Model
             iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
+
+            ITextBanner rssBannerService = new RssBannerService();
+            ITextBanner textBannerService = new TextBannerService();
+
+            iTextBannerList.Add(textBannerService);
+            iTextBannerList.Add(rssBannerService);
+
         }
 
         public void AddListener(IObserver pListener)
@@ -86,13 +93,12 @@ namespace TPFinal.Model
         }
 
         /// <summary>
-        /// Frena ambos timers.
+        /// Frena 
         /// </summary>
         public void Stop()
         {
             iRefreshTimer.Stop();
         }
-        /*
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.
         /// </summary>
@@ -106,6 +112,5 @@ namespace TPFinal.Model
 
             iBannerList = iUnitOfWork.bannerRepository.GetActives(pDateFrom,pDateFrom, pDateTo);
         }
-        */
     }
 }

@@ -10,7 +10,7 @@ using TPFinal.Model.RssReaderModel;
 
 namespace TPFinal.Model
 {
-    class RssBannerService
+    class RssBannerService : ITextBanner
     {
         IList<RssBanner> iRssBannerList;
 
@@ -27,10 +27,14 @@ namespace TPFinal.Model
                     {
                     text = text + " - " + item.description;
                     }
-
             }
 
             return text;
+        }
+
+        public void Refresh()
+        {
+
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)
