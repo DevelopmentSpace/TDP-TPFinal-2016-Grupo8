@@ -9,6 +9,7 @@ namespace TPFinal.View
     public partial class AdView : Form, IObserver
     {
         CampaignService campaignService;
+        BannerService bannerService;
 
         public AdView()
         {
@@ -17,8 +18,17 @@ namespace TPFinal.View
 
         private void AdView_Load(object sender, EventArgs e)
         {
-            campaignService = new CampaignService(50); //ESTE TIEMPO SE TIENE QUE SELECCIONAR EN OTRA VISTA 
+            int DataBaseRefreshTime = 20;
+
+
+
+            campaignService = new CampaignService(DataBaseRefreshTime); //ESTE TIEMPO SE TIENE QUE SELECCIONAR EN OTRA VISTA 
+            bannerService = new BannerService(DataBaseRefreshTime);
+
             campaignService.AddListener(this);
+            bannerService.AddListener(this);
+
+            bannerService.Start();
             campaignService.Start();
 
 
@@ -33,20 +43,12 @@ namespace TPFinal.View
             }
             else if (des == "Banner")
             {
+                textBanner.ForeColor = System.Drawing.Color.Red; // - PARA CAMBIAR EL COLOR DEL TEXTO.
                 //textBanner.Text = bannerService.GetText();
-                //textBanner.ForeColor = new Color(); // - PARA CAMBIAR EL COLOR DEL TEXTO.
+                textBanner.ForeColor = System.Drawing.Color.Black;
+
             }
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void refreshTimer_Tick(object sender, EventArgs e)
-        {
-        
-        }
-
+ 
     }
 }
