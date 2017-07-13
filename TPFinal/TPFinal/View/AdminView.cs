@@ -16,5 +16,20 @@ namespace TPFinal.View
         {
             InitializeComponent();
         }
+
+        private void AdminView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Campaign_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
