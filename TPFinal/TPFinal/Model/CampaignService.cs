@@ -164,7 +164,6 @@ namespace TPFinal.Model
         private void OnIntervalTimer(object sender, ElapsedEventArgs e)
      
         {
-            NotifyListeners();
 
             if (ActiveCampaign())
             {
@@ -193,6 +192,8 @@ namespace TPFinal.Model
                     iActualCampaign = 0;
                 }
             }
+
+            NotifyListeners();
         }
 
         /// <summary>
@@ -200,7 +201,6 @@ namespace TPFinal.Model
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
-            NotifyListeners();
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime pDateFrom = DateTime.Now;
@@ -211,6 +211,8 @@ namespace TPFinal.Model
             iActualCampaign = 0;
             iActualImage = 0;
             iCampaignList = iUnitOfWork.campaignRepository.GetActives(pDateFrom, pDateTo);
+
+            NotifyListeners();
         }
 
         /// <summary>

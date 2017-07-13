@@ -40,8 +40,8 @@ namespace TPFinal.Model
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
 
-            ITextBanner rssBannerService = new RssBannerService();
-            ITextBanner textBannerService = new TextBannerService();
+            ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
+            ITextBanner textBannerService = new TextBannerService(pRefreshTime);
 
             iTextBannerList.Add(textBannerService);
             iTextBannerList.Add(rssBannerService);
@@ -89,7 +89,7 @@ namespace TPFinal.Model
             iRefreshTimer.Start();
 
             //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-           // iRefreshTimer.Elapsed += OnRefreshTimer;
+           iRefreshTimer.Elapsed += OnRefreshTimer;
         }
 
         /// <summary>
@@ -104,13 +104,18 @@ namespace TPFinal.Model
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
-            NotifyListeners();
+
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime pDateFrom = DateTime.Now;
             DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
 
-            iBannerList = iUnitOfWork.bannerRepository.GetActives(pDateFrom,pDateFrom, pDateTo);
+            foreach (ITextBanner textBanner in iTextBannerList)
+            {
+                textBanner.Refresh();
+            }
+
+            NotifyListeners();
         }
     }
 }

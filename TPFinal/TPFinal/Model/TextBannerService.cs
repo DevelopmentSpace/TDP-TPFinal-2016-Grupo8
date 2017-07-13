@@ -11,8 +11,14 @@ namespace TPFinal.Model
 {
     class TextBannerService : ITextBanner
     {
+        int iRefreshTime;
 
         IList<TextBanner> iTextBannerList;
+
+        public TextBannerService(int pRefreshTIme)
+        {
+            iRefreshTime = pRefreshTIme;
+        }
 
         public String GetText()
         {
@@ -25,8 +31,17 @@ namespace TPFinal.Model
 
             return text;
         }
-  
-public void Create(TextBannerDTO pTextBannerDTO)
+
+        public void Refresh()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            DateTime pDateFrom = DateTime.Now;
+            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTime);
+
+            iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(pDateFrom, pDateFrom, pDateTo);
+        }
+
+        public void Create(TextBannerDTO pTextBannerDTO)
 {
     IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
     TextBannerMapper textBannerMapper = new TextBannerMapper();

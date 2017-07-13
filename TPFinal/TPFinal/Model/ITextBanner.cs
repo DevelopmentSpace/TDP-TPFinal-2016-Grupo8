@@ -9,5 +9,7 @@ namespace TPFinal.Model
     interface ITextBanner
     {
        String GetText();
+
+       void Refresh();
     }
 }

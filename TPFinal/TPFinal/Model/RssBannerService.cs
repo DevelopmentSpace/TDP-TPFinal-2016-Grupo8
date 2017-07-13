@@ -14,6 +14,13 @@ namespace TPFinal.Model
     {
         IList<RssBanner> iRssBannerList;
 
+        int iRefreshTime;
+
+        public RssBannerService(int pRefreshTIme)
+        {
+            iRefreshTime = pRefreshTIme;
+        }
+
         public String GetText()
         {
             String text = "";
@@ -34,7 +41,11 @@ namespace TPFinal.Model
 
         public void Refresh()
         {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            DateTime pDateFrom = DateTime.Now;
+            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTime);
 
+            iRssBannerList = iUnitOfWork.rssBannerRepository.GetActives(pDateFrom, pDateFrom, pDateTo);
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)
