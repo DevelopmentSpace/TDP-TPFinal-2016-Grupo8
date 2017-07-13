@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -117,7 +118,13 @@
     </Compile>
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
+    <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
+    <Compile Include="Model\RssBannerService.cs" />
+    <Compile Include="Model\RssReaderModel\IRssReader.cs" />
+    <Compile Include="Model\RssReaderModel\RssReader.cs" />
+    <Compile Include="Model\RssReaderModel\SyndicationFeedRssReader.cs" />
+    <Compile Include="Model\TextBannerService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AdminView.cs">
