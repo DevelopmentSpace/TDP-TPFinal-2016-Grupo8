@@ -101,24 +101,23 @@ namespace TPFinal.Model
 
             iUnitOfWork.Complete();
         }
-
+         */
         /// <summary>
         /// Obtiene el ultimo banner ingresado
         /// </summary>
         /// <returns>Ultimo banner</returns>
-        public IList<String> GetBannersText()
+        public String GetText()
         {
-            IList<String> aux = new List<String> { };
-            foreach (Banner banner in iBannerList)
-            {
-                if (banner.GetType == TextBanner)
-                {
-                    aux.Add(banner.text);
-                }
-            }
-            return aux;
+            String text;
+            int sizeBanner;
+            text = "Nada";
+            //text = iBannerList.Last().text;
+            sizeBanner = iBannerList.Count;
+            iBannerList.RemoveAt(sizeBanner);
+            return text;
         }
 
+       
         /// <summary>
         /// Empieza un servicio de campañas. Pone a correr los timers.
         /// </summary>
@@ -127,7 +126,7 @@ namespace TPFinal.Model
             iRefreshTimer.Start();
 
             //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-            iRefreshTimer.Elapsed += OnRefreshTimer;
+           // iRefreshTimer.Elapsed += OnRefreshTimer;
         }
 
         /// <summary>
@@ -138,6 +137,7 @@ namespace TPFinal.Model
             iRefreshTimer.Stop();
         }
 
+        /*
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.
         /// </summary>
