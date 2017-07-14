@@ -25,7 +25,12 @@ namespace TPFinal.Model
         /// <summary>
         /// Timer con el tiempo de actualizacion de la base de datos
         /// </summary>
-        private Timer iRefreshTimer; 
+        private Timer iRefreshTimer;
+
+        /// <summary>
+        /// Timer con el tiempo de actualizacion de los textos
+        /// </summary>
+        private Timer iIntervalTimer;
 
         /// <summary>
         /// Creador del servicio de campañas
@@ -37,6 +42,11 @@ namespace TPFinal.Model
             iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
+
+            iIntervalTimer = new System.Timers.Timer();
+            iIntervalTimer.Interval = pRefreshTime * 15000;
+            iIntervalTimer.AutoReset = true;
+            iIntervalTimer.Enabled = false;
 
             ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
             ITextBanner textBannerService = new TextBannerService(pRefreshTime);
@@ -70,7 +80,6 @@ namespace TPFinal.Model
         public String GetText()
         {
             string text = "";
-
             foreach (ITextBanner serviceBanner in iTextBannerList)
             {
                 text = text + " - " + serviceBanner.GetText();
@@ -80,7 +89,7 @@ namespace TPFinal.Model
 
        
         /// <summary>
-        /// Empieza un servicio de campañas. Pone a correr los timers.
+        /// Empieza un servicio de banners. Pone a correr los timers.
         /// </summary>
         public void Start()
         {
@@ -88,6 +97,7 @@ namespace TPFinal.Model
 
             //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
            iRefreshTimer.Elapsed += OnRefreshTimer;
+           iIntervalTimer.Elapsed += OnIntervalTimer;
         }
 
         /// <summary>
@@ -102,17 +112,17 @@ namespace TPFinal.Model
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
-
-
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
-
             foreach (ITextBanner textBanner in iTextBannerList)
             {
                 textBanner.Refresh();
             }
 
+            NotifyListeners();
+        }
+
+        private void OnIntervalTimer(object sender, ElapsedEventArgs e)
+        {
+            //ACA HAY UN TEMA. PUEDE QUE SER QUE LOS BANNER ACTIVOS NO SE MUESTREN
             NotifyListeners();
         }
     }

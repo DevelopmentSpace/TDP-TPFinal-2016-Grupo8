@@ -44,7 +44,7 @@ namespace TPFinal.View
             else if (des == "Banner")
             {
                 textBanner.ForeColor = System.Drawing.Color.Red; // - PARA CAMBIAR EL COLOR DEL TEXTO.
-                //textBanner.Text = bannerService.GetText();
+                textBanner.Text = bannerService.GetText();
                 textBanner.ForeColor = System.Drawing.Color.Black;
 
             }

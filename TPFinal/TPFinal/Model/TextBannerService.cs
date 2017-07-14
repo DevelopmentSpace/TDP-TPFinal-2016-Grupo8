@@ -33,7 +33,6 @@ namespace TPFinal.Model
         public String GetText()
         {
             String text = "";
-       
             foreach (TextBanner textBanner in iTextBannerList)
             {
                 if (IsActive(textBanner))

@@ -165,7 +165,7 @@ namespace TPFinal.Model
      
         {
 
-            if (ActiveCampaign())
+            if (IsActualCampaignActive())
             {
                 iActualImage++;
 
@@ -216,10 +216,10 @@ namespace TPFinal.Model
         }
 
         /// <summary>
-        /// Da informacion del estado de la campaña
+        /// Da informacion del estado de la campaña actual
         /// </summary>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
-        private bool ActiveCampaign()
+        private bool IsActualCampaignActive()
         {
             //REEMPLAZA POR TU CODIGO AGUSTIN
             return ((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
