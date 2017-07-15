@@ -134,6 +134,8 @@ namespace TPFinal.View
 
             campaignService.Create(campaign);
 
+            this.Close();
+
         }
     }
 }
