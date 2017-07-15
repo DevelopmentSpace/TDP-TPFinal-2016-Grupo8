@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPFinal.DTO;
+using TPFinal.Model;
 
 namespace TPFinal.View
 {
@@ -49,17 +51,53 @@ namespace TPFinal.View
 
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            Bitmap image = new Bitmap(openFileDialog.FileName);
-
-            DataGridViewRow row = new DataGridViewRow();
-
-            row.Cells["Image"].Value = image;
-
-            dataGridView1.Rows.Add(row);
+            foreach (String dir in openFileDialog.FileNames)
+            {
+                //EL ID ACA TIENE QUE SALIR DE OTRO LADO
+                dataGridViewImages.Rows.Add(dataGridViewImages.Rows.Count, Bitmap.FromFile(dir));
+             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void dataGridViewImages_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '⌂')
+                { 
+                foreach (DataGridViewRow row in dataGridViewImages.SelectedRows)
+                {
+                    dataGridViewImages.Rows.Remove(row);
+                }
+            }
+        }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            //Este campaign service tiene que salir de otro lado.
+            CampaignService campaignService = new CampaignService(30);
+
+            CampaignDTO campaign = new CampaignDTO();
+            //campaign.id = campaignService.LastID();
+            campaign.name = campaignNameText.Text;
+
+            campaign.interval = Convert.ToInt32(intervalText.Text);
+
+            campaign.initDateTime = initDateTimePicker.Value;
+            campaign.endDateTime = endDateTimePicker.Value;
+
+            IEnumerable<ByteImageDTO> imageDTO;
+
+            foreach (DataGridViewRow row in dataGridViewImages.Rows)
+            {
+               //row
+            }
+
+            //campaign.imagesList = imageDTO;
+
+            campaignService.Create(campaign);
 
         }
     }
