@@ -13,7 +13,7 @@ namespace TPFinal.Model
     {
         int iRefreshTime;
 
-        IList<TextBanner> iTextBannerList;
+        IEnumerable<TextBanner> iTextBannerList;
 
         public TextBannerService(int pRefreshTIme)
         {
@@ -24,7 +24,7 @@ namespace TPFinal.Model
         /// Da informacion del estado de un banner
         /// </summary>
         /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
-        public bool IsActive(Banner pBanner)
+        public bool IsBannerActive(Banner pBanner)
         {
             //REEMPLAZA POR TU CODIGO AGUSTIN
             return ((pBanner.initDate <= DateTime.Now) && (pBanner.endDate >= DateTime.Now));
@@ -35,7 +35,7 @@ namespace TPFinal.Model
             String text = "";
             foreach (TextBanner textBanner in iTextBannerList)
             {
-                if (IsActive(textBanner))
+                if (IsBannerActive(textBanner))
                 { 
                     text = text + " - " + textBanner.text;
                 }
@@ -47,10 +47,11 @@ namespace TPFinal.Model
         public void Refresh()
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTime);
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTime));
 
-            iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(pDateFrom, pDateFrom, pDateTo);
+            iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(date,timeFrom,timeTo);
         }
 
         public void Create(TextBannerDTO pTextBannerDTO)

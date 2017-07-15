@@ -13,6 +13,6 @@ namespace TPFinal.Model
 
        void Refresh();
 
-        bool IsActive(Banner pBanner);
+        bool IsBannerActive(Banner pBanner);
     }
 }
