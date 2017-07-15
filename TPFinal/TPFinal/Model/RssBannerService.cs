@@ -12,7 +12,7 @@ namespace TPFinal.Model
 {
     class RssBannerService : ITextBanner
     {
-        IList<RssBanner> iRssBannerList;
+        IEnumerable<RssBanner> iRssBannerList;
 
         int iRefreshTime;
 
@@ -25,11 +25,16 @@ namespace TPFinal.Model
         /// Da informacion del estado de un banner
         /// </summary>
         /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
-        public bool IsActive(Banner pBanner)
+        public bool IsBannerActive(Banner b)
         {
-            //REEMPLAZA POR TU CODIGO AGUSTIN
-            return ((pBanner.initTime <= DateTime.Now) && (pBanner.endTime>= DateTime.Now));
+            DateTime date = DateTime.Now.Date;
+            TimeSpan time = date.TimeOfDay;
+
+            return (b.initDate <= date && b.endDate >= date)
+                    &&
+                    (b.initTime <= time && b.endTime >= time);
         }
+
 
         public String GetText()
         {
@@ -38,7 +43,7 @@ namespace TPFinal.Model
 
             foreach (RssBanner rssBanner in iRssBannerList)
             {
-                if (IsActive(rssBanner))
+                if (IsBannerActive(rssBanner))
                     { 
                 IEnumerable<RssItem> rssItems;
                 rssItems =  feed.Read(rssBanner.url);
@@ -55,10 +60,11 @@ namespace TPFinal.Model
         public void Refresh()
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTime);
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTime));
 
-            iRssBannerList = iUnitOfWork.rssBannerRepository.GetActives(pDateFrom, pDateFrom, pDateTo);
+            iRssBannerList = iUnitOfWork.rssBannerRepository.GetActives(date,timeFrom,timeTo);
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)

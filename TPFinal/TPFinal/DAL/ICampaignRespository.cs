@@ -11,6 +11,6 @@ namespace TPFinal.DAL
     {
 
         IEnumerable<Campaign> GetActives(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo);
-        
+
     }
 }
