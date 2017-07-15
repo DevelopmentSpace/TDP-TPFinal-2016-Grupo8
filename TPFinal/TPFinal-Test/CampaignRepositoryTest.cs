@@ -158,110 +158,39 @@ namespace TPFinal_Test
 
             uow.Complete();
 
-            DateTime dateFrom = new DateTime(2016, 06, 06, 12, 30, 0);
-            DateTime dateTo = new DateTime(2016, 06, 06, 13, 30, 0);
+            DateTime date = new DateTime(2016, 06, 06, 0,0, 0);
+            TimeSpan timeFrom = new TimeSpan(12, 30, 0);
+            TimeSpan timeTo = new TimeSpan(13, 30, 0);
 
-            IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(dateFrom, dateTo);
+            IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date,timeFrom,timeTo);
 
+            uow.Complete();
 
-            try
-            {
-                IEnumerator<Campaign> e = enume.GetEnumerator();
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c2", e.Current.name);
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c3", e.Current.name);
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c4", e.Current.name);
-                Assert.IsFalse(e.MoveNext());
-            }
-            finally
-            {
-                uow.Dispose();
-            }
-            
-
-            
+            IEnumerator<Campaign> e = enume.GetEnumerator();
+            e.MoveNext();
+            Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c2", e.Current.name);
+            e.MoveNext();
+            Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c3", e.Current.name);
+            e.MoveNext();
+            Assert.IsNotNull(e.Current);
+            Assert.AreEqual("c4", e.Current.name);
+            Assert.IsFalse(e.MoveNext());
         }
 
         [TestMethod]
-        public void GetActivesCampaignsBetweenDays()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void invalidTimeGetActiveCampaigns()
         {
-            Campaign c;
-
             IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
 
-            //Campañaa que empieza y termina en el primer dia
-            c = new Campaign();
-            c.name = "c1";
-            c.initDate = new DateTime(2017, 06, 06, 0, 0, 0);
-            c.endDate = new DateTime(2017, 06, 06, 0, 0, 0);
-            c.initTime = new TimeSpan(22, 0, 0);
-            c.endTime = new TimeSpan(23, 50, 0);
-            uow.campaignRepository.Add(c);
+            DateTime date = new DateTime(2016, 06, 06, 0, 0, 0);
+            TimeSpan timeFrom = new TimeSpan(12, 30, 0);
+            TimeSpan timeTo = new TimeSpan(10, 30, 0);
 
-            //Campañaa que empieza en un dia y termina en el siguiente
-            c = new Campaign();
-            c.name = "c2";
-            c.initDate = new DateTime(2017, 06, 06, 0, 0, 0);
-            c.endDate = new DateTime(2017, 06, 07, 0, 0, 0);
-            c.initTime = new TimeSpan(22, 0, 0);
-            c.endTime = new TimeSpan(0, 50, 0);
-            uow.campaignRepository.Add(c);
-
-            //Campañaa que empieza en el dia siguiente y termina despues
-            c = new Campaign();
-            c.name = "c3";
-            c.initDate = new DateTime(2017, 06, 07, 0, 0, 0);
-            c.endDate = new DateTime(2017, 06, 07, 0, 0, 0);
-            c.initTime = new TimeSpan(0, 10, 0);
-            c.endTime = new TimeSpan(1, 50, 0);
-            uow.campaignRepository.Add(c);
-
-            //Campañaa que empieza y termina en el primer dia
-            c = new Campaign();
-            c.name = "c4";
-            c.initDate = new DateTime(2017, 06, 06, 0, 0, 0);
-            c.endDate = new DateTime(2017, 06, 06, 0, 0, 0);
-            c.initTime = new TimeSpan(22, 0, 0);
-            c.endTime = new TimeSpan(23, 50, 0);
-            uow.campaignRepository.Add(c);
-
-            //Campañaa que empieza y termina en el dia siguiente
-            c = new Campaign();
-            c.name = "c5";
-            c.initDate = new DateTime(2017, 06, 07, 0, 0, 0);
-            c.endDate = new DateTime(2017, 06, 07, 0, 0, 0);
-            c.initTime = new TimeSpan(4, 0, 0);
-            c.endTime = new TimeSpan(5, 50, 0);
-            uow.campaignRepository.Add(c);
-
-            uow.Complete();
-        
-
-            DateTime dateFrom = new DateTime(2017, 06, 06, 23, 30, 0);
-            DateTime dateTo = new DateTime(2017, 06, 07, 0, 30, 0);
-
-            IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(dateFrom, dateTo);
-
-
-                IEnumerator<Campaign> e = enume.GetEnumerator();
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c1", e.Current.name);
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c2", e.Current.name);
-                e.MoveNext();
-                Assert.IsNotNull(e.Current);
-                Assert.AreEqual("c3", e.Current.name);
-                Assert.IsFalse(e.MoveNext());
-
-
-            
+            uow.campaignRepository.GetActives(date, timeFrom, timeTo);
         }
+
     }
 }
