@@ -165,11 +165,11 @@ namespace TPFinal.Model
      
         {
 
-            if (IsActualCampaignActive())
+                if (IsCampaignActive(this.iCampaignList.ElementAt(this.iActualCampaign)))
             {
-                iActualImage++;
+                this.iActualImage++;
 
-                if (iActualImage > iCampaignList.ElementAt(iActualCampaign).imagesList.Count)
+                if (iActualImage > this.iCampaignList.ElementAt(iActualCampaign).imagesList.Count)
                 {
                     iActualImage = 0;
                     iActualCampaign++;
@@ -216,18 +216,9 @@ namespace TPFinal.Model
             NotifyListeners();
         }
 
-        /// <summary>
-        /// Da informacion del estado de la campaña actual
-        /// </summary>
-        /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
-        private bool IsActualCampaignActive()
-        {
-            //REEMPLAZA POR TU CODIGO AGUSTIN
-            return true;//((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
-        }
 
         /// <summary>
-        /// Permite saber si una capaña esta activa actualmente
+        /// Permite saber si una campaña esta activa actualmente
         /// </summary>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
         private bool IsCampaignActive(Campaign c)
