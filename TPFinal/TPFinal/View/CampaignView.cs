@@ -58,6 +58,8 @@ namespace TPFinal.View
                 //EL ID ACA TIENE QUE SALIR DE OTRO LADO
                 dataGridViewImages.Rows.Add(dataGridViewImages.Rows.Count, Bitmap.FromFile(dir));
              }
+            dataGridViewImages.Update();
+            dataGridViewImages.Refresh();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -67,12 +69,13 @@ namespace TPFinal.View
 
         private void dataGridViewImages_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '⌂')
+            if (e.KeyChar == 'd')
                 { 
                 foreach (DataGridViewRow row in dataGridViewImages.SelectedRows)
                 {
                     dataGridViewImages.Rows.Remove(row);
                 }
+
             }
         }
 

@@ -26,8 +26,12 @@ namespace TPFinal.Model
         /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
         public bool IsBannerActive(Banner pBanner)
         {
-            //REEMPLAZA POR TU CODIGO AGUSTIN
-            return ((pBanner.initDate <= DateTime.Now) && (pBanner.endDate >= DateTime.Now));
+            DateTime date = DateTime.Now.Date;
+            TimeSpan time = date.TimeOfDay;
+
+            return (pBanner.initDate <= date && pBanner.endDate >= date)
+                    &&
+                    (pBanner.initTime <= time && pBanner.endTime >= time);
         }
 
         public String GetText()
