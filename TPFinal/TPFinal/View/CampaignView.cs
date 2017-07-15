@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -74,6 +76,31 @@ namespace TPFinal.View
             }
         }
 
+        //ESTO NO VA ACA
+        public static byte[] BitmapToByteArray(Bitmap bitmap)
+        {
+
+            BitmapData bmpdata = null;
+
+            try
+            {
+                bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                int numbytes = bmpdata.Stride * bitmap.Height;
+                byte[] bytedata = new byte[numbytes];
+                IntPtr ptr = bmpdata.Scan0;
+
+                Marshal.Copy(ptr, bytedata, 0, numbytes);
+
+                return bytedata;
+            }
+            finally
+            {
+                if (bmpdata != null)
+                    bitmap.UnlockBits(bmpdata);
+            }
+
+        }
+
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             //Este campaign service tiene que salir de otro lado.
@@ -85,17 +112,25 @@ namespace TPFinal.View
 
             campaign.interval = Convert.ToInt32(intervalText.Text);
 
-            campaign.initDateTime = initDateTimePicker.Value;
-            campaign.endDateTime = endDateTimePicker.Value;
+            campaign.initDate = initDateTimePicker.Value;
+            campaign.endDate = endDateTimePicker.Value;
 
-            IEnumerable<ByteImageDTO> imageDTO;
+            //campaign.initTime = initTimeText.Text;
+            //campaign.endTime = endTimeText.Text;
+
+            IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
 
             foreach (DataGridViewRow row in dataGridViewImages.Rows)
             {
-               //row
+                ByteImageDTO imageDTO = new ByteImageDTO();
+
+                imageDTO.id = Convert.ToInt32(row.Cells["ID"].Value);
+                imageDTO.bytes = CampaignView.BitmapToByteArray((Bitmap)row.Cells["Image"].Value);
+
+                imagesAuxDTO.Add(imageDTO);
             }
 
-            //campaign.imagesList = imageDTO;
+            campaign.imagesList = imagesAuxDTO;
 
             campaignService.Create(campaign);
 
