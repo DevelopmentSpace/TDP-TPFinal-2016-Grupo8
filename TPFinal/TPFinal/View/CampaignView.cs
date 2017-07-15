@@ -110,7 +110,7 @@ namespace TPFinal.View
             //campaign.id = campaignService.LastID();
             campaign.name = campaignNameText.Text;
 
-            campaign.interval = Convert.ToInt32(intervalText.Text);
+            //campaign.interval = Convert.ToInt32(intervalText.Text);
 
             campaign.initDate = initDateTimePicker.Value;
             campaign.endDate = endDateTimePicker.Value;

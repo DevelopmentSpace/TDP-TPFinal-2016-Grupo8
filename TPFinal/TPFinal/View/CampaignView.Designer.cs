@@ -314,8 +314,8 @@
         private System.Windows.Forms.GroupBox imageBox;
         private System.Windows.Forms.Button addPictureButton;
         private System.Windows.Forms.GroupBox endTimeText;
-        private System.Windows.Forms.Button AcceptButton;
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button AcceptButton;
+        private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.DataGridView dataGridViewImages;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
