@@ -9,5 +9,6 @@ namespace TPFinal.DAL
 {
     public interface IRssBannerRepository : IRepository<RssBanner>
     {
+        IList<RssBanner> GetActives(DateTime pDateFrom1, DateTime pDateFrom2, DateTime pDateTo);
     }
 }
