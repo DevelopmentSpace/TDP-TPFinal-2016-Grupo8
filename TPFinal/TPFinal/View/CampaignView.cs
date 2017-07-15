@@ -41,5 +41,26 @@ namespace TPFinal.View
         {
             this.Close();
         }
+
+        private void addPictureButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            Bitmap image = new Bitmap(openFileDialog.FileName);
+
+            DataGridViewRow row = new DataGridViewRow();
+
+            row.Cells.["Image"].Value = image;
+
+            dataGridView1.Rows.Add(row);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
