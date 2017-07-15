@@ -53,7 +53,7 @@ namespace TPFinal.View
 
             DataGridViewRow row = new DataGridViewRow();
 
-            row.Cells.["Image"].Value = image;
+            row.Cells["Image"].Value = image;
 
             dataGridView1.Rows.Add(row);
         }
