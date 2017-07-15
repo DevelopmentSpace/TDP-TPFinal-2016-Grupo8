@@ -12,5 +12,10 @@ namespace TPFinal.DAL.EntityFramework
         public RssBannerRepository(DigitalSignageDbContext pContext) : base(pContext)
         {
         }
+
+        public IList<RssBanner> GetActives(DateTime pDateFrom1, DateTime pDateFrom2, DateTime pDateTo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

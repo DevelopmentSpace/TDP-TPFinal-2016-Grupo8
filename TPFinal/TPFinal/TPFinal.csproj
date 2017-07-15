@@ -71,6 +71,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -109,15 +111,21 @@
     <Compile Include="DTO\RssBannerDTO.cs" />
     <Compile Include="DTO\RssItemDTO.cs" />
     <Compile Include="DTO\TextBannerDTO.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
+    <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
+    <Compile Include="Model\RssBannerService.cs" />
+    <Compile Include="Model\RssReaderModel\IRssReader.cs" />
+    <Compile Include="Model\RssReaderModel\RssReader.cs" />
+    <Compile Include="Model\RssReaderModel\SyndicationFeedRssReader.cs" />
+    <Compile Include="Model\TextBannerService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AdminView.cs">
@@ -133,6 +141,15 @@
       <DependentUpon>AdView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IObserver.cs" />
+    <Compile Include="View\CampaignView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CampaignView.Designer.cs">
+      <DependentUpon>CampaignView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -148,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\AdView.resx">
       <DependentUpon>AdView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CampaignView.resx">
+      <DependentUpon>CampaignView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="log4net.config" />

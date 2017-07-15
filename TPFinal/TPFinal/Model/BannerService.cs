@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TPFinal.DAL;
-using TPFinal.Domain;
-using TPFinal.DTO;
 using System.Timers;
 
 namespace TPFinal.Model
@@ -20,14 +18,19 @@ namespace TPFinal.Model
         private List<IObserver> iObserver;
 
         /// <summary>
-        /// Lista de banners
+        /// Lista de servicios de texto de banner
         /// </summary>
-        private IList<Banner> iBannerList;
+        private IList<ITextBanner> iTextBannerList;
 
         /// <summary>
         /// Timer con el tiempo de actualizacion de la base de datos
         /// </summary>
-        private Timer iRefreshTimer; 
+        private Timer iRefreshTimer;
+
+        /// <summary>
+        /// Timer con el tiempo de actualizacion de los textos
+        /// </summary>
+        private Timer iIntervalTimer;
 
         /// <summary>
         /// Creador del servicio de campañas
@@ -39,6 +42,18 @@ namespace TPFinal.Model
             iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
+
+            iIntervalTimer = new System.Timers.Timer();
+            iIntervalTimer.Interval = pRefreshTime * 15000;
+            iIntervalTimer.AutoReset = true;
+            iIntervalTimer.Enabled = false;
+
+            ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
+            ITextBanner textBannerService = new TextBannerService(pRefreshTime);
+
+            iTextBannerList.Add(textBannerService);
+            iTextBannerList.Add(rssBannerService);
+
         }
 
         public void AddListener(IObserver pListener)
@@ -58,99 +73,57 @@ namespace TPFinal.Model
                 view.Update("Banner");
                 }              
         }
-        /*
-        public void Create(BannerDTO pBannerDTO)
-        {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            BannerMapper bannerMapper = new BannerMapper();
-            Banner banner = new Banner();
-
-            bannerMapper.MapToModel(pBannerDTO, banner);
-            iUnitOfWork.bannerRepository.Add(banner);
-
-            iUnitOfWork.Complete();
-
-        }
-
-        public void Update(CampaignDTO pCampaignDTO)
-        {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            CampaignMapper bannerMapper = new CampaignMapper();
-            Campaign campaign = new Campaign();
-            Campaign oldCampaign = new Campaign();
-
-            campaignMapper.MapToModel(pCampaignDTO, campaign);
-
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id); //REVISAR SI FUNCIONA
-
-            oldCampaign = campaign;
-
-            iUnitOfWork.Complete();
-
-        }
-
-        public void Delete(CampaignDTO pCampaignDTO)
-        {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            CampaignMapper campaignMapper = new CampaignMapper();
-            Campaign oldCampaign = new Campaign();
-
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
-
-            iUnitOfWork.campaignRepository.Remove(oldCampaign);
-
-            iUnitOfWork.Complete();
-        }
-         */
         /// <summary>
-        /// Obtiene el ultimo banner ingresado
+        /// Obtiene las cadenas de caracteres de todos los banners activos. 
         /// </summary>
-        /// <returns>Ultimo banner</returns>
+        /// <returns>Cadena de caracteres con todo el texto de los banners</returns>
         public String GetText()
         {
-            String text;
-            int sizeBanner;
-            text = "Nada";
-            //text = iBannerList.Last().text;
-            sizeBanner = iBannerList.Count;
-            iBannerList.RemoveAt(sizeBanner);
+            string text = "";
+            foreach (ITextBanner serviceBanner in iTextBannerList)
+            {
+                text = text + " - " + serviceBanner.GetText();
+            }
             return text;
         }
 
        
         /// <summary>
-        /// Empieza un servicio de campañas. Pone a correr los timers.
+        /// Empieza un servicio de banners. Pone a correr los timers.
         /// </summary>
         public void Start()
         {
             iRefreshTimer.Start();
 
             //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-           // iRefreshTimer.Elapsed += OnRefreshTimer;
+           iRefreshTimer.Elapsed += OnRefreshTimer;
+           iIntervalTimer.Elapsed += OnIntervalTimer;
         }
 
         /// <summary>
-        /// Frena ambos timers.
+        /// Frena 
         /// </summary>
         public void Stop()
         {
             iRefreshTimer.Stop();
         }
-
-        /*
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
+            foreach (ITextBanner textBanner in iTextBannerList)
+            {
+                textBanner.Refresh();
+            }
+
             NotifyListeners();
-
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
-
-            iBannerList = iUnitOfWork.bannerRepository.GetActives(pDateFrom,pDateFrom, pDateTo);
         }
-        */
+
+        private void OnIntervalTimer(object sender, ElapsedEventArgs e)
+        {
+            //ACA HAY UN TEMA. PUEDE QUE SER QUE LOS BANNER ACTIVOS NO SE MUESTREN
+            NotifyListeners();
+        }
     }
 }

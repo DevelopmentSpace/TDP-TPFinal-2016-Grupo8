@@ -164,9 +164,8 @@ namespace TPFinal.Model
         private void OnIntervalTimer(object sender, ElapsedEventArgs e)
      
         {
-            NotifyListeners();
 
-            if (ActiveCampaign())
+            if (IsActualCampaignActive())
             {
                 iActualImage++;
 
@@ -193,6 +192,8 @@ namespace TPFinal.Model
                     iActualCampaign = 0;
                 }
             }
+
+            NotifyListeners();
         }
 
         /// <summary>
@@ -200,7 +201,6 @@ namespace TPFinal.Model
         /// </summary>
         private void OnRefreshTimer(object sender, ElapsedEventArgs e)
         {
-            NotifyListeners();
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime pDateFrom = DateTime.Now;
@@ -211,14 +211,17 @@ namespace TPFinal.Model
             iActualCampaign = 0;
             iActualImage = 0;
             iCampaignList = iUnitOfWork.campaignRepository.GetActives(pDateFrom, pDateTo);
+
+            NotifyListeners();
         }
 
         /// <summary>
-        /// Da informacion del estado de la campaña
+        /// Da informacion del estado de la campaña actual
         /// </summary>
-        /// <returns>Verdadero si la campaña estaba activa o falso si no lo estaba</returns>
-        private bool ActiveCampaign()
+        /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
+        private bool IsActualCampaignActive()
         {
+            //REEMPLAZA POR TU CODIGO AGUSTIN
             return ((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
         }
     }
