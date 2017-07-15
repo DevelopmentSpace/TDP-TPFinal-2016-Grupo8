@@ -16,8 +16,10 @@ namespace TPFinal.DTO
         public int id { get; set; }
         public String name { get; set; }
         public int interval { get; set; }
-        public DateTime initDateTime { get; set; }
-        public DateTime endDateTime { get; set; }
+        public DateTime initDate { get; set; }
+        public DateTime endDate { get; set; }
+        public TimeSpan initTime { get; set; }
+        public TimeSpan endTime { get; set; }
         public IEnumerable<ByteImageDTO> imagesList { get; set; }
     }
 
@@ -37,8 +39,10 @@ namespace TPFinal.DTO
                     id = p.id,
                     name = p.name,
                     interval = p.interval,
-                    initDateTime = p.initDateTime,
-                    endDateTime = p.endDateTime,
+                    initDate = p.initDate,
+                    endDate = p.endDate,
+                    initTime = p.initTime,
+                    endTime = p.endTime,
                     imagesList = p.imagesList.AsQueryable().Select(this._byteImageMapper.SelectorExpression)
                 }));
             }
@@ -51,8 +55,10 @@ namespace TPFinal.DTO
             model.id = dto.id;
             model.name = dto.name;
             model.interval = dto.interval;
-            model.initDateTime = dto.initDateTime;
-            model.endDateTime = dto.endDateTime;
+            model.initDate = dto.initDate;
+            model.endDate = dto.endDate;
+            model.initTime = dto.initTime;
+            model.endTime = dto.endTime;
 
         }
     }

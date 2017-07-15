@@ -19,28 +19,30 @@ namespace TPFinal.DAL.EntityFramework
             this.iDbContext = pContext;
         }
 
-        public IEnumerable<Campaign> GetActives(DateTime pDateFrom, DateTime pDateTo)
+        public IEnumerable<Campaign> GetActives(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo)
         {
+
+            if (pDate == null)
+                throw new ArgumentNullException("pDate");
+            if (pTimeFrom == null)
+                throw new ArgumentNullException("pTimeFrom");
+            if (pTimeTo == null)
+                throw new ArgumentNullException("pTimeTo");
+            if (pTimeFrom.CompareTo(pTimeTo) > -1)
+                throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
+           
+
+
             IQueryable<Campaign> query = from campaign in this.iDbContext.Set<Campaign>()
-                        where ((DbFunctions.TruncateTime(campaign.initDateTime) <= pDateFrom.Date && DbFunctions.TruncateTime(campaign.endDateTime) >= pDateTo.Date)
-                        || (DbFunctions.TruncateTime(campaign.initDateTime) >= pDateFrom.Date && DbFunctions.TruncateTime(campaign.initDateTime) <= pDateTo.Date))
+                                         where
+                                             (campaign.initDate <= pDate && campaign.endDate >= pDate)
+                                             &&
+                                             (campaign.initTime <= pTimeTo && campaign.endTime >= pTimeFrom)
                         select campaign;
 
             var sqlString = query.ToString();
 
-            return from campaign in this.iDbContext.Set<Campaign>()
-                   select campaign;
-
-            /*
-            return from campaign in this.iDbContext.Set<Campaign>()
-                   where ((DbFunctions.TruncateTime(campaign.initDateTime) <= pDateFrom.Date && DbFunctions.TruncateTime(campaign.endDateTime) >= pDateTo.Date) 
-                   || (DbFunctions.TruncateTime(campaign.initDateTime) >= pDateFrom.Date && DbFunctions.TruncateTime(campaign.initDateTime) <= pDateTo.Date))
-                   select campaign;*/
-            /*
-
-            return from campaign in this.iDbContext.Set<Campaign>()
-                   where  ((campaign.initDateTime.Date <= pDateFrom.Date && campaign.endDateTime.Date >= pDateTo.Date) || (campaign.initDateTime >= pDateFrom.Date && campaign.initDateTime.Date <= pDateTo.Date))
-                   select campaign;*/
+            return query;
         }
     }
 }

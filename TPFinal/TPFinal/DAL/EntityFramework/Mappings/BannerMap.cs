@@ -25,10 +25,6 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             this.Property(pBanner => pBanner.name)
                 .IsRequired();
 
-            // Se establece la columna obligatoria (NOT NULL) 'interval'.
-            this.Property(pBanner => pBanner.interval)
-                .IsRequired();
-
             // Se establece la columna obligatoria (NOT NULL) 'initDate'.
             this.Property(pBanner => pBanner.initDate)
                 .IsRequired();

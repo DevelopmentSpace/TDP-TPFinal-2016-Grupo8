@@ -165,11 +165,11 @@ namespace TPFinal.Model
      
         {
 
-            if (IsActualCampaignActive())
+                if (IsCampaignActive(this.iCampaignList.ElementAt(this.iActualCampaign)))
             {
-                iActualImage++;
+                this.iActualImage++;
 
-                if (iActualImage > iCampaignList.ElementAt(iActualCampaign).imagesList.Count)
+                if (iActualImage > this.iCampaignList.ElementAt(iActualCampaign).imagesList.Count)
                 {
                     iActualImage = 0;
                     iActualCampaign++;
@@ -203,26 +203,32 @@ namespace TPFinal.Model
         {
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime pDateFrom = DateTime.Now;
-            DateTime pDateTo = DateTime.Now.AddMilliseconds(iRefreshTimer.Interval);
-
-            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTimer.Interval));
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(pDateFrom, pDateTo);
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo);
+
+            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
 
             NotifyListeners();
         }
 
+
         /// <summary>
-        /// Da informacion del estado de la campaña actual
+        /// Permite saber si una campaña esta activa actualmente
         /// </summary>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
-        private bool IsActualCampaignActive()
+        private bool IsCampaignActive(Campaign c)
         {
-            //REEMPLAZA POR TU CODIGO AGUSTIN
-            return ((iCampaignList.ElementAt(iActualCampaign).initDateTime <= DateTime.Now) && (iCampaignList.ElementAt(iActualCampaign).endDateTime >= DateTime.Now));
+            DateTime date = DateTime.Now.Date;
+            TimeSpan time = date.TimeOfDay;
+
+            return (c.initDate <= date && c.endDate >= date)
+                    &&
+                    (c.initTime <= time && c.endTime >= time);
         }
     }
 }
