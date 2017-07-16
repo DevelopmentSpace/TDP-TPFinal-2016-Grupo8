@@ -147,6 +147,10 @@ namespace TPFinal.Model
         public void Start()
         {           
             iIntervalTimer.Start();
+
+            
+            OnRefreshTimer(null, ElapsedEventArgs.Empty);
+
             iRefreshTimer.Start();        
         }
 
@@ -201,7 +205,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.
         /// </summary>
-        private void OnRefreshTimer(object sender, ElapsedEventArgs e)
+        private void OnRefreshTimer(object sender, EventArgs e)
         {
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
@@ -211,7 +215,7 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo); //ESTO NO ANDA
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo); //ESTO NO ANDA. Me tira las consultas a la base de datos en vez de darme una lista de campañas.
 
             iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
 

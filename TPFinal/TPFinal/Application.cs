@@ -31,7 +31,7 @@ namespace TPFinal
             }
         }
 
-        private CampaignService campaignService = new CampaignService(0);
+        private CampaignService campaignService = new CampaignService(30);
 
         internal CampaignService CampaignService
         {
