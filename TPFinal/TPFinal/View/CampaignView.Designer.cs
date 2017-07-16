@@ -50,6 +50,7 @@
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             // imageBox
             // 
+            this.imageBox.Controls.Add(this.label1);
             this.imageBox.Controls.Add(this.dataGridViewImages);
             this.imageBox.Controls.Add(this.addPictureButton);
             this.imageBox.Location = new System.Drawing.Point(428, 33);
@@ -131,11 +133,11 @@
             // 
             // addPictureButton
             // 
-            this.addPictureButton.Location = new System.Drawing.Point(194, 169);
+            this.addPictureButton.Location = new System.Drawing.Point(46, 169);
             this.addPictureButton.Name = "addPictureButton";
             this.addPictureButton.Size = new System.Drawing.Size(75, 23);
             this.addPictureButton.TabIndex = 14;
-            this.addPictureButton.Text = "Add picture";
+            this.addPictureButton.Text = "Add pictures";
             this.addPictureButton.UseVisualStyleBackColor = true;
             this.addPictureButton.Click += new System.EventHandler(this.addPictureButton_Click);
             // 
@@ -276,6 +278,15 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(150, 174);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(269, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "To delete images you must select the rows and press \'d\'";
+            // 
             // CampaignView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,6 +300,7 @@
             this.campaingBox.ResumeLayout(false);
             this.campaingBox.PerformLayout();
             this.imageBox.ResumeLayout(false);
+            this.imageBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).EndInit();
             this.endTimeText.ResumeLayout(false);
             this.endTimeText.PerformLayout();
@@ -320,5 +332,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewImageColumn Image;
+        private System.Windows.Forms.Label label1;
     }
 }
