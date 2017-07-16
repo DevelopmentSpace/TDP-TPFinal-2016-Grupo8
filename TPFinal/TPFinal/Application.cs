@@ -46,8 +46,6 @@ namespace TPFinal
             }
         }
 
-
-
         public Application()
         {
             InitializeComponent();

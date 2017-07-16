@@ -36,9 +36,9 @@
             // 
             this.adminMenu.Location = new System.Drawing.Point(26, 112);
             this.adminMenu.Name = "adminMenu";
-            this.adminMenu.Size = new System.Drawing.Size(75, 23);
+            this.adminMenu.Size = new System.Drawing.Size(99, 23);
             this.adminMenu.TabIndex = 0;
-            this.adminMenu.Text = "Admin View";
+            this.adminMenu.Text = "Add Campaign";
             this.adminMenu.UseVisualStyleBackColor = true;
             this.adminMenu.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -52,14 +52,14 @@
             this.adButton.UseVisualStyleBackColor = true;
             this.adButton.Click += new System.EventHandler(this.adButton_Click);
             // 
-            // Principal
+            // Application
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.adButton);
             this.Controls.Add(this.adminMenu);
-            this.Name = "Principal";
+            this.Name = "Application";
             this.Text = "Ad aplication";
             this.ResumeLayout(false);
 

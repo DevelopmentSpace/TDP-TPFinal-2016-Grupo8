@@ -25,12 +25,12 @@ namespace TPFinal.Model
         /// <summary>
         /// Timer con el tiempo de actualizacion de la base de datos
         /// </summary>
-        private Timer iRefreshTimer;
+        private static Timer iRefreshTimer;
 
         /// <summary>
         /// Timer con el tiempo de actualizacion de los textos
         /// </summary>
-        private Timer iIntervalTimer;
+        private static Timer iIntervalTimer;
 
         /// <summary>
         /// Creador del servicio de campañas
@@ -100,6 +100,8 @@ namespace TPFinal.Model
         /// </summary>
         public void Start()
         {
+            OnRefreshTimer(null, ElapsedEventArgs.Empty);
+
             iRefreshTimer.Start();
             iIntervalTimer.Start();
         }
@@ -115,7 +117,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.
         /// </summary>
-        private void OnRefreshTimer(object sender, ElapsedEventArgs e)
+        private void OnRefreshTimer(object sender, EventArgs e)
         {
             foreach (ITextBanner textBanner in iTextBannerList)
             {

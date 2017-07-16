@@ -145,13 +145,11 @@ namespace TPFinal.Model
         /// Empieza un servicio de campañas. Pone a correr los timers.
         /// </summary>
         public void Start()
-        {           
-            iIntervalTimer.Start();
-
-            
+        {                       
             OnRefreshTimer(null, ElapsedEventArgs.Empty);
 
-            iRefreshTimer.Start();        
+            iRefreshTimer.Start();
+            iIntervalTimer.Start();
         }
 
         /// <summary>
