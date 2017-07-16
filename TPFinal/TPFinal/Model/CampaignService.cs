@@ -138,6 +138,8 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
+            iActualCampaign = 0;
+            iActualImage = 0;
             return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
         }
 

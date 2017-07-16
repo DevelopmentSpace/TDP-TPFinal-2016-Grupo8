@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -107,6 +108,14 @@ namespace TPFinal.View
 
         }
 
+        private static Byte[] imageToByte(Image i)
+        {
+            MemoryStream stream = new MemoryStream();
+            i.Save(stream, ImageFormat.Png);
+            byte[] bytes = stream.ToArray();
+            return bytes;
+        }
+
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             //Este campaign service tiene que salir de otro lado.
@@ -131,7 +140,7 @@ namespace TPFinal.View
                 ByteImageDTO imageDTO = new ByteImageDTO();
 
                 imageDTO.id = Convert.ToInt32(row.Cells["ID"].Value);
-                imageDTO.bytes = CampaignView.BitmapToByteArray((Bitmap)row.Cells["Image"].Value);
+                imageDTO.bytes = CampaignView.imageToByte((Image)row.Cells["Image"].Value);
 
                 imagesAuxDTO.Add(imageDTO);
             }

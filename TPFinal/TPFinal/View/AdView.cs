@@ -33,8 +33,10 @@ namespace TPFinal.View
             {
 
                 byte[] image = application.CampaignService.GetActualImage();
-                MemoryStream ms = new MemoryStream(image);
-                Image i = Image.FromStream(ms);
+
+                MemoryStream stream = new MemoryStream(image);
+                Image i = Image.FromStream(stream);
+                stream.Dispose();
 
                 imageBox.Image = i;
                 imageBox.Refresh();
