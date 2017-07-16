@@ -31,8 +31,12 @@ namespace TPFinal.View
         {
             if (des == "Campaign")
             {
-                MemoryStream ms = new MemoryStream(application.CampaignService.GetActualImage());
-                imageBox.Image = Image.FromStream(ms);
+
+                byte[] image = application.CampaignService.GetActualImage();
+                MemoryStream ms = new MemoryStream(image);
+                Image i = Image.FromStream(ms);
+
+                imageBox.Image = i;
                 imageBox.Refresh();
                 imageBox.Update();
             }

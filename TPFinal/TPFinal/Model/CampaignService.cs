@@ -213,7 +213,7 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo); //ESTO NO ANDA. Me tira las consultas a la base de datos en vez de darme una lista de campañas.
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList(); //ESTO NO ANDA. Me tira las consultas a la base de datos en vez de darme una lista de campañas.
 
             iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
 
