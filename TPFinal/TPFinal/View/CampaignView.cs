@@ -115,8 +115,8 @@ namespace TPFinal.View
 
             campaign.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
 
-            campaign.initDate = initDateTimePicker.Value;
-            campaign.endDate = endDateTimePicker.Value;
+            campaign.initDate = initDateTimePicker.Value.Date;
+            campaign.endDate = endDateTimePicker.Value.Date;
 
             campaign.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
             campaign.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);

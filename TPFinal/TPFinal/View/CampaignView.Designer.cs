@@ -31,13 +31,13 @@
             this.initDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.campaingBox = new System.Windows.Forms.GroupBox();
+            this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
+            this.minuteIntervalLabel = new System.Windows.Forms.Label();
             this.imageBox = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.addPictureButton = new System.Windows.Forms.Button();
+            this.addImageButton = new System.Windows.Forms.Button();
             this.endTimeText = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
             this.hourLabel = new System.Windows.Forms.Label();
@@ -56,8 +56,8 @@
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.secondIntervalLabel = new System.Windows.Forms.Label();
-            this.minuteIntervalLabel = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -100,23 +100,41 @@
             this.campaingBox.Text = "Campaign Data";
             this.campaingBox.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // secondIntervalLabel
+            // 
+            this.secondIntervalLabel.AutoSize = true;
+            this.secondIntervalLabel.Location = new System.Drawing.Point(268, 53);
+            this.secondIntervalLabel.Name = "secondIntervalLabel";
+            this.secondIntervalLabel.Size = new System.Drawing.Size(44, 13);
+            this.secondIntervalLabel.TabIndex = 15;
+            this.secondIntervalLabel.Text = "Second";
+            // 
             // intervalSecond
             // 
             this.intervalSecond.Location = new System.Drawing.Point(246, 68);
             this.intervalSecond.Name = "intervalSecond";
             this.intervalSecond.Size = new System.Drawing.Size(85, 20);
             this.intervalSecond.TabIndex = 17;
-            this.intervalSecond.Text = "20";
+            this.intervalSecond.Text = "30";
             this.intervalSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // minuteIntervalLabel
+            // 
+            this.minuteIntervalLabel.AutoSize = true;
+            this.minuteIntervalLabel.Location = new System.Drawing.Point(152, 52);
+            this.minuteIntervalLabel.Name = "minuteIntervalLabel";
+            this.minuteIntervalLabel.Size = new System.Drawing.Size(39, 13);
+            this.minuteIntervalLabel.TabIndex = 14;
+            this.minuteIntervalLabel.Text = "Minute";
             // 
             // imageBox
             // 
             this.imageBox.Controls.Add(this.label1);
             this.imageBox.Controls.Add(this.dataGridViewImages);
-            this.imageBox.Controls.Add(this.addPictureButton);
-            this.imageBox.Location = new System.Drawing.Point(428, 33);
+            this.imageBox.Controls.Add(this.addImageButton);
+            this.imageBox.Location = new System.Drawing.Point(411, 33);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(425, 201);
+            this.imageBox.Size = new System.Drawing.Size(452, 229);
             this.imageBox.TabIndex = 3;
             this.imageBox.TabStop = false;
             this.imageBox.Text = "Images Data";
@@ -124,7 +142,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(150, 174);
+            this.label1.Location = new System.Drawing.Point(149, 191);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(269, 13);
             this.label1.TabIndex = 17;
@@ -141,33 +159,20 @@
             this.dataGridViewImages.Location = new System.Drawing.Point(6, 23);
             this.dataGridViewImages.Name = "dataGridViewImages";
             this.dataGridViewImages.ReadOnly = true;
-            this.dataGridViewImages.Size = new System.Drawing.Size(413, 140);
+            this.dataGridViewImages.Size = new System.Drawing.Size(440, 140);
             this.dataGridViewImages.TabIndex = 16;
             this.dataGridViewImages.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridViewImages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewImages_KeyPress);
             // 
-            // ID
+            // addImageButton
             // 
-            this.ID.HeaderText = "Id";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Image
-            // 
-            this.Image.HeaderText = "Image";
-            this.Image.Name = "Image";
-            this.Image.ReadOnly = true;
-            this.Image.Width = 275;
-            // 
-            // addPictureButton
-            // 
-            this.addPictureButton.Location = new System.Drawing.Point(46, 169);
-            this.addPictureButton.Name = "addPictureButton";
-            this.addPictureButton.Size = new System.Drawing.Size(75, 23);
-            this.addPictureButton.TabIndex = 14;
-            this.addPictureButton.Text = "Add pictures";
-            this.addPictureButton.UseVisualStyleBackColor = true;
-            this.addPictureButton.Click += new System.EventHandler(this.addPictureButton_Click);
+            this.addImageButton.Location = new System.Drawing.Point(45, 186);
+            this.addImageButton.Name = "addImageButton";
+            this.addImageButton.Size = new System.Drawing.Size(75, 23);
+            this.addImageButton.TabIndex = 14;
+            this.addImageButton.Text = "Add images";
+            this.addImageButton.UseVisualStyleBackColor = true;
+            this.addImageButton.Click += new System.EventHandler(this.addPictureButton_Click);
             // 
             // endTimeText
             // 
@@ -287,17 +292,17 @@
             this.intervalMinute.Name = "intervalMinute";
             this.intervalMinute.Size = new System.Drawing.Size(85, 20);
             this.intervalMinute.TabIndex = 11;
-            this.intervalMinute.Text = "2";
+            this.intervalMinute.Text = "0";
             this.intervalMinute.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 69);
+            this.label6.Location = new System.Drawing.Point(3, 71);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.Size = new System.Drawing.Size(122, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Interval";
+            this.label6.Text = "Interval between images";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label3
@@ -346,23 +351,20 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
-            // secondIntervalLabel
+            // ID
             // 
-            this.secondIntervalLabel.AutoSize = true;
-            this.secondIntervalLabel.Location = new System.Drawing.Point(268, 53);
-            this.secondIntervalLabel.Name = "secondIntervalLabel";
-            this.secondIntervalLabel.Size = new System.Drawing.Size(44, 13);
-            this.secondIntervalLabel.TabIndex = 15;
-            this.secondIntervalLabel.Text = "Second";
+            this.ID.HeaderText = "Id";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 25;
             // 
-            // minuteIntervalLabel
+            // Image
             // 
-            this.minuteIntervalLabel.AutoSize = true;
-            this.minuteIntervalLabel.Location = new System.Drawing.Point(152, 52);
-            this.minuteIntervalLabel.Name = "minuteIntervalLabel";
-            this.minuteIntervalLabel.Size = new System.Drawing.Size(39, 13);
-            this.minuteIntervalLabel.TabIndex = 14;
-            this.minuteIntervalLabel.Text = "Minute";
+            this.Image.HeaderText = "Image";
+            this.Image.MinimumWidth = 10;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Width = 350;
             // 
             // CampaignView
             // 
@@ -401,14 +403,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox intervalMinute;
         private System.Windows.Forms.GroupBox imageBox;
-        private System.Windows.Forms.Button addPictureButton;
+        private System.Windows.Forms.Button addImageButton;
         private System.Windows.Forms.GroupBox endTimeText;
         private new System.Windows.Forms.Button AcceptButton;
         private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.DataGridView dataGridViewImages;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox endTimeMinute;
         private System.Windows.Forms.TextBox initTimeMinute;
@@ -417,5 +417,7 @@
         private System.Windows.Forms.TextBox intervalSecond;
         private System.Windows.Forms.Label secondIntervalLabel;
         private System.Windows.Forms.Label minuteIntervalLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
     }
 }
