@@ -59,6 +59,7 @@ namespace TPFinal.DTO
             model.endDate = dto.endDate;
             model.initTime = dto.initTime;
             model.endTime = dto.endTime;
+            model.imagesList = model.imagesList;
 
         }
     }
