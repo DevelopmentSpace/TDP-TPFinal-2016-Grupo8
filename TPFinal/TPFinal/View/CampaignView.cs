@@ -16,9 +16,12 @@ namespace TPFinal.View
 {
     public partial class CampaignView : Form
     {
-        public CampaignView()
+        private Application application;
+
+        public CampaignView(Application pApplication)
         {
             InitializeComponent();
+            application = pApplication;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -107,7 +110,7 @@ namespace TPFinal.View
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             //Este campaign service tiene que salir de otro lado.
-            CampaignService campaignService = new CampaignService(30);
+
 
             CampaignDTO campaign = new CampaignDTO();
             //campaign.id = campaignService.LastID();
@@ -134,8 +137,8 @@ namespace TPFinal.View
             }
 
             campaign.imagesList = imagesAuxDTO;
-
-            campaignService.Create(campaign);
+            
+            application.CampaignService.Create(campaign);
 
             this.Close();
 

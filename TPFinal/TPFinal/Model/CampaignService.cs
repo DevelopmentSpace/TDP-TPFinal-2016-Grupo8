@@ -61,6 +61,8 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
+
+            iObserver = new List<IObserver> { };
         }
 
         public void AddListener(IObserver pListener)

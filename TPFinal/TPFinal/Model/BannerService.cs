@@ -51,6 +51,9 @@ namespace TPFinal.Model
             ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
             ITextBanner textBannerService = new TextBannerService(pRefreshTime);
 
+            iTextBannerList = new List<ITextBanner> { };
+            iObserver = new List<IObserver> { };
+
             iTextBannerList.Add(textBannerService);
             iTextBannerList.Add(rssBannerService);
 

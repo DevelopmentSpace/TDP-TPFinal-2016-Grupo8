@@ -1,6 +1,6 @@
 ﻿namespace TPFinal
 {
-    partial class Principal
+    partial class Application
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,25 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.adminMenu = new System.Windows.Forms.Button();
+            this.adButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // adminMenu
             // 
-            this.button1.Location = new System.Drawing.Point(51, 82);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.adminMenu.Location = new System.Drawing.Point(26, 112);
+            this.adminMenu.Name = "adminMenu";
+            this.adminMenu.Size = new System.Drawing.Size(75, 23);
+            this.adminMenu.TabIndex = 0;
+            this.adminMenu.Text = "Admin View";
+            this.adminMenu.UseVisualStyleBackColor = true;
+            this.adminMenu.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // adButton
+            // 
+            this.adButton.Location = new System.Drawing.Point(172, 112);
+            this.adButton.Name = "adButton";
+            this.adButton.Size = new System.Drawing.Size(75, 23);
+            this.adButton.TabIndex = 1;
+            this.adButton.Text = "Ad view";
+            this.adButton.UseVisualStyleBackColor = true;
+            this.adButton.Click += new System.EventHandler(this.adButton_Click);
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.adButton);
+            this.Controls.Add(this.adminMenu);
             this.Name = "Principal";
             this.Text = "Ad aplication";
             this.ResumeLayout(false);
@@ -55,7 +67,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button adminMenu;
+        private System.Windows.Forms.Button adButton;
     }
 }
 

@@ -8,29 +8,22 @@ namespace TPFinal.View
 {
     public partial class AdView : Form, IObserver
     {
-        CampaignService campaignService;
-        BannerService bannerService;
+        private Application application;
 
-        public AdView()
+        public AdView(Application pApplication)
         {
             InitializeComponent();
+            application = pApplication;
         }
 
         private void AdView_Load(object sender, EventArgs e)
         {
-            int DataBaseRefreshTime = 20;
 
+            application.CampaignService.AddListener(this);
+            application.BannerService.AddListener(this);
 
-
-            campaignService = new CampaignService(DataBaseRefreshTime); //ESTE TIEMPO SE TIENE QUE SELECCIONAR EN OTRA VISTA 
-            bannerService = new BannerService(DataBaseRefreshTime);
-
-            campaignService.AddListener(this);
-            bannerService.AddListener(this);
-
-            bannerService.Start();
-            campaignService.Start();
-
+            application.CampaignService.Start();
+            application.BannerService.Start();
 
         }
 
@@ -38,13 +31,13 @@ namespace TPFinal.View
         {
             if (des == "Campaign")
             {
-                MemoryStream ms = new MemoryStream(campaignService.GetActualImage());
+                MemoryStream ms = new MemoryStream(application.CampaignService.GetActualImage());
                 imageBox.Image = Image.FromStream(ms);
             }
             else if (des == "Banner")
             {
                 textBanner.ForeColor = System.Drawing.Color.Red; // - PARA CAMBIAR EL COLOR DEL TEXTO.
-                textBanner.Text = bannerService.GetText();
+                textBanner.Text = application.BannerService.GetText();
                 textBanner.ForeColor = System.Drawing.Color.Black;
 
             }
