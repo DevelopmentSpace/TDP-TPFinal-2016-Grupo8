@@ -50,7 +50,18 @@ namespace TPFinal.DTO
 
         public override void MapToModel(CampaignDTO dto, Campaign model)
         {
-            ////BCC/ BEGIN CUSTOM CODE SECTION 
+            ////BCC/ BEGIN CUSTOM CODE SECTION
+
+            ByteImageMapper imageMapper = new ByteImageMapper();
+            IList<ByteImage> auxImageList = new List<ByteImage> { };
+
+            foreach (ByteImageDTO imageDTO in dto.imagesList)
+            {
+                ByteImage imageModel = new ByteImage();
+                imageMapper.MapToModel(imageDTO, imageModel);
+                auxImageList.Add(imageModel);
+            }
+             
             ////ECC/ END CUSTOM CODE SECTION 
             model.id = dto.id;
             model.name = dto.name;
@@ -59,7 +70,7 @@ namespace TPFinal.DTO
             model.endDate = dto.endDate;
             model.initTime = dto.initTime;
             model.endTime = dto.endTime;
-            model.imagesList = model.imagesList;
+            model.imagesList = auxImageList;
 
         }
     }
