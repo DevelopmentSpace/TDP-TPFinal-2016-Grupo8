@@ -48,6 +48,10 @@ namespace TPFinal.Model
             iIntervalTimer.AutoReset = true;
             iIntervalTimer.Enabled = false;
 
+            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
+            iRefreshTimer.Elapsed += OnRefreshTimer;
+            iIntervalTimer.Elapsed += OnIntervalTimer;
+
             ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
             ITextBanner textBannerService = new TextBannerService(pRefreshTime);
 
@@ -97,10 +101,7 @@ namespace TPFinal.Model
         public void Start()
         {
             iRefreshTimer.Start();
-
-            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-           iRefreshTimer.Elapsed += OnRefreshTimer;
-           iIntervalTimer.Elapsed += OnIntervalTimer;
+            iIntervalTimer.Start();
         }
 
         /// <summary>
@@ -108,6 +109,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Stop()
         {
+            iRefreshTimer.Stop();
             iRefreshTimer.Stop();
         }
         /// <summary>

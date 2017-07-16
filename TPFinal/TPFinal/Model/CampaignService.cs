@@ -36,12 +36,12 @@ namespace TPFinal.Model
         /// <summary>
         /// Reloj de tiempo para controlar los intervalos. Los intervalos de los timers estan en milisegundos.
         /// </summary>
-        private Timer iIntervalTimer;
+        private static Timer iIntervalTimer;
 
         /// <summary>
         /// Reloj de tiempo para controlar el tiempo de refresco con la base de datos. Los intervalos de los timers estan en milisegundos.
         /// </summary>
-        private Timer iRefreshTimer;
+        private static Timer iRefreshTimer;
 
         /// <summary>
         /// Creador del servicio de campañas
@@ -49,15 +49,20 @@ namespace TPFinal.Model
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public CampaignService(int pRefreshTime)
         {
-            iIntervalTimer = new System.Timers.Timer();
+            iIntervalTimer = new Timer();
             iIntervalTimer.Interval = 1000;
             iIntervalTimer.AutoReset = true;
             iIntervalTimer.Enabled = false;
 
-            iRefreshTimer = new System.Timers.Timer();
+            iRefreshTimer = new Timer();
             iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
             iRefreshTimer.Enabled = false;
+
+            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
+
+            iIntervalTimer.Elapsed += OnIntervalTimer;
+            iRefreshTimer.Elapsed += OnRefreshTimer;
 
             iActualCampaign = 0;
             iActualImage = 0;
@@ -140,14 +145,9 @@ namespace TPFinal.Model
         /// Empieza un servicio de campañas. Pone a correr los timers.
         /// </summary>
         public void Start()
-        {
-            
+        {           
             iIntervalTimer.Start();
-            iRefreshTimer.Start();
-
-            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-            iIntervalTimer.Elapsed += OnIntervalTimer;
-            iRefreshTimer.Elapsed += OnRefreshTimer;
+            iRefreshTimer.Start();        
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo);
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date,timeFrom,timeTo); //ESTO NO ANDA
 
             iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval;
 

@@ -33,6 +33,8 @@ namespace TPFinal.View
             {
                 MemoryStream ms = new MemoryStream(application.CampaignService.GetActualImage());
                 imageBox.Image = Image.FromStream(ms);
+                imageBox.Refresh();
+                imageBox.Update();
             }
             else if (des == "Banner")
             {
