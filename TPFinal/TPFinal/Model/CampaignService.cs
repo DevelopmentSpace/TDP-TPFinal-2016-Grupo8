@@ -52,12 +52,12 @@ namespace TPFinal.Model
             iIntervalTimer = new Timer();
             iIntervalTimer.Interval = 1000;
             iIntervalTimer.AutoReset = true;
-            iIntervalTimer.Enabled = false;
+            iIntervalTimer.Stop();
 
             iRefreshTimer = new Timer();
             iRefreshTimer.Interval = pRefreshTime * 60000;
             iRefreshTimer.AutoReset = true;
-            iRefreshTimer.Enabled = false;
+            iRefreshTimer.Stop();
 
             //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
 
