@@ -21,7 +21,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Lista de escuchadores
         /// </summary>
-        private List<IObserver> iObserver;
+        private List<IObserver> iObserver = new List<IObserver> { };
 
         /// <summary>
         /// Indice de la imagen actual de una campaña
@@ -66,8 +66,6 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-
-            iObserver = new List<IObserver> { };
         }
 
         public void AddListener(IObserver pListener)
@@ -217,7 +215,7 @@ namespace TPFinal.Model
             iActualImage = 0;
             iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList(); //ESTO NO ANDA. Me tira las consultas a la base de datos en vez de darme una lista de campañas.
 
-            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *1000;
+            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *100;
 
             NotifyListeners();
         }

@@ -37,8 +37,8 @@
             // 
             this.imageBox.Location = new System.Drawing.Point(12, 12);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(626, 285);
-            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imageBox.Size = new System.Drawing.Size(725, 376);
+            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imageBox.TabIndex = 0;
             this.imageBox.TabStop = false;
             // 
@@ -46,9 +46,9 @@
             // 
             this.textBanner.Enabled = false;
             this.textBanner.HideSelection = false;
-            this.textBanner.Location = new System.Drawing.Point(12, 320);
+            this.textBanner.Location = new System.Drawing.Point(12, 394);
             this.textBanner.Name = "textBanner";
-            this.textBanner.Size = new System.Drawing.Size(626, 20);
+            this.textBanner.Size = new System.Drawing.Size(725, 20);
             this.textBanner.TabIndex = 1;
             this.textBanner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 369);
+            this.ClientSize = new System.Drawing.Size(749, 426);
             this.Controls.Add(this.textBanner);
             this.Controls.Add(this.imageBox);
             this.Name = "AdView";
