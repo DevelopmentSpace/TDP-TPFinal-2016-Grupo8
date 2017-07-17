@@ -13,7 +13,7 @@ namespace TPFinal.Model
     {
         int iRefreshTime;
 
-        IEnumerable<TextBanner> iTextBannerList;
+        IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
         public TextBannerService(int pRefreshTIme)
         {
@@ -55,7 +55,7 @@ namespace TPFinal.Model
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTime));
 
-            iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(date,timeFrom,timeTo);
+            //iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(date,timeFrom,timeTo).ToList();
         }
 
         public void Create(TextBannerDTO pTextBannerDTO)

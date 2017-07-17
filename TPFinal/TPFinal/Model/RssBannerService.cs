@@ -39,7 +39,7 @@ namespace TPFinal.Model
         public String GetText()
         {
             String text = "";
-            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
+            /*SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
 
             foreach (RssBanner rssBanner in iRssBannerList)
             {
@@ -53,7 +53,7 @@ namespace TPFinal.Model
                     }
                 }
             }
-
+            */
             return text;
         }
 
@@ -64,7 +64,7 @@ namespace TPFinal.Model
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTime));
 
-            iRssBannerList = iUnitOfWork.rssBannerRepository.GetActives(date,timeFrom,timeTo);
+            //iRssBannerList = iUnitOfWork.rssBannerRepository.GetActives(date,timeFrom,timeTo);
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)
