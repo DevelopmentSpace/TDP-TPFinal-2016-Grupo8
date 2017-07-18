@@ -51,23 +51,18 @@ namespace TPFinal_Test
             Assert.IsTrue(x);
         }
 
-
         [TestMethod]
-        public void removeCampaign()
+        public void removeTextBanner()
         {
-            byte[] b= { 0x44, 0x55 };
-
-            ByteImage i = new ByteImage();
-            i.bytes = b;
 
             Campaign c = new Campaign();
-            c.name = "Una campañaa re linda";
-            c.imagesList = new List<ByteImage> {i};
+            c.name = "Mi campañaaaaa";
+            c.imagesList = new List<ByteImage> { };
             c.initDate = DateTime.Now.Date;
             c.endDate = DateTime.Now.Date.AddDays(50);
             c.initTime = new TimeSpan(5, 0, 12);
             c.endTime = new TimeSpan(5, 5, 12);
-            c.interval = 4;
+            c.interval = 10;
 
             IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
             uow.campaignRepository.Add(c);
@@ -82,9 +77,10 @@ namespace TPFinal_Test
 
             uow.campaignRepository.Remove(get);
             uow.Complete();
-            Assert.IsNull(uow.campaignRepository.Get(get.id));
+            Assert.IsNull(uow.textBannerRepository.Get(get.id));
 
         }
+
 
         [TestMethod]
         public void GetActivesCampaigns()

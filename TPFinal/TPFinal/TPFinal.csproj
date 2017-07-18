@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\EntityFramework\BannerRepository.cs" />
     <Compile Include="DAL\EntityFramework\CamapignRepository.cs" />
     <Compile Include="DAL\EntityFramework\DigitalSignageDbContext.cs" />
     <Compile Include="DAL\EntityFramework\EFRepository.cs" />
