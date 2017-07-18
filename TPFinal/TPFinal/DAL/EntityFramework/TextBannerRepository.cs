@@ -7,7 +7,7 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework
 {
-    class TextBannerRepository : EFRepository<TextBanner, DigitalSignageDbContext>
+    class TextBannerRepository : EFRepository<TextBanner, DigitalSignageDbContext>, ITextBannerRepository
     {
         DigitalSignageDbContext iDbContext;
         public TextBannerRepository(DigitalSignageDbContext pContext) : base(pContext)

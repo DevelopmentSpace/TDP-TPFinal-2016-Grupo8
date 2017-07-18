@@ -25,6 +25,9 @@ namespace TPFinal.DAL
 
             this.iDbContext = pContext;
             this.campaignRepository = new CampaignRepository(this.iDbContext);
+            this.bannerRepository = new BannerRepository(this.iDbContext);
+            this.rssBannerRepository = new RssBannerRepository(this.iDbContext);
+            this.textBannerRepository = new TextBannerRepository(this.iDbContext);
         }
 
         /// <summary>

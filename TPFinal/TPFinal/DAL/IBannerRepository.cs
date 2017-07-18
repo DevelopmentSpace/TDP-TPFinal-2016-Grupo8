@@ -9,7 +9,7 @@ namespace TPFinal.DAL
 {
     public interface IBannerRepository : IRepository<Banner>
     {
-        IList<Banner> GetActives(DateTime pDate, DateTime pTinit, DateTime pTfinish);
+        //IList<Banner> GetActives(DateTime pDate, DateTime pTinit, DateTime pTfinish);
 
     }
 }
