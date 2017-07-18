@@ -141,11 +141,17 @@
       <DependentUpon>AdView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IObserver.cs" />
-    <Compile Include="View\CampaignView.cs">
+    <Compile Include="View\CampaignViewAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CampaignView.Designer.cs">
-      <DependentUpon>CampaignView.cs</DependentUpon>
+    <Compile Include="View\CampaignViewAdd.Designer.cs">
+      <DependentUpon>CampaignViewAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CampaignViewDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CampaignViewDelete.Designer.cs">
+      <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
@@ -166,8 +172,11 @@
     <EmbeddedResource Include="View\AdView.resx">
       <DependentUpon>AdView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\CampaignView.resx">
-      <DependentUpon>CampaignView.cs</DependentUpon>
+    <EmbeddedResource Include="View\CampaignViewAdd.resx">
+      <DependentUpon>CampaignViewAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CampaignViewDelete.resx">
+      <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="log4net.config" />

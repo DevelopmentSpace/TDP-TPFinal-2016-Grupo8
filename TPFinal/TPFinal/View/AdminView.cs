@@ -12,9 +12,13 @@ namespace TPFinal.View
 {
     public partial class AdminView : Form
     {
-        public AdminView()
+
+        private Application application;
+
+        public AdminView(Application pApplication)
         {
             InitializeComponent();
+            application = pApplication;
         }
 
         private void AdminView_Load(object sender, EventArgs e)
@@ -29,7 +33,8 @@ namespace TPFinal.View
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CampaignViewAdd campaignViewAdd = new CampaignViewAdd(application);
+            campaignViewAdd.Show();
         }
     }
 }

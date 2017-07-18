@@ -39,7 +39,7 @@ namespace TPFinal.Model
         public String GetText()
         {
             String text = "";
-            /*SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
+            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
 
             foreach (RssBanner rssBanner in iRssBannerList)
             {
@@ -53,7 +53,6 @@ namespace TPFinal.Model
                     }
                 }
             }
-            */
             return text;
         }
 

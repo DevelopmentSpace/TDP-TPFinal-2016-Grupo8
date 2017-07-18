@@ -15,11 +15,11 @@ using TPFinal.Model;
 
 namespace TPFinal.View
 {
-    public partial class CampaignView : Form
+    public partial class CampaignViewAdd : Form
     {
         private Application application;
 
-        public CampaignView(Application pApplication)
+        public CampaignViewAdd(Application pApplication)
         {
             InitializeComponent();
             application = pApplication;
@@ -116,7 +116,7 @@ namespace TPFinal.View
                 ByteImageDTO imageDTO = new ByteImageDTO();
 
                 imageDTO.id = Convert.ToInt32(row.Cells["ID"].Value);
-                imageDTO.bytes = CampaignView.imageToByte((Image)row.Cells["Image"].Value);
+                imageDTO.bytes = CampaignViewAdd.imageToByte((Image)row.Cells["Image"].Value);
 
                 imagesAuxDTO.Add(imageDTO);
             }
@@ -126,6 +126,11 @@ namespace TPFinal.View
             application.CampaignService.Create(campaign);
 
             this.Close();
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
 
         }
     }

@@ -51,10 +51,10 @@ namespace TPFinal
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void adminButton_Click(object sender, EventArgs e)
         {
-            CampaignView campaignView = new CampaignView(this);
-            campaignView.Show();
+            AdminView adminView = new AdminView(this);
+            adminView.Show();
         }
 
         private void adButton_Click(object sender, EventArgs e)

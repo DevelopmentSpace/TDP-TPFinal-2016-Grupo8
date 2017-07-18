@@ -34,17 +34,17 @@
             // 
             // adminMenu
             // 
-            this.adminMenu.Location = new System.Drawing.Point(26, 112);
+            this.adminMenu.Location = new System.Drawing.Point(29, 98);
             this.adminMenu.Name = "adminMenu";
-            this.adminMenu.Size = new System.Drawing.Size(99, 23);
+            this.adminMenu.Size = new System.Drawing.Size(126, 23);
             this.adminMenu.TabIndex = 0;
-            this.adminMenu.Text = "Add Campaign";
+            this.adminMenu.Text = "Admin tools";
             this.adminMenu.UseVisualStyleBackColor = true;
-            this.adminMenu.Click += new System.EventHandler(this.button1_Click);
+            this.adminMenu.Click += new System.EventHandler(this.adminButton_Click);
             // 
             // adButton
             // 
-            this.adButton.Location = new System.Drawing.Point(172, 112);
+            this.adButton.Location = new System.Drawing.Point(189, 98);
             this.adButton.Name = "adButton";
             this.adButton.Size = new System.Drawing.Size(75, 23);
             this.adButton.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(293, 205);
             this.Controls.Add(this.adButton);
             this.Controls.Add(this.adminMenu);
             this.Name = "Application";
