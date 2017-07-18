@@ -191,14 +191,17 @@ namespace TPFinal.Model
             else
             {
                 iActualImage = 0;
-                iActualCampaign++;
 
-                if (iActualCampaign > iCampaignList.Count()-1)
+                while (!IsCampaignActive(this.iCampaignList.ElementAt(this.iActualCampaign)))
                 {
-                    iActualCampaign = 0;
+                    iActualCampaign++;
+
+                    if (iActualCampaign > iCampaignList.Count() - 1)
+                    {
+                        iActualCampaign = 0;
+                    }
                 }
             }
-
             NotifyListeners();
         }
 
