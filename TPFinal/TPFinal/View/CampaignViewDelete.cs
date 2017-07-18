@@ -7,14 +7,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPFinal.DTO;
+using TPFinal.Domain;
+using System.IO;
 
 namespace TPFinal.View
 {
     public partial class CampaignViewDelete : Form
     {
-        public CampaignViewDelete()
+
+        private Application application;
+
+        public CampaignViewDelete(Application pAplication)
         {
             InitializeComponent();
+            application = pAplication;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            //No las elimina todas
+            foreach (DataGridViewRow row in dataGridViewImages.Rows)
+            {
+                dataGridViewImages.Rows.Remove(row);
+            }
+
+            CampaignDTO campaign= application.CampaignService.GetCampaign(Convert.ToInt32(idText.Text));
+
+            campaignNameText.Text = campaign.name;
+
+            initDateTimePicker.Value = campaign.initDate;
+            endDateTimePicker.Value = campaign.endDate;
+
+            initTimeHour.Text = campaign.initTime.Hours.ToString();
+            initTimeMinute.Text = campaign.initTime.Minutes.ToString();
+
+            endTimeHour.Text = campaign.endTime.Hours.ToString();
+            endTimeMinute.Text = campaign.endTime.Minutes.ToString();
+
+            TimeSpan interval = new TimeSpan(0,0,0,campaign.interval,0);
+            intervalMinute.Text = interval.Minutes.ToString();
+            intervalSecond.Text = interval.Seconds.ToString();
+
+
+            IList<ByteImageDTO> imagesAuxDTO = campaign.imagesList.ToList<ByteImageDTO>();
+
+            foreach (ByteImageDTO image in imagesAuxDTO)
+            {
+                MemoryStream ms = new MemoryStream(image.bytes);
+                Image imageAux = System.Drawing.Image.FromStream(ms);
+                dataGridViewImages.Rows.Add(image.id,imageAux);
+                ms.Dispose();
+            }
+
         }
     }
 }

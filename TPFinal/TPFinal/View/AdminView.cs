@@ -36,5 +36,11 @@ namespace TPFinal.View
             CampaignViewAdd campaignViewAdd = new CampaignViewAdd(application);
             campaignViewAdd.Show();
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CampaignViewDelete campaignViewDelete = new CampaignViewDelete(application);
+            campaignViewDelete.Show();
+        }
     }
 }

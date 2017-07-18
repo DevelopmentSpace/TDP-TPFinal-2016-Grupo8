@@ -26,8 +26,10 @@ namespace TPFinal.DTO
     public class CampaignMapper : MapperBase<Campaign, CampaignDTO>
     {
         ////BCC/ BEGIN CUSTOM CODE SECTION 
-        ////ECC/ END CUSTOM CODE SECTION 
         private ByteImageMapper _byteImageMapper = new ByteImageMapper();
+
+        ////ECC/ END CUSTOM CODE SECTION 
+
         public override Expression<Func<Campaign, CampaignDTO>> SelectorExpression
         {
             get

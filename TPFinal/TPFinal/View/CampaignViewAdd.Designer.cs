@@ -31,6 +31,8 @@
             this.initDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.campaingBox = new System.Windows.Forms.GroupBox();
+            this.idText = new System.Windows.Forms.TextBox();
+            this.idLabel = new System.Windows.Forms.Label();
             this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
             this.minuteIntervalLabel = new System.Windows.Forms.Label();
@@ -51,15 +53,13 @@
             this.InitTimeLabel = new System.Windows.Forms.Label();
             this.intervalMinute = new System.Windows.Forms.TextBox();
             this.intervalLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.campaignNameText = new System.Windows.Forms.TextBox();
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
-            this.idText = new System.Windows.Forms.TextBox();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -103,6 +103,26 @@
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
             this.campaingBox.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // idText
+            // 
+            this.idText.Enabled = false;
+            this.idText.Location = new System.Drawing.Point(131, 27);
+            this.idText.Name = "idText";
+            this.idText.Size = new System.Drawing.Size(85, 20);
+            this.idText.TabIndex = 20;
+            this.idText.Text = "Campaign Id";
+            this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.Location = new System.Drawing.Point(109, 30);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(16, 13);
+            this.idLabel.TabIndex = 19;
+            this.idLabel.Text = "Id";
+            this.idLabel.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // secondIntervalLabel
             // 
@@ -158,7 +178,7 @@
             this.dataGridViewImages.AllowUserToDeleteRows = false;
             this.dataGridViewImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
+            this.Order,
             this.Image});
             this.dataGridViewImages.Location = new System.Drawing.Point(6, 23);
             this.dataGridViewImages.Name = "dataGridViewImages";
@@ -309,6 +329,15 @@
             this.intervalLabel.Text = "Interval between images";
             this.intervalLabel.Click += new System.EventHandler(this.label6_Click);
             // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(90, 56);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 17;
+            this.nameLabel.Text = "Name";
+            // 
             // campaignNameText
             // 
             this.campaignNameText.Location = new System.Drawing.Point(131, 53);
@@ -346,12 +375,12 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
-            // ID
+            // Order
             // 
-            this.ID.HeaderText = "Id";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 25;
+            this.Order.HeaderText = "Order";
+            this.Order.Name = "Order";
+            this.Order.ReadOnly = true;
+            this.Order.Width = 40;
             // 
             // Image
             // 
@@ -360,35 +389,6 @@
             this.Image.Name = "Image";
             this.Image.ReadOnly = true;
             this.Image.Width = 370;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(90, 56);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(35, 13);
-            this.nameLabel.TabIndex = 17;
-            this.nameLabel.Text = "Name";
-            // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(109, 30);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(16, 13);
-            this.idLabel.TabIndex = 19;
-            this.idLabel.Text = "Id";
-            this.idLabel.Click += new System.EventHandler(this.label1_Click_1);
-            // 
-            // idText
-            // 
-            this.idText.Enabled = false;
-            this.idText.Location = new System.Drawing.Point(131, 27);
-            this.idText.Name = "idText";
-            this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 20;
-            this.idText.Text = "Campaign Id";
-            this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CampaignViewAdd
             // 
@@ -440,10 +440,10 @@
         private System.Windows.Forms.TextBox intervalSecond;
         private System.Windows.Forms.Label secondIntervalLabel;
         private System.Windows.Forms.Label minuteIntervalLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.TextBox idText;
         private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
     }
 }

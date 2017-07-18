@@ -5,6 +5,7 @@ using TPFinal.DAL;
 using TPFinal.Domain;
 using TPFinal.DTO;
 using System.Timers;
+using System.Linq.Expressions;
 
 namespace TPFinal.Model
 {
@@ -128,6 +129,18 @@ namespace TPFinal.Model
             iUnitOfWork.campaignRepository.Remove(oldCampaign);
 
             iUnitOfWork.Complete();
+        }
+
+        public CampaignDTO GetCampaign(int pId)
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            Campaign campaign = new Campaign();
+            CampaignMapper campaignMapper = new CampaignMapper();
+
+            campaign = iUnitOfWork.campaignRepository.Get(pId);
+
+            return campaignMapper.SelectorExpression.Compile()(campaign);
+
         }
 
         /// <summary>

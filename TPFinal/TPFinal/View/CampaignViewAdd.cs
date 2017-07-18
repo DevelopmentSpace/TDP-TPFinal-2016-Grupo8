@@ -94,9 +94,6 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            //Este campaign service tiene que salir de otro lado.
-
-
             CampaignDTO campaign = new CampaignDTO();
             //campaign.id = campaignService.LastID();
             campaign.name = campaignNameText.Text;
@@ -115,8 +112,8 @@ namespace TPFinal.View
             {
                 ByteImageDTO imageDTO = new ByteImageDTO();
 
-                imageDTO.id = Convert.ToInt32(row.Cells["ID"].Value);
-                imageDTO.bytes = CampaignViewAdd.imageToByte((Image)row.Cells["Image"].Value);
+                imageDTO.id = Convert.ToInt32(row.Cells[0].Value);
+                imageDTO.bytes = CampaignViewAdd.imageToByte((Image)row.Cells[1].Value);
 
                 imagesAuxDTO.Add(imageDTO);
             }
