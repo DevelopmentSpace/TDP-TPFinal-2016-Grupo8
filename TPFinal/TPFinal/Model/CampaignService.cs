@@ -136,8 +136,6 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
-            iActualCampaign = 0;
-            iActualImage = 0;
             return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
         }
 
@@ -165,7 +163,7 @@ namespace TPFinal.Model
         /// Cuando se llega al tiempo de cada intervalo (segun la campaña).
         /// </summary>
 
-        private void OnIntervalTimer(object sender, ElapsedEventArgs e)
+        private void OnIntervalTimer(object sender, EventArgs e)
      
         {
 
@@ -173,13 +171,18 @@ namespace TPFinal.Model
             {
                 this.iActualImage++;
 
-                if (iActualImage > this.iCampaignList.ElementAt(iActualCampaign).imagesList.Count)
+                if (iActualImage > this.iCampaignList.ElementAt(iActualCampaign).imagesList.Count()-1)
                 {
                     iActualImage = 0;
                     iActualCampaign++;
+
+                    if (iActualCampaign > iCampaignList.Count()-1)
+                    {
+                        iActualCampaign = 0;
+                    }
                 }
 
-                if (iActualCampaign > iCampaignList.Count())
+                if (iActualCampaign > iCampaignList.Count()-1)
                 {
                     iActualImage = 0;
                     iActualCampaign = 0;
@@ -190,9 +193,8 @@ namespace TPFinal.Model
                 iActualImage = 0;
                 iActualCampaign++;
 
-                if (iActualCampaign > iCampaignList.Count())
+                if (iActualCampaign > iCampaignList.Count()-1)
                 {
-                    iActualImage = 0;
                     iActualCampaign = 0;
                 }
             }
@@ -213,9 +215,9 @@ namespace TPFinal.Model
 
             iActualCampaign = 0;
             iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList(); //ESTO NO ANDA. Me tira las consultas a la base de datos en vez de darme una lista de campañas.
+            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList();
 
-            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *100;
+            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *1000;
 
             NotifyListeners();
         }
