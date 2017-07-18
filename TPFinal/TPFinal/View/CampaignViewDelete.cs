@@ -66,5 +66,12 @@ namespace TPFinal.View
             }
 
         }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            //Esto creo que podria optimizarse un toque. Me parece al cuete llamar al mensaje de nuevo.
+            application.CampaignService.Delete(application.CampaignService.GetCampaign(Convert.ToInt32(idText.Text)));
+            this.Close();
+        }
     }
 }

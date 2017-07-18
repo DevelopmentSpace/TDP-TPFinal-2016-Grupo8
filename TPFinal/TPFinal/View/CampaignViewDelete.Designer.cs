@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.campaingBox = new System.Windows.Forms.GroupBox();
+            this.searchButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.idText = new System.Windows.Forms.TextBox();
             this.idLabel = new System.Windows.Forms.Label();
@@ -38,6 +39,8 @@
             this.imageBox = new System.Windows.Forms.GroupBox();
             this.hintLabel = new System.Windows.Forms.Label();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
+            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.addImageButton = new System.Windows.Forms.Button();
             this.dateBox = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
@@ -58,9 +61,6 @@
             this.campaignNameText = new System.Windows.Forms.TextBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
-            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.searchButton = new System.Windows.Forms.Button();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -88,6 +88,15 @@
             this.campaingBox.TabIndex = 15;
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(271, 27);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(60, 20);
+            this.searchButton.TabIndex = 21;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
             // 
             // okButton
             // 
@@ -179,6 +188,21 @@
             this.dataGridViewImages.ReadOnly = true;
             this.dataGridViewImages.Size = new System.Drawing.Size(440, 191);
             this.dataGridViewImages.TabIndex = 10;
+            // 
+            // Order
+            // 
+            this.Order.HeaderText = "Order";
+            this.Order.Name = "Order";
+            this.Order.ReadOnly = true;
+            this.Order.Width = 40;
+            // 
+            // Image
+            // 
+            this.Image.HeaderText = "Image";
+            this.Image.MinimumWidth = 10;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Width = 370;
             // 
             // addImageButton
             // 
@@ -379,30 +403,7 @@
             this.AcceptButton.TabIndex = 16;
             this.AcceptButton.Text = "Accept";
             this.AcceptButton.UseVisualStyleBackColor = true;
-            // 
-            // Order
-            // 
-            this.Order.HeaderText = "Order";
-            this.Order.Name = "Order";
-            this.Order.ReadOnly = true;
-            this.Order.Width = 40;
-            // 
-            // Image
-            // 
-            this.Image.HeaderText = "Image";
-            this.Image.MinimumWidth = 10;
-            this.Image.Name = "Image";
-            this.Image.ReadOnly = true;
-            this.Image.Width = 370;
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(271, 27);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(60, 20);
-            this.searchButton.TabIndex = 21;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
+            this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // CampaignViewDelete
             // 

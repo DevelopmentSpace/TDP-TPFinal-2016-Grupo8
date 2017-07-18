@@ -134,12 +134,9 @@ namespace TPFinal.Model
         public CampaignDTO GetCampaign(int pId)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            Campaign campaign = new Campaign();
             CampaignMapper campaignMapper = new CampaignMapper();
 
-            campaign = iUnitOfWork.campaignRepository.Get(pId);
-
-            return campaignMapper.SelectorExpression.Compile()(campaign);
+            return campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(pId));
 
         }
 
