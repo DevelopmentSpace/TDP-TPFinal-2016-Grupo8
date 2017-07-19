@@ -187,7 +187,9 @@
     <EmbeddedResource Include="View\CampaignViewDelete.resx">
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -204,8 +206,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Unity.config" />
+    <None Include="Unity.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)Unity.config $(TargetDir)Unity.config
+
+copy $(ProjectDir)log4net.config $(TargetDir)log4net.config</PostBuildEvent>
+  </PropertyGroup>
 </Project>
