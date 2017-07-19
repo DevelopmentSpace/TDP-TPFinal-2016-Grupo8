@@ -52,6 +52,8 @@ namespace TPFinal.Model
                 .Build();
             scheduler.ScheduleJob(intervalJob, intervalTrigger);
 
+
+
             scheduler.Start();
         }
 

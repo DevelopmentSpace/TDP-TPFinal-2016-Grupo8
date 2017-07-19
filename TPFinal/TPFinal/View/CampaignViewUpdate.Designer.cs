@@ -1,6 +1,6 @@
 ﻿namespace TPFinal.View
 {
-    partial class CampaignViewDelete
+    partial class CampaignViewUpdate
     {
         /// <summary>
         /// Required designer variable.
@@ -30,16 +30,18 @@
         {
             this.campaingBox = new System.Windows.Forms.GroupBox();
             this.searchButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
             this.idText = new System.Windows.Forms.TextBox();
+            this.okButton = new System.Windows.Forms.Button();
             this.idLabel = new System.Windows.Forms.Label();
             this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
             this.minuteIntervalLabel = new System.Windows.Forms.Label();
             this.imageBox = new System.Windows.Forms.GroupBox();
+            this.hintLabel = new System.Windows.Forms.Label();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
             this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.addImageButton = new System.Windows.Forms.Button();
             this.dateBox = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
             this.hourLabel = new System.Windows.Forms.Label();
@@ -59,6 +61,7 @@
             this.campaignNameText = new System.Windows.Forms.TextBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -68,8 +71,8 @@
             // campaingBox
             // 
             this.campaingBox.Controls.Add(this.searchButton);
-            this.campaingBox.Controls.Add(this.okButton);
             this.campaingBox.Controls.Add(this.idText);
+            this.campaingBox.Controls.Add(this.okButton);
             this.campaingBox.Controls.Add(this.idLabel);
             this.campaingBox.Controls.Add(this.secondIntervalLabel);
             this.campaingBox.Controls.Add(this.intervalSecond);
@@ -92,19 +95,9 @@
             this.searchButton.Location = new System.Drawing.Point(271, 27);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(60, 20);
-            this.searchButton.TabIndex = 21;
+            this.searchButton.TabIndex = 23;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
-            // 
-            // okButton
-            // 
-            this.okButton.Location = new System.Drawing.Point(222, 27);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(44, 20);
-            this.okButton.TabIndex = 3;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // idText
             // 
@@ -114,6 +107,16 @@
             this.idText.TabIndex = 20;
             this.idText.Text = "ID";
             this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(222, 27);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(44, 20);
+            this.okButton.TabIndex = 22;
+            this.okButton.Text = "Ok";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // idLabel
             // 
@@ -135,7 +138,6 @@
             // 
             // intervalSecond
             // 
-            this.intervalSecond.Enabled = false;
             this.intervalSecond.Location = new System.Drawing.Point(246, 92);
             this.intervalSecond.Name = "intervalSecond";
             this.intervalSecond.Size = new System.Drawing.Size(85, 20);
@@ -154,13 +156,24 @@
             // 
             // imageBox
             // 
+            this.imageBox.Controls.Add(this.hintLabel);
             this.imageBox.Controls.Add(this.dataGridViewImages);
+            this.imageBox.Controls.Add(this.addImageButton);
             this.imageBox.Location = new System.Drawing.Point(411, 33);
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(452, 260);
             this.imageBox.TabIndex = 15;
             this.imageBox.TabStop = false;
             this.imageBox.Text = "Images Data";
+            // 
+            // hintLabel
+            // 
+            this.hintLabel.AutoSize = true;
+            this.hintLabel.Location = new System.Drawing.Point(149, 227);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(269, 13);
+            this.hintLabel.TabIndex = 23;
+            this.hintLabel.Text = "To delete images you must select the rows and press \'d\'";
             // 
             // dataGridViewImages
             // 
@@ -175,6 +188,7 @@
             this.dataGridViewImages.ReadOnly = true;
             this.dataGridViewImages.Size = new System.Drawing.Size(440, 191);
             this.dataGridViewImages.TabIndex = 10;
+            this.dataGridViewImages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewImages_KeyPress_1);
             // 
             // Order
             // 
@@ -190,6 +204,16 @@
             this.Image.Name = "Image";
             this.Image.ReadOnly = true;
             this.Image.Width = 370;
+            // 
+            // addImageButton
+            // 
+            this.addImageButton.Location = new System.Drawing.Point(46, 222);
+            this.addImageButton.Name = "addImageButton";
+            this.addImageButton.Size = new System.Drawing.Size(75, 23);
+            this.addImageButton.TabIndex = 11;
+            this.addImageButton.Text = "Add images";
+            this.addImageButton.UseVisualStyleBackColor = true;
+            this.addImageButton.Click += new System.EventHandler(this.addImageButton_Click);
             // 
             // dateBox
             // 
@@ -232,7 +256,6 @@
             // 
             // endTimeMinute
             // 
-            this.endTimeMinute.Enabled = false;
             this.endTimeMinute.Location = new System.Drawing.Point(216, 132);
             this.endTimeMinute.Name = "endTimeMinute";
             this.endTimeMinute.Size = new System.Drawing.Size(85, 20);
@@ -242,7 +265,6 @@
             // 
             // initTimeMinute
             // 
-            this.initTimeMinute.Enabled = false;
             this.initTimeMinute.Location = new System.Drawing.Point(216, 106);
             this.initTimeMinute.Name = "initTimeMinute";
             this.initTimeMinute.Size = new System.Drawing.Size(85, 20);
@@ -261,7 +283,6 @@
             // 
             // endDateTimePicker
             // 
-            this.endDateTimePicker.Enabled = false;
             this.endDateTimePicker.Location = new System.Drawing.Point(101, 52);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
@@ -270,7 +291,6 @@
             // 
             // initDateTimePicker
             // 
-            this.initDateTimePicker.Enabled = false;
             this.initDateTimePicker.Location = new System.Drawing.Point(101, 26);
             this.initDateTimePicker.Name = "initDateTimePicker";
             this.initDateTimePicker.Size = new System.Drawing.Size(200, 20);
@@ -288,7 +308,6 @@
             // 
             // initTimeHour
             // 
-            this.initTimeHour.Enabled = false;
             this.initTimeHour.Location = new System.Drawing.Point(101, 106);
             this.initTimeHour.Name = "initTimeHour";
             this.initTimeHour.Size = new System.Drawing.Size(85, 20);
@@ -298,7 +317,6 @@
             // 
             // endTimeHour
             // 
-            this.endTimeHour.Enabled = false;
             this.endTimeHour.Location = new System.Drawing.Point(101, 133);
             this.endTimeHour.Name = "endTimeHour";
             this.endTimeHour.Size = new System.Drawing.Size(85, 20);
@@ -326,7 +344,6 @@
             // 
             // intervalMinute
             // 
-            this.intervalMinute.Enabled = false;
             this.intervalMinute.Location = new System.Drawing.Point(131, 92);
             this.intervalMinute.Name = "intervalMinute";
             this.intervalMinute.Size = new System.Drawing.Size(85, 20);
@@ -354,7 +371,6 @@
             // 
             // campaignNameText
             // 
-            this.campaignNameText.Enabled = false;
             this.campaignNameText.Location = new System.Drawing.Point(131, 53);
             this.campaignNameText.Name = "campaignNameText";
             this.campaignNameText.Size = new System.Drawing.Size(200, 20);
@@ -364,7 +380,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(544, 317);
+            this.CancelButton.Location = new System.Drawing.Point(545, 317);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 17;
@@ -374,7 +390,7 @@
             // 
             // AcceptButton
             // 
-            this.AcceptButton.Location = new System.Drawing.Point(307, 317);
+            this.AcceptButton.Location = new System.Drawing.Point(308, 317);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(75, 23);
             this.AcceptButton.TabIndex = 16;
@@ -382,19 +398,27 @@
             this.AcceptButton.UseVisualStyleBackColor = true;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
-            // CampaignViewDelete
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "Imagenes PNG|*.png|Imagenes JPG|*.jpg";
+            this.openFileDialog.Multiselect = true;
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
+            // CampaignViewUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 360);
+            this.ClientSize = new System.Drawing.Size(934, 397);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.campaingBox);
-            this.Name = "CampaignViewDelete";
-            this.Text = "CampaignViewDelete";
+            this.Name = "CampaignViewUpdate";
+            this.Text = "CampaignViewUpdate";
             this.campaingBox.ResumeLayout(false);
             this.campaingBox.PerformLayout();
             this.imageBox.ResumeLayout(false);
+            this.imageBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).EndInit();
             this.dateBox.ResumeLayout(false);
             this.dateBox.PerformLayout();
@@ -411,7 +435,11 @@
         private System.Windows.Forms.TextBox intervalSecond;
         private System.Windows.Forms.Label minuteIntervalLabel;
         private System.Windows.Forms.GroupBox imageBox;
+        private System.Windows.Forms.Label hintLabel;
         private System.Windows.Forms.DataGridView dataGridViewImages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
+        private System.Windows.Forms.Button addImageButton;
         private System.Windows.Forms.GroupBox dateBox;
         private System.Windows.Forms.Label minuteLabel;
         private System.Windows.Forms.Label hourLabel;
@@ -429,11 +457,10 @@
         private System.Windows.Forms.Label intervalLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox campaignNameText;
-        private System.Windows.Forms.Button okButton;
         private new System.Windows.Forms.Button CancelButton;
         private new System.Windows.Forms.Button AcceptButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
-        private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

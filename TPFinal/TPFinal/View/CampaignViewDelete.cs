@@ -31,11 +31,8 @@ namespace TPFinal.View
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            //No las elimina todas
-            foreach (DataGridViewRow row in dataGridViewImages.Rows)
-            {
-                dataGridViewImages.Rows.Remove(row);
-            }
+            dataGridViewImages.Rows.Clear();
+            dataGridViewImages.Refresh();
 
             CampaignDTO campaign= application.CampaignService.GetCampaign(Convert.ToInt32(idText.Text));
 

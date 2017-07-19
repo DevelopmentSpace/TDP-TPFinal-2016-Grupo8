@@ -163,6 +163,12 @@
     <Compile Include="View\CampaignViewDelete.Designer.cs">
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\CampaignViewUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CampaignViewUpdate.Designer.cs">
+      <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewDelete.resx">
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CampaignViewUpdate.resx">
+      <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="job_scheduling_data_2_0.xsd">
