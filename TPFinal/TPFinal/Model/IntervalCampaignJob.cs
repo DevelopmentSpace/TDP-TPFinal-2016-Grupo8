@@ -15,47 +15,48 @@ namespace TPFinal.Model
         {
             CampaignService service = IoCContainerLocator.Container.Resolve<CampaignService>();
 
-            if (service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
+            if (service.IsCampaignActive(service.ICampaignList.ElementAt(service.IActualCampaign)))
                 {
-                service.iActualImage++;
+                service.IActualImage++;
 
-                    if (service.iActualImage > service.iCampaignList.ElementAt(service.iActualCampaign).imagesList.Count() - 1)
+                    if (service.IActualImage > service.ICampaignList.ElementAt(service.IActualCampaign).imagesList.Count() - 1)
                     {
-                    service.iActualImage = 0;
-                    service.iActualCampaign++;
+                    service.IActualImage = 0;
+                    service.IActualCampaign++;
 
-                        if (service.iActualCampaign > service.iCampaignList.Count() - 1)
+                        if (service.IActualCampaign > service.ICampaignList.Count() - 1)
                         {
-                        service.iActualCampaign = 0;
+                        service.IActualCampaign = 0;
                         }
                     }
 
-                    if (service.iActualCampaign > service.iCampaignList.Count() - 1)
+                    if (service.IActualCampaign > service.ICampaignList.Count() - 1)
                     {
-                    service.iActualImage = 0;
-                    service.iActualCampaign = 0;
+                    service.IActualImage = 0;
+                    service.IActualCampaign = 0;
                     }
                 }
                 else
                 {
-                service.iActualImage = 0;
+                service.IActualImage = 0;
                     //Esto sirve para que no muestra campañas que no deben mostrar
+                    /*
                     if (No hay ninguna campaña activa) 
                     {
                         Mostrar imagen por defecto.
                     }
-                    else
+                    else*/
                         //Esto adelanta hasta que encuentra la siguiente campaña activa. 
-                        while (!service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
+                        while (!service.IsCampaignActive(service.ICampaignList.ElementAt(service.IActualCampaign)))
                         {
-                            service.iActualCampaign++;
-                            if (service.iActualCampaign > service.iCampaignList.Count() - 1)
+                            service.IActualCampaign++;
+                            if (service.IActualCampaign > service.ICampaignList.Count() - 1)
                             {
-                                service.iActualCampaign = 0;
+                                service.IActualCampaign = 0;
                             }
                     }
                 }
-            service.NotifyListeners();*/
+            service.NotifyListeners();
         }
     }
-    }
+}

@@ -36,17 +36,56 @@ namespace TPFinal.Model
         //Esto no deberia estar aca.
         private JobScheduler jobScheduler;
 
+        public IEnumerable<Campaign> ICampaignList
+        {
+            get
+            {
+                return iCampaignList;
+            }
+
+            set
+            {
+                iCampaignList = value;
+            }
+        }
+
+        public int IActualImage
+        {
+            get
+            {
+                return iActualImage;
+            }
+
+            set
+            {
+                iActualImage = value;
+            }
+        }
+
+        public int IActualCampaign
+        {
+            get
+            {
+                return iActualCampaign;
+            }
+
+            set
+            {
+                iActualCampaign = value;
+            }
+        }
+
         /// <summary>
         /// Creador del servicio de campañas
         /// </summary>
         public CampaignService()
         {
-            JobScheduler job = new JobScheduler(this);
+            JobScheduler job = new JobScheduler();
 
             jobScheduler = job;
 
-            iActualCampaign = 0;
-            iActualImage = 0;
+            IActualCampaign = 0;
+            IActualImage = 0;
         }
 
         public void AddListener(IObserver pListener)
@@ -141,7 +180,7 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
-            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+            return ICampaignList.ElementAt(IActualCampaign).imagesList.ElementAt(IActualImage).bytes;
         }
 
         /// <summary>
@@ -159,73 +198,6 @@ namespace TPFinal.Model
         {
             jobScheduler.Stop();
         }
-
-        /// <summary>
-        /// Cuando se llega al tiempo de cada intervalo (segun la campaña).
-        /// </summary>
-
-        private void OnIntervalTimer(object sender, EventArgs e)
-     
-        {
-
-           if (IsCampaignActive(this.iCampaignList.ElementAt(this.iActualCampaign)))
-            {
-                this.iActualImage++;
-
-                if (iActualImage > this.iCampaignList.ElementAt(iActualCampaign).imagesList.Count()-1)
-                {
-                    iActualImage = 0;
-                    iActualCampaign++;
-
-                    if (iActualCampaign > iCampaignList.Count()-1)
-                    {
-                        iActualCampaign = 0;
-                    }
-                }
-
-                if (iActualCampaign > iCampaignList.Count()-1)
-                {
-                    iActualImage = 0;
-                    iActualCampaign = 0;
-                }
-            }
-            else
-            {
-                iActualImage = 0;
-
-                while (!IsCampaignActive(this.iCampaignList.ElementAt(this.iActualCampaign)))
-                {
-                    iActualCampaign++;
-
-                    if (iActualCampaign > iCampaignList.Count() - 1)
-                    {
-                        iActualCampaign = 0;
-                    }
-                }
-            }
-            NotifyListeners();
-        }
-
-        /// <summary>
-        /// Cuando se llega al tiempo de cada refresco con la base de datos.
-        /// </summary>
-        private void OnRefreshTimer(object sender, EventArgs e)
-        {
-
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime date = DateTime.Now.Date;
-            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
-            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, 30)); //(int)iRefreshTimer.Interval)
-
-            iActualCampaign = 0;
-            iActualImage = 0;
-            iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList();
-
-            //iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *1000;
-
-            NotifyListeners();
-        }
-
 
         /// <summary>
         /// Permite saber si una campaña esta activa actualmente

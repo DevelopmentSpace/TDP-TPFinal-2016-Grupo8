@@ -13,18 +13,12 @@ namespace TPFinal.Model
 {
     class JobScheduler
     {
-
-        JobDataMap services;
-
         IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
 
         public void Start()
         {
            
             IJobDetail refreshCampaignJob = JobBuilder.Create<RefreshCampaignJob>().Build();
-
-            IJobDetail refreshBannerJob = JobBuilder.Create<RefreshBannerJob>().Build();
-
             ITrigger refreshCampaignTrigger = TriggerBuilder.Create()
                 .WithIdentity("RefreshCampaignJob", "Refresh")
                 .StartNow()
@@ -33,7 +27,9 @@ namespace TPFinal.Model
                     .RepeatForever())
                 .WithPriority(1)
                 .Build();
-            //ACA PODRIA HABER UN SOLO TRIGGER, NO SE SI SE PUEDE
+            scheduler.ScheduleJob(refreshCampaignJob, refreshCampaignTrigger);
+            /*
+            IJobDetail refreshBannerJob = JobBuilder.Create<RefreshBannerJob>().Build();
             ITrigger refreshBannerTrigger = TriggerBuilder.Create()
                 .WithIdentity("RefreshBannerJob", "Refresh")
                 .StartNow()
@@ -42,13 +38,9 @@ namespace TPFinal.Model
                     .RepeatForever())
                     .WithPriority(2)
                     .Build();
-
-            scheduler.ScheduleJob(refreshCampaignJob, refreshCampaignTrigger);
-            scheduler.ScheduleJob(refreshBannerJob, refreshBannerTrigger);
+            scheduler.ScheduleJob(refreshBannerJob, refreshBannerTrigger);*/
 
             IJobDetail intervalCampaignJob = JobBuilder.Create<IntervalCampaignJob>().Build();
-            IJobDetail intervalBannerJob = JobBuilder.Create<IntervalBannerJob>().Build();
-
             ITrigger intervalCampaignTrigger = TriggerBuilder.Create()
                 .WithIdentity("IntervalCampaignJob", "IntervalCampaign")
                 .StartNow()
@@ -57,8 +49,10 @@ namespace TPFinal.Model
                     .RepeatForever())
                 .WithPriority(3)
                 .Build();
+            scheduler.ScheduleJob(intervalCampaignJob, intervalCampaignTrigger);
 
-             ITrigger intervalBannerTrigger = TriggerBuilder.Create()
+            /*IJobDetail intervalBannerJob = JobBuilder.Create<IntervalBannerJob>().Build();
+            ITrigger intervalBannerTrigger = TriggerBuilder.Create()
                 .WithIdentity("IntervalBannerJob", "IntervalBanner")
                 .StartNow()
                 .WithSimpleSchedule(s => s
@@ -66,11 +60,7 @@ namespace TPFinal.Model
                     .RepeatForever())
                 .WithPriority(4)
                 .Build();
-
-            scheduler.ScheduleJob(intervalCampaignJob, intervalCampaignTrigger);
-            scheduler.ScheduleJob(intervalBannerJob, intervalBannerTrigger);
-
-
+            scheduler.ScheduleJob(intervalBannerJob, intervalBannerTrigger);*/
 
             scheduler.Start();
         }

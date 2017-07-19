@@ -22,9 +22,9 @@ namespace TPFinal.Model
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, 30)); //(int)service.iRefreshTimer.Interval
 
-            service.iActualCampaign = 0;
-            service.iActualImage = 0;
-            service.iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList();
+            service.IActualCampaign = 0;
+            service.IActualImage = 0;
+            service.ICampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList();
 
             //service.iIntervalTimer.Interval = service.iCampaignList.ElementAt(iActualCampaign).interval * 1000;
 
