@@ -11,7 +11,7 @@ namespace TPFinal.Model
     /// <summary>
     /// Servicio de campañas. Se encarga de ser servicio de todos.
     /// </summary>
-    class CampaignService : IObservable
+    public class CampaignService : IObservable
     {
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
@@ -39,8 +39,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Creador del servicio de campañas
         /// </summary>
-        /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
-        public CampaignService(int pRefreshTime)
+        public CampaignService()
         {
             JobScheduler job = new JobScheduler(this);
 

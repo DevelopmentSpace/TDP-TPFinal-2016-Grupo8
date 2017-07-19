@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Quartz;
 using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
@@ -12,9 +13,9 @@ namespace TPFinal.Model
     {
         public void Execute(IJobExecutionContext context)
         {
-            /*
+            CampaignService service = IoCContainerLocator.Container.Resolve<CampaignService>();
 
-                if (service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
+            if (service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
                 {
                 service.iActualImage++;
 
