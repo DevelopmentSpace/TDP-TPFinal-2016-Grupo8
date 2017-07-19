@@ -16,7 +16,7 @@ namespace TPFinal.Model
 
             JobDataMap dataMap = context.JobDetail.JobDataMap;
 
-            CampaignService service = (CampaignService)dataMap.Get("service");
+            /*CampaignService service = (CampaignService)dataMap.Get("service");
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime date = DateTime.Now.Date;
@@ -29,7 +29,7 @@ namespace TPFinal.Model
 
             //service.iIntervalTimer.Interval = service.iCampaignList.ElementAt(iActualCampaign).interval * 1000;
 
-            service.NotifyListeners();
+            service.NotifyListeners();*/
         }
     }
 }

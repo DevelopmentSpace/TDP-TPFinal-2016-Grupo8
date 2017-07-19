@@ -15,7 +15,9 @@ namespace TPFinal.Model
     {
 
         JobDataMap services;
-        
+
+        IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+
         public JobScheduler(CampaignService pCampaign)
         {
             JobDataMap dataMap = new JobDataMap();
@@ -25,9 +27,7 @@ namespace TPFinal.Model
 
         public void Start()
         {
-            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
-
-
+           
             IJobDetail job = JobBuilder.Create<RefreshJob>().Build();
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("RefreshJob", "Refresh")
@@ -41,6 +41,16 @@ namespace TPFinal.Model
             scheduler.ScheduleJob(job, trigger);
 
             scheduler.Start();
+        }
+
+        public void Stop()
+        {
+            scheduler.PauseAll();
+        }
+
+        public void Resume()
+        {
+            scheduler.ResumeAll();
         }
 
     }

@@ -33,15 +33,6 @@ namespace TPFinal.Model
         /// </summary>
         public int iActualCampaign;
 
-        /// <summary>
-        /// Reloj de tiempo para controlar los intervalos. Los intervalos de los timers estan en milisegundos.
-        /// </summary>
-        private static Timer iIntervalTimer;
-
-        /// <summary>
-        /// Reloj de tiempo para controlar el tiempo de refresco con la base de datos. Los intervalos de los timers estan en milisegundos.
-        /// </summary>
-        private static Timer iRefreshTimer;
 
         private JobScheduler jobScheduler;
 
@@ -51,21 +42,6 @@ namespace TPFinal.Model
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public CampaignService(int pRefreshTime)
         {
-            iIntervalTimer = new Timer();
-            iIntervalTimer.Interval = 1000;
-            iIntervalTimer.AutoReset = true;
-            iIntervalTimer.Stop();
-
-            iRefreshTimer = new Timer();
-            iRefreshTimer.Interval = pRefreshTime * 60000;
-            iRefreshTimer.AutoReset = true;
-            iRefreshTimer.Stop();
-
-            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-
-            iIntervalTimer.Elapsed += OnIntervalTimer;
-            iRefreshTimer.Elapsed += OnRefreshTimer;
-
             JobScheduler job = new JobScheduler(this);
 
             jobScheduler = job;
@@ -159,11 +135,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Start()
         {                       
-            //OnRefreshTimer(null, ElapsedEventArgs.Empty);
-
             jobScheduler.Start();
-            //iRefreshTimer.Start();
-            //iIntervalTimer.Start();
         }
 
         /// <summary>
@@ -171,8 +143,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Stop()
         {
-            iIntervalTimer.Stop();
-            iRefreshTimer.Stop();
+
         }
 
         /// <summary>
@@ -230,13 +201,13 @@ namespace TPFinal.Model
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime date = DateTime.Now.Date;
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
-            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTimer.Interval));
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, 30)); //(int)iRefreshTimer.Interval)
 
             iActualCampaign = 0;
             iActualImage = 0;
             iCampaignList = iUnitOfWork.campaignRepository.GetActives(date, timeFrom, timeTo).ToList();
 
-            iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *1000;
+            //iIntervalTimer.Interval = iCampaignList.ElementAt(iActualCampaign).interval *1000;
 
             NotifyListeners();
         }
