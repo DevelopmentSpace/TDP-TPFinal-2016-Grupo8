@@ -28,17 +28,29 @@ namespace TPFinal.Model
         public void Start()
         {
            
-            IJobDetail job = JobBuilder.Create<RefreshJob>().Build();
-            ITrigger trigger = TriggerBuilder.Create()
+            IJobDetail refreshJob = JobBuilder.Create<RefreshCampaignJob>().Build();
+            ITrigger refreshTrigger = TriggerBuilder.Create()
                 .WithIdentity("RefreshJob", "Refresh")
                 .StartNow()
-                .UsingJobData(services)
+                .UsingJobData(services) //No funciona
                 .WithSimpleSchedule(s => s
                     .WithIntervalInSeconds(30)
                     .RepeatForever())
                 .WithPriority(1)
                 .Build();
-            scheduler.ScheduleJob(job, trigger);
+            scheduler.ScheduleJob(refreshJob, refreshTrigger);
+
+            IJobDetail intervalJob = JobBuilder.Create<IntervalCampaignJob>().Build();
+            ITrigger intervalTrigger = TriggerBuilder.Create()
+                .WithIdentity("IntervalJob", "Interval")
+                .StartNow()
+                .UsingJobData(services)
+                .WithSimpleSchedule(s => s
+                    .WithIntervalInSeconds(30)
+                    .RepeatForever())
+                .WithPriority(2)
+                .Build();
+            scheduler.ScheduleJob(intervalJob, intervalTrigger);
 
             scheduler.Start();
         }

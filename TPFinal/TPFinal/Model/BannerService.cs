@@ -23,34 +23,11 @@ namespace TPFinal.Model
         private IList<ITextBanner> iTextBannerList;
 
         /// <summary>
-        /// Timer con el tiempo de actualizacion de la base de datos
-        /// </summary>
-        private static Timer iRefreshTimer;
-
-        /// <summary>
-        /// Timer con el tiempo de actualizacion de los textos
-        /// </summary>
-        private static Timer iIntervalTimer;
-
-        /// <summary>
         /// Creador del servicio de campañas
         /// </summary>
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public BannerService(int pRefreshTime)
         {
-            iRefreshTimer = new System.Timers.Timer();
-            iRefreshTimer.Interval = pRefreshTime * 60000;
-            iRefreshTimer.AutoReset = true;
-            iRefreshTimer.Enabled = false;
-
-            iIntervalTimer = new System.Timers.Timer();
-            iIntervalTimer.Interval = pRefreshTime * 15000;
-            iIntervalTimer.AutoReset = true;
-            iIntervalTimer.Enabled = false;
-
-            //Cuando pasa el tiempo que alguno de los timers ejecuta la accion que corresponda.
-            iRefreshTimer.Elapsed += OnRefreshTimer;
-            iIntervalTimer.Elapsed += OnIntervalTimer;
 
             ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
             ITextBanner textBannerService = new TextBannerService(pRefreshTime);
@@ -100,10 +77,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Start()
         {
-            OnRefreshTimer(null, ElapsedEventArgs.Empty);
 
-            iRefreshTimer.Start();
-            iIntervalTimer.Start();
         }
 
         /// <summary>
@@ -111,8 +85,6 @@ namespace TPFinal.Model
         /// </summary>
         public void Stop()
         {
-            iRefreshTimer.Stop();
-            iRefreshTimer.Stop();
         }
         /// <summary>
         /// Cuando se llega al tiempo de cada refresco con la base de datos.

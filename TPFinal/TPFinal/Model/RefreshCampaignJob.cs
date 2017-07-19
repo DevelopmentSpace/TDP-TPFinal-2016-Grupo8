@@ -9,14 +9,11 @@ using TPFinal.DAL;
 
 namespace TPFinal.Model
 {
-    class RefreshJob : IJob
+    class RefreshCampaignJob : IJob
     {
         public void Execute (IJobExecutionContext context)
         {
-
-            JobDataMap dataMap = context.JobDetail.JobDataMap;
-
-            /*CampaignService service = (CampaignService)dataMap.Get("service");
+            /*
 
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime date = DateTime.Now.Date;

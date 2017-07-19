@@ -8,7 +8,7 @@ using TPFinal.Model;
 
 namespace TPFinal.Model
 {
-    class IntervalJob : IJob
+    class IntervalCampaignJob : IJob
     {
         public void Execute(IJobExecutionContext context)
         {

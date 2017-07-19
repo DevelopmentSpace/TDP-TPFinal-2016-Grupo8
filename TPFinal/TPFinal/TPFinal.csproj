@@ -124,11 +124,13 @@
     </Compile>
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
-    <Compile Include="Model\IntervalJob.cs" />
+    <Compile Include="Model\IntervalBannerJob.cs" />
+    <Compile Include="Model\IntervalCampaignJob.cs" />
     <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\JobScheduler.cs" />
-    <Compile Include="Model\RefreshJob.cs" />
+    <Compile Include="Model\RefreshBannerJob.cs" />
+    <Compile Include="Model\RefreshCampaignJob.cs" />
     <Compile Include="Model\RssBannerService.cs" />
     <Compile Include="Model\RssReaderModel\IRssReader.cs" />
     <Compile Include="Model\RssReaderModel\RssReader.cs" />
