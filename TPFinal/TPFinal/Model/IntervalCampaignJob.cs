@@ -38,15 +38,20 @@ namespace TPFinal.Model
                 else
                 {
                 service.iActualImage = 0;
-
-                    while (!service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
+                    //Esto sirve para que no muestra campañas que no deben mostrar
+                    if (No hay ninguna campaña activa) 
                     {
-                    service.iActualCampaign++;
-
-                        if (service.iActualCampaign > service.iCampaignList.Count() - 1)
+                        Mostrar imagen por defecto.
+                    }
+                    else
+                        //Esto adelanta hasta que encuentra la siguiente campaña activa. 
+                        while (!service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
                         {
-                        service.iActualCampaign = 0;
-                        }
+                            service.iActualCampaign++;
+                            if (service.iActualCampaign > service.iCampaignList.Count() - 1)
+                            {
+                                service.iActualCampaign = 0;
+                            }
                     }
                 }
             service.NotifyListeners();*/
