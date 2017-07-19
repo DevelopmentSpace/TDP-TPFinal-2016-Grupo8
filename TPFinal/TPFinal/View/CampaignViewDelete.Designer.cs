@@ -114,7 +114,7 @@
             this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(85, 20);
             this.idText.TabIndex = 20;
-            this.idText.Text = "Campaign Id";
+            this.idText.Text = "ID";
             this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // idLabel

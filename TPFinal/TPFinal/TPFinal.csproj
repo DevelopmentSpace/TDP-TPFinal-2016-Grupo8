@@ -68,6 +68,10 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz, Version=2.5.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.5.0\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -120,8 +124,11 @@
     </Compile>
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
+    <Compile Include="Model\IntervalJob.cs" />
     <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
+    <Compile Include="Model\JobScheduler.cs" />
+    <Compile Include="Model\RefreshJob.cs" />
     <Compile Include="Model\RssBannerService.cs" />
     <Compile Include="Model\RssReaderModel\IRssReader.cs" />
     <Compile Include="Model\RssReaderModel\RssReader.cs" />
@@ -180,8 +187,13 @@
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="log4net.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
