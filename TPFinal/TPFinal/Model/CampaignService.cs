@@ -5,7 +5,6 @@ using TPFinal.DAL;
 using TPFinal.Domain;
 using TPFinal.DTO;
 using System.Timers;
-using System.Linq.Expressions;
 
 namespace TPFinal.Model
 {
@@ -17,7 +16,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
         /// </summary>
-        private IEnumerable<Campaign> iCampaignList;
+        public IEnumerable<Campaign> iCampaignList;
 
         /// <summary>
         /// Lista de escuchadores
@@ -27,12 +26,12 @@ namespace TPFinal.Model
         /// <summary>
         /// Indice de la imagen actual de una campaña
         /// </summary>
-        private int iActualImage;
+        public int iActualImage;
 
         /// <summary>
         /// Indice de campaña actual
         /// </summary>
-        private int iActualCampaign;
+        public int iActualCampaign;
 
         /// <summary>
         /// Reloj de tiempo para controlar los intervalos. Los intervalos de los timers estan en milisegundos.
@@ -43,6 +42,8 @@ namespace TPFinal.Model
         /// Reloj de tiempo para controlar el tiempo de refresco con la base de datos. Los intervalos de los timers estan en milisegundos.
         /// </summary>
         private static Timer iRefreshTimer;
+
+        private JobScheduler jobScheduler;
 
         /// <summary>
         /// Creador del servicio de campañas
@@ -64,6 +65,10 @@ namespace TPFinal.Model
 
             iIntervalTimer.Elapsed += OnIntervalTimer;
             iRefreshTimer.Elapsed += OnRefreshTimer;
+
+            JobScheduler job = new JobScheduler(this);
+
+            jobScheduler = job;
 
             iActualCampaign = 0;
             iActualImage = 0;
@@ -154,10 +159,11 @@ namespace TPFinal.Model
         /// </summary>
         public void Start()
         {                       
-            OnRefreshTimer(null, ElapsedEventArgs.Empty);
+            //OnRefreshTimer(null, ElapsedEventArgs.Empty);
 
-            iRefreshTimer.Start();
-            iIntervalTimer.Start();
+            jobScheduler.Start();
+            //iRefreshTimer.Start();
+            //iIntervalTimer.Start();
         }
 
         /// <summary>
@@ -240,7 +246,7 @@ namespace TPFinal.Model
         /// Permite saber si una campaña esta activa actualmente
         /// </summary>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
-        private bool IsCampaignActive(Campaign c)
+        public bool IsCampaignActive(Campaign c)
         {
             DateTime date = DateTime.Now.Date;
             TimeSpan time = date.TimeOfDay;

@@ -41,7 +41,7 @@ namespace TPFinal.Model
             String text = "";
             SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
 
-            foreach (RssBanner rssBanner in iRssBannerList)
+            /*foreach (RssBanner rssBanner in iRssBannerList)
             {
                 if (IsBannerActive(rssBanner))
                     { 
@@ -52,7 +52,7 @@ namespace TPFinal.Model
                     text = text + " - " + item.description;
                     }
                 }
-            }
+            }*/
             return text;
         }
 
