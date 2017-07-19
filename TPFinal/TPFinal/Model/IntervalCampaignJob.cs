@@ -12,9 +12,7 @@ namespace TPFinal.Model
     {
         public void Execute(IJobExecutionContext context)
         {
-            JobDataMap dataMap = context.JobDetail.JobDataMap;
-
-            CampaignService service = (CampaignService)dataMap.Get("service");
+            /*
 
                 if (service.IsCampaignActive(service.iCampaignList.ElementAt(service.iActualCampaign)))
                 {
@@ -51,7 +49,7 @@ namespace TPFinal.Model
                         }
                     }
                 }
-            service.NotifyListeners();
-            }
+            service.NotifyListeners();*/
         }
+    }
     }

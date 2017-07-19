@@ -16,7 +16,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
         /// </summary>
-        public IEnumerable<Campaign> iCampaignList;
+        private IEnumerable<Campaign> iCampaignList;
 
         /// <summary>
         /// Lista de escuchadores
@@ -26,14 +26,14 @@ namespace TPFinal.Model
         /// <summary>
         /// Indice de la imagen actual de una campaña
         /// </summary>
-        public int iActualImage;
+        private int iActualImage;
 
         /// <summary>
         /// Indice de campaña actual
         /// </summary>
-        public int iActualCampaign;
+        private int iActualCampaign;
 
-
+        //Esto no deberia estar aca.
         private JobScheduler jobScheduler;
 
         /// <summary>
@@ -121,6 +121,21 @@ namespace TPFinal.Model
 
         }
 
+        public IEnumerable<CampaignDTO> GetAllCampaigns()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IList<CampaignDTO> campaignAux = new List<CampaignDTO> { };
+            CampaignMapper campaignMapper = new CampaignMapper();
+
+            foreach (Campaign campaign in iUnitOfWork.campaignRepository.GetAll().ToList())
+            {
+                campaignAux.Add(campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(campaign.id)));
+            }
+
+            return campaignAux;
+
+        }
+
         /// <summary>
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
@@ -143,7 +158,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Stop()
         {
-
+            jobScheduler.Stop();
         }
 
         /// <summary>

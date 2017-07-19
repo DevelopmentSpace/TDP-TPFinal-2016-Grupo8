@@ -48,5 +48,11 @@ namespace TPFinal.View
             CampaignViewUpdate campaignViewUpdate = new CampaignViewUpdate(application);
             campaignViewUpdate.Show();
         }
+
+        private void listAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CampaignViewListAll campaignViewList = new CampaignViewListAll(application);
+            campaignViewList.Show();
+        }
     }
 }
