@@ -122,6 +122,7 @@
     <Compile Include="Application.Designer.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Compile Include="IoCContainerLocator.cs" />
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
     <Compile Include="Model\IntervalJob.cs" />
