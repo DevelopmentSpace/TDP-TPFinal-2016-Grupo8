@@ -16,9 +16,14 @@ namespace TPFinal_Test
         {
             IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
 
+            byte[] bytes = { 0x00, 0x22, 0x11 };
+
+            ByteImage b = new ByteImage();
+            b.bytes = bytes;
+
             Campaign c = new Campaign();
             c.name = "Mi campañaaaaa";
-            c.imagesList = new List<ByteImage> { };
+            c.imagesList = new List<ByteImage> {b};
             c.initDate = DateTime.Now.Date;
             c.endDate = DateTime.Now.Date.AddDays(50);
             c.initTime = new TimeSpan(5, 0, 12);
