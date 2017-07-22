@@ -47,5 +47,10 @@ namespace TPFinal.View
                 }
 
             }
+
+        private void nameTextLabel_Click(object sender, EventArgs e)
+        {
+
         }
+    }
     }

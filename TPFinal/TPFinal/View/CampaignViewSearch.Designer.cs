@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.searchButton = new System.Windows.Forms.Button();
             this.searchText = new System.Windows.Forms.TextBox();
             this.dataGridViewCampaigns = new System.Windows.Forms.DataGridView();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,20 +38,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCampaigns)).BeginInit();
             this.SuspendLayout();
             // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(478, 33);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 20);
-            this.searchButton.TabIndex = 0;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            // 
             // searchText
             // 
             this.searchText.Location = new System.Drawing.Point(372, 33);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(100, 20);
+            this.searchText.Size = new System.Drawing.Size(271, 20);
             this.searchText.TabIndex = 1;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
@@ -99,11 +89,12 @@
             // nameTextLabel
             // 
             this.nameTextLabel.AutoSize = true;
-            this.nameTextLabel.Location = new System.Drawing.Point(331, 36);
+            this.nameTextLabel.Location = new System.Drawing.Point(282, 36);
             this.nameTextLabel.Name = "nameTextLabel";
-            this.nameTextLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameTextLabel.Size = new System.Drawing.Size(84, 13);
             this.nameTextLabel.TabIndex = 3;
-            this.nameTextLabel.Text = "Name";
+            this.nameTextLabel.Text = "Search by name";
+            this.nameTextLabel.Click += new System.EventHandler(this.nameTextLabel_Click);
             // 
             // CampaignViewSearch
             // 
@@ -113,7 +104,6 @@
             this.Controls.Add(this.nameTextLabel);
             this.Controls.Add(this.dataGridViewCampaigns);
             this.Controls.Add(this.searchText);
-            this.Controls.Add(this.searchButton);
             this.Name = "CampaignViewSearch";
             this.Text = "CampaignViewSearch";
             this.Load += new System.EventHandler(this.CampaignViewListAll_Load);
@@ -124,8 +114,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchText;
         private System.Windows.Forms.DataGridView dataGridViewCampaigns;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
