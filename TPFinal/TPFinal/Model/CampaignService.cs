@@ -9,7 +9,7 @@ using System.Timers;
 namespace TPFinal.Model
 {
     /// <summary>
-    /// Servicio de campañas. Se encarga de ser servicio de todos.
+    /// Servicio de campañas. Se encarga de ofrecer servicios a todas las campañas
     /// </summary>
     public class CampaignService : IObservable
     {
@@ -108,6 +108,7 @@ namespace TPFinal.Model
 
         public void Create(CampaignDTO pCampaignDTO)
         {
+
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
@@ -172,6 +173,18 @@ namespace TPFinal.Model
 
             return campaignAux;
 
+        }
+
+        public int GetLastCampaignId()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
+            if (!allCampaigns.Any())
+            {
+                return (int)1;
+            }
+            else
+                return (allCampaigns.Last().id + 1);
         }
 
         /// <summary>

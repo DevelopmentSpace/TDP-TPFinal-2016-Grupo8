@@ -23,6 +23,7 @@ namespace TPFinal.View
         {
             InitializeComponent();
             application = pApplication;
+            idText.Text = application.CampaignService.GetLastCampaignId().ToString();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -95,7 +96,6 @@ namespace TPFinal.View
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             CampaignDTO campaign = new CampaignDTO();
-            //campaign.id = campaignService.LastID();
             campaign.name = campaignNameText.Text;
 
             campaign.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
@@ -119,8 +119,10 @@ namespace TPFinal.View
             }
 
             campaign.imagesList = imagesAuxDTO;
-            
+
             application.CampaignService.Create(campaign);
+
+
 
             this.Close();
 

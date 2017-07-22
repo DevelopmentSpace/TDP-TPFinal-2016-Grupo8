@@ -35,6 +35,7 @@
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InitDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameTextLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCampaigns)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,11 +95,21 @@
             this.EndDateColumn.Name = "EndDateColumn";
             this.EndDateColumn.ReadOnly = true;
             // 
+            // nameTextLabel
+            // 
+            this.nameTextLabel.AutoSize = true;
+            this.nameTextLabel.Location = new System.Drawing.Point(331, 36);
+            this.nameTextLabel.Name = "nameTextLabel";
+            this.nameTextLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameTextLabel.TabIndex = 3;
+            this.nameTextLabel.Text = "Name";
+            // 
             // CampaignViewListAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 352);
+            this.Controls.Add(this.nameTextLabel);
             this.Controls.Add(this.dataGridViewCampaigns);
             this.Controls.Add(this.searchText);
             this.Controls.Add(this.searchButton);
@@ -120,5 +131,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn InitDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDateColumn;
+        private System.Windows.Forms.Label nameTextLabel;
     }
 }
