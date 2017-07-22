@@ -7,6 +7,9 @@ using TPFinal.DAL.EntityFramework;
 
 namespace TPFinal.DAL
 {
+    /// <summary>
+    /// Implementacion de la interfaz IUnitOfWork
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         //Almacena el Contexto a utilizar en los repositorios
@@ -15,7 +18,7 @@ namespace TPFinal.DAL
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="pContext">Contexto a utilizar en los repositorios</param>
+        /// <param name="pContext">Contexto a utilizar para los repositorios</param>
         public UnitOfWork(DigitalSignageDbContext pContext)
         {
             if (pContext == null)
@@ -31,7 +34,7 @@ namespace TPFinal.DAL
         }
 
         /// <summary>
-        /// Repositorio de Cuentas
+        /// Repositorio de Campañas
         /// </summary>
         public ICampaignRespository campaignRepository
         {
@@ -39,20 +42,23 @@ namespace TPFinal.DAL
         }
 
         /// <summary>
-        /// Repositorio de Clientes
+        /// Repositorio de Banners
         /// </summary>
         public IBannerRepository bannerRepository
         {
             get; private set;
         }
 
+        /// <summary>
+        /// Repositorios de Banners estaticos.
+        /// </summary>
         public ITextBannerRepository textBannerRepository
         {
             get; private set;
         }
 
         /// <summary>
-        /// Repositorio de Clientes
+        /// Repositorio de Banners RSS
         /// </summary>
         public IRssBannerRepository rssBannerRepository
         {
@@ -60,7 +66,7 @@ namespace TPFinal.DAL
         }
 
         /// <summary>
-        /// Metodo para persistir los cambios
+        /// Confirma los cambios
         /// </summary>
         public void Complete()
         {
@@ -68,7 +74,7 @@ namespace TPFinal.DAL
         }
 
         /// <summary>
-        /// Metodo para terminar la transaccion
+        /// Descarta los cambios
         /// </summary>
         public void Dispose()
         {

@@ -8,14 +8,17 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework.Mappings
 {
+    /// <summary>
+    /// Representa una Mapping entre el objeto y las tablas de entity framework
+    /// </summary>
     public class RssItemMap: EntityTypeConfiguration<RssItem>
     {
         public RssItemMap()
         {
-            // Nombre de la tabla que tendrá la entidad, en este caso 'AccountMovement'.
+            // Nombre de la tabla que tendrá la entidad, en este caso 'RssItem'.
             this.ToTable("RssItem");
 
-            // Clave primaria de la entidad, indicando que la columna se llama 'AccountMovementId' y que es autoincremental.
+            // Clave primaria de la entidad, indicando que la columna se llama 'RssItemId' y que es autoincremental.
             this.HasKey(pRssItem => pRssItem.id)
                 .Property(pRssItem => pRssItem.id)
                 .HasColumnName("RssItemId")

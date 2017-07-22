@@ -7,6 +7,11 @@ using System.Data.Entity;
 
 namespace TPFinal.DAL.EntityFramework
 {
+    /// <summary>
+    /// Representa un repositorio generico en entity framework
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TDbContext"></typeparam>
     abstract class EFRepository<TEntity, TDbContext> : IRepository<TEntity>
         where TEntity : class
         where TDbContext : DbContext

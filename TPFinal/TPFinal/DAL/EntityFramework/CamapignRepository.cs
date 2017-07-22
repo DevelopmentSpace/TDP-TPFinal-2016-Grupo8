@@ -9,16 +9,30 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework
 {
+    /// <summary>
+    /// Implementacion de repositorio de campañas
+    /// </summary>
     class CampaignRepository : EFRepository<Campaign, DigitalSignageDbContext>, ICampaignRespository
     {
 
         DbContext iDbContext;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pContext">Contexto a utilizar en el repositorio</param>
         public CampaignRepository(DigitalSignageDbContext pContext) : base(pContext)
         {
             this.iDbContext = pContext;
         }
 
+        /// <summary>
+        /// Obtiene las campañas activas en una fecha y rango de hora específico
+        /// </summary>
+        /// <param name="pDate">Fecha a buscar</param>
+        /// <param name="pTimeFrom">Inicio de intervalo de tiempo</param>
+        /// <param name="pTimeTo">Fin de intervalo de tiempo</param>
+        /// <returns>Lista de campañas activas en el horario y fecha dados</returns>
         public IEnumerable<Campaign> GetActives(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo)
         {
 
@@ -35,12 +49,15 @@ namespace TPFinal.DAL.EntityFramework
 
             IQueryable<Campaign> query = from campaign in this.iDbContext.Set<Campaign>()
                                          where
-                                             (campaign.initDate <= pDate && campaign.endDate >= pDate)
+                                             //La fecha actual esta entre la fecha de inicio y fin de la campaña
+                                             (campaign.initDate <= pDate && campaign.endDate >= pDate) 
                                              &&
+                                             //La campaña empieza antes del fin del intervalo y termina despues del principio del intervalo
                                              (campaign.initTime <= pTimeTo && campaign.endTime >= pTimeFrom)
                         select campaign;
 
-            var sqlString = query.ToString();
+            //For debug
+            //var sqlString = query.ToString();
 
             return query;
         }

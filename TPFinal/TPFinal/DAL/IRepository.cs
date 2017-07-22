@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace TPFinal.DAL
 {
+    /// <summary>
+    /// Interfaz de acceso a un objeto genérico
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>

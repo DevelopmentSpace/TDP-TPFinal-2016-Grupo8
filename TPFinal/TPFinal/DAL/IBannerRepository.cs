@@ -7,9 +7,11 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL
 {
+    /// <summary>
+    /// Interfaz de acceso a Banners
+    /// </summary>
     public interface IBannerRepository : IRepository<Banner>
     {
-        //IList<Banner> GetActives(DateTime pDate, DateTime pTinit, DateTime pTfinish);
 
     }
 }

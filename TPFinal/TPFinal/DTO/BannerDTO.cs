@@ -36,7 +36,6 @@ namespace TPFinal.DTO
                     ////ECC/ END CUSTOM CODE SECTION 
                     id = p.id,
                     name = p.name,
-                    interval = p.interval,
                     initDate = p.initDate,
                     endDate = p.endDate,
                     initTime = p.initTime,
@@ -51,7 +50,6 @@ namespace TPFinal.DTO
             ////ECC/ END CUSTOM CODE SECTION 
             model.id = dto.id;
             model.name = dto.name;
-            model.interval = dto.interval;
             model.initDate = dto.initDate;
             model.endDate = dto.endDate;
             model.initTime = dto.initTime;

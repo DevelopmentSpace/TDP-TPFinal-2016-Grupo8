@@ -6,20 +6,39 @@ using System.Threading.Tasks;
 
 namespace TPFinal.Domain
 {
-    public abstract class Banner
+    /// <summary>
+    /// Representa un Banner genérico con restriccion de tiempo para mostrarlo
+    /// </summary>
+    public class Banner
     {
+        /// <summary>
+        /// Clave unica del banner
+        /// </summary>
         public int id { get; set; }
 
+        /// <summary>
+        /// Nombre del banner
+        /// </summary>
         public String name { get; set; }
 
-        public int interval { get; set; }
-
+        /// <summary>
+        /// Fecha de inicio de exposicion
+        /// </summary>
         public DateTime initDate { get; set; }
 
+        /// <summary>
+        /// Fecha de fin de exposicion
+        /// </summary>
         public DateTime endDate { get; set; }
 
+        /// <summary>
+        /// Hora de inicio de exposicion
+        /// </summary>
         public TimeSpan initTime { get; set; }
 
+        /// <summary>
+        /// Hora de fin de exposicion
+        /// </summary>
         public TimeSpan endTime { get; set; }
 
 

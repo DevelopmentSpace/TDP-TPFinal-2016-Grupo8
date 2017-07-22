@@ -8,8 +8,14 @@ using TPFinal.Domain;
 
 namespace TPFinal.DAL.EntityFramework.Mappings
 {
+    /// <summary>
+    /// Representa una Mapping entre el objeto y las tablas de entity framework
+    /// </summary>
     public class BannerMap:EntityTypeConfiguration<Banner>
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BannerMap()
         {
             // Nombre de la tabla que tendrá la entidad, en este caso 'Banner'.
@@ -41,7 +47,7 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             this.Property(pBanner => pBanner.endTime)
                 .IsRequired();
 
-
+            //para la herencia se define un atributo tipo segun el tipo de subclase
             Map<TextBanner>(x => x.Requires("Type")
                                         .HasValue("T")
                                         .HasColumnType("char")

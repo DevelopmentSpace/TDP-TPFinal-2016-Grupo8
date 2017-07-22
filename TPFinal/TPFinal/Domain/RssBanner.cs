@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace TPFinal.Domain
 {
+    /// <summary>
+    /// Representa un banner cuya fuente de text es RSS
+    /// </summary>
     public class RssBanner : Banner
     {
+        /// <summary>
+        /// Url del RSS
+        /// </summary>
         public String url { get; set; }
 
-        public String description { get; set; }
-
+        /// <summary>
+        /// Lista de Items RSS
+        /// </summary>
         public virtual IList<RssItem> items { get; set; }
     }
 }

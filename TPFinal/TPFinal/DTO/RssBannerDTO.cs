@@ -33,7 +33,6 @@ namespace TPFinal.DTO
                     ////BCC/ BEGIN CUSTOM CODE SECTION 
                     ////ECC/ END CUSTOM CODE SECTION 
                     url = p.url,
-                    description = p.description,
                     items = p.items.AsQueryable().Select(this._rssItemMapper.SelectorExpression)
                 })).MergeWith(this._bannerMapper.SelectorExpression);
             }
@@ -44,7 +43,6 @@ namespace TPFinal.DTO
             ////BCC/ BEGIN CUSTOM CODE SECTION 
             ////ECC/ END CUSTOM CODE SECTION 
             model.url = dto.url;
-            model.description = dto.description;
             this._bannerMapper.MapToModel(dto, model);
         }
     }
