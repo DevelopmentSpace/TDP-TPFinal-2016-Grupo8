@@ -1,6 +1,6 @@
 ﻿namespace TPFinal.View
 {
-    partial class CampaignViewListAll
+    partial class CampaignViewSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -54,6 +54,7 @@
             this.searchText.Name = "searchText";
             this.searchText.Size = new System.Drawing.Size(100, 20);
             this.searchText.TabIndex = 1;
+            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
             // dataGridViewCampaigns
             // 
@@ -104,7 +105,7 @@
             this.nameTextLabel.TabIndex = 3;
             this.nameTextLabel.Text = "Name";
             // 
-            // CampaignViewListAll
+            // CampaignViewSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,8 +114,8 @@
             this.Controls.Add(this.dataGridViewCampaigns);
             this.Controls.Add(this.searchText);
             this.Controls.Add(this.searchButton);
-            this.Name = "CampaignViewListAll";
-            this.Text = "CampaignViewListAll";
+            this.Name = "CampaignViewSearch";
+            this.Text = "CampaignViewSearch";
             this.Load += new System.EventHandler(this.CampaignViewListAll_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCampaigns)).EndInit();
             this.ResumeLayout(false);

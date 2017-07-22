@@ -95,7 +95,7 @@
             // 
             this.listAllToolStripMenuItem.Name = "listAllToolStripMenuItem";
             this.listAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.listAllToolStripMenuItem.Text = "List all";
+            this.listAllToolStripMenuItem.Text = "Search";
             this.listAllToolStripMenuItem.Click += new System.EventHandler(this.listAllToolStripMenuItem_Click);
             // 
             // bannerToolStripMenuItem

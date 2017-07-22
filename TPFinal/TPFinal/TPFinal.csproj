@@ -164,11 +164,11 @@
     <Compile Include="View\CampaignViewDelete.Designer.cs">
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\CampaignViewListAll.cs">
+    <Compile Include="View\CampaignViewSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CampaignViewListAll.Designer.cs">
-      <DependentUpon>CampaignViewListAll.cs</DependentUpon>
+    <Compile Include="View\CampaignViewSearch.Designer.cs">
+      <DependentUpon>CampaignViewSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CampaignViewUpdate.cs">
       <SubType>Form</SubType>
@@ -201,8 +201,8 @@
     <EmbeddedResource Include="View\CampaignViewDelete.resx">
       <DependentUpon>CampaignViewDelete.cs</DependentUpon>
     </EmbeddedResource>
-     <EmbeddedResource Include="View\CampaignViewListAll.resx">
-      <DependentUpon>CampaignViewListAll.cs</DependentUpon>
+    <EmbeddedResource Include="View\CampaignViewSearch.resx">
+      <DependentUpon>CampaignViewSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewUpdate.resx">
       <DependentUpon>CampaignViewUpdate.cs</DependentUpon>

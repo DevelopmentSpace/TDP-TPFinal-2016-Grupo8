@@ -70,5 +70,11 @@ namespace TPFinal.View
             application.CampaignService.Delete(application.CampaignService.GetCampaign(Convert.ToInt32(idText.Text)));
             this.Close();
         }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            CampaignViewSearch campaignSearch = new CampaignViewSearch(application);
+            campaignSearch.Show();
+        }
     }
 }

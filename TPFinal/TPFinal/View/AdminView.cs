@@ -51,7 +51,7 @@ namespace TPFinal.View
 
         private void listAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CampaignViewListAll campaignViewList = new CampaignViewListAll(application);
+            CampaignViewSearch campaignViewList = new CampaignViewSearch(application);
             campaignViewList.Show();
         }
     }
