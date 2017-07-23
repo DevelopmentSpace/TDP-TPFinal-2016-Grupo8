@@ -36,6 +36,9 @@ namespace TPFinal.Model
         //Esto no deberia estar aca.
         private JobScheduler jobScheduler;
 
+        /// <summary>
+        /// Accesor y setter de la lista de campañas
+        /// </summary>
         public IEnumerable<Campaign> ICampaignList
         {
             get
@@ -49,6 +52,9 @@ namespace TPFinal.Model
             }
         }
 
+        /// <summary>
+        /// Accesor y setter de el indice de imagen actual
+        /// </summary>
         public int IActualImage
         {
             get
@@ -62,6 +68,9 @@ namespace TPFinal.Model
             }
         }
 
+        /// <summary>
+        /// Accesor y setter de el indice de la campaña actual
+        /// </summary>
         public int IActualCampaign
         {
             get
@@ -88,6 +97,10 @@ namespace TPFinal.Model
             IActualImage = 0;
         }
 
+        /// <summary>
+        /// Agregar un escuchador a la lista de escuchadores
+        /// </summary>
+        /// <param name="pListener">Escuchador</param>
         public void AddListener(IObserver pListener)
         {
             iObserver.Add(pListener);
@@ -197,7 +210,7 @@ namespace TPFinal.Model
         }
 
         /// <summary>
-        /// Empieza un servicio de campañas. Pone a correr los timers.
+        /// Comienza el organizador de trabajos.
         /// </summary>
         public void Start()
         {                       
@@ -205,7 +218,7 @@ namespace TPFinal.Model
         }
 
         /// <summary>
-        /// Frena ambos timers.
+        /// frena el organizador de trabajos.
         /// </summary>
         public void Stop()
         {
@@ -215,6 +228,7 @@ namespace TPFinal.Model
         /// <summary>
         /// Permite saber si una campaña esta activa actualmente
         /// </summary>
+        /// <param name="c">Campaña que se desea comprobar</param>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
         public bool IsCampaignActive(Campaign c)
         {
