@@ -13,8 +13,11 @@ namespace TPFinal.Model
     {
         public void Execute(IJobExecutionContext context)
         {
-            int iActualCampaign = (int)context.Trigger.JobDataMap.Get("indexCampaign");
-            int iActualImage = (int)context.Trigger.JobDataMap.Get("indexImage");
+
+            //Aca hay que agregar 
+            int iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
+            int iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
+
 
             //Code starts here
 
