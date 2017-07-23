@@ -126,15 +126,14 @@
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
     <Compile Include="Model\ChangeImageJob.cs" />
-    <Compile Include="Model\IntervalBannerJob.cs" />
+    <Compile Include="Model\ChangeBannerJob.cs" />
     <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
-    <Compile Include="Model\RefreshBannerJob.cs" />
+    <Compile Include="Model\UpdateBannerJob.cs" />
     <Compile Include="Model\RssBannerService.cs" />
     <Compile Include="Model\RssReaderModel\IRssReader.cs" />
     <Compile Include="Model\RssReaderModel\RssReader.cs" />
     <Compile Include="Model\RssReaderModel\SyndicationFeedRssReader.cs" />
-    <Compile Include="Model\SerializableCampaign.cs" />
     <Compile Include="Model\TextBannerService.cs" />
     <Compile Include="Model\UpdateCampaignsJob.cs" />
     <Compile Include="Program.cs" />

@@ -7,7 +7,7 @@ using Quartz;
 
 namespace TPFinal.Model
 {
-    class RefreshBannerJob : IJob
+    class UpdateBannerJob : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
