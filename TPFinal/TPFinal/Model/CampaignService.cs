@@ -65,7 +65,6 @@ namespace TPFinal.Model
 
         public CampaignService()
         {
-
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
@@ -294,13 +293,16 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
-            MemoryStream s = (MemoryStream) context.Trigger.JobDataMap.Get("List");
+            MemoryStream s = (MemoryStream) context.Trigger.JobDataMap.Get("listCampaign");
             s.Position = 0;
 
             IList<Campaign> l;
 
             IFormatter formatter = new BinaryFormatter();
             l = (IList<Campaign>) formatter.Deserialize(s);
+
+            //Cuando el trabajo se termina de ejecutar notifica a las pantallas
+            NotifyListeners();
 
         }
     }

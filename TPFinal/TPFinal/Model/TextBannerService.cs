@@ -13,25 +13,11 @@ namespace TPFinal.Model
     {
         int iRefreshTime;
 
-        IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
+        private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
         public TextBannerService(int pRefreshTIme)
         {
             iRefreshTime = pRefreshTIme;
-        }
-
-        /// <summary>
-        /// Da informacion del estado de un banner
-        /// </summary>
-        /// <returns>Verdadero si el banner esta activo o falso si no lo esta</returns>
-        public bool IsBannerActive(Banner pBanner)
-        {
-            DateTime date = DateTime.Now.Date;
-            TimeSpan time = date.TimeOfDay;
-
-            return (pBanner.initDate <= date && pBanner.endDate >= date)
-                    &&
-                    (pBanner.initTime <= time && pBanner.endTime >= time);
         }
 
         public String GetText()
@@ -39,66 +25,60 @@ namespace TPFinal.Model
             String text = "";
             foreach (TextBanner textBanner in iTextBannerList)
             {
-                if (IsBannerActive(textBanner))
+                if (BannerService.IsBannerActive(textBanner))
                 { 
                     text = text + " - " + textBanner.text;
                 }
             }
-
             return text;
         }
 
-        public void Refresh()
+        public void Create(TextBannerDTO pTextBannerDTO)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime date = DateTime.Now.Date;
-            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
-            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 0, 0, (int)iRefreshTime));
+            TextBannerMapper textBannerMapper = new TextBannerMapper();
+            TextBanner banner = new TextBanner();
 
-            //iTextBannerList = iUnitOfWork.textBannerRepository.GetActives(date,timeFrom,timeTo).ToList();
+            textBannerMapper.MapToModel(pTextBannerDTO, banner);
+            iUnitOfWork.textBannerRepository.Add(banner);
+
+            iUnitOfWork.Complete();
+
         }
 
-        public void Create(TextBannerDTO pTextBannerDTO)
-{
-    IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-    TextBannerMapper textBannerMapper = new TextBannerMapper();
-    TextBanner banner = new TextBanner();
-
-    textBannerMapper.MapToModel(pTextBannerDTO, banner);
-    iUnitOfWork.textBannerRepository.Add(banner);
-
-    iUnitOfWork.Complete();
-
-}
-
-public void Update(TextBannerDTO pTextBannerDTO)
-{
+        public void Update(TextBannerDTO pTextBannerDTO)
+        {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
             TextBanner oldTextBanner = new TextBanner();
 
-    textBannerMapper.MapToModel(pTextBannerDTO, banner);
+            textBannerMapper.MapToModel(pTextBannerDTO, banner);
 
-    oldTextBanner = iUnitOfWork.textBannerRepository.Get(banner.id); //REVISAR SI FUNCIONA
+            oldTextBanner = iUnitOfWork.textBannerRepository.Get(banner.id); //REVISAR SI FUNCIONA
 
-    oldTextBanner = banner;
+            oldTextBanner = banner;
 
-    iUnitOfWork.Complete();
+            iUnitOfWork.Complete();
 
-}
+        }
 
-public void Delete(TextBannerDTO pTextBannerDTO)
-    {
+        public void Delete(TextBannerDTO pTextBannerDTO)
+        {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
 
             oldTextBanner = iUnitOfWork.textBannerRepository.Get(pTextBannerDTO.id);
 
-    iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
+            iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
 
-    iUnitOfWork.Complete();
-    }
+            iUnitOfWork.Complete();
+        }
+
+        public void ChangeList(IEnumerable<TextBanner> bannerList)
+        {
+            iTextBannerList = bannerList;
+        }
     }
 }

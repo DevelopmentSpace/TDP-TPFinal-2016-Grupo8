@@ -11,7 +11,6 @@ namespace TPFinal.Model
     {
         public void Execute (IJobExecutionContext context)
         {
-            //NotifyListeners();
         }
     }
 }

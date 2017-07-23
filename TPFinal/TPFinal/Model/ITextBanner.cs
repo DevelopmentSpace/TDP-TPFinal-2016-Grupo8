@@ -10,9 +10,5 @@ namespace TPFinal.Model
     interface ITextBanner
     {
        String GetText();
-
-       void Refresh();
-
-        bool IsBannerActive(Banner pBanner);
     }
 }

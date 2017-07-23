@@ -36,7 +36,7 @@ namespace TPFinal.Model
             var s = new MemoryStream();
             formatter.Serialize(s,x);
 
-            context.Trigger.JobDataMap.Put("List", s);
+            context.Trigger.JobDataMap.Put("listCampaign", s);
         }
     }
 }

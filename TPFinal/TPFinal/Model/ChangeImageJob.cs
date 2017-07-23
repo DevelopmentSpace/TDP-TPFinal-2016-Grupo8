@@ -42,9 +42,10 @@ namespace TPFinal.Model
             {
                 iActualImage = 0;
                 //Esto sirve para que no muestra campañas que no deben mostrar
-                if (iCampaignList.Any(campaign => CampaignService.IsCampaignActive(campaign)) )
+                if (!iCampaignList.Any(campaign => CampaignService.IsCampaignActive(campaign)) )
                 {
                     //SHOW PREDIFINITE IMAGE
+                    //iActualCampaign = -1
                 }
                 else
                     while (!CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)))
