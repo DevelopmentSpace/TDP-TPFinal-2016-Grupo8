@@ -61,8 +61,8 @@ namespace TPFinal.Model
             //ACA HAY PROBLEMA LOCO
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
-            ITextBanner rssBannerService = new RssBannerService(pRefreshTime);
-            ITextBanner textBannerService = new TextBannerService(pRefreshTime);
+            ITextBanner rssBannerService = new RssBannerService();
+            ITextBanner textBannerService = new TextBannerService();
 
             iTextBannerList.Add(textBannerService);
             iTextBannerList.Add(rssBannerService);
@@ -220,7 +220,7 @@ namespace TPFinal.Model
                     }
                 }
 
-        };
+            };
 
             NotifyListeners();
         }

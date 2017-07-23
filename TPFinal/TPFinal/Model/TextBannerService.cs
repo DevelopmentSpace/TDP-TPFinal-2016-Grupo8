@@ -11,14 +11,7 @@ namespace TPFinal.Model
 {
     class TextBannerService : ITextBanner
     {
-        int iRefreshTime;
-
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
-
-        public TextBannerService(int pRefreshTIme)
-        {
-            iRefreshTime = pRefreshTIme;
-        }
 
         public String GetText()
         {

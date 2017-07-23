@@ -14,13 +14,6 @@ namespace TPFinal.Model
     {
         IEnumerable<RssBanner> iRssBannerList;
 
-        int iRefreshTime;
-
-        public RssBannerService(int pRefreshTIme)
-        {
-            iRefreshTime = pRefreshTIme;
-        }
-
         public String GetText()
         {
             String text = "";
