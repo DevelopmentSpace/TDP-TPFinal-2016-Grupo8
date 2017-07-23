@@ -40,9 +40,9 @@ namespace TPFinal.Model.RssReaderModel
             {
                 mRssItems.Add(new RssItem
                 {
+                    
                     //name = bItem.Title.Text,
                     description = bItem.Summary.Text,
-                    //url = bItem.Links[0].Uri, // Siempre obtengo la primera URL, por más que haya más de una.
                     publishingDate = bItem.PublishDate.DateTime
                 });
             }
