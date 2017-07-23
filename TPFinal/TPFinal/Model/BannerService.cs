@@ -11,6 +11,7 @@ using System.IO;
 using TPFinal.Domain;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
