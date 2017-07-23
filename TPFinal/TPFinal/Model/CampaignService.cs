@@ -79,6 +79,8 @@ namespace TPFinal.Model
             iUpdateAvailable = false;
             iUpdateDone = false;
 
+            iActualImage = 0;
+            iActualCampaign = 0;
             
             StartUpdateCampaignsJob(1);
         }
@@ -265,6 +267,9 @@ namespace TPFinal.Model
 
         public void JobToBeExecuted(IJobExecutionContext context)
         {
+            context.Trigger.JobDataMap.Put("indexCampaign", iActualCampaign);
+            context.Trigger.JobDataMap.Put("indexImage", iActualImage);
+           
         }
 
         public void JobExecutionVetoed(IJobExecutionContext context)
