@@ -51,7 +51,9 @@ namespace TPFinal.DAL.EntityFramework
         /// </summary>
         public DigitalSignageDbContext() : base("DigitalSignage")
         {
+
             // Se establece la estrategia personalizada de inicialización de la BBDD.
+            //Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseIfModelChanges<DigitalSignageDbContext>());
             Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseAlways<DigitalSignageDbContext>());
         }
 
