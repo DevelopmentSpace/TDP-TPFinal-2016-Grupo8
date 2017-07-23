@@ -56,7 +56,7 @@ namespace TPFinal.Model
         /// Creador del servicio de campañas
         /// </summary>
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
-        public BannerService(int pRefreshTime)
+        public BannerService()
         {
             //ACA HAY PROBLEMA LOCO
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
@@ -88,7 +88,6 @@ namespace TPFinal.Model
             iUpdateDone = false;
 
             StartUpdateBannerJob(0);
-
         }
 
         private void StartUpdateBannerJob(int minutes)

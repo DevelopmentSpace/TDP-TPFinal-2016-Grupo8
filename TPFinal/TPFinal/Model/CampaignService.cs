@@ -254,6 +254,15 @@ namespace TPFinal.Model
                 .WithPriority(1)
                 .Build();
 
+            iChangeImageJob.JobDataMap.Put("indexCampaign", iActualCampaign);
+            iChangeImageJob.JobDataMap.Put("indexImage", iActualImage);
+
+            IFormatter formatter = new BinaryFormatter();
+            var s = new MemoryStream();
+            formatter.Serialize(s, iCampaignList);
+
+            iChangeImageJob.JobDataMap.Put("listCampaign", s);
+
             iScheduler.DeleteJob(iChangeImageJobKey);
             iScheduler.ScheduleJob(iChangeImageJob, changeImageJobTrigger);
         }
@@ -261,9 +270,9 @@ namespace TPFinal.Model
         private void StartUpdateCampaignsJob(int minutes)
         {
             ITrigger updateCampaignsJobTrigger = TriggerBuilder.Create()
-            .StartAt(DateTime.Now.AddMinutes(minutes))
-            .WithPriority(1)
-            .Build();
+                .StartAt(DateTime.Now.AddMinutes(minutes))
+                .WithPriority(1)
+                .Build();
 
             iScheduler.DeleteJob(iUpdateCampaignsJobKey);
             iScheduler.ScheduleJob(iUpdateCampaignsJob, updateCampaignsJobTrigger);
@@ -275,16 +284,7 @@ namespace TPFinal.Model
         /******************************************************************/
 
         public void JobToBeExecuted(IJobExecutionContext context)
-        {
-            context.Trigger.JobDataMap.Put("indexCampaign", iActualCampaign);
-            context.Trigger.JobDataMap.Put("indexImage", iActualImage);
-
-            IFormatter formatter = new BinaryFormatter();
-            var s = new MemoryStream();
-            formatter.Serialize(s, iCampaignList);
-
-            context.Trigger.JobDataMap.Put("listCampaign", s);
-           
+        {         
         }
 
         public void JobExecutionVetoed(IJobExecutionContext context)

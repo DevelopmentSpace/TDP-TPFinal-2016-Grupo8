@@ -16,7 +16,7 @@ namespace TPFinal
 
         int DataBaseRefreshTime; //TODAVIA NO IMPLEMENTADO, SE TIENE QUE SELECCIONAR AL PRINCIPIO.
 
-        private BannerService bannerService = new BannerService(30);
+        private BannerService bannerService = new BannerService();
 
         internal BannerService BannerService
         {
@@ -61,6 +61,11 @@ namespace TPFinal
         {
             AdView adview = new AdView(this);
             adview.Show();
+        }
+
+        private void Application_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
