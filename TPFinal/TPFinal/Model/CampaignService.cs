@@ -293,6 +293,10 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
+
+            iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
+            iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
+
             MemoryStream s = (MemoryStream) context.Trigger.JobDataMap.Get("listCampaign");
             s.Position = 0;
 
