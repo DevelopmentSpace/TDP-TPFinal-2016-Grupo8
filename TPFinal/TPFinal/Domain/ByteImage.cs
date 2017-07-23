@@ -9,6 +9,7 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa una imagen
     /// </summary>
+    [Serializable]
     public class ByteImage
     {
         /// <summary>

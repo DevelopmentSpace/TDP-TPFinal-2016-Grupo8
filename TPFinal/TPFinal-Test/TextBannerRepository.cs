@@ -81,7 +81,7 @@ namespace TPFinal_Test
         }
 
         [TestMethod]
-        public void GetActivesCampaigns()
+        public void GetActivesTextBanners()
         {
             TextBanner t;
 

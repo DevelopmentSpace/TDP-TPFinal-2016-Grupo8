@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using TPFinal.Domain;
 
-namespace TPFinal.Domain
+namespace TPFinal.Model
 {
-    /// <summary>
-    /// Representa una campaña de imagenes con restriccion de fecha y hora de exposicion.
-    /// </summary>
-    [Serializable]
-    public class Campaign //: ISerializable
+    class SerializableCampaign
     {
+
+        public SerializableCampaign(Campaign pCampaign)
+        {
+            this.id = pCampaign.id;
+            this.interval = pCampaign.interval;
+            this.initDate = pCampaign.initDate;
+            this.endDate = pCampaign.endDate;
+            this.initTime = pCampaign.initTime;
+            this.endTime = pCampaign.endTime;
+        }
+
         /// <summary>
         /// Clave unica de la campaña
         /// </summary>
@@ -52,18 +58,6 @@ namespace TPFinal.Domain
         /// <summary>
         /// Lista de imagenes de la campaña
         /// </summary>
-        public IList<ByteImage> imagesList { get; set; }
-        /*
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("id", id);
-            info.AddValue("interval", interval);
-            info.AddValue("initDate", initDate);
-            info.AddValue("endDate", endDate);
-            info.AddValue("initTime", endTime);
-            info.AddValue("endTime", endTime);
-            info.AddValue("imageList", imagesList, typeof(List<ByteImage>));
-        }*/
+        public virtual List<ByteImage> imagesList { get; set; }
     }
 }

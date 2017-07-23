@@ -44,10 +44,12 @@ namespace TPFinal.DAL.EntityFramework
                 throw new ArgumentNullException("pTimeTo");
             if (pTimeFrom.CompareTo(pTimeTo) > -1)
                 throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
-           
 
 
-            IQueryable<Campaign> query = from campaign in this.iDbContext.Set<Campaign>()
+            this.iDbContext.Configuration.LazyLoadingEnabled = false;
+
+            /*IQueryable<Campaign> query =*/
+            return from campaign in this.iDbContext.Set<Campaign>()
                                          where
                                              //La fecha actual esta entre la fecha de inicio y fin de la campaña
                                              (campaign.initDate <= pDate && campaign.endDate >= pDate) 
@@ -59,7 +61,7 @@ namespace TPFinal.DAL.EntityFramework
             //For debug
             //var sqlString = query.ToString();
 
-            return query;
+            //return query;
         }
     }
 }

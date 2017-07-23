@@ -1,27 +1,33 @@
-﻿using System;
+﻿using Quartz;
+using Quartz.Impl;
+using Quartz.Impl.Matchers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Threading.Tasks;
 using TPFinal.DAL;
 using TPFinal.Domain;
 using TPFinal.DTO;
-using System.Timers;
 
 namespace TPFinal.Model
 {
-    /// <summary>
-    /// Servicio de campañas. Se encarga de ofrecer servicios a todas las campañas
-    /// </summary>
-    public class CampaignService : IObservable
+    class CampaignService : IObservable, IJobListener
     {
-        /// <summary>
-        /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
-        /// </summary>
-        private IEnumerable<Campaign> iCampaignList;
 
         /// <summary>
         /// Lista de escuchadores
         /// </summary>
         private List<IObserver> iObserver = new List<IObserver> { };
+
+        /// <summary>
+        /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
+        /// </summary>
+        private IEnumerable<Campaign> iCampaignList;
+        private IEnumerable<Campaign> iNewCampaignList;
 
         /// <summary>
         /// Indice de la imagen actual de una campaña
@@ -33,60 +39,54 @@ namespace TPFinal.Model
         /// </summary>
         private int iActualCampaign;
 
-        //Esto no deberia estar aca.
-        private JobScheduler jobScheduler;
-
-        public IEnumerable<Campaign> ICampaignList
-        {
-            get
-            {
-                return iCampaignList;
-            }
-
-            set
-            {
-                iCampaignList = value;
-            }
-        }
-
-        public int IActualImage
-        {
-            get
-            {
-                return iActualImage;
-            }
-
-            set
-            {
-                iActualImage = value;
-            }
-        }
-
-        public int IActualCampaign
-        {
-            get
-            {
-                return iActualCampaign;
-            }
-
-            set
-            {
-                iActualCampaign = value;
-            }
-        }
-
         /// <summary>
-        /// Creador del servicio de campañas
+        /// JobListener Name
         /// </summary>
+        public string Name => "Campaign Service";
+
+
+        //Atributos para controlar los timers
+        bool iUpdateAvailable, iUpdateDone;
+
+        //Quartz Scheduler
+        IScheduler iScheduler;
+
+        //Jobs details
+        IJobDetail iChangeImageJob, iUpdateCampaignsJob;
+        //Jobs Keys
+        JobKey iChangeImageJobKey, iUpdateCampaignsJobKey;
+
         public CampaignService()
         {
-            JobScheduler job = new JobScheduler();
+            iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
-            jobScheduler = job;
+            iChangeImageJobKey = new JobKey("CIJK");
+            iUpdateCampaignsJobKey = new JobKey("UCJK");
 
-            IActualCampaign = 0;
-            IActualImage = 0;
+            iChangeImageJob = JobBuilder.Create<ChangeImageJob>()
+                .WithIdentity(iChangeImageJobKey)
+                .Build();
+
+            iUpdateCampaignsJob = JobBuilder.Create<UpdateCampaignsJob>()
+                .WithIdentity(iUpdateCampaignsJobKey)
+                .Build();
+
+
+            iScheduler.Start();
+            iScheduler.ListenerManager.AddJobListener(this, OrMatcher<JobKey>.Or(KeyMatcher<JobKey>.KeyEquals<JobKey>(iChangeImageJobKey), KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateCampaignsJobKey)));
+
+
+            iUpdateAvailable = false;
+            iUpdateDone = false;
+
+            
+            StartUpdateCampaignsJob(1);
         }
+
+
+        /******************************************************************/
+        /**************************PATRON OBSERVER*************************/
+        /******************************************************************/
 
         public void AddListener(IObserver pListener)
         {
@@ -101,10 +101,14 @@ namespace TPFinal.Model
         public void NotifyListeners()
         {
             foreach (IObserver view in iObserver)
-                {
+            {
                 view.Update("Campaign");
-                }              
+            }
         }
+
+        /******************************************************************/
+        /********************************CRUD******************************/
+        /******************************************************************/
 
         public void Create(CampaignDTO pCampaignDTO)
         {
@@ -175,33 +179,24 @@ namespace TPFinal.Model
 
         }
 
-        public int GetLastCampaignId()
-        {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
-            if (!allCampaigns.Any())
-            {
-                return (int)1;
-            }
-            else
-                return (allCampaigns.Last().id + 1);
-        }
-
+        /******************************************************************/
+        /*******************************TIMERS*****************************/
+        /******************************************************************/
         /// <summary>
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
-            return ICampaignList.ElementAt(IActualCampaign).imagesList.ElementAt(IActualImage).bytes;
+            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
         }
 
         /// <summary>
         /// Empieza un servicio de campañas. Pone a correr los timers.
         /// </summary>
         public void Start()
-        {                       
-            jobScheduler.Start();
+        {
+           // jobScheduler.Start();
         }
 
         /// <summary>
@@ -209,7 +204,7 @@ namespace TPFinal.Model
         /// </summary>
         public void Stop()
         {
-            jobScheduler.Stop();
+           // jobScheduler.Stop();
         }
 
         /// <summary>
@@ -224,6 +219,68 @@ namespace TPFinal.Model
             return (c.initDate <= date && c.endDate >= date)
                     &&
                     (c.initTime <= time && c.endTime >= time);
+        }
+
+        public int GetLastCampaignId()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
+            if (!allCampaigns.Any())
+            {
+                return (int)1;
+            }
+            else
+                return (allCampaigns.Last().id + 1);
+        }
+
+        /******************************************************************/
+        /*******************************TIMERS*****************************/
+        /******************************************************************/
+        private void StartChangeImageJob(int seconds)
+        {
+            ITrigger changeImageJobTrigger = TriggerBuilder.Create()
+                .StartAt(DateTime.Now.AddSeconds(seconds))
+                .WithPriority(1)
+                .Build();
+
+            iScheduler.DeleteJob(iChangeImageJobKey);
+            iScheduler.ScheduleJob(iChangeImageJob, changeImageJobTrigger);
+        }
+
+        private void StartUpdateCampaignsJob(int minutes)
+        {
+            ITrigger updateCampaignsJobTrigger = TriggerBuilder.Create()
+            .StartAt(DateTime.Now.AddMinutes(minutes))
+            .WithPriority(1)
+            .Build();
+
+            iScheduler.DeleteJob(iUpdateCampaignsJobKey);
+            iScheduler.ScheduleJob(iUpdateCampaignsJob, updateCampaignsJobTrigger);
+        }
+
+
+        /******************************************************************/
+        /**************************TIMERS LISTENER*************************/
+        /******************************************************************/
+
+        public void JobToBeExecuted(IJobExecutionContext context)
+        {
+        }
+
+        public void JobExecutionVetoed(IJobExecutionContext context)
+        {
+        }
+
+        public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
+        {
+            MemoryStream s = (MemoryStream) context.Trigger.JobDataMap.Get("List");
+            s.Position = 0;
+
+            IList<Campaign> l;
+
+            IFormatter formatter = new BinaryFormatter();
+            l = (IList<Campaign>) formatter.Deserialize(s);
+
         }
     }
 }
