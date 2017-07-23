@@ -223,7 +223,7 @@ namespace TPFinal.Model
         /// Permite saber si una campaña esta activa actualmente
         /// </summary>
         /// <returns>Verdadero si la campaña esta activa o falso si no lo esta</returns>
-        public bool IsCampaignActive(Campaign c)
+        public static bool IsCampaignActive(Campaign c)
         {
             DateTime date = DateTime.Now.Date;
             TimeSpan time = date.TimeOfDay;
@@ -279,6 +279,12 @@ namespace TPFinal.Model
         {
             context.Trigger.JobDataMap.Put("indexCampaign", iActualCampaign);
             context.Trigger.JobDataMap.Put("indexImage", iActualImage);
+
+            IFormatter formatter = new BinaryFormatter();
+            var s = new MemoryStream();
+            formatter.Serialize(s, iCampaignList);
+
+            context.Trigger.JobDataMap.Put("listCampaign", s);
            
         }
 
