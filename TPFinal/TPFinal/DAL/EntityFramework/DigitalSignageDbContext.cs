@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TPFinal.DAL.EntityFramework.Mappings;
 using TPFinal.Domain;
 
+
 namespace TPFinal.DAL.EntityFramework
 {
     /// <summary>
@@ -51,10 +52,10 @@ namespace TPFinal.DAL.EntityFramework
         /// </summary>
         public DigitalSignageDbContext() : base("DigitalSignage")
         {
-
+            this.Configuration.LazyLoadingEnabled = false;
             // Se establece la estrategia personalizada de inicialización de la BBDD.
-            //Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseIfModelChanges<DigitalSignageDbContext>());
-            Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseAlways<DigitalSignageDbContext>());
+            Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseIfModelChanges<DigitalSignageDbContext>());
+            //Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseAlways<DigitalSignageDbContext>());
         }
 
         /// <summary>
@@ -76,8 +77,6 @@ namespace TPFinal.DAL.EntityFramework
             pModelBuilder.Configurations.Add(new CampaignMap());
             pModelBuilder.Configurations.Add(new ByteImageMap());
             pModelBuilder.Configurations.Add(new BannerMap());
-            //pModelBuilder.Configurations.Add(new RssBannerMap());
-            //pModelBuilder.Configurations.Add(new TextBannerMap());
             pModelBuilder.Configurations.Add(new RssItemMap());
 
 

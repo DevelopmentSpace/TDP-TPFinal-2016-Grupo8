@@ -207,7 +207,6 @@ namespace TPFinal_Test
             TimeSpan timeFrom = new TimeSpan(12, 30, 0);
             TimeSpan timeTo = new TimeSpan(13, 30, 0);
 
-            uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
 
             IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date,timeFrom,timeTo);
 

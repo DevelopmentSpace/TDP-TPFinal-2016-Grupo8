@@ -72,7 +72,8 @@
     <Compile Include="CampaignRepositoryTest.cs" />
     <Compile Include="CampaignServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextBannerRepository.cs" />
+    <Compile Include="RssReaderTest.cs" />
+    <Compile Include="TextBannerRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

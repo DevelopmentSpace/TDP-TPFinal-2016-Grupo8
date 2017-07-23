@@ -10,8 +10,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using TPFinal.DAL;
+using TPFinal.DAL.EntityFramework;
 using TPFinal.Domain;
 using TPFinal.DTO;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
@@ -22,6 +24,11 @@ namespace TPFinal.Model
         /// Lista de escuchadores
         /// </summary>
         private List<IObserver> iObserver = new List<IObserver> { };
+
+        /// <summary>
+        /// Contexto a utilizar
+        /// </summary>
+        DigitalSignageDbContext iDbContext;
 
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
@@ -58,6 +65,9 @@ namespace TPFinal.Model
 
         public CampaignService()
         {
+
+            iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
+
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
             iChangeImageJobKey = new JobKey("CIJK");
@@ -82,7 +92,7 @@ namespace TPFinal.Model
             iActualImage = 0;
             iActualCampaign = 0;
             
-            StartUpdateCampaignsJob(1);
+            StartUpdateCampaignsJob(0);
         }
 
 
@@ -115,7 +125,7 @@ namespace TPFinal.Model
         public void Create(CampaignDTO pCampaignDTO)
         {
 
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
 
@@ -129,7 +139,7 @@ namespace TPFinal.Model
 
         public void Update(CampaignDTO pCampaignDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
             Campaign oldCampaign = new Campaign();
@@ -146,7 +156,7 @@ namespace TPFinal.Model
 
         public void Delete(CampaignDTO pCampaignDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign oldCampaign = new Campaign();
 
@@ -159,7 +169,7 @@ namespace TPFinal.Model
 
         public CampaignDTO GetCampaign(int pId)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
 
             return campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(pId));
@@ -168,7 +178,7 @@ namespace TPFinal.Model
 
         public IEnumerable<CampaignDTO> GetAllCampaigns()
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             IList<CampaignDTO> campaignAux = new List<CampaignDTO> { };
             CampaignMapper campaignMapper = new CampaignMapper();
 
@@ -225,7 +235,7 @@ namespace TPFinal.Model
 
         public int GetLastCampaignId()
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
             if (!allCampaigns.Any())
             {

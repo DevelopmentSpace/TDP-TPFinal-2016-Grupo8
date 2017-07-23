@@ -12,7 +12,7 @@ namespace TPFinal_Test
     /// Descripción resumida de TextBannerRepository
     /// </summary>
     [TestClass]
-    public class TextBannerRepository
+    public class TextBannerRepositoryTest
     {
         [TestMethod]
         public void AddTextBannerTest()
