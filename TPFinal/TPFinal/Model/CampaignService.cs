@@ -187,10 +187,11 @@ namespace TPFinal.Model
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             IList<CampaignDTO> campaignAux = new List<CampaignDTO> { };
             CampaignMapper campaignMapper = new CampaignMapper();
+            IList<Campaign> campaignList = iUnitOfWork.campaignRepository.GetAll().ToList();
 
-            foreach (Campaign campaign in iUnitOfWork.campaignRepository.GetAll().ToList())
+            foreach (Campaign campaign in campaignList)
             {
-                campaignAux.Add(campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(campaign.id)));
+                campaignAux.Add(campaignMapper.SelectorExpression.Compile()(campaign));
             }
 
             return campaignAux;
