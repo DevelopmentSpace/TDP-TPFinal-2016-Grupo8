@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\EntityFramework\BannerRepository.cs" />
-    <Compile Include="DAL\EntityFramework\CamapignRepository.cs" />
+    <Compile Include="DAL\EntityFramework\CampaignRepository.cs" />
     <Compile Include="DAL\EntityFramework\DigitalSignageDbContext.cs" />
     <Compile Include="DAL\EntityFramework\EFRepository.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\BannerMap.cs" />
@@ -151,6 +151,12 @@
       <DependentUpon>AdView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IObserver.cs" />
+    <Compile Include="View\BannerViewAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BannerViewAdd.Designer.cs">
+      <DependentUpon>BannerViewAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CampaignViewAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\AdView.resx">
       <DependentUpon>AdView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BannerViewAdd.resx">
+      <DependentUpon>BannerViewAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewAdd.resx">
       <DependentUpon>CampaignViewAdd.cs</DependentUpon>

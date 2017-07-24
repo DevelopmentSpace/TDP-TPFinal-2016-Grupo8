@@ -14,6 +14,7 @@ using TPFinal.DAL.EntityFramework;
 using TPFinal.Domain;
 using TPFinal.DTO;
 using Microsoft.Practices.Unity;
+using System.Collections;
 
 namespace TPFinal.Model
 {
@@ -185,17 +186,16 @@ namespace TPFinal.Model
         public IEnumerable<CampaignDTO> GetAllCampaigns()
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
-            IList<CampaignDTO> campaignAux = new List<CampaignDTO> { };
+            IList<CampaignDTO> campaignAux = new List<CampaignDTO>();
             CampaignMapper campaignMapper = new CampaignMapper();
-            IList<Campaign> campaignList = iUnitOfWork.campaignRepository.GetAll().ToList();
+            IEnumerable<Campaign> campaignEnum = iUnitOfWork.campaignRepository.GetAll();
 
-            foreach (Campaign campaign in campaignList)
+            IEnumerator e = campaignEnum.GetEnumerator();
+            while (e.MoveNext())
             {
-                campaignAux.Add(campaignMapper.SelectorExpression.Compile()(campaign));
+                campaignAux.Add((campaignMapper.SelectorExpression.Compile()((Campaign)e.Current)));
             }
-
             return campaignAux;
-
         }
 
         /******************************************************************/
@@ -265,8 +265,10 @@ namespace TPFinal.Model
             Stream campList = new MemoryStream();
             formatter.Serialize(campList, iCampaignList);
 
+
             Stream newCampList = new MemoryStream();
             formatter.Serialize(newCampList, iNewCampaignList);
+
 
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.Put("indexCampaign", iActualCampaign);
@@ -274,6 +276,9 @@ namespace TPFinal.Model
             jobDataMap.Put("campList", campList);
             jobDataMap.Put("newCampList", newCampList);
             jobDataMap.Put("updateAvailable", iUpdateAvailable);
+
+            campList.Dispose();
+            newCampList.Dispose();
 
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
                 .StartAt(DateTime.Now.AddSeconds(seconds))
@@ -342,7 +347,6 @@ namespace TPFinal.Model
                 IFormatter formatter = new BinaryFormatter();
                 iNewCampaignList = (IList<Campaign>)formatter.Deserialize(s);
                 iUpdateAvailable = true;
-
 
                 StartUpdateCampaignsJob(DateTime.Now.AddMinutes(CampaignService.UPDATE_TIME));
 

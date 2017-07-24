@@ -36,7 +36,8 @@ namespace TPFinal.DTO
             {
                 return ((Expression<Func<Campaign, CampaignDTO>>)(p => new CampaignDTO()
                 {
-                    ////BCC/ BEGIN CUSTOM CODE SECTION 
+                    ////BCC/ BEGIN CUSTOM CODE SECTION
+
                     ////ECC/ END CUSTOM CODE SECTION 
                     id = p.id,
                     name = p.name,
