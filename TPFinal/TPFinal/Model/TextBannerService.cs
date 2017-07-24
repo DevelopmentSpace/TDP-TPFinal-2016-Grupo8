@@ -28,20 +28,20 @@ namespace TPFinal.Model
 
         public void Create(TextBannerDTO pTextBannerDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
 
             textBannerMapper.MapToModel(pTextBannerDTO, banner);
             iUnitOfWork.textBannerRepository.Add(banner);
 
-            iUnitOfWork.Complete();
+            iUnitOfWork.Complete();*/
 
         }
 
         public void Update(TextBannerDTO pTextBannerDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
             TextBanner oldTextBanner = new TextBanner();
@@ -52,13 +52,13 @@ namespace TPFinal.Model
 
             oldTextBanner = banner;
 
-            iUnitOfWork.Complete();
+            iUnitOfWork.Complete();*/
 
         }
 
         public void Delete(TextBannerDTO pTextBannerDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+           /* IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
 
@@ -66,7 +66,7 @@ namespace TPFinal.Model
 
             iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
 
-            iUnitOfWork.Complete();
+            iUnitOfWork.Complete();*/
         }
 
         public void ChangeList(IEnumerable<TextBanner> bannerList)

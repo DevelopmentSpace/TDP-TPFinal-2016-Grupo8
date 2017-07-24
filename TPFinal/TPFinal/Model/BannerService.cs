@@ -27,10 +27,6 @@ namespace TPFinal.Model
         private List<IObserver> iObserver = new List<IObserver> { };
 
 
-        /// <summary>
-        /// Contexto a utilizar
-        /// </summary>
-        DigitalSignageDbContext iDbContext;
 
         /// <summary>
         /// Lista de servicios de texto de banner
@@ -72,7 +68,6 @@ namespace TPFinal.Model
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public BannerService()
         {
-            iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
             ITextBanner rssBannerService = new RssBannerService();
             ITextBanner textBannerService = new TextBannerService();

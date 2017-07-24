@@ -21,15 +21,18 @@ namespace TPFinal.Model
     {
         public void Execute(IJobExecutionContext context)
         {
-            
-            IUnitOfWork uow = new UnitOfWork(IoCContainerLocator.Container.Resolve<DigitalSignageDbContext>());
+            DigitalSignageDbContext dbContext = IoCContainerLocator.Container.Resolve<DigitalSignageDbContext>();
+
+            IUnitOfWork uow = new UnitOfWork(dbContext);
             DateTime date = DateTime.Now.Date;
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0,30,0));
 
+
+            //Aqui se obtienen las campañas de la BD, pero no trae la lista de imagenes que tiene cada una
             IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date, timeFrom, timeTo);
             
-            uow.Complete();
+
        
             List<Campaign> x = enume.ToList<Campaign>();
             IFormatter formatter = new BinaryFormatter();

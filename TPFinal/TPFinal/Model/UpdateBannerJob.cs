@@ -18,7 +18,7 @@ namespace TPFinal.Model
         {
 
 
-
+            /*
             IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime date = DateTime.Now.Date;
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
@@ -43,7 +43,7 @@ namespace TPFinal.Model
             formatter.Serialize(d, y);
             context.Trigger.JobDataMap.Put("listTextBanner", d);
             d.Dispose();
-
+            */
             
         }
     }

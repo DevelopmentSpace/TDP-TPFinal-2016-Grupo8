@@ -253,7 +253,11 @@ namespace TPFinal.Model
                 return (int)1;
             }
             else
+            {
                 return (allCampaigns.Last().id + 1);
+            }
+                
+
         }
 
         /******************************************************************/
@@ -277,8 +281,8 @@ namespace TPFinal.Model
             jobDataMap.Put("newCampList", newCampList);
             jobDataMap.Put("updateAvailable", iUpdateAvailable);
 
-            campList.Dispose();
-            newCampList.Dispose();
+            //campList.Dispose();
+            //newCampList.Dispose();
 
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
                 .StartAt(DateTime.Now.AddSeconds(seconds))
