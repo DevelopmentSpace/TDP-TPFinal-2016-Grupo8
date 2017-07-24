@@ -16,6 +16,27 @@ namespace TPFinal
 
         int DataBaseRefreshTime; //TODAVIA NO IMPLEMENTADO, SE TIENE QUE SELECCIONAR AL PRINCIPIO.
 
+        private TextBannerService textBannerService = new TextBannerService();
+
+        internal TextBannerService TextBannerService
+        {
+            get
+            {
+                return textBannerService;
+            }
+        }
+
+        private RssBannerService rssBannerService = new RssBannerService();
+
+        internal RssBannerService RssBannerService
+        {
+            get
+            {
+                return rssBannerService;
+            }
+
+        }
+
         private BannerService bannerService = new BannerService();
 
         internal BannerService BannerService
@@ -25,10 +46,6 @@ namespace TPFinal
                 return bannerService;
             }
 
-            set
-            {
-                bannerService = value;
-            }
         }
 
         private CampaignService campaignService = new CampaignService();
@@ -39,16 +56,15 @@ namespace TPFinal
             {
                 return campaignService;
             }
-
-            set
-            {
-                campaignService = value;
-            }
         }
+
+
 
         public Application()
         {
             InitializeComponent();
+            bannerService.AddService(textBannerService);
+            bannerService.AddService(rssBannerService);
         }
 
         private void adminButton_Click(object sender, EventArgs e)

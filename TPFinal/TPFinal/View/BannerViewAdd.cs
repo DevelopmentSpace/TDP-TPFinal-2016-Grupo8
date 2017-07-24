@@ -43,7 +43,7 @@ namespace TPFinal.View
 
             banner.text = textBanner.Text;
 
-            //application.BannerService.ITextBannerList.TextBannerService.Create(Banner);
+            application.TextBannerService.Create(banner);
 
 
 

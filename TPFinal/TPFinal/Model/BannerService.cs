@@ -33,19 +33,6 @@ namespace TPFinal.Model
         /// </summary>
         private IList<ITextBanner> iTextBannerList = new List<ITextBanner> { };
 
-        internal IList<ITextBanner> ITextBannerList
-        {
-            get
-            {
-                return iTextBannerList;
-            }
-
-            set
-            {
-                iTextBannerList = value;
-            }
-        }
-
         /// <summary>
         /// JobListener Name
         /// </summary>
@@ -62,19 +49,17 @@ namespace TPFinal.Model
         //Jobs Keys
         JobKey iChangeBannerJobKey, iUpdateBannerJobKey;
 
+        public void AddService(ITextBanner textBanner)
+        {
+            iTextBannerList.Add(textBanner);
+        }
+
         /// <summary>
         /// Creador del servicio de campañas
         /// </summary>
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public BannerService()
         {
-
-            ITextBanner rssBannerService = new RssBannerService();
-            ITextBanner textBannerService = new TextBannerService();
-
-            ITextBannerList.Add(textBannerService);
-            ITextBannerList.Add(rssBannerService);
-
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
             iChangeBannerJobKey = new JobKey("BIJK");
@@ -144,7 +129,7 @@ namespace TPFinal.Model
         public String GetText()
         {
             string text = "";
-            foreach (ITextBanner serviceBanner in ITextBannerList)
+            foreach (ITextBanner serviceBanner in iTextBannerList)
             {
                 text = text + " - " + serviceBanner.GetText();
             }
@@ -216,7 +201,7 @@ namespace TPFinal.Model
                 d.Dispose();
 
                 //Esta horrible pero es la idea
-                foreach (ITextBanner textBanner in ITextBannerList)
+                foreach (ITextBanner textBanner in iTextBannerList)
                 {
                     switch (textBanner.GetType().ToString())
                     {
