@@ -12,7 +12,7 @@ namespace TPFinal.Domain
     /// Representa una campaña de imagenes con restriccion de fecha y hora de exposicion.
     /// </summary>
     [Serializable]
-    public class Campaign //: ISerializable
+    public class Campaign
     {
         /// <summary>
         /// Clave unica de la campaña
@@ -52,18 +52,6 @@ namespace TPFinal.Domain
         /// <summary>
         /// Lista de imagenes de la campaña
         /// </summary>
-        public IList<ByteImage> imagesList { get; set; }
-        /*
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("id", id);
-            info.AddValue("interval", interval);
-            info.AddValue("initDate", initDate);
-            info.AddValue("endDate", endDate);
-            info.AddValue("initTime", endTime);
-            info.AddValue("endTime", endTime);
-            info.AddValue("imageList", imagesList, typeof(List<ByteImage>));
-        }*/
+        virtual public IList<ByteImage> imagesList { get; set; }
     }
 }

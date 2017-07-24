@@ -9,6 +9,7 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un Banner genérico con restriccion de tiempo para mostrarlo
     /// </summary>
+    [Serializable]
     public class Banner
     {
         /// <summary>

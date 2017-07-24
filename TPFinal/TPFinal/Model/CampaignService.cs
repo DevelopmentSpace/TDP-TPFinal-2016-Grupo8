@@ -15,14 +15,17 @@ using TPFinal.Domain;
 using TPFinal.DTO;
 using Microsoft.Practices.Unity;
 using System.Collections;
+using Common.Logging;
 
 namespace TPFinal.Model
 {
     class CampaignService : IObservable, IJobListener
     {
 
-        static int UPDATE_TIME = 1;
-        static int DEFAULT_CHANGE_IMAGE_TIME = 5;
+        private static int UPDATE_TIME = 1;
+        private static int DEFAULT_CHANGE_IMAGE_TIME = 5;
+
+        private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();
 
         /// <summary>
         /// Lista de escuchadores
@@ -69,6 +72,8 @@ namespace TPFinal.Model
 
         public CampaignService()
         {
+            cLogger.Info("Iniciando CampaignService");
+
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
             iCampaignList = new List<Campaign>() { };
@@ -78,6 +83,8 @@ namespace TPFinal.Model
 
             iChangeImageJobKey = new JobKey("CIJK");
             iUpdateCampaignsJobKey = new JobKey("UCJK");
+
+
 
             iChangeImageJob = JobBuilder.Create<ChangeImageJob>()
                 .WithIdentity(iChangeImageJobKey)
@@ -97,7 +104,9 @@ namespace TPFinal.Model
 
             iActualImage = -1;
             iActualCampaign = 0;
-            
+
+            cLogger.Info("Iniciando CampaignService Jobs");
+
             StartUpdateCampaignsJob(DateTime.Now);
             StartChangeImageJob(CampaignService.DEFAULT_CHANGE_IMAGE_TIME);
         }
@@ -110,15 +119,18 @@ namespace TPFinal.Model
         public void AddListener(IObserver pListener)
         {
             iObserver.Add(pListener);
+            cLogger.Info("Nuevo listener agregado");
         }
 
         public void RemoveListener(IObserver pListener)
         {
             iObserver.Remove(pListener);
+            cLogger.Info("Listener removed");
         }
 
         public void NotifyListeners()
         {
+            cLogger.Info("Notifing Listeners");
             foreach (IObserver view in iObserver)
             {
                 view.Update("Campaign");
@@ -141,6 +153,7 @@ namespace TPFinal.Model
             iUnitOfWork.campaignRepository.Add(campaign);
 
             iUnitOfWork.Complete();
+            cLogger.Info("Nueva campaña agregada");
 
         }
 
@@ -158,6 +171,7 @@ namespace TPFinal.Model
             oldCampaign = campaign;
 
             iUnitOfWork.Complete();
+            cLogger.Info("Campaña actualizada");
 
         }
 
@@ -172,13 +186,14 @@ namespace TPFinal.Model
             iUnitOfWork.campaignRepository.Remove(oldCampaign);
 
             iUnitOfWork.Complete();
+            cLogger.Info("Campaña eliminada");
         }
 
         public CampaignDTO GetCampaign(int pId)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
-
+            cLogger.Info("Obteniendo campaña por id");
             return campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(pId));
 
         }
@@ -189,6 +204,8 @@ namespace TPFinal.Model
             IList<CampaignDTO> campaignAux = new List<CampaignDTO>();
             CampaignMapper campaignMapper = new CampaignMapper();
             IEnumerable<Campaign> campaignEnum = iUnitOfWork.campaignRepository.GetAll();
+
+            cLogger.Info("Obteniendo todas las campañas.");
 
             IEnumerator e = campaignEnum.GetEnumerator();
             while (e.MoveNext())
@@ -207,6 +224,7 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
+            cLogger.Info("Obteniendo imagen actual.");
             byte[] b = { };
             if (iActualImage > -1)
                 return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
@@ -214,21 +232,6 @@ namespace TPFinal.Model
                 return b;
         }
 
-        /// <summary>
-        /// Empieza un servicio de campañas. Pone a correr los timers.
-        /// </summary>
-        public void Start()
-        {
-           // jobScheduler.Start();
-        }
-
-        /// <summary>
-        /// Frena ambos timers.
-        /// </summary>
-        public void Stop()
-        {
-           // jobScheduler.Stop();
-        }
 
         /// <summary>
         /// Permite saber si una campaña esta activa actualmente
@@ -246,6 +249,7 @@ namespace TPFinal.Model
 
         public int GetLastCampaignId()
         {
+            cLogger.Info("Obteniendo id de la ultima campaña");
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
             if (!allCampaigns.Any())
@@ -269,7 +273,6 @@ namespace TPFinal.Model
             Stream campList = new MemoryStream();
             formatter.Serialize(campList, iCampaignList);
 
-
             Stream newCampList = new MemoryStream();
             formatter.Serialize(newCampList, iNewCampaignList);
 
@@ -290,6 +293,7 @@ namespace TPFinal.Model
                 .WithPriority(1)
                 .Build();
 
+            cLogger.Info("iniciando ChangeImage Job");
             iScheduler.DeleteJob(iChangeImageJobKey);
             iScheduler.ScheduleJob(iChangeImageJob, changeImageJobTrigger);
         }
@@ -322,6 +326,7 @@ namespace TPFinal.Model
         {
             if(context.JobDetail.Key == iChangeImageJobKey)
             {
+                cLogger.Info("ChangeImageJob Done");
                 iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
                 iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
                 iUpdateDone = context.Trigger.JobDataMap.GetBoolean("updateDone");
@@ -344,6 +349,7 @@ namespace TPFinal.Model
             }
             else if(context.JobDetail.Key == iUpdateCampaignsJobKey)
             {
+                cLogger.Info("UpdateCampaignsJob Done");
                 //Obtengo la lista nueva
                 MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listCampaign");
                 s.Position = 0;

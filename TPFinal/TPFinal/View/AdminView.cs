@@ -54,5 +54,11 @@ namespace TPFinal.View
             CampaignViewSearch campaignViewList = new CampaignViewSearch(application);
             campaignViewList.Show();
         }
+
+        private void createToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BannerViewAdd bannerViewAdd = new BannerViewAdd(application);
+            bannerViewAdd.Show();
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPFinal.Domain;
 
+
 namespace TPFinal.DAL.EntityFramework
 {
     /// <summary>
@@ -50,8 +51,7 @@ namespace TPFinal.DAL.EntityFramework
 
             cLogger.Info("Obteniendo Campañas activas");
 
-            /*IQueryable<Campaign> query =*/
-            return from campaign in this.iDbContext.Set<Campaign>()
+            IQueryable<Campaign> query = from campaign in this.iDbContext.Set<Campaign>()
                                          where
                                              //La fecha actual esta entre la fecha de inicio y fin de la campaña
                                              (campaign.initDate <= pDate && campaign.endDate >= pDate) 
@@ -60,10 +60,7 @@ namespace TPFinal.DAL.EntityFramework
                                              (campaign.initTime <= pTimeTo && campaign.endTime >= pTimeFrom)
                         select campaign;
 
-            //For debug
-            //var sqlString = query.ToString();
-
-            //return query;
+            return QueryableExtensions.Include(query, "imagesList");
         }
     }
 }

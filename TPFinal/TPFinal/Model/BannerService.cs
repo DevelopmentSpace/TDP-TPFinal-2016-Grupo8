@@ -80,13 +80,13 @@ namespace TPFinal.Model
             iUpdateAvailable = false;
             iUpdateDone = false;
 
-            //StartUpdateBannerJob(0);
+            StartUpdateBannerJob(0);
         }
 
         private void StartUpdateBannerJob(int minutes)
         {
             ITrigger updateBannerJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddMinutes(minutes))
+                .StartAt(DateTime.Now.AddSeconds(minutes))
                 .WithPriority(1)
                 .Build();
 
@@ -143,29 +143,13 @@ namespace TPFinal.Model
         public static bool IsBannerActive(Banner b)
         {
             DateTime date = DateTime.Now.Date;
-            TimeSpan time = date.TimeOfDay;
+            TimeSpan time = DateTime.Now.TimeOfDay;
 
             return (b.initDate <= date && b.endDate >= date)
                     &&
                     (b.initTime <= time && b.endTime >= time);
         }
 
-
-        /// <summary>
-        /// Empieza un servicio de banners.
-        /// </summary>
-        public void Start()
-        {
-
-        }
-
-        /// <summary>
-        /// Frena 
-        /// </summary>
-        public void Stop()
-        {
-
-        }
 
         public void JobToBeExecuted(IJobExecutionContext context)
         {
@@ -186,39 +170,11 @@ namespace TPFinal.Model
             else if (context.JobDetail.Key == iUpdateBannerJobKey)
             {
 
-                IFormatter formatter = new BinaryFormatter();
-
-                MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listTextBanner");
-                s.Position = 0;
-                IList<TextBanner> l;
-                l = (IList<TextBanner>)formatter.Deserialize(s);
-                s.Dispose();
-
-                MemoryStream d = (MemoryStream)context.Trigger.JobDataMap.Get("listRssBanner");
-                s.Position = 0;
-                IList<RssBanner> e;
-                e = (IList<RssBanner>)formatter.Deserialize(d);
-                d.Dispose();
-
-                //Esta horrible pero es la idea
                 foreach (ITextBanner textBanner in iTextBannerList)
                 {
-                    switch (textBanner.GetType().ToString())
-                    {
-                        case "RssService":
-                        {
-                                RssBannerService rssService = (RssBannerService)textBanner;
-                                rssService.ChangeList(e);
-                                break;
-                        }
-                        case "TextBannerService":
-                        {
-                                TextBannerService textService = (TextBannerService)textBanner;
-                                textService.ChangeList(l);
-                                break;
-                        }
-                    }
-                };
+                    textBanner.Update();
+                }
+                StartUpdateBannerJob(10);
             }
         }
     }

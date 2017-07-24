@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.imageBox = new System.Windows.Forms.PictureBox();
             this.textBanner = new System.Windows.Forms.TextBox();
+            this.moveTextTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +52,10 @@
             this.textBanner.Name = "textBanner";
             this.textBanner.Size = new System.Drawing.Size(725, 20);
             this.textBanner.TabIndex = 1;
-            this.textBanner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // moveTextTimer
+            // 
+            this.moveTextTimer.Tick += new System.EventHandler(this.moveTextTimer_Tick);
             // 
             // AdView
             // 
@@ -72,5 +77,6 @@
 
         private System.Windows.Forms.PictureBox imageBox;
         private System.Windows.Forms.TextBox textBanner;
+        private System.Windows.Forms.Timer moveTextTimer;
     }
 }

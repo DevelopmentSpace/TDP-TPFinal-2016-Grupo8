@@ -9,6 +9,7 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un banner cuya fuente de text es RSS
     /// </summary>
+    [Serializable]
     public class RssBanner : Banner
     {
         /// <summary>

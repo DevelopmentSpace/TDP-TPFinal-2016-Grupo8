@@ -34,6 +34,20 @@ namespace TPFinal.Model
             return text;
         }
 
+        public void Update()
+        {/*
+            IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 30, 0));
+
+            IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(date, timeFrom, timeTo);
+
+            iRssBannerList = rssBannerEnum;
+
+            uow.Complete();*/
+        }
+
         public void Create(RssBannerDTO pRssBannerDTO)
         {
             /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
@@ -75,11 +89,6 @@ namespace TPFinal.Model
             iUnitOfWork.rssBannerRepository.Remove(oldRssBanner);
 
             iUnitOfWork.Complete();*/
-        }
-
-        public void ChangeList(IEnumerable<RssBanner> bannerList)
-        {
-            iRssBannerList = bannerList;
         }
     }
 }

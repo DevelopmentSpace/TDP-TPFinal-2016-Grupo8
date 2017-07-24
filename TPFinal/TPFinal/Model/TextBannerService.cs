@@ -26,16 +26,31 @@ namespace TPFinal.Model
             return text;
         }
 
+        public void Update()
+        {
+            IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
+            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 30, 0));
+
+            IEnumerable<TextBanner> textBannerEnum = uow.textBannerRepository.GetActives(date, timeFrom, timeTo);
+
+            iTextBannerList = textBannerEnum;
+
+            uow.Complete();
+
+        }
+
         public void Create(TextBannerDTO pTextBannerDTO)
         {
-            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
 
             textBannerMapper.MapToModel(pTextBannerDTO, banner);
             iUnitOfWork.textBannerRepository.Add(banner);
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
 
         }
 
@@ -69,9 +84,5 @@ namespace TPFinal.Model
             iUnitOfWork.Complete();*/
         }
 
-        public void ChangeList(IEnumerable<TextBanner> bannerList)
-        {
-            iTextBannerList = bannerList;
-        }
     }
 }
