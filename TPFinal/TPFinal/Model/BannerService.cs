@@ -37,6 +37,19 @@ namespace TPFinal.Model
         /// </summary>
         private IList<ITextBanner> iTextBannerList = new List<ITextBanner> { };
 
+        internal IList<ITextBanner> ITextBannerList
+        {
+            get
+            {
+                return iTextBannerList;
+            }
+
+            set
+            {
+                iTextBannerList = value;
+            }
+        }
+
         /// <summary>
         /// JobListener Name
         /// </summary>
@@ -64,8 +77,8 @@ namespace TPFinal.Model
             ITextBanner rssBannerService = new RssBannerService();
             ITextBanner textBannerService = new TextBannerService();
 
-            iTextBannerList.Add(textBannerService);
-            iTextBannerList.Add(rssBannerService);
+            ITextBannerList.Add(textBannerService);
+            ITextBannerList.Add(rssBannerService);
 
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
@@ -136,7 +149,7 @@ namespace TPFinal.Model
         public String GetText()
         {
             string text = "";
-            foreach (ITextBanner serviceBanner in iTextBannerList)
+            foreach (ITextBanner serviceBanner in ITextBannerList)
             {
                 text = text + " - " + serviceBanner.GetText();
             }
@@ -208,7 +221,7 @@ namespace TPFinal.Model
                 d.Dispose();
 
                 //Esta horrible pero es la idea
-                foreach (ITextBanner textBanner in iTextBannerList)
+                foreach (ITextBanner textBanner in ITextBannerList)
                 {
                     switch (textBanner.GetType().ToString())
                     {
