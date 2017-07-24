@@ -88,7 +88,7 @@ namespace TPFinal.Model
             iUpdateAvailable = false;
             iUpdateDone = false;
 
-            StartUpdateBannerJob(0);
+            //StartUpdateBannerJob(0);
         }
 
         private void StartUpdateBannerJob(int minutes)
@@ -177,12 +177,11 @@ namespace TPFinal.Model
 
         public void JobToBeExecuted(IJobExecutionContext context)
         {
-            throw new NotImplementedException();
+
         }
 
         public void JobExecutionVetoed(IJobExecutionContext context)
         {
-            throw new NotImplementedException();
         }
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
