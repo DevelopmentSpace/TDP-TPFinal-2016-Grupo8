@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace TPFinal.DAL
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
+        private static readonly ILog cLogger = LogManager.GetLogger<CampaignRepository>();
+
         //Almacena el Contexto a utilizar en los repositorios
         private readonly DigitalSignageDbContext iDbContext;
 
@@ -23,8 +26,11 @@ namespace TPFinal.DAL
         {
             if (pContext == null)
             {
+                cLogger.Error("Intento crear UnitOfWork con contexto nulo");
                 throw new ArgumentNullException(nameof(pContext));
             }
+
+            cLogger.Info("Creando instancia de UnitOfWork");
 
             this.iDbContext = pContext;
             this.campaignRepository = new CampaignRepository(this.iDbContext);
@@ -70,6 +76,7 @@ namespace TPFinal.DAL
         /// </summary>
         public void Complete()
         {
+            cLogger.Info("Confirmando cambios realizados");
             this.iDbContext.SaveChanges();
         }
 
@@ -78,6 +85,7 @@ namespace TPFinal.DAL
         /// </summary>
         public void Dispose()
         {
+            cLogger.Info("Descartando cambios realizados (disposing context)");
             this.iDbContext.Dispose();
         }
     }

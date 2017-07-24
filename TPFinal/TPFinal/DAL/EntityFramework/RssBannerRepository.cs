@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class RssBannerRepository : EFRepository<RssBanner, DigitalSignageDbContext>, IRssBannerRepository
     {
+        private static readonly ILog cLogger = LogManager.GetLogger<RssBannerRepository>();
+
         //contexto a utilizar
         DigitalSignageDbContext iDbContext;
 
@@ -42,7 +45,7 @@ namespace TPFinal.DAL.EntityFramework
             if (pTimeFrom.CompareTo(pTimeTo) > -1)
                 throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
 
-
+            cLogger.Info("Obteniendo Banners RSS activos");
 
             IQueryable<RssBanner> query = from rssBanner in this.iDbContext.Set<RssBanner>()
                                          where

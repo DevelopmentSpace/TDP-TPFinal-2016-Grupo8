@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     public class DigitalSignageDbContext:DbContext
     {
-    
+        private static readonly ILog cLogger = LogManager.GetLogger<DigitalSignageDbContext>();
+
         /// <summary>
         /// DbSet para Campañas
         /// </summary>
@@ -52,6 +54,8 @@ namespace TPFinal.DAL.EntityFramework
         /// </summary>
         public DigitalSignageDbContext() : base("DigitalSignage")
         {
+            cLogger.Info("Creando instancia de dbContext");
+
             this.Configuration.LazyLoadingEnabled = false;
             // Se establece la estrategia personalizada de inicialización de la BBDD.
             Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseIfModelChanges<DigitalSignageDbContext>());
@@ -59,7 +63,7 @@ namespace TPFinal.DAL.EntityFramework
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor for testing
         /// </summary>
         /// <param name="name">nombre de la Base de Datos</param>
         public DigitalSignageDbContext(String name) : base(name)

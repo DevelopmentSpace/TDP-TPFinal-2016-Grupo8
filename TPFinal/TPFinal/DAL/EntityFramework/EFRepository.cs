@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Common.Logging;
 
 namespace TPFinal.DAL.EntityFramework
 {
@@ -16,6 +17,9 @@ namespace TPFinal.DAL.EntityFramework
         where TEntity : class
         where TDbContext : DbContext
     {
+
+        private static readonly ILog cLogger = LogManager.GetLogger<EFRepository<TEntity, TDbContext>>();
+
         //Contexto a utilizar
         DbContext iDbContext;
 
@@ -27,9 +31,11 @@ namespace TPFinal.DAL.EntityFramework
         {
             if (pContext == null)
             {
+                cLogger.Error("Crear repositorio con contexto nulo");
                 throw new ArgumentNullException(nameof(pContext));
             }
 
+            cLogger.Info("Repositorio creado");
             this.iDbContext = pContext;
         }
 
@@ -42,10 +48,12 @@ namespace TPFinal.DAL.EntityFramework
         {
             if (pEntity == null)
             {
+                cLogger.Error("Intento agregar entidad nula");
                 throw new ArgumentNullException(nameof(pEntity));
             }
 
             this.iDbContext.Set<TEntity>().Add(pEntity);
+            cLogger.Info("Entidad Agregada");
         }
 
         /// <summary>
@@ -55,6 +63,7 @@ namespace TPFinal.DAL.EntityFramework
         /// <returns>Elemento cuya Id coincida</returns>
         public TEntity Get(int pId)
         {
+            cLogger.Info("Buscando entidad por id");
             return this.iDbContext.Set<TEntity>().Find(pId);
         }
 
@@ -64,6 +73,7 @@ namespace TPFinal.DAL.EntityFramework
         /// <returns>Lista de elementos</returns>
         public IEnumerable<TEntity> GetAll()
         {
+            cLogger.Info("Obteniendo todas las entidades");
             return this.iDbContext.Set<TEntity>().ToList();
         }
 
@@ -75,9 +85,11 @@ namespace TPFinal.DAL.EntityFramework
         {
             if (pEntity == null)
             {
+                cLogger.Error("Intento eliminar entidad nula");
                 throw new ArgumentNullException(nameof(pEntity));
             }
 
+            cLogger.Info("Eliminando entidad");
             this.iDbContext.Set<TEntity>().Remove(pEntity);
         }
     }

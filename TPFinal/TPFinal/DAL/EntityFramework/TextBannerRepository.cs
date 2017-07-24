@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class TextBannerRepository : EFRepository<TextBanner, DigitalSignageDbContext>, ITextBannerRepository
     {
+        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerRepository>();
+
         //Contexto a utilizar
         DigitalSignageDbContext iDbContext;
 
@@ -42,7 +45,7 @@ namespace TPFinal.DAL.EntityFramework
             if (pTimeFrom.CompareTo(pTimeTo) > -1)
                 throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
 
-
+            cLogger.Info("Obteniendo Banner de texto activos");
 
             IQueryable<TextBanner> query = from textBanner in this.iDbContext.Set<TextBanner>()
                                           where

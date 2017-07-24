@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
@@ -14,6 +15,7 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class CampaignRepository : EFRepository<Campaign, DigitalSignageDbContext>, ICampaignRespository
     {
+        private static readonly ILog cLogger = LogManager.GetLogger<CampaignRepository>();
 
         DbContext iDbContext;
 
@@ -46,7 +48,7 @@ namespace TPFinal.DAL.EntityFramework
                 throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
 
 
-            this.iDbContext.Configuration.LazyLoadingEnabled = false;
+            cLogger.Info("Obteniendo Campañas activas");
 
             /*IQueryable<Campaign> query =*/
             return from campaign in this.iDbContext.Set<Campaign>()
