@@ -59,7 +59,6 @@ namespace TPFinal.Model
         /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public BannerService()
         {
-            //ACA HAY PROBLEMA LOCO
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
             ITextBanner rssBannerService = new RssBannerService();
@@ -186,42 +185,48 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
-            IFormatter formatter = new BinaryFormatter();
 
-            MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listTextBanner");
-            s.Position = 0;
-            IList<TextBanner> l;
-            l = (IList<TextBanner>)formatter.Deserialize(s);
-            s.Dispose();
-
-            MemoryStream d = (MemoryStream)context.Trigger.JobDataMap.Get("listRssBanner");
-            s.Position = 0;
-            IList<RssBanner> e;
-            e = (IList<RssBanner>)formatter.Deserialize(d);
-            d.Dispose();
-
-            //Esta horrible pero es la idea
-            foreach (ITextBanner textBanner in iTextBannerList)
+            if (context.JobDetail.Key == iChangeBannerJobKey)
             {
-                switch (textBanner.GetType().ToString())
+                this.NotifyListeners();
+            }
+            else if (context.JobDetail.Key == iUpdateBannerJobKey)
+            {
+
+                IFormatter formatter = new BinaryFormatter();
+
+                MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listTextBanner");
+                s.Position = 0;
+                IList<TextBanner> l;
+                l = (IList<TextBanner>)formatter.Deserialize(s);
+                s.Dispose();
+
+                MemoryStream d = (MemoryStream)context.Trigger.JobDataMap.Get("listRssBanner");
+                s.Position = 0;
+                IList<RssBanner> e;
+                e = (IList<RssBanner>)formatter.Deserialize(d);
+                d.Dispose();
+
+                //Esta horrible pero es la idea
+                foreach (ITextBanner textBanner in iTextBannerList)
                 {
-                    case "RssService":
+                    switch (textBanner.GetType().ToString())
                     {
-                            RssBannerService rssService = (RssBannerService)textBanner;
-                            rssService.ChangeList(e);
-                            break;
+                        case "RssService":
+                        {
+                                RssBannerService rssService = (RssBannerService)textBanner;
+                                rssService.ChangeList(e);
+                                break;
+                        }
+                        case "TextBannerService":
+                        {
+                                TextBannerService textService = (TextBannerService)textBanner;
+                                textService.ChangeList(l);
+                                break;
+                        }
                     }
-                    case "TextBannerService":
-                    {
-                            TextBannerService textService = (TextBannerService)textBanner;
-                            textService.ChangeList(l);
-                            break;
-                    }
-                }
-
-            };
-
-            NotifyListeners();
+                };
+            }
         }
     }
 }
