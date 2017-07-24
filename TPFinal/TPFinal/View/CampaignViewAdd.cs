@@ -120,7 +120,23 @@ namespace TPFinal.View
 
             campaign.imagesList = imagesAuxDTO;
 
-            application.CampaignService.Create(campaign);
+            try
+            {
+                application.CampaignService.Create(campaign);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("La hora ingresada debe estar entre 0 y 23. Los minutos entre 0 y 60.");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Debes rellenar todos los campos.");
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Error. Consulte con el administrador del programa.");
+            }
+
 
 
 
