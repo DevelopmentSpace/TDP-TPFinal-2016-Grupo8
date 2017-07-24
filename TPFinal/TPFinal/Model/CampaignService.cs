@@ -20,6 +20,9 @@ namespace TPFinal.Model
     class CampaignService : IObservable, IJobListener
     {
 
+        static int UPDATE_TIME = 1;
+        static int DEFAULT_CHANGE_IMAGE_TIME = 5;
+
         /// <summary>
         /// Lista de escuchadores
         /// </summary>
@@ -33,8 +36,8 @@ namespace TPFinal.Model
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
         /// </summary>
-        private IEnumerable<Campaign> iCampaignList;
-        private IEnumerable<Campaign> iNewCampaignList;
+        private IList<Campaign> iCampaignList;
+        private IList<Campaign> iNewCampaignList;
 
         /// <summary>
         /// Indice de la imagen actual de una campaña
@@ -67,6 +70,9 @@ namespace TPFinal.Model
         {
             iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
+            iCampaignList = new List<Campaign>() { };
+            iNewCampaignList = new List<Campaign>() { };
+
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
             iChangeImageJobKey = new JobKey("CIJK");
@@ -88,10 +94,11 @@ namespace TPFinal.Model
             iUpdateAvailable = false;
             iUpdateDone = false;
 
-            iActualImage = 0;
+            iActualImage = -1;
             iActualCampaign = 0;
             
-            StartUpdateCampaignsJob(0);
+            StartUpdateCampaignsJob(DateTime.Now);
+            StartChangeImageJob(CampaignService.DEFAULT_CHANGE_IMAGE_TIME);
         }
 
 
@@ -199,7 +206,11 @@ namespace TPFinal.Model
         /// <returns>Imagen actual</returns>
         public byte[] GetActualImage()
         {
-            return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+            byte[] b = { };
+            if (iActualImage > -1)
+                return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+            else
+                return b;
         }
 
         /// <summary>
@@ -225,7 +236,7 @@ namespace TPFinal.Model
         public static bool IsCampaignActive(Campaign c)
         {
             DateTime date = DateTime.Now.Date;
-            TimeSpan time = date.TimeOfDay;
+            TimeSpan time = DateTime.Now.TimeOfDay;
 
             return (c.initDate <= date && c.endDate >= date)
                     &&
@@ -249,28 +260,34 @@ namespace TPFinal.Model
         /******************************************************************/
         private void StartChangeImageJob(int seconds)
         {
+            IFormatter formatter = new BinaryFormatter();
+            Stream campList = new MemoryStream();
+            formatter.Serialize(campList, iCampaignList);
+
+            Stream newCampList = new MemoryStream();
+            formatter.Serialize(newCampList, iNewCampaignList);
+
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.Put("indexCampaign", iActualCampaign);
+            jobDataMap.Put("indexImage", iActualImage);
+            jobDataMap.Put("campList", campList);
+            jobDataMap.Put("newCampList", newCampList);
+            jobDataMap.Put("updateAvailable", iUpdateAvailable);
+
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
                 .StartAt(DateTime.Now.AddSeconds(seconds))
+                .UsingJobData(jobDataMap)
                 .WithPriority(1)
                 .Build();
-
-            iChangeImageJob.JobDataMap.Put("indexCampaign", iActualCampaign);
-            iChangeImageJob.JobDataMap.Put("indexImage", iActualImage);
-
-            IFormatter formatter = new BinaryFormatter();
-            var s = new MemoryStream();
-            formatter.Serialize(s, iCampaignList);
-
-            iChangeImageJob.JobDataMap.Put("listCampaign", s);
 
             iScheduler.DeleteJob(iChangeImageJobKey);
             iScheduler.ScheduleJob(iChangeImageJob, changeImageJobTrigger);
         }
 
-        private void StartUpdateCampaignsJob(int minutes)
+        private void StartUpdateCampaignsJob(DateTime pDateTime)
         {
             ITrigger updateCampaignsJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddMinutes(minutes))
+                .StartAt(pDateTime)
                 .WithPriority(1)
                 .Build();
 
@@ -293,21 +310,55 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
+            if(context.JobDetail.Key == iChangeImageJobKey)
+            {
+                iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
+                iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
+                iUpdateDone = context.Trigger.JobDataMap.GetBoolean("updateDone");
+                if (iUpdateDone)
+                {
+                    iUpdateDone = false;
+                    iUpdateAvailable = false;
+                    iCampaignList = this.DeepCopy(iNewCampaignList);
+                    iNewCampaignList.Clear();
+                }
 
-            iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
-            iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
+                this.NotifyListeners();
 
-            MemoryStream s = (MemoryStream) context.Trigger.JobDataMap.Get("listCampaign");
-            s.Position = 0;
+                if (iActualImage > -1)
+                    StartChangeImageJob(iCampaignList.ElementAt(iActualCampaign).interval);
+                else
+                    StartChangeImageJob(CampaignService.DEFAULT_CHANGE_IMAGE_TIME);
 
-            IList<Campaign> l;
 
-            IFormatter formatter = new BinaryFormatter();
-            l = (IList<Campaign>) formatter.Deserialize(s);
+            }
+            else if(context.JobDetail.Key == iUpdateCampaignsJobKey)
+            {
+                //Obtengo la lista nueva
+                MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listCampaign");
+                s.Position = 0;
 
-            //Cuando el trabajo se termina de ejecutar notifica a las pantallas
-            NotifyListeners();
+                IFormatter formatter = new BinaryFormatter();
+                iNewCampaignList = (IList<Campaign>)formatter.Deserialize(s);
+                iUpdateAvailable = true;
 
+
+                StartUpdateCampaignsJob(DateTime.Now.AddMinutes(CampaignService.UPDATE_TIME));
+
+            }
+
+        }
+
+
+        private IList<Campaign> DeepCopy(object objectToCopy)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(memoryStream, objectToCopy);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                return (IList<Campaign>)binaryFormatter.Deserialize(memoryStream);
+            }
         }
     }
 }
