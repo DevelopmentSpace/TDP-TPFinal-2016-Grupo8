@@ -158,8 +158,7 @@ namespace TPFinal.Model
             }
             catch (ArgumentException)
             {
-
-                throw;
+                throw new ArgumentException();
             }
 
 

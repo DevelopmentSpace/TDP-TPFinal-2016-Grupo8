@@ -70,7 +70,6 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-
             try
             {
                 CampaignDTO campaign = new CampaignDTO();
@@ -104,16 +103,12 @@ namespace TPFinal.View
             }
             catch (FormatException)
             {
-                MessageBox.Show("Insert correct times");
+                MessageBox.Show("Bad text format: Insert numbers");
             }
-
-            //catch(Exception)
-            //{
-            //    MessageBox.Show("Error. Consulte con el administrador del programa.");
-            //}
-
-
-
+            catch(ArgumentException)
+            {
+                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60.Also init-time/date must be greater then end-time/date.");
+            }
         }
     }
 }
