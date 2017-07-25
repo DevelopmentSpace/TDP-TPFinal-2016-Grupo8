@@ -31,20 +31,32 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            TextBannerDTO banner = new TextBannerDTO();
-            banner.name = bannerNameText.Text;
+            try
+            {
+                TextBannerDTO banner = new TextBannerDTO();
+                banner.name = bannerNameText.Text;
 
-            banner.initDate = initDateTimePicker.Value.Date;
-            banner.endDate = endDateTimePicker.Value.Date;
+                banner.initDate = initDateTimePicker.Value.Date;
+                banner.endDate = endDateTimePicker.Value.Date;
 
-            banner.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
-            banner.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
+                banner.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
+                banner.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
 
-            banner.text = textBanner.Text;
+                banner.text = textBanner.Text;
 
-            iTextBannerService.Create(banner);
+                iTextBannerService.Create(banner);
 
-            this.Close();
+                this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Bad time format: Insert numbers");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
+            }
+
 
         }
     }

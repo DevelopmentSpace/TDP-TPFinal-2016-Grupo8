@@ -25,22 +25,31 @@ namespace TPFinal.View
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            TextBannerDTO banner = iTextBannerService.Get(Convert.ToInt32(idText.Text));
+            try
+            {
+                TextBannerDTO banner = iTextBannerService.Get(Convert.ToInt32(idText.Text));
 
-            bannerNameText.Text = banner.name;
+                bannerNameText.Text = banner.name;
 
-            initDateTimePicker.Value = banner.initDate;
-            endDateTimePicker.Value = banner.endDate;
+                initDateTimePicker.Value = banner.initDate;
+                endDateTimePicker.Value = banner.endDate;
 
-            initTimeHour.Text = banner.initTime.Hours.ToString();
-            initTimeMinute.Text = banner.initTime.Minutes.ToString();
+                initTimeHour.Text = banner.initTime.Hours.ToString();
+                initTimeMinute.Text = banner.initTime.Minutes.ToString();
 
-            endTimeHour.Text = banner.endTime.Hours.ToString();
-            endTimeMinute.Text = banner.endTime.Minutes.ToString();
+                endTimeHour.Text = banner.endTime.Hours.ToString();
+                endTimeMinute.Text = banner.endTime.Minutes.ToString();
 
-            textBanner.Text = banner.text;
-
-
+                textBanner.Text = banner.text;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("TextBanner not found.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Insert correct ID.");
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -50,8 +59,19 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            iTextBannerService.Delete(Convert.ToInt32(idText.Text));
-            this.Close();
+            try
+            {
+                iTextBannerService.Delete(Convert.ToInt32(idText.Text));
+                this.Close();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("TextBanner not found.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Insert correct ID.");
+            }
         }
 
         private void searchButton_Click(object sender, EventArgs e)

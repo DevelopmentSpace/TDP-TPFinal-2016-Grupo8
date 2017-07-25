@@ -36,39 +36,61 @@ namespace TPFinal.View
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            RssBannerDTO banner = iRssBannerService.Get(Convert.ToInt32(idText.Text));
+            try
+            {
+                RssBannerDTO banner = iRssBannerService.Get(Convert.ToInt32(idText.Text));
+                bannerNameText.Text = banner.name;
 
-            bannerNameText.Text = banner.name;
+                initDateTimePicker.Value = banner.initDate;
+                endDateTimePicker.Value = banner.endDate;
 
-            initDateTimePicker.Value = banner.initDate;
-            endDateTimePicker.Value = banner.endDate;
+                initTimeHour.Text = banner.initTime.Hours.ToString();
+                initTimeMinute.Text = banner.initTime.Minutes.ToString();
 
-            initTimeHour.Text = banner.initTime.Hours.ToString();
-            initTimeMinute.Text = banner.initTime.Minutes.ToString();
+                endTimeHour.Text = banner.endTime.Hours.ToString();
+                endTimeMinute.Text = banner.endTime.Minutes.ToString();
 
-            endTimeHour.Text = banner.endTime.Hours.ToString();
-            endTimeMinute.Text = banner.endTime.Minutes.ToString();
-
-            textBanner.Text = banner.url;
+                textBanner.Text = banner.url;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("RssBanner not found.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Insert correct ID.");
+            }
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            RssBannerDTO banner = new RssBannerDTO();
-            banner.id = Convert.ToInt32(idText.Text);
-            banner.name = bannerNameText.Text;
+            try
+            {
+                RssBannerDTO banner = new RssBannerDTO();
+                banner.id = Convert.ToInt32(idText.Text);
+                banner.name = bannerNameText.Text;
 
-            banner.initDate = initDateTimePicker.Value.Date;
-            banner.endDate = endDateTimePicker.Value.Date;
+                banner.initDate = initDateTimePicker.Value.Date;
+                banner.endDate = endDateTimePicker.Value.Date;
 
-            banner.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
-            banner.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
+                banner.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
+                banner.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
 
-            banner.url = textBanner.Text;
+                banner.url = textBanner.Text;
 
-            iRssBannerService.Update(banner);
+                iRssBannerService.Update(banner);
 
-            this.Close();
+                this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Bad text format: Insert numbers");
+            }
+
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
+            }
         }
     }
 }
