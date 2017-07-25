@@ -19,7 +19,7 @@ namespace TPFinal.View
     public partial class CampaignViewAdd : Form
     {
 
-        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
+        private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
         public CampaignViewAdd()
         {

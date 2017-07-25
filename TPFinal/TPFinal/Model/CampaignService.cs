@@ -19,7 +19,7 @@ using Common.Logging;
 
 namespace TPFinal.Model
 {
-    class CampaignService : IObservable, IJobListener
+    class CampaignService : ICampaignService, IJobListener
     {
 
         private static int DEFAULT_CHANGE_IMAGE_TIME = 5;

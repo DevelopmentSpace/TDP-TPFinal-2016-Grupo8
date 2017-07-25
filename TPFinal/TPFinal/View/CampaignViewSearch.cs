@@ -16,7 +16,7 @@ namespace TPFinal.View
     public partial class CampaignViewSearch : Form
     {
 
-        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
+        private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
         private IEnumerator<CampaignDTO> campaigns;
 

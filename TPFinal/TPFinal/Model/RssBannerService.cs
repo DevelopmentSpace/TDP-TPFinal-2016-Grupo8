@@ -11,7 +11,7 @@ using Common.Logging;
 
 namespace TPFinal.Model
 {
-    class RssBannerService : ITextBanner
+    class RssBannerService : IRssBannerService, ITextBanner
     {
 
         private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();

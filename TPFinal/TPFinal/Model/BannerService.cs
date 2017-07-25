@@ -19,7 +19,7 @@ namespace TPFinal.Model
     /// <summary>
     /// Servicio de banners. Se encarga de ser servicio de todos.
     /// </summary>
-    class BannerService : IObservable, IJobListener
+    class BannerService : IBannerService, IJobListener
     {
 
         private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();

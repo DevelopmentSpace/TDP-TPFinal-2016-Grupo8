@@ -9,8 +9,8 @@ namespace TPFinal.View
 {
     public partial class AdView : Form, IObserver
     {
-        private BannerService iBannerService = IoCContainerLocator.Container.Resolve<BannerService>();
-        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
+        private IBannerService iBannerService = IoCContainerLocator.Container.Resolve<IBannerService>();
+        private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
         private static string SPACE_STRING = "                                                                                                                                                                                             ";
 

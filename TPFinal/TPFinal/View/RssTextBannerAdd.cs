@@ -16,7 +16,7 @@ namespace TPFinal.View
     public partial class RssTextBannerAdd : Form
     {
 
-        private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();
+        private IRssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<IRssBannerService>();
 
         public RssTextBannerAdd()
         {

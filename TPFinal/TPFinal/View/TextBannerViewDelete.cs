@@ -16,7 +16,7 @@ namespace TPFinal.View
     public partial class TextBannerViewDelete : Form
     {
 
-        private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
+        private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
 
         public TextBannerViewDelete()
         {

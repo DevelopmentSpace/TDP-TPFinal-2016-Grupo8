@@ -126,8 +126,12 @@
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
     <Compile Include="Model\ChangeImageJob.cs" />
+    <Compile Include="Model\IBannerService.cs" />
+    <Compile Include="Model\ICampaignService.cs" />
+    <Compile Include="Model\IRssBannerService.cs" />
     <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
+    <Compile Include="Model\ITextBannerService.cs" />
     <Compile Include="Model\UpdateBannerJob.cs" />
     <Compile Include="Model\RssBannerService.cs" />
     <Compile Include="Model\RssReaderModel\IRssReader.cs" />

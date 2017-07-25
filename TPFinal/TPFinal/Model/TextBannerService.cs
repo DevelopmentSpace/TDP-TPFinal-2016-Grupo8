@@ -12,7 +12,7 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
-    class TextBannerService : ITextBanner
+    class TextBannerService : ITextBannerService, ITextBanner
     {
         private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
 

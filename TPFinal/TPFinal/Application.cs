@@ -15,16 +15,16 @@ namespace TPFinal
     public partial class Application : Form
     {
 
-        private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
-        private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();
-        private BannerService iBannerService = IoCContainerLocator.Container.Resolve<BannerService>();
-        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
+        private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
+        private IRssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<IRssBannerService>();
+        private IBannerService iBannerService = IoCContainerLocator.Container.Resolve<IBannerService>();
+        private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
         public Application()
         {
             InitializeComponent();
-            iBannerService.AddService(iTextBannerService);
-            iBannerService.AddService(iRssBannerService);
+            iBannerService.AddService((ITextBanner)iTextBannerService);
+            iBannerService.AddService((ITextBanner)iRssBannerService);
         }
 
         private void adminButton_Click(object sender, EventArgs e)
