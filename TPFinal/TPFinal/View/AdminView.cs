@@ -57,8 +57,14 @@ namespace TPFinal.View
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextBannerViewAdd bannerViewAdd = new TextBannerViewAdd(application);
-            bannerViewAdd.Show();
+            TextBannerViewAdd textBannerViewAdd = new TextBannerViewAdd(application);
+            textBannerViewAdd.Show();
+        }
+
+        private void createToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            RssTextBannerAdd rssBannerViewAdd = new RssTextBannerAdd();
+            rssBannerViewAdd.Show();
         }
     }
 }

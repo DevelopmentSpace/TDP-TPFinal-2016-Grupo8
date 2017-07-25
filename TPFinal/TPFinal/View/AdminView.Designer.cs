@@ -112,26 +112,26 @@
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.createToolStripMenuItem.Text = "Create";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             // 
             // updateToolStripMenuItem1
             // 
             this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
-            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.updateToolStripMenuItem1.Text = "Update";
             // 
             // listAllToolStripMenuItem1
             // 
             this.listAllToolStripMenuItem1.Name = "listAllToolStripMenuItem1";
-            this.listAllToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.listAllToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.listAllToolStripMenuItem1.Text = "List all";
             // 
             // rssSourceToolStripMenuItem
@@ -148,25 +148,26 @@
             // createToolStripMenuItem1
             // 
             this.createToolStripMenuItem1.Name = "createToolStripMenuItem1";
-            this.createToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.createToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.createToolStripMenuItem1.Text = "Create";
+            this.createToolStripMenuItem1.Click += new System.EventHandler(this.createToolStripMenuItem1_Click);
             // 
             // deleteToolStripMenuItem2
             // 
             this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
-            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem2.Text = "Delete";
             // 
             // updateToolStripMenuItem2
             // 
             this.updateToolStripMenuItem2.Name = "updateToolStripMenuItem2";
-            this.updateToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.updateToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.updateToolStripMenuItem2.Text = "Update";
             // 
             // listAllToolStripMenuItem2
             // 
             this.listAllToolStripMenuItem2.Name = "listAllToolStripMenuItem2";
-            this.listAllToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.listAllToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.listAllToolStripMenuItem2.Text = "List all";
             // 
             // AdminView

@@ -131,7 +131,7 @@ namespace TPFinal.Model
             string text = "";
             foreach (ITextBanner serviceBanner in iTextBannerList)
             {
-                text = text + " - " + serviceBanner.GetText();
+                text = text + serviceBanner.GetText();
             }
             return text;
         }

@@ -18,6 +18,9 @@ namespace TPFinal.Model
         {
             String text = "";
 
+            if (iRssBannerList == null)
+                return text;
+
             foreach (RssBanner rssBanner in iRssBannerList)
             {
                 if (BannerService.IsBannerActive(rssBanner))

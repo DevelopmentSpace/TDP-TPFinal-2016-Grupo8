@@ -40,11 +40,11 @@ namespace TPFinal.Model.RssReaderModel
             {
                 mRssItems.Add(new RssItem
                 {
-                    
+
                     //name = bItem.Title.Text,
-                    description = bItem.Summary.Text,
-                    publishingDate = bItem.PublishDate.DateTime
-                });
+                    description = bItem.Title.Text,
+                    publishingDate = bItem.LastUpdatedTime.DateTime
+            });
             }
 
             cLogger.Info("Devolviendo feeds adaptados...");

@@ -71,9 +71,9 @@ namespace TPFinal.View
             }
             else
             {
-                if (application.TextBannerService.GetText() != "")
+                if (application.BannerService.GetText() != "")
                 { 
-                    textBanner.Text = SPACE_STRING + application.TextBannerService.GetText();
+                    textBanner.Text = SPACE_STRING + application.BannerService.GetText();
                 }
             }
         }

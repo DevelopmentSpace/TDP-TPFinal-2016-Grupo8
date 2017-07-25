@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace TPFinal.DAL.EntityFramework
             //For debug
             //var sqlString = query.ToString();
 
-            return query;
+            return QueryableExtensions.Include(query, "items");
         }
     }
 }
