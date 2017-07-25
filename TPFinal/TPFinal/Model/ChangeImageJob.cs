@@ -72,8 +72,6 @@ namespace TPFinal.Model
                                 iActualCampaign++;
                             }
                         }
-
-
                     }
                     //Sino hay que empezar desde el principio
                     else
@@ -89,57 +87,13 @@ namespace TPFinal.Model
                                 iActualCampaign++;
                             }
                         }
-
-
                     }
                 }
             }//Fin if-else
 
-
-
             context.Trigger.JobDataMap.Put("indexCampaign", iActualCampaign);
             context.Trigger.JobDataMap.Put("indexImage", iActualImage);
             context.Trigger.JobDataMap.Put("updateDone", iUpdateDone);
-
-
-
-
-            /*
-            if (CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)))
-            {
-                iActualImage++;
-
-                if (iActualImage > iCampaignList.ElementAt(iActualCampaign).imagesList.Count() - 1)
-                {
-                    iActualImage = 0;
-                    iActualCampaign++;
-                    if (iActualCampaign > iCampaignList.Count() - 1)
-                    {
-                        iActualCampaign = 0;
-                    }
-                }
-            }
-            else
-            {
-                iActualImage = 0;
-                //Esto sirve para que no muestra campañas que no deben mostrar
-                if (!iCampaignList.Any(campaign => CampaignService.IsCampaignActive(campaign)) )
-                {
-                    //SHOW PREDIFINITE IMAGE
-                    //iActualCampaign = -1
-                }
-                else
-                    while (!CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)))
-                    {
-                        iActualCampaign++;
-                        if (iActualCampaign > iCampaignList.Count() - 1)
-                        {
-                            iActualCampaign = 0;
-                        }
-                }
-            }
-            */
-
         }
     }
 }

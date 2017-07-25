@@ -9,7 +9,7 @@ namespace TPFinal.Model
 {
     interface ITextBanner
     {
-       String GetText();
+        String GetText();
 
         void Update();
     }

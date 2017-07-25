@@ -70,6 +70,9 @@ namespace TPFinal.Model
         //Jobs Keys
         JobKey iChangeImageJobKey, iUpdateCampaignsJobKey;
 
+        /// <summary>
+        /// Creador del servicio de campañas
+        /// </summary>
         public CampaignService()
         {
             cLogger.Info("Iniciando CampaignService");
@@ -84,8 +87,6 @@ namespace TPFinal.Model
             iChangeImageJobKey = new JobKey("CIJK");
             iUpdateCampaignsJobKey = new JobKey("UCJK");
 
-
-
             iChangeImageJob = JobBuilder.Create<ChangeImageJob>()
                 .WithIdentity(iChangeImageJobKey)
                 .Build();
@@ -94,10 +95,8 @@ namespace TPFinal.Model
                 .WithIdentity(iUpdateCampaignsJobKey)
                 .Build();
 
-
             iScheduler.Start();
             iScheduler.ListenerManager.AddJobListener(this, OrMatcher<JobKey>.Or(KeyMatcher<JobKey>.KeyEquals<JobKey>(iChangeImageJobKey), KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateCampaignsJobKey)));
-
 
             iUpdateAvailable = false;
             iUpdateDone = false;
@@ -125,12 +124,12 @@ namespace TPFinal.Model
         public void RemoveListener(IObserver pListener)
         {
             iObserver.Remove(pListener);
-            cLogger.Info("Listener removed");
+            cLogger.Info("Listener quitado");
         }
 
         public void NotifyListeners()
         {
-            cLogger.Info("Notifing Listeners");
+            cLogger.Info("Notificando Listeners");
             foreach (IObserver view in iObserver)
             {
                 view.Update("Campaign");
@@ -289,9 +288,6 @@ namespace TPFinal.Model
             jobDataMap.Put("campList", campList);
             jobDataMap.Put("newCampList", newCampList);
             jobDataMap.Put("updateAvailable", iUpdateAvailable);
-
-            //campList.Dispose();
-            //newCampList.Dispose();
 
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
                 .StartAt(DateTime.Now.AddSeconds(seconds))

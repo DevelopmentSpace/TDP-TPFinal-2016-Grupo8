@@ -12,6 +12,7 @@ using TPFinal.Domain;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Practices.Unity;
+using Common.Logging;
 
 namespace TPFinal.Model
 {
@@ -21,12 +22,12 @@ namespace TPFinal.Model
     class BannerService : IObservable, IJobListener
     {
 
+        private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();
+
         /// <summary>
         /// Lista de escuchadores
         /// </summary>
         private List<IObserver> iObserver = new List<IObserver> { };
-
-
 
         /// <summary>
         /// Lista de servicios de texto de banner
@@ -46,17 +47,14 @@ namespace TPFinal.Model
         //Jobs Keys
         JobKey iUpdateBannerJobKey;
 
-        public void AddService(ITextBanner textBanner)
-        {
-            iTextBannerList.Add(textBanner);
-        }
 
         /// <summary>
-        /// Creador del servicio de campañas
+        /// Creador del servicio de Banners
         /// </summary>
-        /// <param name="pRefreshTime">Minutos para el refresco con la base de datos</param>
         public BannerService()
         {
+            cLogger.Info("Iniciando BannerService");
+
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
             iUpdateBannerJobKey = new JobKey("UBJK");
@@ -67,7 +65,9 @@ namespace TPFinal.Model
 
 
             iScheduler.Start();
-            iScheduler.ListenerManager.AddJobListener(this,(KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateBannerJobKey)));
+            iScheduler.ListenerManager.AddJobListener(this, (KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateBannerJobKey)));
+
+            cLogger.Info("Iniciando UpdateBanner Job");
 
             StartUpdateBannerJob(0);
         }
@@ -83,23 +83,41 @@ namespace TPFinal.Model
             iScheduler.ScheduleJob(iUpdateBannerJob, updateBannerJobTrigger);
         }
 
+
+        /******************************************************************/
+        /**************************PATRON OBSERVER*************************/
+        /******************************************************************/
+
         public void AddListener(IObserver pListener)
         {
             iObserver.Add(pListener);
+            cLogger.Info("Nuevo listener agregado");
         }
 
         public void RemoveListener(IObserver pListener)
         {
             iObserver.Remove(pListener);
+            cLogger.Info("Listener quitado");
         }
 
         public void NotifyListeners()
         {
+            cLogger.Info("Notificando Listeners");
             foreach (IObserver view in iObserver)
                 {
                 view.Update("Banner");
                 }              
         }
+
+        /// <summary>
+        /// Agregar un servicio de texto a la lista de servicio de textos
+        /// </summary>
+        /// <param name="textBanner">Servicio de textos</param>
+        public void AddService(ITextBanner textBanner)
+        {
+            iTextBannerList.Add(textBanner);
+        }
+
         /// <summary>
         /// Obtiene las cadenas de caracteres de todos los banners activos. 
         /// </summary>
@@ -128,6 +146,9 @@ namespace TPFinal.Model
                     (b.initTime <= time && b.endTime >= time);
         }
 
+        /******************************************************************/
+        /**************************TIMERS LISTENER*************************/
+        /******************************************************************/
 
         public void JobToBeExecuted(IJobExecutionContext context)
         {
