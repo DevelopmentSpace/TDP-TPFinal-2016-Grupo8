@@ -103,11 +103,11 @@ namespace TPFinal.View
             }
             catch (FormatException)
             {
-                MessageBox.Show("Bad text format: Insert numbers");
+                MessageBox.Show("Bad time format: Insert numbers");
             }
             catch(ArgumentException)
             {
-                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60.Also init-time/date must be greater then end-time/date.");
+                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
             }
         }
     }

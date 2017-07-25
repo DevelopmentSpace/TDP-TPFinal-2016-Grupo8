@@ -62,12 +62,17 @@ namespace TPFinal.Model
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
 
-            textBannerMapper.MapToModel(pTextBannerDTO, banner);
+            try
+            {
+                textBannerMapper.MapToModel(pTextBannerDTO, banner);
+                iUnitOfWork.textBannerRepository.Add(banner);
+                iUnitOfWork.Complete();
+            }
+            catch (ArgumentException)
+            {
 
-            iUnitOfWork.textBannerRepository.Add(banner);
-
-            iUnitOfWork.Complete();
-
+                throw new ArgumentException();
+            }
         }
 
         public void Update(TextBannerDTO pTextBannerDTO)
@@ -94,15 +99,19 @@ namespace TPFinal.Model
 
         public void Delete(int pId)
         {
-           IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
-
-            oldTextBanner = iUnitOfWork.textBannerRepository.Get(pId);
-
-            iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
-
-            iUnitOfWork.Complete();
+            try
+            {
+                oldTextBanner = iUnitOfWork.textBannerRepository.Get(pId);
+                iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
+                iUnitOfWork.Complete();
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public TextBannerDTO Get(int pId)
@@ -111,7 +120,14 @@ namespace TPFinal.Model
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner TextBanner = new TextBanner();
 
-            return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pId));
+            try
+            {
+                return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pId));
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public IEnumerable<TextBannerDTO> GetAll()

@@ -72,11 +72,17 @@ namespace TPFinal.Model
             RssBannerMapper RssBannerMapper = new RssBannerMapper();
             RssBanner banner = new RssBanner();
 
-            RssBannerMapper.MapToModel(pRssBannerDTO, banner);
-            iUnitOfWork.rssBannerRepository.Add(banner);
+            try
+            {
+                RssBannerMapper.MapToModel(pRssBannerDTO, banner);
+                iUnitOfWork.rssBannerRepository.Add(banner);
+                iUnitOfWork.Complete();
+            }
+            catch (ArgumentException)
+            {
 
-            iUnitOfWork.Complete();
-
+                throw new ArgumentException();
+            }
         }
 
         public void Update(RssBannerDTO pRssBannerDTO)
@@ -107,12 +113,17 @@ namespace TPFinal.Model
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             RssBannerMapper RssBannerMapper = new RssBannerMapper();
             RssBanner oldRssBanner = new RssBanner();
-
-            oldRssBanner = iUnitOfWork.rssBannerRepository.Get(pId);
-
-            iUnitOfWork.rssBannerRepository.Remove(oldRssBanner);
-
-            iUnitOfWork.Complete();
+            try
+            {
+                oldRssBanner = iUnitOfWork.rssBannerRepository.Get(pId);
+                iUnitOfWork.rssBannerRepository.Remove(oldRssBanner);
+                iUnitOfWork.Complete();
+                cLogger.Info("RssBanner eliminado");
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public RssBannerDTO Get(int pId)
@@ -121,7 +132,14 @@ namespace TPFinal.Model
             RssBannerMapper textRssBannerMapper = new RssBannerMapper();
             RssBanner TextBanner = new RssBanner();
 
-            return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
+            try
+            {
+                return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public IEnumerable<RssBannerDTO> GetAll()

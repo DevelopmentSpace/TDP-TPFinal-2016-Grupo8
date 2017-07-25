@@ -204,11 +204,7 @@ namespace TPFinal.Model
             catch (NullReferenceException)
             {
                 throw new IndexOutOfRangeException();
-            }
-
-            
-
-            
+            }         
         }
 
         public CampaignDTO GetCampaign(int pId)
