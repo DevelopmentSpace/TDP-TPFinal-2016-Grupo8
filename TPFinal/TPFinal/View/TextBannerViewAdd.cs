@@ -12,12 +12,12 @@ using TPFinal.Model;
 
 namespace TPFinal.View
 {
-    public partial class BannerViewAdd : Form
+    public partial class TextBannerViewAdd : Form
     {
 
         Application application;
 
-        public BannerViewAdd(Application pApplication)
+        public TextBannerViewAdd(Application pApplication)
         {
             InitializeComponent();
             application = pApplication;
@@ -33,8 +33,6 @@ namespace TPFinal.View
             TextBannerDTO banner = new TextBannerDTO();
             banner.name = bannerNameText.Text;
 
-            banner.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
-
             banner.initDate = initDateTimePicker.Value.Date;
             banner.endDate = endDateTimePicker.Value.Date;
 
@@ -44,8 +42,6 @@ namespace TPFinal.View
             banner.text = textBanner.Text;
 
             application.TextBannerService.Create(banner);
-
-
 
             this.Close();
 

@@ -151,11 +151,11 @@
       <DependentUpon>AdView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IObserver.cs" />
-    <Compile Include="View\BannerViewAdd.cs">
+    <Compile Include="View\TextBannerViewAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\BannerViewAdd.Designer.cs">
-      <DependentUpon>BannerViewAdd.cs</DependentUpon>
+    <Compile Include="View\TextBannerViewAdd.Designer.cs">
+      <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CampaignViewAdd.cs">
       <SubType>Form</SubType>
@@ -181,6 +181,12 @@
     <Compile Include="View\CampaignViewUpdate.Designer.cs">
       <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\RssTextBannerAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RssTextBannerAdd.Designer.cs">
+      <DependentUpon>RssTextBannerAdd.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,8 +206,11 @@
     <EmbeddedResource Include="View\AdView.resx">
       <DependentUpon>AdView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\BannerViewAdd.resx">
-      <DependentUpon>BannerViewAdd.cs</DependentUpon>
+    <EmbeddedResource Include="View\RssTextBannerAdd.resx">
+      <DependentUpon>RssTextBannerAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TextBannerViewAdd.resx">
+      <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewAdd.resx">
       <DependentUpon>CampaignViewAdd.cs</DependentUpon>

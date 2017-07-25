@@ -1,6 +1,6 @@
 ﻿namespace TPFinal.View
 {
-    partial class BannerViewAdd
+    partial class TextBannerViewAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,9 @@
             this.bannerBox = new System.Windows.Forms.GroupBox();
             this.idText = new System.Windows.Forms.TextBox();
             this.idLabel = new System.Windows.Forms.Label();
-            this.secondIntervalLabel = new System.Windows.Forms.Label();
-            this.intervalSecond = new System.Windows.Forms.TextBox();
-            this.minuteIntervalLabel = new System.Windows.Forms.Label();
             this.textBox = new System.Windows.Forms.GroupBox();
+            this.textLabel = new System.Windows.Forms.Label();
+            this.textBanner = new System.Windows.Forms.TextBox();
             this.dateBox = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
             this.hourLabel = new System.Windows.Forms.Label();
@@ -48,14 +47,10 @@
             this.endTimeHour = new System.Windows.Forms.TextBox();
             this.EndTimeLabel = new System.Windows.Forms.Label();
             this.InitTimeLabel = new System.Windows.Forms.Label();
-            this.intervalMinute = new System.Windows.Forms.TextBox();
-            this.intervalLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.bannerNameText = new System.Windows.Forms.TextBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
-            this.textBanner = new System.Windows.Forms.TextBox();
-            this.textLabel = new System.Windows.Forms.Label();
             this.bannerBox.SuspendLayout();
             this.textBox.SuspendLayout();
             this.dateBox.SuspendLayout();
@@ -65,18 +60,13 @@
             // 
             this.bannerBox.Controls.Add(this.idText);
             this.bannerBox.Controls.Add(this.idLabel);
-            this.bannerBox.Controls.Add(this.secondIntervalLabel);
-            this.bannerBox.Controls.Add(this.intervalSecond);
-            this.bannerBox.Controls.Add(this.minuteIntervalLabel);
             this.bannerBox.Controls.Add(this.textBox);
             this.bannerBox.Controls.Add(this.dateBox);
-            this.bannerBox.Controls.Add(this.intervalMinute);
-            this.bannerBox.Controls.Add(this.intervalLabel);
             this.bannerBox.Controls.Add(this.nameLabel);
             this.bannerBox.Controls.Add(this.bannerNameText);
             this.bannerBox.Location = new System.Drawing.Point(12, 12);
             this.bannerBox.Name = "bannerBox";
-            this.bannerBox.Size = new System.Drawing.Size(869, 299);
+            this.bannerBox.Size = new System.Drawing.Size(876, 299);
             this.bannerBox.TabIndex = 16;
             this.bannerBox.TabStop = false;
             this.bannerBox.Text = "Banner Data";
@@ -100,43 +90,32 @@
             this.idLabel.TabIndex = 19;
             this.idLabel.Text = "Id";
             // 
-            // secondIntervalLabel
-            // 
-            this.secondIntervalLabel.AutoSize = true;
-            this.secondIntervalLabel.Location = new System.Drawing.Point(268, 77);
-            this.secondIntervalLabel.Name = "secondIntervalLabel";
-            this.secondIntervalLabel.Size = new System.Drawing.Size(44, 13);
-            this.secondIntervalLabel.TabIndex = 15;
-            this.secondIntervalLabel.Text = "Second";
-            // 
-            // intervalSecond
-            // 
-            this.intervalSecond.Location = new System.Drawing.Point(246, 92);
-            this.intervalSecond.Name = "intervalSecond";
-            this.intervalSecond.Size = new System.Drawing.Size(85, 20);
-            this.intervalSecond.TabIndex = 3;
-            this.intervalSecond.Text = "30";
-            this.intervalSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // minuteIntervalLabel
-            // 
-            this.minuteIntervalLabel.AutoSize = true;
-            this.minuteIntervalLabel.Location = new System.Drawing.Point(152, 76);
-            this.minuteIntervalLabel.Name = "minuteIntervalLabel";
-            this.minuteIntervalLabel.Size = new System.Drawing.Size(39, 13);
-            this.minuteIntervalLabel.TabIndex = 14;
-            this.minuteIntervalLabel.Text = "Minute";
-            // 
             // textBox
             // 
             this.textBox.Controls.Add(this.textLabel);
             this.textBox.Controls.Add(this.textBanner);
-            this.textBox.Location = new System.Drawing.Point(411, 33);
+            this.textBox.Location = new System.Drawing.Point(417, 79);
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(452, 136);
             this.textBox.TabIndex = 15;
             this.textBox.TabStop = false;
             this.textBox.Text = "Text Data";
+            // 
+            // textLabel
+            // 
+            this.textLabel.AutoSize = true;
+            this.textLabel.Location = new System.Drawing.Point(29, 42);
+            this.textLabel.Name = "textLabel";
+            this.textLabel.Size = new System.Drawing.Size(109, 13);
+            this.textLabel.TabIndex = 1;
+            this.textLabel.Text = "Text that will be show";
+            // 
+            // textBanner
+            // 
+            this.textBanner.Location = new System.Drawing.Point(18, 62);
+            this.textBanner.Name = "textBanner";
+            this.textBanner.Size = new System.Drawing.Size(408, 20);
+            this.textBanner.TabIndex = 0;
             // 
             // dateBox
             // 
@@ -152,7 +131,7 @@
             this.dateBox.Controls.Add(this.endTimeHour);
             this.dateBox.Controls.Add(this.EndTimeLabel);
             this.dateBox.Controls.Add(this.InitTimeLabel);
-            this.dateBox.Location = new System.Drawing.Point(30, 124);
+            this.dateBox.Location = new System.Drawing.Point(42, 79);
             this.dateBox.Name = "dateBox";
             this.dateBox.Size = new System.Drawing.Size(363, 169);
             this.dateBox.TabIndex = 16;
@@ -265,24 +244,6 @@
             this.InitTimeLabel.TabIndex = 21;
             this.InitTimeLabel.Text = "Init time";
             // 
-            // intervalMinute
-            // 
-            this.intervalMinute.Location = new System.Drawing.Point(131, 92);
-            this.intervalMinute.Name = "intervalMinute";
-            this.intervalMinute.Size = new System.Drawing.Size(85, 20);
-            this.intervalMinute.TabIndex = 2;
-            this.intervalMinute.Text = "0";
-            this.intervalMinute.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // intervalLabel
-            // 
-            this.intervalLabel.AutoSize = true;
-            this.intervalLabel.Location = new System.Drawing.Point(6, 95);
-            this.intervalLabel.Name = "intervalLabel";
-            this.intervalLabel.Size = new System.Drawing.Size(127, 13);
-            this.intervalLabel.TabIndex = 18;
-            this.intervalLabel.Text = "Interval between banners";
-            // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
@@ -321,22 +282,6 @@
             this.AcceptButton.UseVisualStyleBackColor = true;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
-            // textBanner
-            // 
-            this.textBanner.Location = new System.Drawing.Point(18, 62);
-            this.textBanner.Name = "textBanner";
-            this.textBanner.Size = new System.Drawing.Size(408, 20);
-            this.textBanner.TabIndex = 0;
-            // 
-            // textLabel
-            // 
-            this.textLabel.AutoSize = true;
-            this.textLabel.Location = new System.Drawing.Point(29, 42);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(109, 13);
-            this.textLabel.TabIndex = 1;
-            this.textLabel.Text = "Text that will be show";
-            // 
             // BannerViewAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,9 +307,6 @@
         private System.Windows.Forms.GroupBox bannerBox;
         private System.Windows.Forms.TextBox idText;
         private System.Windows.Forms.Label idLabel;
-        private System.Windows.Forms.Label secondIntervalLabel;
-        private System.Windows.Forms.TextBox intervalSecond;
-        private System.Windows.Forms.Label minuteIntervalLabel;
         private System.Windows.Forms.GroupBox textBox;
         private System.Windows.Forms.GroupBox dateBox;
         private System.Windows.Forms.Label minuteLabel;
@@ -379,8 +321,6 @@
         private System.Windows.Forms.TextBox endTimeHour;
         private System.Windows.Forms.Label EndTimeLabel;
         private System.Windows.Forms.Label InitTimeLabel;
-        private System.Windows.Forms.TextBox intervalMinute;
-        private System.Windows.Forms.Label intervalLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox bannerNameText;
         private System.Windows.Forms.Button CancelButton;

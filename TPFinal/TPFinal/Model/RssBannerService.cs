@@ -17,25 +17,22 @@ namespace TPFinal.Model
         public String GetText()
         {
             String text = "";
-            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
 
             foreach (RssBanner rssBanner in iRssBannerList)
             {
                 if (BannerService.IsBannerActive(rssBanner))
                     { 
-                IEnumerable<RssItem> rssItems;
-                rssItems =  feed.Read(rssBanner.url);
-                    foreach (RssItem item in rssItems)
-                    {
-                    text = text + " - " + item.description;
-                    }
+                        foreach (RssItem item in rssBanner.items)
+                        {
+                            text = text + " - " + item.description;
+                        }
                 }
             }
             return text;
         }
 
         public void Update()
-        {/*
+        {
             IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             DateTime date = DateTime.Now.Date;
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
@@ -43,21 +40,38 @@ namespace TPFinal.Model
 
             IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(date, timeFrom, timeTo);
 
+
+
+            IEnumerator<RssBanner> e = rssBannerEnum.GetEnumerator();
+
+            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
+
+            while (e.MoveNext())
+            {
+                try
+                {
+                    e.Current.items = feed.Read(e.Current.url).ToList();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
             iRssBannerList = rssBannerEnum;
 
-            uow.Complete();*/
+            uow.Complete();
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)
         {
-            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             RssBannerMapper RssBannerMapper = new RssBannerMapper();
             RssBanner banner = new RssBanner();
 
             RssBannerMapper.MapToModel(pRssBannerDTO, banner);
             iUnitOfWork.rssBannerRepository.Add(banner);
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
 
         }
 

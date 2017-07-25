@@ -56,24 +56,24 @@ namespace TPFinal.Model
 
         public void Update(TextBannerDTO pTextBannerDTO)
         {
-            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
             TextBanner oldTextBanner = new TextBanner();
 
             textBannerMapper.MapToModel(pTextBannerDTO, banner);
 
-            oldTextBanner = iUnitOfWork.textBannerRepository.Get(banner.id); //REVISAR SI FUNCIONA
+            oldTextBanner = iUnitOfWork.textBannerRepository.Get(banner.id);
 
             oldTextBanner = banner;
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
 
         }
 
         public void Delete(TextBannerDTO pTextBannerDTO)
         {
-           /* IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+           IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
 
@@ -81,7 +81,7 @@ namespace TPFinal.Model
 
             iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
         }
 
     }
