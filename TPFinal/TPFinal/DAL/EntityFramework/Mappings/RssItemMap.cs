@@ -28,10 +28,9 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             this.Property(pRssItem => pRssItem.url)
                 .IsRequired();
 
-            // Se establece la columna obligatoria (NOT NULL) 'description', con una longitud máxima de 50 caracteres [varchar(50)].
+            // Se establece la columna obligatoria (NOT NULL) 'description'.
             this.Property(pRssItem => pRssItem.description)
-                .IsRequired()
-                .HasMaxLength(100);
+                .IsRequired();
 
             // Se establece la columna obligatoria (NOT NULL) 'publishingDate'.
             this.Property(pRssItem => pRssItem.publishingDate);

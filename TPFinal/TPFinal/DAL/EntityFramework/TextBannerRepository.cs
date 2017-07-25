@@ -56,9 +56,6 @@ namespace TPFinal.DAL.EntityFramework
                                               (textBanner.initTime <= pTimeTo && textBanner.endTime >= pTimeFrom)
                                           select textBanner;
 
-            //For debug
-            //var sqlString = query.ToString();
-
             return query;
         }
     }

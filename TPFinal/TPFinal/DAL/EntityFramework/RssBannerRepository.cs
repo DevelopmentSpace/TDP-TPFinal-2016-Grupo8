@@ -57,8 +57,6 @@ namespace TPFinal.DAL.EntityFramework
                                              (rssBanner.initTime <= pTimeTo && rssBanner.endTime >= pTimeFrom)
                                          select rssBanner;
 
-            //For debug
-            //var sqlString = query.ToString();
             return QueryableExtensions.Include(query, "items");
         }
     }
