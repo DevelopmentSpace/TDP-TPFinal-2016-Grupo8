@@ -120,7 +120,7 @@ namespace TPFinal.Model
                 iUnitOfWork.Complete();
                 cLogger.Info("RssBanner eliminado");
             }
-            catch (NullReferenceException)
+            catch (ArgumentException)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -136,7 +136,7 @@ namespace TPFinal.Model
             {
                 return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
             }
-            catch (NullReferenceException)
+            catch (ArgumentException)
             {
                 throw new IndexOutOfRangeException();
             }

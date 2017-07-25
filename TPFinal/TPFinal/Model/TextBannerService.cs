@@ -108,7 +108,7 @@ namespace TPFinal.Model
                 iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
                 iUnitOfWork.Complete();
             }
-            catch (NullReferenceException)
+            catch (ArgumentException)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -124,7 +124,7 @@ namespace TPFinal.Model
             {
                 return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pId));
             }
-            catch (NullReferenceException)
+            catch (ArgumentException)
             {
                 throw new IndexOutOfRangeException();
             }

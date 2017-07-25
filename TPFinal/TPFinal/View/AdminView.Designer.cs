@@ -106,34 +106,34 @@
             this.updateToolStripMenuItem1,
             this.listAllToolStripMenuItem1});
             this.bannerToolStripMenuItem.Name = "bannerToolStripMenuItem";
-            this.bannerToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.bannerToolStripMenuItem.Text = "Banner";
+            this.bannerToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.bannerToolStripMenuItem.Text = "TextBanner";
             // 
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.createToolStripMenuItem.Text = "Create";
             this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // updateToolStripMenuItem1
             // 
             this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
-            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.updateToolStripMenuItem1.Text = "Update";
             this.updateToolStripMenuItem1.Click += new System.EventHandler(this.updateToolStripMenuItem1_Click);
             // 
             // listAllToolStripMenuItem1
             // 
             this.listAllToolStripMenuItem1.Name = "listAllToolStripMenuItem1";
-            this.listAllToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.listAllToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.listAllToolStripMenuItem1.Text = "Search";
             this.listAllToolStripMenuItem1.Click += new System.EventHandler(this.listAllToolStripMenuItem1_Click);
             // 
@@ -151,28 +151,28 @@
             // createToolStripMenuItem1
             // 
             this.createToolStripMenuItem1.Name = "createToolStripMenuItem1";
-            this.createToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.createToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.createToolStripMenuItem1.Text = "Create";
             this.createToolStripMenuItem1.Click += new System.EventHandler(this.createToolStripMenuItem1_Click);
             // 
             // deleteToolStripMenuItem2
             // 
             this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
-            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
             this.deleteToolStripMenuItem2.Text = "Delete";
             this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
             // 
             // updateToolStripMenuItem2
             // 
             this.updateToolStripMenuItem2.Name = "updateToolStripMenuItem2";
-            this.updateToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
             this.updateToolStripMenuItem2.Text = "Update";
             this.updateToolStripMenuItem2.Click += new System.EventHandler(this.updateToolStripMenuItem2_Click);
             // 
             // listAllToolStripMenuItem2
             // 
             this.listAllToolStripMenuItem2.Name = "listAllToolStripMenuItem2";
-            this.listAllToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.listAllToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
             this.listAllToolStripMenuItem2.Text = "Search";
             this.listAllToolStripMenuItem2.Click += new System.EventHandler(this.listAllToolStripMenuItem2_Click);
             // 

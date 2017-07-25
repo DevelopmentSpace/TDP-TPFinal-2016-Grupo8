@@ -64,7 +64,15 @@ namespace TPFinal.DAL.EntityFramework
         public TEntity Get(int pId)
         {
             cLogger.Info("Buscando entidad por id");
-            return this.iDbContext.Set<TEntity>().Find(pId);
+            try
+            {
+                return this.iDbContext.Set<TEntity>().Find(pId);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ArgumentException();
+            }
+
         }
 
         /// <summary>
