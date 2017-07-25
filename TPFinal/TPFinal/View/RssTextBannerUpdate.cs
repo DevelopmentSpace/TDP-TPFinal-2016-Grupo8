@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Practices.Unity;
-using TPFinal.DTO;
 using TPFinal.Model;
+using TPFinal.DTO;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
-    public partial class TextBannerViewUpdate : Form
+    public partial class RssTextBannerUpdate : Form
     {
-        private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
 
-        public TextBannerViewUpdate()
+        private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();
+
+        public RssTextBannerUpdate()
         {
             InitializeComponent();
         }
@@ -27,9 +28,15 @@ namespace TPFinal.View
             this.Close();
         }
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            RssTextBannerSearch rssTextBannerSearch = new RssTextBannerSearch();
+            rssTextBannerSearch.Show();
+        }
+
         private void okButton_Click(object sender, EventArgs e)
         {
-            TextBannerDTO banner = iTextBannerService.Get(Convert.ToInt32(idText.Text));
+            RssBannerDTO banner = iRssBannerService.Get(Convert.ToInt32(idText.Text));
 
             bannerNameText.Text = banner.name;
 
@@ -42,12 +49,12 @@ namespace TPFinal.View
             endTimeHour.Text = banner.endTime.Hours.ToString();
             endTimeMinute.Text = banner.endTime.Minutes.ToString();
 
-            textBanner.Text = banner.text;
+            textBanner.Text = banner.url;
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            TextBannerDTO banner = new TextBannerDTO();
+            RssBannerDTO banner = new RssBannerDTO();
             banner.id = Convert.ToInt32(idText.Text);
             banner.name = bannerNameText.Text;
 
@@ -57,17 +64,11 @@ namespace TPFinal.View
             banner.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
             banner.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
 
-            banner.text = textBanner.Text;
+            banner.url = textBanner.Text;
 
-            iTextBannerService.Update(banner);
+            iRssBannerService.Update(banner);
 
             this.Close();
-        }
-
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            TextBannerViewSearch textBannerViewSearch = new TextBannerViewSearch();
-            textBannerViewSearch.Show();
         }
     }
 }

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using TPFinal.Domain;
 using TPFinal.DTO;
 using TPFinal.DAL;
+using Common.Logging;
 
 namespace TPFinal.Model
 {
     class TextBannerService : ITextBanner
     {
+        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
+
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
         public String GetText()
@@ -106,6 +109,21 @@ namespace TPFinal.Model
             }
 
             return textBannersDTO;   
+        }
+
+        public int GetLastTextBannerId()
+        {
+            cLogger.Info("Obteniendo id de el ultimo banner de texto");
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IEnumerable<TextBanner> allTextBanner = iUnitOfWork.textBannerRepository.GetAll();
+            if (!allTextBanner.Any())
+            {
+                return (int)1;
+            }
+            else
+            {
+                return (allTextBanner.Last().id + 1);
+            }
         }
 
     }

@@ -121,18 +121,21 @@
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
             this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
+            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // updateToolStripMenuItem1
             // 
             this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
             this.updateToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.updateToolStripMenuItem1.Text = "Update";
+            this.updateToolStripMenuItem1.Click += new System.EventHandler(this.updateToolStripMenuItem1_Click);
             // 
             // listAllToolStripMenuItem1
             // 
             this.listAllToolStripMenuItem1.Name = "listAllToolStripMenuItem1";
             this.listAllToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.listAllToolStripMenuItem1.Text = "List all";
+            this.listAllToolStripMenuItem1.Text = "Search";
+            this.listAllToolStripMenuItem1.Click += new System.EventHandler(this.listAllToolStripMenuItem1_Click);
             // 
             // rssSourceToolStripMenuItem
             // 
@@ -157,6 +160,7 @@
             this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
             this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem2.Text = "Delete";
+            this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
             // 
             // updateToolStripMenuItem2
             // 
@@ -168,7 +172,8 @@
             // 
             this.listAllToolStripMenuItem2.Name = "listAllToolStripMenuItem2";
             this.listAllToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.listAllToolStripMenuItem2.Text = "List all";
+            this.listAllToolStripMenuItem2.Text = "Search";
+            this.listAllToolStripMenuItem2.Click += new System.EventHandler(this.listAllToolStripMenuItem2_Click);
             // 
             // AdminView
             // 
@@ -179,7 +184,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AdminView";
             this.Text = "AdminView";
-            this.Load += new System.EventHandler(this.AdminView_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

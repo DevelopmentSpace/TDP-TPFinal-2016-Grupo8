@@ -8,20 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPFinal.DTO;
-using TPFinal.Domain;
+using TPFinal.Model;
+using Microsoft.Practices.Unity;
 using System.IO;
+
 
 namespace TPFinal.View
 {
     public partial class CampaignViewDelete : Form
     {
 
-        private Application application;
+        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
 
-        public CampaignViewDelete(Application pAplication)
+        public CampaignViewDelete()
         {
             InitializeComponent();
-            application = pAplication;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace TPFinal.View
             dataGridViewImages.Rows.Clear();
             dataGridViewImages.Refresh();
 
-            CampaignDTO campaign= application.CampaignService.GetCampaign(Convert.ToInt32(idText.Text));
+            CampaignDTO campaign= iCampaignService.GetCampaign(Convert.ToInt32(idText.Text));
 
             campaignNameText.Text = campaign.name;
 
@@ -66,7 +67,7 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            application.CampaignService.Delete(Convert.ToInt32(idText.Text));
+            iCampaignService.Delete(Convert.ToInt32(idText.Text));
             this.Close();
         }
 

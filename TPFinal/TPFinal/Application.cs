@@ -8,74 +8,34 @@ using System.Text;
 using System.Windows.Forms;
 using TPFinal.View;
 using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal
 {
     public partial class Application : Form
     {
-
         int DataBaseRefreshTime; //TODAVIA NO IMPLEMENTADO, SE TIENE QUE SELECCIONAR AL PRINCIPIO.
 
-        private TextBannerService textBannerService = new TextBannerService();
-
-        internal TextBannerService TextBannerService
-        {
-            get
-            {
-                return textBannerService;
-            }
-        }
-
-        private RssBannerService rssBannerService = new RssBannerService();
-
-        internal RssBannerService RssBannerService
-        {
-            get
-            {
-                return rssBannerService;
-            }
-
-        }
-
-        private BannerService bannerService = new BannerService();
-
-        internal BannerService BannerService
-        {
-            get
-            {
-                return bannerService;
-            }
-
-        }
-
-        private CampaignService campaignService = new CampaignService();
-
-        internal CampaignService CampaignService
-        {
-            get
-            {
-                return campaignService;
-            }
-        }
-
-
+        private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
+        private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();
+        private BannerService iBannerService = IoCContainerLocator.Container.Resolve<BannerService>();
 
         public Application()
         {
             InitializeComponent();
-            bannerService.AddService(textBannerService);
-            bannerService.AddService(rssBannerService);
+            iBannerService.AddService(iTextBannerService);
+            iBannerService.AddService(iRssBannerService);
         }
 
         private void adminButton_Click(object sender, EventArgs e)
         {
-            AdminView adminView = new AdminView(this);
+            AdminView adminView = new AdminView();
             adminView.Show();
         }
 
         private void adButton_Click(object sender, EventArgs e)
         {
-            AdView adview = new AdView(this);
+            AdView adview = new AdView();
             adview.Show();
         }
 

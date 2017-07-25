@@ -21,6 +21,7 @@ namespace TPFinal.View
         public RssTextBannerAdd()
         {
             InitializeComponent();
+            idText.Text = iRssBannerService.GetLastRssTextId().ToString();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -45,5 +46,6 @@ namespace TPFinal.View
 
             this.Close();
         }
+
     }
 }

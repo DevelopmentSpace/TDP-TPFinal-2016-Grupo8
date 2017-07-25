@@ -50,9 +50,14 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-
             iTextBannerService.Delete(Convert.ToInt32(idText.Text));
             this.Close();
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            TextBannerViewSearch textBannerViewSearch = new TextBannerViewSearch();
+            textBannerViewSearch.Show();
         }
     }
 }

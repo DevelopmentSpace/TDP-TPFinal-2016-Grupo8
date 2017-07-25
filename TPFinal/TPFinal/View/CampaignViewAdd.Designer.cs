@@ -120,7 +120,6 @@
             this.idLabel.Size = new System.Drawing.Size(16, 13);
             this.idLabel.TabIndex = 19;
             this.idLabel.Text = "Id";
-            this.idLabel.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // secondIntervalLabel
             // 

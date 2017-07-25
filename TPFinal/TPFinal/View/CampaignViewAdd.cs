@@ -27,7 +27,6 @@ namespace TPFinal.View
             idText.Text = iCampaignService.GetLastCampaignId().ToString();
         }
 
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -114,15 +113,7 @@ namespace TPFinal.View
                 MessageBox.Show("Error. Consulte con el administrador del programa.");
             }
 
-
-
-
             this.Close();
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
 
         }
     }

@@ -7,11 +7,15 @@ using TPFinal.Domain;
 using TPFinal.DTO;
 using TPFinal.DAL;
 using TPFinal.Model.RssReaderModel;
+using Common.Logging;
 
 namespace TPFinal.Model
 {
     class RssBannerService : ITextBanner
     {
+
+        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
+
         IEnumerable<RssBanner> iRssBannerList;
 
         public String GetText()
@@ -42,9 +46,6 @@ namespace TPFinal.Model
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 30, 0));
 
             IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(date, timeFrom, timeTo);
-
-
-
             IEnumerator<RssBanner> e = rssBannerEnum.GetEnumerator();
 
             SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
@@ -115,6 +116,36 @@ namespace TPFinal.Model
             RssBanner TextBanner = new RssBanner();
 
             return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
+        }
+
+        public IEnumerable<RssBannerDTO> GetAll()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            RssBannerMapper textRssBannerMapper = new RssBannerMapper();
+            IEnumerator<RssBanner> rssBanners = iUnitOfWork.rssBannerRepository.GetAll().GetEnumerator();
+            IList<RssBannerDTO> rssBannersDTO = new List<RssBannerDTO> { };
+
+            while (rssBanners.MoveNext())
+            {
+                rssBannersDTO.Add(textRssBannerMapper.SelectorExpression.Compile()(rssBanners.Current));
+            }
+
+            return rssBannersDTO;
+        }
+
+        public int GetLastRssTextId()
+        {
+            cLogger.Info("Obteniendo id de el ultimo banner de Rss");
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IEnumerable<RssBanner> allRssBanner = iUnitOfWork.rssBannerRepository.GetAll();
+            if (!allRssBanner.Any())
+            {
+                return (int)1;
+            }
+            else
+            {
+                return (allRssBanner.Last().id + 1);
+            }
         }
     }
 }

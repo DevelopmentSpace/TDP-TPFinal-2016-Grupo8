@@ -2,27 +2,28 @@
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Practices.Unity;
 using TPFinal.Model;
 
 namespace TPFinal.View
 {
     public partial class AdView : Form, IObserver
     {
-        private Application application;
+        private BannerService iBannerService = IoCContainerLocator.Container.Resolve<BannerService>();
+        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
 
         private static string SPACE_STRING = "                                                                                                                                                                                                                                                             ";
 
-        public AdView(Application pApplication)
+        public AdView()
         {
             InitializeComponent();
-            application = pApplication;
         }
 
         private void AdView_Load(object sender, EventArgs e)
         {
 
-            application.CampaignService.AddListener(this);
-            application.BannerService.AddListener(this);
+            iCampaignService.AddListener(this);
+            iBannerService.AddListener(this);
 
             UpdateImage();
 
@@ -37,7 +38,7 @@ namespace TPFinal.View
 
         private void UpdateImage()
         {
-            byte[] image = application.CampaignService.GetActualImage();
+            byte[] image = iCampaignService.GetActualImage();
             if (image.Length == 0)
                 return;
 
@@ -71,9 +72,9 @@ namespace TPFinal.View
             }
             else
             {
-                if (application.BannerService.GetText() != "")
+                if (iBannerService.GetText() != "")
                 { 
-                    textBanner.Text = SPACE_STRING + application.BannerService.GetText();
+                    textBanner.Text = SPACE_STRING + iBannerService.GetText();
                 }
             }
         }
