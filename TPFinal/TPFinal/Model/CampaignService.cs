@@ -32,10 +32,6 @@ namespace TPFinal.Model
         /// </summary>
         private List<IObserver> iObserver = new List<IObserver> { };
 
-        /// <summary>
-        /// Contexto a utilizar
-        /// </summary>
-        DigitalSignageDbContext iDbContext;
 
         /// <summary>
         /// Lista donde se almacenaran todas las campañas actuales. El tiempo de refresco de las campañas se define por iRefreshTime.
@@ -76,8 +72,7 @@ namespace TPFinal.Model
         public CampaignService()
         {
             cLogger.Info("Iniciando CampaignService");
-
-            iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
+            //new DigitalSignageDbContext() = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
 
             iCampaignList = new List<Campaign>() { };
             iNewCampaignList = new List<Campaign>() { };
@@ -143,7 +138,7 @@ namespace TPFinal.Model
         public void Create(CampaignDTO pCampaignDTO)
         {
 
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
 
@@ -166,7 +161,7 @@ namespace TPFinal.Model
 
         public void Update(CampaignDTO pCampaignDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
             Campaign oldCampaign = new Campaign();
@@ -190,7 +185,7 @@ namespace TPFinal.Model
 
         public void Delete(int pId)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign oldCampaign = new Campaign();
 
@@ -209,7 +204,7 @@ namespace TPFinal.Model
 
         public CampaignDTO GetCampaign(int pId)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             CampaignMapper campaignMapper = new CampaignMapper();
             try
             {
@@ -226,7 +221,7 @@ namespace TPFinal.Model
 
         public IEnumerable<CampaignDTO> GetAllCampaigns()
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             IList<CampaignDTO> campaignAux = new List<CampaignDTO>();
             CampaignMapper campaignMapper = new CampaignMapper();
             IEnumerable<Campaign> campaignEnum = iUnitOfWork.campaignRepository.GetAll();
@@ -276,7 +271,7 @@ namespace TPFinal.Model
         public int GetLastCampaignId()
         {
             cLogger.Info("Obteniendo id de la ultima campaña");
-            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
             if (!allCampaigns.Any())
             {
@@ -375,11 +370,14 @@ namespace TPFinal.Model
                 cLogger.Info("UpdateCampaignsJob Done");
                 //Obtengo la lista nueva
                 MemoryStream s = (MemoryStream)context.Trigger.JobDataMap.Get("listCampaign");
-                s.Position = 0;
+                if (s != null)
+                {
+                    s.Position = 0;
 
-                IFormatter formatter = new BinaryFormatter();
-                iNewCampaignList = (IList<Campaign>)formatter.Deserialize(s);
-                iUpdateAvailable = true;
+                    IFormatter formatter = new BinaryFormatter();
+                    iNewCampaignList = (IList<Campaign>)formatter.Deserialize(s);
+                    iUpdateAvailable = true;
+                }
 
                 StartUpdateCampaignsJob(DateTime.Now.AddMinutes(CampaignService.UPDATE_TIME));
 

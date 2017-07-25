@@ -21,7 +21,7 @@ namespace TPFinal.Model
     {
         public void Execute(IJobExecutionContext context)
         {
-            DigitalSignageDbContext dbContext = IoCContainerLocator.Container.Resolve<DigitalSignageDbContext>();
+            DigitalSignageDbContext dbContext = new DigitalSignageDbContext();// IoCContainerLocator.Container.Resolve<DigitalSignageDbContext>();
 
             IUnitOfWork uow = new UnitOfWork(dbContext);
             DateTime date = DateTime.Now.Date;
@@ -31,13 +31,20 @@ namespace TPFinal.Model
 
             //Aqui se obtienen las campañas de la BD, pero no trae la lista de imagenes que tiene cada una
             IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date, timeFrom, timeTo);
-       
             List<Campaign> x = enume.ToList<Campaign>();
-            IFormatter formatter = new BinaryFormatter();
-            var s = new MemoryStream();
-            formatter.Serialize(s,x);
+            if (x.Count == 0)
+            {
+                context.Trigger.JobDataMap.Put("listCampaign", null);
+            }
+            else
+            {
+                IFormatter formatter = new BinaryFormatter();
+                var s = new MemoryStream();
+                formatter.Serialize(s, x);
 
-            context.Trigger.JobDataMap.Put("listCampaign", s);
+                context.Trigger.JobDataMap.Put("listCampaign", s);
+            }
+
         }
     }
 }
