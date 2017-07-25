@@ -56,7 +56,6 @@ namespace TPFinal.DAL.EntityFramework
         {
             cLogger.Info("Creando instancia de dbContext");
 
-            //this.Configuration.LazyLoadingEnabled = false;
             // Se establece la estrategia personalizada de inicialización de la BBDD.
             Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseIfModelChanges<DigitalSignageDbContext>());
             //Database.SetInitializer<DigitalSignageDbContext>(new DropCreateDatabaseAlways<DigitalSignageDbContext>());
