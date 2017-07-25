@@ -82,5 +82,11 @@ namespace TPFinal.View
             RssTextBannerSearch rssTextBannerSearch = new RssTextBannerSearch();
             rssTextBannerSearch.Show();
         }
+
+        private void updateToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            RssTextBannerUpdate rssTextBannerUpdate = new RssTextBannerUpdate();
+            rssTextBannerUpdate.Show();
+        }
     }
 }

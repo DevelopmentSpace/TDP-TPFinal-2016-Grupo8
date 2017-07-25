@@ -19,10 +19,17 @@ namespace TPFinal
         private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
         private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();
         private BannerService iBannerService = IoCContainerLocator.Container.Resolve<BannerService>();
+        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
 
         public Application()
         {
             InitializeComponent();
+
+            iTextBannerService = new TextBannerService();
+            iRssBannerService = new RssBannerService();
+            iCampaignService = new CampaignService();
+            iBannerService = new BannerService();
+    
             iBannerService.AddService(iTextBannerService);
             iBannerService.AddService(iRssBannerService);
         }

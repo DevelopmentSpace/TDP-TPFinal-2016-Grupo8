@@ -97,7 +97,6 @@
             // 
             // idText
             // 
-            this.idText.Enabled = false;
             this.idText.Location = new System.Drawing.Point(131, 27);
             this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(85, 20);
