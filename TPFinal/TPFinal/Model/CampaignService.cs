@@ -166,9 +166,15 @@ namespace TPFinal.Model
 
             campaignMapper.MapToModel(pCampaignDTO, campaign);
 
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id); //REVISAR SI FUNCIONA
+            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
 
-            oldCampaign = campaign;
+            oldCampaign.name = campaign.name;
+            oldCampaign.initTime = campaign.initTime;
+            oldCampaign.endTime = campaign.endTime;
+            oldCampaign.initDate = campaign.initDate;
+            oldCampaign.endDate = campaign.endDate;
+            oldCampaign.imagesList = campaign.imagesList;
+            oldCampaign.interval = campaign.interval;
 
             iUnitOfWork.Complete();
             cLogger.Info("Campaña actualizada");

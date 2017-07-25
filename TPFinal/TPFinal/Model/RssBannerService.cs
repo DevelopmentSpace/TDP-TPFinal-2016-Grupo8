@@ -90,9 +90,14 @@ namespace TPFinal.Model
 
             oldRssBanner = iUnitOfWork.rssBannerRepository.Get(banner.id);
 
-            oldRssBanner = banner;
-            
-
+            oldRssBanner.name = banner.name;
+            oldRssBanner.initTime = banner.initTime;
+            oldRssBanner.endTime = banner.endTime;
+            oldRssBanner.initDate = banner.initDate;
+            oldRssBanner.endDate = banner.endDate;
+            oldRssBanner.items = banner.items;
+            oldRssBanner.url = banner.url;
+           
             iUnitOfWork.Complete();
 
         }

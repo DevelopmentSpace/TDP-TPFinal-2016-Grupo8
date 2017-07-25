@@ -80,7 +80,12 @@ namespace TPFinal.Model
 
             oldTextBanner = iUnitOfWork.textBannerRepository.Get(banner.id);
 
-            oldTextBanner = banner;
+            oldTextBanner.name = banner.name;
+            oldTextBanner.initTime = banner.initTime;
+            oldTextBanner.endTime = banner.endTime;
+            oldTextBanner.initDate = banner.initDate;
+            oldTextBanner.endDate = banner.endDate;
+            oldTextBanner.text = banner.text;
 
             iUnitOfWork.Complete();
 
