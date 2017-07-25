@@ -8,49 +8,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPFinal.DTO;
+using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
     public partial class CampaignViewSearch : Form
     {
 
-        private Application application;
+        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
 
-        private IEnumerable<CampaignDTO> campaigns;
+        private IEnumerator<CampaignDTO> campaigns;
 
-        public CampaignViewSearch(Application pAplication)
+        public CampaignViewSearch()
         {
             InitializeComponent();
-            application = pAplication;
-
-        }
-
-        private void CampaignViewListAll_Load(object sender, EventArgs e)
-        {
-            campaigns = application.CampaignService.GetAllCampaigns().ToList();
+            campaigns = iCampaignService.GetAllCampaigns().GetEnumerator();
         }
 
         private void searchText_TextChanged(object sender, EventArgs e)
         {
+            int searchLenght = searchText.Text.Length;
             dataGridViewCampaigns.Rows.Clear();
 
-            foreach (CampaignDTO campaign in campaigns)
+            while (campaigns.MoveNext())
             {
-                int searchLenght = searchText.Text.Length;
-                if (campaign.name.Length >= searchLenght)
+                if (campaigns.Current.name.Length >= searchLenght)
                 {
-                    if (campaign.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (campaigns.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewCampaigns.Rows.Add(campaign.id, campaign.name, campaign.initDate.ToString(), campaign.endDate.ToString());
+                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.ToString(), campaigns.Current.endDate.ToString());
                     }
                 }
-                }
+             }
 
-            }
-
-        private void nameTextLabel_Click(object sender, EventArgs e)
-        {
-
-        }
+         }
     }
-    }
+}

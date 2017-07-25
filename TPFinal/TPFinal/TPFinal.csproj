@@ -192,6 +192,18 @@
     <Compile Include="View\TextBannerViewDelete.Designer.cs">
       <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TextBannerViewSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TextBannerViewSearch.Designer.cs">
+      <DependentUpon>TextBannerViewSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TextBannerViewUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TextBannerViewUpdate.Designer.cs">
+      <DependentUpon>TextBannerViewUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\TextBannerViewDelete.resx">
       <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TextBannerViewSearch.resx">
+      <DependentUpon>TextBannerViewSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TextBannerViewUpdate.resx">
+      <DependentUpon>TextBannerViewUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="job_scheduling_data_2_0.xsd">

@@ -71,26 +71,41 @@ namespace TPFinal.Model
 
         }
 
-        public void Delete(TextBannerDTO pTextBannerDTO)
+        public void Delete(int pId)
         {
            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
 
-            oldTextBanner = iUnitOfWork.textBannerRepository.Get(pTextBannerDTO.id);
+            oldTextBanner = iUnitOfWork.textBannerRepository.Get(pId);
 
             iUnitOfWork.textBannerRepository.Remove(oldTextBanner);
 
             iUnitOfWork.Complete();
         }
 
-        public TextBannerDTO Get(int pTextBannerId)
+        public TextBannerDTO Get(int pId)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner TextBanner = new TextBanner();
 
-            return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pTextBannerId));
+            return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pId));
+        }
+
+        public IEnumerable<TextBannerDTO> GetAll()
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            TextBannerMapper textBannerMapper = new TextBannerMapper();
+            IEnumerator<TextBanner> textBanners = iUnitOfWork.textBannerRepository.GetAll().GetEnumerator();
+            IList<TextBannerDTO> textBannersDTO = new List<TextBannerDTO> { };
+
+            while (textBanners.MoveNext())
+            {
+                textBannersDTO.Add(textBannerMapper.SelectorExpression.Compile()(textBanners.Current));
+            }
+
+            return textBannersDTO;   
         }
 
     }

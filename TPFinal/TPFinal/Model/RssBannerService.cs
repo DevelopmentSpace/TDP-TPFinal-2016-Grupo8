@@ -80,7 +80,7 @@ namespace TPFinal.Model
 
         public void Update(RssBannerDTO pRssBannerDTO)
         {
-           /* IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             RssBannerMapper RssBannerMapper = new RssBannerMapper();
             RssBanner banner = new RssBanner();
             RssBanner oldRssBanner = new RssBanner();
@@ -91,21 +91,30 @@ namespace TPFinal.Model
 
             oldRssBanner = banner;
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
 
         }
 
-        public void Delete(RssBannerDTO pRssBannerDTO)
+        public void Delete(int pId)
         {
-            /*IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
             RssBannerMapper RssBannerMapper = new RssBannerMapper();
             RssBanner oldRssBanner = new RssBanner();
 
-            oldRssBanner = iUnitOfWork.rssBannerRepository.Get(pRssBannerDTO.id);
+            oldRssBanner = iUnitOfWork.rssBannerRepository.Get(pId);
 
             iUnitOfWork.rssBannerRepository.Remove(oldRssBanner);
 
-            iUnitOfWork.Complete();*/
+            iUnitOfWork.Complete();
+        }
+
+        public RssBannerDTO Get(int pId)
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            RssBannerMapper textRssBannerMapper = new RssBannerMapper();
+            RssBanner TextBanner = new RssBanner();
+
+            return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
         }
     }
 }

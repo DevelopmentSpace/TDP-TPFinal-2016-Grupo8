@@ -12,39 +12,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPFinal.DTO;
 using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
     public partial class CampaignViewAdd : Form
     {
-        private Application application;
 
-        public CampaignViewAdd(Application pApplication)
+        private CampaignService iCampaignService = IoCContainerLocator.Container.Resolve<CampaignService>();
+
+        public CampaignViewAdd()
         {
             InitializeComponent();
-            application = pApplication;
-            idText.Text = application.CampaignService.GetLastCampaignId().ToString();
+            idText.Text = iCampaignService.GetLastCampaignId().ToString();
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
@@ -65,11 +47,6 @@ namespace TPFinal.View
              }
             dataGridViewImages.Update();
             dataGridViewImages.Refresh();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void dataGridViewImages_KeyPress(object sender, KeyPressEventArgs e)
@@ -122,7 +99,7 @@ namespace TPFinal.View
 
             try
             {
-                application.CampaignService.Create(campaign);
+                iCampaignService.Create(campaign);
             }
             catch (ArgumentOutOfRangeException)
             {

@@ -51,13 +51,13 @@ namespace TPFinal.View
 
         private void listAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CampaignViewSearch campaignViewList = new CampaignViewSearch(application);
+            CampaignViewSearch campaignViewList = new CampaignViewSearch();
             campaignViewList.Show();
         }
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextBannerViewAdd textBannerViewAdd = new TextBannerViewAdd(application);
+            TextBannerViewAdd textBannerViewAdd = new TextBannerViewAdd();
             textBannerViewAdd.Show();
         }
 

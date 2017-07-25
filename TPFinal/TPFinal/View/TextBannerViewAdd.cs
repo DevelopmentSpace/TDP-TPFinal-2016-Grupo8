@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPFinal.DTO;
 using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
     public partial class TextBannerViewAdd : Form
     {
 
-        Application application;
+        private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
 
-        public TextBannerViewAdd(Application pApplication)
+        public TextBannerViewAdd()
         {
             InitializeComponent();
-            application = pApplication;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace TPFinal.View
 
             banner.text = textBanner.Text;
 
-            application.TextBannerService.Create(banner);
+            iTextBannerService.Create(banner);
 
             this.Close();
 

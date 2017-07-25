@@ -175,13 +175,13 @@ namespace TPFinal.Model
 
         }
 
-        public void Delete(CampaignDTO pCampaignDTO)
+        public void Delete(int pId)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign oldCampaign = new Campaign();
 
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pCampaignDTO.id);
+            oldCampaign = iUnitOfWork.campaignRepository.Get(pId);
 
             iUnitOfWork.campaignRepository.Remove(oldCampaign);
 

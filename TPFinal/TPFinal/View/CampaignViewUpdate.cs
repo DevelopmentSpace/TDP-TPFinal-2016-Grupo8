@@ -138,7 +138,7 @@ namespace TPFinal.View
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            CampaignViewSearch campaignSearch = new CampaignViewSearch(application);
+            CampaignViewSearch campaignSearch = new CampaignViewSearch();
             campaignSearch.Show();
         }
     }

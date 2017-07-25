@@ -73,7 +73,6 @@
             this.initDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.initDateTimePicker.TabIndex = 4;
             this.initDateTimePicker.Value = new System.DateTime(2017, 7, 15, 0, 0, 0, 0);
-            this.initDateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // endDateTimePicker
             // 
@@ -102,7 +101,6 @@
             this.campaingBox.TabIndex = 14;
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
-            this.campaingBox.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // idText
             // 
@@ -185,7 +183,6 @@
             this.dataGridViewImages.ReadOnly = true;
             this.dataGridViewImages.Size = new System.Drawing.Size(440, 191);
             this.dataGridViewImages.TabIndex = 10;
-            this.dataGridViewImages.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridViewImages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewImages_KeyPress);
             // 
             // addImageButton
@@ -263,7 +260,6 @@
             this.InitDateLabel.Size = new System.Drawing.Size(45, 13);
             this.InitDateLabel.TabIndex = 19;
             this.InitDateLabel.Text = "Init date";
-            this.InitDateLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // EndDateLabel
             // 
@@ -327,7 +323,6 @@
             this.intervalLabel.Size = new System.Drawing.Size(122, 13);
             this.intervalLabel.TabIndex = 18;
             this.intervalLabel.Text = "Interval between images";
-            this.intervalLabel.Click += new System.EventHandler(this.label6_Click);
             // 
             // nameLabel
             // 
