@@ -63,6 +63,7 @@ namespace TPFinal.Model
             TextBanner banner = new TextBanner();
 
             textBannerMapper.MapToModel(pTextBannerDTO, banner);
+
             iUnitOfWork.textBannerRepository.Add(banner);
 
             iUnitOfWork.Complete();

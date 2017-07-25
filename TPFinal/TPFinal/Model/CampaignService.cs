@@ -147,12 +147,21 @@ namespace TPFinal.Model
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign campaign = new Campaign();
 
-            campaignMapper.MapToModel(pCampaignDTO, campaign);
+            try
+            {
+                campaignMapper.MapToModel(pCampaignDTO, campaign);
 
-            iUnitOfWork.campaignRepository.Add(campaign);
+                iUnitOfWork.campaignRepository.Add(campaign);
 
-            iUnitOfWork.Complete();
-            cLogger.Info("Nueva campaña agregada");
+                iUnitOfWork.Complete();
+                cLogger.Info("Nueva campaña agregada");
+            }
+            catch (ArgumentException)
+            {
+
+                throw;
+            }
+
 
         }
 
@@ -186,20 +195,37 @@ namespace TPFinal.Model
             CampaignMapper campaignMapper = new CampaignMapper();
             Campaign oldCampaign = new Campaign();
 
-            oldCampaign = iUnitOfWork.campaignRepository.Get(pId);
+            try
+            {
+                oldCampaign = iUnitOfWork.campaignRepository.Get(pId);
+                iUnitOfWork.campaignRepository.Remove(oldCampaign);
+                iUnitOfWork.Complete();
+                cLogger.Info("Campaña eliminada");
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
 
-            iUnitOfWork.campaignRepository.Remove(oldCampaign);
+            
 
-            iUnitOfWork.Complete();
-            cLogger.Info("Campaña eliminada");
+            
         }
 
         public CampaignDTO GetCampaign(int pId)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             CampaignMapper campaignMapper = new CampaignMapper();
-            cLogger.Info("Obteniendo campaña por id");
-            return campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(pId));
+            try
+            {
+                cLogger.Info("Obteniendo campaña por id");
+                return campaignMapper.SelectorExpression.Compile()(iUnitOfWork.campaignRepository.Get(pId));
+            }
+            catch (NullReferenceException)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
 
         }
 

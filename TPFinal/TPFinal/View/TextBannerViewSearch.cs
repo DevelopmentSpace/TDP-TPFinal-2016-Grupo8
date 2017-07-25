@@ -37,7 +37,7 @@ namespace TPFinal.View
                 {
                     if (textBanners.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewTextBanners.Rows.Add(textBanners.Current.id, textBanners.Current.name, textBanners.Current.initDate.ToString(), textBanners.Current.endDate.ToString(),textBanners.Current.text);
+                        dataGridViewTextBanners.Rows.Add(textBanners.Current.id, textBanners.Current.name, textBanners.Current.initDate.Date.ToString(), textBanners.Current.endDate.Date.ToString(),textBanners.Current.text);
                     }
                 }
             }

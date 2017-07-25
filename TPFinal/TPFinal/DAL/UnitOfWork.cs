@@ -77,7 +77,16 @@ namespace TPFinal.DAL
         public void Complete()
         {
             cLogger.Info("Confirmando cambios realizados");
-            this.iDbContext.SaveChanges();
+            try
+            {
+               this.iDbContext.SaveChanges();
+            }
+            catch (FormatException)
+            {
+
+                throw;
+            }
+
         }
 
         /// <summary>

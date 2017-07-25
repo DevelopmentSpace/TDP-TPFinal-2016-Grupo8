@@ -35,40 +35,61 @@ namespace TPFinal.View
             dataGridViewImages.Rows.Clear();
             dataGridViewImages.Refresh();
 
-            CampaignDTO campaign= iCampaignService.GetCampaign(Convert.ToInt32(idText.Text));
-
-            campaignNameText.Text = campaign.name;
-
-            initDateTimePicker.Value = campaign.initDate;
-            endDateTimePicker.Value = campaign.endDate;
-
-            initTimeHour.Text = campaign.initTime.Hours.ToString();
-            initTimeMinute.Text = campaign.initTime.Minutes.ToString();
-
-            endTimeHour.Text = campaign.endTime.Hours.ToString();
-            endTimeMinute.Text = campaign.endTime.Minutes.ToString();
-
-            TimeSpan interval = new TimeSpan(0,0,0,campaign.interval,0);
-            intervalMinute.Text = interval.Minutes.ToString();
-            intervalSecond.Text = interval.Seconds.ToString();
-
-
-            IList<ByteImageDTO> imagesAuxDTO = campaign.imagesList.ToList<ByteImageDTO>();
-
-            foreach (ByteImageDTO image in imagesAuxDTO)
+            try
             {
-                MemoryStream ms = new MemoryStream(image.bytes);
-                Image imageAux = System.Drawing.Image.FromStream(ms);
-                dataGridViewImages.Rows.Add(image.id,imageAux);
-                ms.Dispose();
+                CampaignDTO campaign = iCampaignService.GetCampaign(Convert.ToInt32(idText.Text));
+                campaignNameText.Text = campaign.name;
+
+                initDateTimePicker.Value = campaign.initDate;
+                endDateTimePicker.Value = campaign.endDate;
+
+                initTimeHour.Text = campaign.initTime.Hours.ToString();
+                initTimeMinute.Text = campaign.initTime.Minutes.ToString();
+
+                endTimeHour.Text = campaign.endTime.Hours.ToString();
+                endTimeMinute.Text = campaign.endTime.Minutes.ToString();
+
+                TimeSpan interval = new TimeSpan(0, 0, 0, campaign.interval, 0);
+                intervalMinute.Text = interval.Minutes.ToString();
+                intervalSecond.Text = interval.Seconds.ToString();
+
+
+                IList<ByteImageDTO> imagesAuxDTO = campaign.imagesList.ToList<ByteImageDTO>();
+
+                foreach (ByteImageDTO image in imagesAuxDTO)
+                {
+                    MemoryStream ms = new MemoryStream(image.bytes);
+                    Image imageAux = System.Drawing.Image.FromStream(ms);
+                    dataGridViewImages.Rows.Add(image.id, imageAux);
+                    ms.Dispose();
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Campaign not found.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Insert correct ID.");
             }
 
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            iCampaignService.Delete(Convert.ToInt32(idText.Text));
-            this.Close();
+            try
+            {
+                iCampaignService.Delete(Convert.ToInt32(idText.Text));
+                this.Close();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Campaign not found.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Insert correct ID.");
+            }           
         }
 
         private void searchButton_Click(object sender, EventArgs e)

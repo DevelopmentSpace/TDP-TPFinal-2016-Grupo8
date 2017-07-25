@@ -37,7 +37,7 @@ namespace TPFinal.View
                 {
                     if (campaigns.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.ToString(), campaigns.Current.endDate.ToString());
+                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.Date.ToString(), campaigns.Current.endDate.Date.ToString());
                     }
                 }
              }

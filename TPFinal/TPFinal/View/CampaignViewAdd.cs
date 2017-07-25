@@ -41,7 +41,6 @@ namespace TPFinal.View
         {
             foreach (String dir in openFileDialog.FileNames)
             {
-                //EL ID ACA TIENE QUE SALIR DE OTRO LADO
                 dataGridViewImages.Rows.Add(dataGridViewImages.Rows.Count, Bitmap.FromFile(dir));
              }
             dataGridViewImages.Update();
@@ -71,49 +70,49 @@ namespace TPFinal.View
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            CampaignDTO campaign = new CampaignDTO();
-            campaign.name = campaignNameText.Text;
-
-            campaign.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
-
-            campaign.initDate = initDateTimePicker.Value.Date;
-            campaign.endDate = endDateTimePicker.Value.Date;
-
-            campaign.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
-            campaign.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
-
-            IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
-
-            foreach (DataGridViewRow row in dataGridViewImages.Rows)
-            {
-                ByteImageDTO imageDTO = new ByteImageDTO();
-
-                imageDTO.id = Convert.ToInt32(row.Cells[0].Value);
-                imageDTO.bytes = CampaignViewAdd.imageToByte((Image)row.Cells[1].Value);
-
-                imagesAuxDTO.Add(imageDTO);
-            }
-
-            campaign.imagesList = imagesAuxDTO;
 
             try
             {
+                CampaignDTO campaign = new CampaignDTO();
+                campaign.name = campaignNameText.Text;
+
+                campaign.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
+
+                campaign.initDate = initDateTimePicker.Value.Date;
+                campaign.endDate = endDateTimePicker.Value.Date;
+
+                campaign.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
+                campaign.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
+
+                IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
+
+                foreach (DataGridViewRow row in dataGridViewImages.Rows)
+                {
+                    ByteImageDTO imageDTO = new ByteImageDTO();
+
+                    imageDTO.id = Convert.ToInt32(row.Cells[0].Value);
+                    imageDTO.bytes = CampaignViewAdd.imageToByte((Image)row.Cells[1].Value);
+
+                    imagesAuxDTO.Add(imageDTO);
+                }
+
+                campaign.imagesList = imagesAuxDTO;
+
+            
                 iCampaignService.Create(campaign);
+                this.Close();
             }
-            catch (ArgumentOutOfRangeException)
+            catch (FormatException)
             {
-                MessageBox.Show("La hora ingresada debe estar entre 0 y 23. Los minutos entre 0 y 60.");
-            }
-            catch (ArgumentNullException)
-            {
-                MessageBox.Show("Debes rellenar todos los campos.");
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("Error. Consulte con el administrador del programa.");
+                MessageBox.Show("Insert correct times");
             }
 
-            this.Close();
+            //catch(Exception)
+            //{
+            //    MessageBox.Show("Error. Consulte con el administrador del programa.");
+            //}
+
+
 
         }
     }

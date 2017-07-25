@@ -36,7 +36,7 @@ namespace TPFinal.View
                 {
                     if (rssBanners.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewRssBanners.Rows.Add(rssBanners.Current.id, rssBanners.Current.name, rssBanners.Current.initDate.ToString(), rssBanners.Current.endDate.ToString(), rssBanners.Current.url);
+                        dataGridViewRssBanners.Rows.Add(rssBanners.Current.id, rssBanners.Current.name, rssBanners.Current.initDate.Date.ToString(), rssBanners.Current.endDate.Date.ToString(), rssBanners.Current.url);
                     }
                 }
             }
