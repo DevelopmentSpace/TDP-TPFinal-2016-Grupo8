@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.campaingBox = new System.Windows.Forms.GroupBox();
-            this.searchButton = new System.Windows.Forms.Button();
             this.idText = new System.Windows.Forms.TextBox();
-            this.okButton = new System.Windows.Forms.Button();
             this.idLabel = new System.Windows.Forms.Label();
             this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
@@ -62,6 +60,8 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -90,34 +90,14 @@
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
             // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(271, 27);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(60, 20);
-            this.searchButton.TabIndex = 23;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
             // idText
             // 
             this.idText.Location = new System.Drawing.Point(131, 27);
             this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 20;
+            this.idText.TabIndex = 1;
             this.idText.Text = "ID";
             this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // okButton
-            // 
-            this.okButton.Location = new System.Drawing.Point(222, 27);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(44, 20);
-            this.okButton.TabIndex = 22;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // idLabel
             // 
@@ -375,7 +355,7 @@
             this.campaignNameText.Location = new System.Drawing.Point(131, 53);
             this.campaignNameText.Name = "campaignNameText";
             this.campaignNameText.Size = new System.Drawing.Size(200, 20);
-            this.campaignNameText.TabIndex = 1;
+            this.campaignNameText.TabIndex = 4;
             this.campaignNameText.Text = "Campaign Name";
             this.campaignNameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -405,6 +385,26 @@
             this.openFileDialog.Filter = "Imagenes PNG|*.png|Imagenes JPG|*.jpg";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(271, 27);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(60, 20);
+            this.searchButton.TabIndex = 3;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(222, 27);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(44, 20);
+            this.okButton.TabIndex = 2;
+            this.okButton.Text = "Ok";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // CampaignViewUpdate
             // 
@@ -460,8 +460,8 @@
         private System.Windows.Forms.TextBox campaignNameText;
         private new System.Windows.Forms.Button CancelButton;
         private new System.Windows.Forms.Button AcceptButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

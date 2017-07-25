@@ -41,6 +41,7 @@ namespace TPFinal.View
                     }
                 }
              }
+            campaigns.Reset();
 
          }
     }

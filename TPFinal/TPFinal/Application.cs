@@ -24,12 +24,6 @@ namespace TPFinal
         public Application()
         {
             InitializeComponent();
-
-            iTextBannerService = new TextBannerService();
-            iRssBannerService = new RssBannerService();
-            iCampaignService = new CampaignService();
-            iBannerService = new BannerService();
-    
             iBannerService.AddService(iTextBannerService);
             iBannerService.AddService(iRssBannerService);
         }

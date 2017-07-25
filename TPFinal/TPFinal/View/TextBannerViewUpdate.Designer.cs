@@ -80,7 +80,7 @@
             this.searchButton.Location = new System.Drawing.Point(271, 27);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(60, 20);
-            this.searchButton.TabIndex = 25;
+            this.searchButton.TabIndex = 3;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
@@ -90,7 +90,7 @@
             this.okButton.Location = new System.Drawing.Point(222, 27);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(44, 20);
-            this.okButton.TabIndex = 22;
+            this.okButton.TabIndex = 2;
             this.okButton.Text = "Ok";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -100,7 +100,7 @@
             this.idText.Location = new System.Drawing.Point(131, 27);
             this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 20;
+            this.idText.TabIndex = 1;
             this.idText.Text = "Banner Id";
             this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -281,7 +281,7 @@
             this.bannerNameText.Location = new System.Drawing.Point(131, 53);
             this.bannerNameText.Name = "bannerNameText";
             this.bannerNameText.Size = new System.Drawing.Size(200, 20);
-            this.bannerNameText.TabIndex = 1;
+            this.bannerNameText.TabIndex = 4;
             this.bannerNameText.Text = "Banner Name";
             this.bannerNameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

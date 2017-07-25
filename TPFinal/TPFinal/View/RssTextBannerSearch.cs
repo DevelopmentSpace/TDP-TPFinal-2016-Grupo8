@@ -40,6 +40,7 @@ namespace TPFinal.View
                     }
                 }
             }
+            rssBanners.Reset();
         }
     }
 }

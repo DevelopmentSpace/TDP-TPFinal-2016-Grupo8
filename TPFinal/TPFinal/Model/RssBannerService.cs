@@ -88,9 +88,10 @@ namespace TPFinal.Model
 
             RssBannerMapper.MapToModel(pRssBannerDTO, banner);
 
-            oldRssBanner = iUnitOfWork.rssBannerRepository.Get(banner.id); //REVISAR SI FUNCIONA
+            oldRssBanner = iUnitOfWork.rssBannerRepository.Get(banner.id);
 
             oldRssBanner = banner;
+            
 
             iUnitOfWork.Complete();
 

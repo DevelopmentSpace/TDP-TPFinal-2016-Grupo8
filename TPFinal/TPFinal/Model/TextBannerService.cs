@@ -7,6 +7,8 @@ using TPFinal.Domain;
 using TPFinal.DTO;
 using TPFinal.DAL;
 using Common.Logging;
+using TPFinal.DAL.EntityFramework;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
@@ -15,6 +17,16 @@ namespace TPFinal.Model
         private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
 
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
+
+        /// <summary>
+        /// Contexto a utilizar
+        /// </summary>
+        DigitalSignageDbContext iDbContext;
+
+        public TextBannerService()
+        {
+            iDbContext = IoCContainerLocator.Container.Resolve<TPFinal.DAL.EntityFramework.DigitalSignageDbContext>();
+        }
 
         public String GetText()
         {
@@ -31,7 +43,7 @@ namespace TPFinal.Model
 
         public void Update()
         {
-            IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork uow = new UnitOfWork(iDbContext);
             DateTime date = DateTime.Now.Date;
             TimeSpan timeFrom = DateTime.Now.TimeOfDay;
             TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 30, 0));
@@ -46,7 +58,7 @@ namespace TPFinal.Model
 
         public void Create(TextBannerDTO pTextBannerDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
 
@@ -59,7 +71,7 @@ namespace TPFinal.Model
 
         public void Update(TextBannerDTO pTextBannerDTO)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner banner = new TextBanner();
             TextBanner oldTextBanner = new TextBanner();
@@ -76,7 +88,7 @@ namespace TPFinal.Model
 
         public void Delete(int pId)
         {
-           IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+           IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner oldTextBanner = new TextBanner();
 
@@ -89,7 +101,7 @@ namespace TPFinal.Model
 
         public TextBannerDTO Get(int pId)
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             TextBanner TextBanner = new TextBanner();
 
@@ -98,7 +110,7 @@ namespace TPFinal.Model
 
         public IEnumerable<TextBannerDTO> GetAll()
         {
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             TextBannerMapper textBannerMapper = new TextBannerMapper();
             IEnumerator<TextBanner> textBanners = iUnitOfWork.textBannerRepository.GetAll().GetEnumerator();
             IList<TextBannerDTO> textBannersDTO = new List<TextBannerDTO> { };
@@ -114,7 +126,7 @@ namespace TPFinal.Model
         public int GetLastTextBannerId()
         {
             cLogger.Info("Obteniendo id de el ultimo banner de texto");
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            IUnitOfWork iUnitOfWork = new UnitOfWork(iDbContext);
             IEnumerable<TextBanner> allTextBanner = iUnitOfWork.textBannerRepository.GetAll();
             if (!allTextBanner.Any())
             {
