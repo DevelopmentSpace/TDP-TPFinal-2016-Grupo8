@@ -84,5 +84,14 @@ namespace TPFinal.Model
             iUnitOfWork.Complete();
         }
 
+        public TextBannerDTO Get(int pTextBannerId)
+        {
+            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+            TextBannerMapper textBannerMapper = new TextBannerMapper();
+            TextBanner TextBanner = new TextBanner();
+
+            return textBannerMapper.SelectorExpression.Compile()(iUnitOfWork.textBannerRepository.Get(pTextBannerId));
+        }
+
     }
 }

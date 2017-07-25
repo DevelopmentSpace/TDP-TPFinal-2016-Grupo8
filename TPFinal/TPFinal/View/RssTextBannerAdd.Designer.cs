@@ -325,7 +325,7 @@
         private System.Windows.Forms.Label InitTimeLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox bannerNameText;
-        private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.Button AcceptButton;
+        private new System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button AcceptButton;
     }
 }

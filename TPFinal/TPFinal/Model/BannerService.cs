@@ -38,16 +38,13 @@ namespace TPFinal.Model
         /// </summary>
         public string Name => "Banner Service";
 
-        //Atributos para controlar los timers
-        bool iUpdateAvailable, iUpdateDone;
-
         //Quartz Scheduler
         IScheduler iScheduler;
 
         //Jobs details
-        IJobDetail iChangeBannerJob, iUpdateBannerJob;
+        IJobDetail iUpdateBannerJob;
         //Jobs Keys
-        JobKey iChangeBannerJobKey, iUpdateBannerJobKey;
+        JobKey iUpdateBannerJobKey;
 
         public void AddService(ITextBanner textBanner)
         {
@@ -62,12 +59,7 @@ namespace TPFinal.Model
         {
             iScheduler = StdSchedulerFactory.GetDefaultScheduler();
 
-            iChangeBannerJobKey = new JobKey("BIJK");
             iUpdateBannerJobKey = new JobKey("UBJK");
-
-            iChangeBannerJob = JobBuilder.Create<ChangeBannerJob>()
-                .WithIdentity(iChangeBannerJobKey)
-                 .Build();
 
             iUpdateBannerJob = JobBuilder.Create<UpdateBannerJob>()
                 .WithIdentity(iUpdateBannerJobKey)
@@ -75,10 +67,7 @@ namespace TPFinal.Model
 
 
             iScheduler.Start();
-            iScheduler.ListenerManager.AddJobListener(this, OrMatcher<JobKey>.Or(KeyMatcher<JobKey>.KeyEquals<JobKey>(iChangeBannerJobKey), KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateBannerJobKey)));
-
-            iUpdateAvailable = false;
-            iUpdateDone = false;
+            iScheduler.ListenerManager.AddJobListener(this,(KeyMatcher<JobKey>.KeyEquals<JobKey>(iUpdateBannerJobKey)));
 
             StartUpdateBannerJob(0);
         }
@@ -86,23 +75,12 @@ namespace TPFinal.Model
         private void StartUpdateBannerJob(int minutes)
         {
             ITrigger updateBannerJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddSeconds(minutes))
+                .StartAt(DateTime.Now.AddMinutes(minutes))
                 .WithPriority(1)
                 .Build();
 
             iScheduler.DeleteJob(iUpdateBannerJobKey);
             iScheduler.ScheduleJob(iUpdateBannerJob, updateBannerJobTrigger);
-        }
-
-        private void StartChangeBannerJob(int seconds)
-        {
-            ITrigger changeBannerJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddSeconds(seconds))
-                .WithPriority(1)
-                .Build();
-
-            iScheduler.DeleteJob(iChangeBannerJobKey);
-            iScheduler.ScheduleJob(iChangeBannerJob, changeBannerJobTrigger);
         }
 
         public void AddListener(IObserver pListener)
@@ -162,20 +140,11 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
-
-            if (context.JobDetail.Key == iChangeBannerJobKey)
-            {
-                this.NotifyListeners();
-            }
-            else if (context.JobDetail.Key == iUpdateBannerJobKey)
-            {
-
                 foreach (ITextBanner textBanner in iTextBannerList)
                 {
                     textBanner.Update();
                 }
-                StartUpdateBannerJob(10);
-            }
+                StartUpdateBannerJob(1);
         }
     }
 }

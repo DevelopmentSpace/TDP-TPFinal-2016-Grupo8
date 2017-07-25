@@ -126,7 +126,6 @@
     <Compile Include="Model\BannerService.cs" />
     <Compile Include="Model\CampaignService.cs" />
     <Compile Include="Model\ChangeImageJob.cs" />
-    <Compile Include="Model\ChangeBannerJob.cs" />
     <Compile Include="Model\ITextBanner.cs" />
     <Compile Include="Model\IObservable.cs" />
     <Compile Include="Model\UpdateBannerJob.cs" />
@@ -187,6 +186,12 @@
     <Compile Include="View\RssTextBannerAdd.Designer.cs">
       <DependentUpon>RssTextBannerAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TextBannerViewDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TextBannerViewDelete.Designer.cs">
+      <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewUpdate.resx">
       <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TextBannerViewDelete.resx">
+      <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="job_scheduling_data_2_0.xsd">

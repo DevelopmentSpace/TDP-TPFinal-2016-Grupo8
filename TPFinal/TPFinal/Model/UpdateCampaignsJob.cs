@@ -31,8 +31,6 @@ namespace TPFinal.Model
 
             //Aqui se obtienen las campañas de la BD, pero no trae la lista de imagenes que tiene cada una
             IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date, timeFrom, timeTo);
-            
-
        
             List<Campaign> x = enume.ToList<Campaign>();
             IFormatter formatter = new BinaryFormatter();
