@@ -9,8 +9,16 @@ using System.Drawing.Imaging;
 
 namespace TPFinal
 {
+    /// <summary>
+    /// Clase de herramientas suplementarias
+    /// </summary>
     class Utilities
     {
+        /// <summary>
+        /// Crea un array de bytes a partir de una imagen.
+        /// </summary>
+        /// <param name="i">Imagen</param>
+        /// <returns>Array de bytes que hacen la imagen</returns>
         public static Byte[] imageToByte(Image i)
         {
             MemoryStream stream = new MemoryStream();
@@ -19,6 +27,14 @@ namespace TPFinal
             return bytes;
         }
 
+        /// <summary>
+        /// Crea dos TimeSpans a partir de una hora y minuto de inicio y de fin.
+        /// </summary>
+        /// <param name="initHour">Hora de inicio en string</param>
+        /// <param name="initMinute">Minuto de inicio en string</param>
+        /// <param name="endHour">Hora de fin en string</param>
+        /// <param name="endMinute">Minuto de fin en string</param>
+        /// <returns>Lista con dos TimeSpan(Inicio en posicion 0 y fin en posicion 1)</returns>
         public static IList<TimeSpan> createTimeSpans(string initHour,string initMinute,string endHour,string endMinute)
         {
             int initHourInt, endHourInt, initMinuteInt, endMinuteInt;

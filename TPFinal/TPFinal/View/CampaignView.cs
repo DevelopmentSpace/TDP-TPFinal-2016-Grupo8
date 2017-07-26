@@ -21,7 +21,7 @@ namespace TPFinal.View
     public partial class CampaignView : Form
     {
         /// <summary>
-        /// Atributo campaignDTO
+        /// Atributo CampaignDTO
         /// </summary>
         private CampaignDTO iCampaignDTO;
 
@@ -37,9 +37,9 @@ namespace TPFinal.View
         }
 
         /// <summary>
-        /// Constructor de la vista de campañas. Se le pasa un objeto segun es para crear uno nuevo o para editarlo
+        /// Constructor de la vista de campañas.
         /// </summary>
-        /// <param name="pCampaignDTO">Objeto de tipo campaignDTO</param>
+        /// <param name="pCampaignDTO">Objeto de tipo CampaignDTO que se asigna a el atributo</param>
         public CampaignView(CampaignDTO pCampaignDTO)
         {
             InitializeComponent();
@@ -111,9 +111,7 @@ namespace TPFinal.View
             foreach (DataGridViewRow row in dataGridViewImages.Rows)
             {
                 ByteImageDTO imageDTO = new ByteImageDTO();
-
                 imageDTO.bytes = Utilities.imageToByte((Image)row.Cells[0].Value);
-
                 imagesAuxDTO.Add(imageDTO);
             }
 
@@ -128,7 +126,6 @@ namespace TPFinal.View
         /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

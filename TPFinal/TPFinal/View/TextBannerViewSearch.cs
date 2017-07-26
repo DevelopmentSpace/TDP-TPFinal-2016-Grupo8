@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
 using TPFinal.Model;
@@ -13,22 +8,38 @@ using TPFinal.DTO;
 
 namespace TPFinal.View
 {
+    /// <summary>
+    /// Vista de busquedas de banners de texto
+    /// </summary>
     public partial class TextBannerViewSearch : Form
     {
-
+        /// <summary>
+        /// Servicio de banners de texto
+        /// </summary>
         private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
 
+        /// <summary>
+        /// Enumerable con todos los banners de texto
+        /// </summary>
         private IEnumerable<TextBannerDTO> textBanners;
 
+        /// <summary>
+        /// Constructor de la vista de busqueda de banners de texto
+        /// </summary>
         public TextBannerViewSearch()
         {
             InitializeComponent();
+            //Se obtienen todos los banners de texto en el enumerable
             textBanners = iTextBannerService.GetAll();
 
+            //Se ejecuta por primera para actualizar la lista de banners de texto
             searchText.Text = "";
             searchText_TextChanged(null, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Se ejecuta cuando cambia el texto en pantalla. Muestra los banners de texto cuyo nombre sea igual al texto ingresado.
+        /// </summary>
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             int searchLenght = searchText.Text.Length;
@@ -48,6 +59,9 @@ namespace TPFinal.View
             textBannersEnumerator.Reset();
         }
 
+        /// <summary>
+        /// En el caso de estar seleccionando la lista y presionar la 'd' o la 'm'. Permite eliminar o modificar filas segun corresponda.
+        /// </summary>
         private void dataGridViewTextBanners_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 'd')
@@ -56,10 +70,10 @@ namespace TPFinal.View
                 {
                     try
                     {
+                        //Se le pasa la id de la columna seleccionada
                         iTextBannerService.Delete((int)row.Cells[0].Value);
                         dataGridViewTextBanners.Rows.Remove(row);
                         dataGridViewTextBanners.Refresh();
-
                     }
                     catch (Exception)
                     {
@@ -75,6 +89,7 @@ namespace TPFinal.View
                 {
                     try
                     {
+                        //Se crea una vista pasandole como parametro el objeto seleccionado.
                         TextBannerView textBannerView = new TextBannerView(textBanners.First<TextBannerDTO>(x => x.id == ((int)dataGridViewTextBanners.SelectedRows[0].Cells[0].Value)));
                         textBannerView.ShowDialog();
                         iTextBannerService.Update(textBannerView.ViewTextBannerDTO);

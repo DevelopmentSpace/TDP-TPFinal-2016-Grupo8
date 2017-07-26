@@ -13,11 +13,19 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
+    /// <summary>
+    /// Vista de fuentes de RSS
+    /// </summary>
     public partial class RssBannerView : Form
     {
-
+        /// <summary>
+        /// Atributo RssBannerDTO
+        /// </summary>
         private RssBannerDTO iRssBannerDTO;
 
+        /// <summary>
+        /// Accesor del atributo RssBannerDTO
+        /// </summary>
         public RssBannerDTO ViewRssBannerDTO
         {
             get
@@ -26,10 +34,15 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Constructor de la vista de RssBanners
+        /// </summary>
+        /// <param name="pCampaignDTO">Objeto de tipo RssBannersDTO que se asigna a el atributo</param>
         public RssBannerView(RssBannerDTO pRssBannerDTO)
         {
             InitializeComponent();
 
+            //Si el objeto no es nulo, lo carga en la vista y lo asigna a la variable.
             if (pRssBannerDTO != null)
             {
                 iRssBannerDTO = pRssBannerDTO;
@@ -41,13 +54,9 @@ namespace TPFinal.View
             }
 
         }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
+        /// <summary>
+        /// Carga la fuente RSS del atributo en la vista
+        /// </summary>
         private void loadRssBannerInView()
         {
             bannerNameText.Text = iRssBannerDTO.name;
@@ -64,6 +73,9 @@ namespace TPFinal.View
             textBanner.Text = iRssBannerDTO.url;
         }
 
+        /// <summary>
+        /// Carga la fuente RSS de la vista en la fuente RSS del atributo
+        /// </summary>
         private void loadRssBannerInVariable()
         {
             iRssBannerDTO.name = bannerNameText.Text;
@@ -82,6 +94,17 @@ namespace TPFinal.View
             iRssBannerDTO.url = textBanner.Text;
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de cancelar. Cierra la vista
+        /// </summary>
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de aceptar. Intenta cargar la fuente RSS de la vista en el atributo
+        /// </summary>
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             try

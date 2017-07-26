@@ -13,11 +13,19 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
+    /// <summary>
+    /// Vista de los banners de texto
+    /// </summary>
     public partial class TextBannerView : Form
     {
-
+        /// <summary>
+        /// Atributo TextBannerDTO
+        /// </summary>
         private TextBannerDTO iTextBannerDTO;
 
+        /// <summary>
+        /// Accesor del atributo TextBannerDTO
+        /// </summary>
         public TextBannerDTO ViewTextBannerDTO
         {
             get
@@ -26,10 +34,15 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Constructor de la vista de TextBanner
+        /// </summary>
+        /// <param name="pCampaignDTO">Objeto de tipo TextBannerDTO que se asigna a el atributo</param>
         public TextBannerView(TextBannerDTO pTextBannerDTO)
         {
             InitializeComponent();
 
+            //Si el objeto no es nulo, lo carga en la vista y lo asigna a la variable.
             if (pTextBannerDTO != null)
             {
                 iTextBannerDTO = pTextBannerDTO;
@@ -41,6 +54,9 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Carga el banner del atributo en la vista
+        /// </summary>
         private void loadTextBannerInView()
         {
             bannerNameText.Text = iTextBannerDTO.name;
@@ -57,6 +73,9 @@ namespace TPFinal.View
             textBanner.Text = iTextBannerDTO.text;
         }
 
+        /// <summary>
+        /// Carga el banner de texto de la vista en el banner de texto del atributo
+        /// </summary>
         private void loadTextBannerInVariable()
         {
             iTextBannerDTO.name = bannerNameText.Text;
@@ -75,12 +94,17 @@ namespace TPFinal.View
             iTextBannerDTO.text = textBanner.Text;
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de cancelar. Cierra la vista
+        /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de aceptar. Intenta cargar el banner de texto de la vista en el atributo
+        /// </summary>
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             try

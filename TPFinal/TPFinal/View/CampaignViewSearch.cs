@@ -37,13 +37,13 @@ namespace TPFinal.View
             //Se obtienen todas las campañas en el enumerable
             campaigns = iCampaignService.GetAll();
 
-            //Se ejecuta por primera para actualizar la lista de imagenes.
+            //Se ejecuta por primera para actualizar la lista de campañas
             searchText.Text = "";
             searchText_TextChanged(null, EventArgs.Empty);
         }
 
         /// <summary>
-        /// Se ejecuta cuando cambia el texto en pantalla. Muestra las campañas que cumplan con el texto ingresado.
+        /// Se ejecuta cuando cambia el texto en pantalla. Muestra las campañas cuyo nombre coincida con el texto ingresado.
         /// </summary>
         private void searchText_TextChanged(object sender, EventArgs e)
         {
@@ -65,7 +65,7 @@ namespace TPFinal.View
          }
 
         /// <summary>
-        /// En el caso de estar seleccionando la lista y presionar la 'd' o la 'm'. Elimina o modifica imagenes segun corresponda.
+        /// En el caso de estar seleccionando la lista y presionar la 'd' o la 'm'. Permite eliminar o modificar filas segun corresponda.
         /// </summary>
         private void dataGridViewCampaigns_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -75,6 +75,7 @@ namespace TPFinal.View
                 {
                     try
                     {
+                        //Se le pasa la id de la columna seleccionada
                         iCampaignService.Delete((int)row.Cells[0].Value);
                         dataGridViewCampaigns.Rows.Remove(row);
                         dataGridViewCampaigns.Refresh();
@@ -94,6 +95,7 @@ namespace TPFinal.View
                 {
                     try
                     {
+                        //Se crea una vista pasandole como parametro el objeto seleccionado.
                         CampaignView campaignView = new CampaignView(campaigns.First<CampaignDTO>(x => x.id == ((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value)));
                         campaignView.ShowDialog();
                         iCampaignService.Update(campaignView.ViewCampaignDTO);
