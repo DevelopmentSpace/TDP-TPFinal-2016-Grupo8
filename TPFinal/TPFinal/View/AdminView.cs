@@ -28,9 +28,8 @@ namespace TPFinal.View
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CampaignView campaignView = new CampaignView(null);
-            campaignView.ShowDialog();
 
-            if (campaignView.campaignDTO != null)
+            if (campaignView.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -52,9 +51,7 @@ namespace TPFinal.View
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TextBannerView textBannerView = new TextBannerView(null);
-            textBannerView.ShowDialog();
-
-            if (textBannerView.textBannerDTO != null)
+            if (textBannerView.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -76,9 +73,9 @@ namespace TPFinal.View
         private void createToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             RssBannerView rssBannerView = new RssBannerView(null);
-            rssBannerView.ShowDialog();
+            
 
-            if (rssBannerView.rssBannerDTO != null)
+            if (rssBannerView.ShowDialog() == DialogResult.OK)
             {
                 try
                 {

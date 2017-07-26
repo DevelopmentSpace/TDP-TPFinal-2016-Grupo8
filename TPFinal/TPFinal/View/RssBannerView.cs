@@ -36,7 +36,7 @@ namespace TPFinal.View
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            rssBannerDTO = null;
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -90,6 +90,7 @@ namespace TPFinal.View
             try
             {
                 loadRssBannerInVariable();
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (FormatException)

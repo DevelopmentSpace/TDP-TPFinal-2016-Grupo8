@@ -36,6 +36,8 @@
             this.EndDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchText = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.deleteLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTextBanners)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,11 +106,31 @@
             this.searchText.TabIndex = 4;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(42, 321);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(219, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Select a row and press \"m\" to modify the row";
+            // 
+            // deleteLabel
+            // 
+            this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Location = new System.Drawing.Point(42, 298);
+            this.deleteLabel.Name = "deleteLabel";
+            this.deleteLabel.Size = new System.Drawing.Size(199, 13);
+            this.deleteLabel.TabIndex = 13;
+            this.deleteLabel.Text = "Select rows and press \"d\" to delete rows";
+            // 
             // TextBannerViewSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 311);
+            this.ClientSize = new System.Drawing.Size(673, 346);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.nameTextLabel);
             this.Controls.Add(this.dataGridViewTextBanners);
             this.Controls.Add(this.searchText);
@@ -129,5 +151,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn InitDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDateColumn;
         private new System.Windows.Forms.DataGridViewTextBoxColumn Text;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label deleteLabel;
     }
 }

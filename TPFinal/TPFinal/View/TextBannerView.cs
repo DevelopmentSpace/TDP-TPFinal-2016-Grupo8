@@ -80,7 +80,7 @@ namespace TPFinal.View
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            textBannerDTO = null;
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -89,6 +89,7 @@ namespace TPFinal.View
             try
             {
                 loadTextBannerInVariable();
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (FormatException)

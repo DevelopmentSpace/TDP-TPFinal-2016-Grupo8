@@ -58,7 +58,7 @@ namespace TPFinal.View
             {
                 MemoryStream ms = new MemoryStream(image.bytes);
                 Image imageAux = System.Drawing.Image.FromStream(ms);
-                dataGridViewImages.Rows.Add(image.id, imageAux);
+                dataGridViewImages.Rows.Add(imageAux);
                 ms.Dispose();
             }
         }
@@ -101,13 +101,15 @@ namespace TPFinal.View
 
                 imagesAuxDTO.Add(imageDTO);
             }
+            if (imagesAuxDTO.Count == 0)
+                throw new ArgumentNullException();
 
             campaignDTO.imagesList = imagesAuxDTO;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            campaignDTO = null;
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -116,17 +118,23 @@ namespace TPFinal.View
             try
             {
                 loadCampaignInVariable();
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (FormatException)
             {
-                MessageBox.Show("Bad time format: Insert numbers");
+                MessageBox.Show("Bad time format: Insert numbers.");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("The campaign must have at least one image.");
             }
             catch (ArgumentException)
             {
                 MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
             }
-   
+
+
         }
 
         private void addButtonImage_Click(object sender, EventArgs e)
