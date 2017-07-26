@@ -7,14 +7,14 @@ using TPFinal.Domain;
 using TPFinal.DTO;
 using TPFinal.DAL;
 using TPFinal.Model.RssReaderModel;
-using Common.Logging;
+using log4net;
 
 namespace TPFinal.Model
 {
     class RssBannerService : IRssBannerService, ITextBanner
     {
 
-        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
+        private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         IEnumerable<RssBanner> iRssBannerList = new List<RssBanner>() { };
 

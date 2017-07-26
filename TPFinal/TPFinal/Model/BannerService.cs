@@ -12,7 +12,7 @@ using TPFinal.Domain;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Practices.Unity;
-using Common.Logging;
+using log4net;
 
 namespace TPFinal.Model
 {
@@ -22,7 +22,7 @@ namespace TPFinal.Model
     class BannerService : IBannerService, IJobListener
     {
 
-        private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();
+        private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Lista de escuchadores

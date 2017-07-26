@@ -14,7 +14,7 @@ namespace TPFinal.Model
 {
     class TextBannerService : ITextBannerService, ITextBanner
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
+        private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
