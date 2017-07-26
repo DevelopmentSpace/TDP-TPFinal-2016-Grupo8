@@ -20,6 +20,6 @@ namespace TPFinal.Domain
         /// <summary>
         /// Lista de Items RSS
         /// </summary>
-        public virtual IList<RssItem> items { get; set; }
+        virtual public IList<RssItem> items { get; set; }
     }
 }

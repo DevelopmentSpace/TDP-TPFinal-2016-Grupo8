@@ -18,6 +18,11 @@ namespace TPFinal.Domain
         public int id { get; set; }
 
         /// <summary>
+        /// ForeignKey de la imagen en relacion con la campaña
+        /// </summary>
+        public virtual int campaignId { get; set; }
+
+        /// <summary>
         /// Array de bytes correspondientes a la imagen
         /// </summary>
         public Byte[] bytes { get; set; }

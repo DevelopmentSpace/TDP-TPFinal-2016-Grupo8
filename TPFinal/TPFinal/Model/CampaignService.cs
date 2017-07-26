@@ -174,8 +174,11 @@ namespace TPFinal.Model
             oldCampaign.endTime = campaign.endTime;
             oldCampaign.initDate = campaign.initDate;
             oldCampaign.endDate = campaign.endDate;
+            oldCampaign.imagesList.Clear();
             oldCampaign.imagesList = campaign.imagesList;
             oldCampaign.interval = campaign.interval;
+
+            
 
             iUnitOfWork.Complete();
             cLogger.Info("Campaña actualizada");

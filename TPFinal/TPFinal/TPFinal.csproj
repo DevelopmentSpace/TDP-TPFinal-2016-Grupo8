@@ -93,6 +93,7 @@
     <Compile Include="DAL\EntityFramework\Mappings\BannerMap.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\ByteImagesMap.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\CampaignMap.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\RssBannerMap.cs" />
     <Compile Include="DAL\EntityFramework\Mappings\RssItemMap.cs" />
     <Compile Include="DAL\EntityFramework\RssBannerRepository.cs" />
     <Compile Include="DAL\EntityFramework\TextBannerRepository.cs" />

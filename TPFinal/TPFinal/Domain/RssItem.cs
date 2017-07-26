@@ -18,6 +18,11 @@ namespace TPFinal.Domain
         public int id { get; set; }
 
         /// <summary>
+        /// Foreign key de la imagen en relacion al RssBanner
+        /// </summary>
+        public int rssBannerId { get; set; }
+
+        /// <summary>
         /// Descripcion del Item RSS
         /// </summary>
         public String description { get; set; }

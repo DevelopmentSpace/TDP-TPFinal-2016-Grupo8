@@ -54,7 +54,22 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                                         .HasMaxLength(1));
 
             Map<RssBanner>(x => x.Requires("Type")
-                                            .HasValue("R"));
+                                          .HasValue("R")
+                            );
+
+
+            // Map<RssBanner>(x => x.);
+            /*
+            .HasMany<RssItem>(ban => ban.imagesList)
+                .WithRequired()
+                .HasForeignKey<int>(b => b.campaignId)
+                .WillCascadeOnDelete(););*/
+
+
+            /* .HasMany<ByteImage>(pCampaign => pCampaign.imagesList)
+             .WithRequired()
+             .HasForeignKey<int>(b => b.campaignId)
+             .WillCascadeOnDelete();*/
 
         }
     }

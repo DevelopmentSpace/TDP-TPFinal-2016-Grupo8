@@ -81,6 +81,7 @@ namespace TPFinal.DAL.EntityFramework
             pModelBuilder.Configurations.Add(new ByteImageMap());
             pModelBuilder.Configurations.Add(new BannerMap());
             pModelBuilder.Configurations.Add(new RssItemMap());
+            pModelBuilder.Configurations.Add(new RssBannerMap());
 
 
             base.OnModelCreating(pModelBuilder);
