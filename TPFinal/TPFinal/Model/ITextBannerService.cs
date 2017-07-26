@@ -18,7 +18,5 @@ namespace TPFinal.Model
         TextBannerDTO Get(int pId);
 
         IEnumerable<TextBannerDTO> GetAll();
-
-        int GetLastTextBannerId();
     }
 }

@@ -15,7 +15,6 @@ namespace TPFinal.View
 {
     public partial class CampaignViewSearch : Form
     {
-
         private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
         private IEnumerable<CampaignDTO> campaigns;
@@ -23,7 +22,7 @@ namespace TPFinal.View
         public CampaignViewSearch()
         {
             InitializeComponent();
-            campaigns = iCampaignService.GetAllCampaigns();
+            campaigns = iCampaignService.GetAll();
 
             searchText.Text = "";
             searchText_TextChanged(null, EventArgs.Empty);
@@ -46,7 +45,6 @@ namespace TPFinal.View
                 }
              }
             campaignsEnumerator.Reset();
-
          }
 
         private void dataGridViewCampaigns_KeyPress(object sender, KeyPressEventArgs e)
@@ -67,7 +65,7 @@ namespace TPFinal.View
                         MessageBox.Show("Error deleting campaigns.");
                     }
                 }
-                campaigns = iCampaignService.GetAllCampaigns();
+                campaigns = iCampaignService.GetAll();
                 searchText_TextChanged(null, EventArgs.Empty);
             }
             else if (e.KeyChar == 'm')
@@ -78,14 +76,14 @@ namespace TPFinal.View
                     {
                         CampaignView campaignView = new CampaignView(campaigns.First<CampaignDTO>(x => x.id == ((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value)));
                         campaignView.ShowDialog();
-                        iCampaignService.Update(campaignView.varCampaignDTO);
+                        iCampaignService.Update(campaignView.campaignDTO);
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Error updating campaign.");
                     }
                 }
-                campaigns = iCampaignService.GetAllCampaigns();
+                campaigns = iCampaignService.GetAll();
                 searchText_TextChanged(null, EventArgs.Empty);
             }
 

@@ -221,7 +221,7 @@ namespace TPFinal.Model
 
         }
 
-        public IEnumerable<CampaignDTO> GetAllCampaigns()
+        public IEnumerable<CampaignDTO> GetAll()
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
             IList<CampaignDTO> campaignAux = new List<CampaignDTO>();
@@ -268,23 +268,6 @@ namespace TPFinal.Model
             return (c.initDate <= date && c.endDate >= date)
                     &&
                     (c.initTime <= time && c.endTime >= time);
-        }
-
-        public int GetLastCampaignId()
-        {
-            cLogger.Info("Obteniendo id de la ultima campaña");
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
-            IEnumerable<Campaign> allCampaigns = iUnitOfWork.campaignRepository.GetAll();
-            if (!allCampaigns.Any())
-            {
-                return (int)1;
-            }
-            else
-            {
-                return (allCampaigns.Last().id + 1);
-            }
-                
-
         }
 
         /******************************************************************/

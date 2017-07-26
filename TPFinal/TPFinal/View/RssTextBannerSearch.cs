@@ -17,30 +17,77 @@ namespace TPFinal.View
     {
         private IRssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<IRssBannerService>();
 
-        private IEnumerator<RssBannerDTO> rssBanners;
+        private IEnumerable<RssBannerDTO> rssBanners;
 
         public RssTextBannerSearch()
         {
             InitializeComponent();
-            rssBanners = iRssBannerService.GetAll().GetEnumerator();
+            rssBanners = iRssBannerService.GetAll();
+
+            searchText.Text = "";
+            searchText_TextChanged(null, EventArgs.Empty);
+
         }
 
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             int searchLenght = searchText.Text.Length;
             dataGridViewRssBanners.Rows.Clear();
+            IEnumerator<RssBannerDTO> rssBannersEnumerator = rssBanners.GetEnumerator();
 
-            while (rssBanners.MoveNext())
+            while (rssBannersEnumerator.MoveNext())
             {
-                if (rssBanners.Current.name.Length >= searchLenght)
+                if (rssBannersEnumerator.Current.name.Length >= searchLenght)
                 {
-                    if (rssBanners.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (rssBannersEnumerator.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewRssBanners.Rows.Add(rssBanners.Current.id, rssBanners.Current.name, rssBanners.Current.initDate.Date.ToString(), rssBanners.Current.endDate.Date.ToString(), rssBanners.Current.url);
+                        dataGridViewRssBanners.Rows.Add(rssBannersEnumerator.Current.id, rssBannersEnumerator.Current.name, rssBannersEnumerator.Current.initDate.Date.ToString("dd/MM/yyyy"), rssBannersEnumerator.Current.endDate.Date.ToString("dd/MM/yyyy"), rssBannersEnumerator.Current.url);
                     }
                 }
             }
-            rssBanners.Reset();
+            rssBannersEnumerator.Reset();
+        }
+
+        private void dataGridViewRssBanners_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'd')
+            {
+                foreach (DataGridViewRow row in dataGridViewRssBanners.SelectedRows)
+                {
+                    try
+                    {
+                        iRssBannerService.Delete((int)row.Cells[0].Value);
+                        dataGridViewRssBanners.Rows.Remove(row);
+                        dataGridViewRssBanners.Refresh();
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error deleting RssTextBanner.");
+                    }
+                }
+                rssBanners = iRssBannerService.GetAll();
+                searchText_TextChanged(null, EventArgs.Empty);
+            }
+            else if (e.KeyChar == 'm')
+            {
+                if (dataGridViewRssBanners.SelectedRows.Count == 1)
+                {
+                    try
+                    {
+                        RssBannerView rssBannerView = new RssBannerView(rssBanners.First<RssBannerDTO>(x => x.id == ((int)dataGridViewRssBanners.SelectedRows[0].Cells[0].Value)));
+                        rssBannerView.ShowDialog();
+                        iRssBannerService.Update(rssBannerView.rssBannerDTO);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error updating RssBanner.");
+                    }
+                }
+                rssBanners = iRssBannerService.GetAll();
+                searchText_TextChanged(null, EventArgs.Empty);
+            }
+
         }
     }
 }

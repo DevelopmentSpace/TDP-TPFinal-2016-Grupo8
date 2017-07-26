@@ -17,7 +17,7 @@ namespace TPFinal.View
 {
     public partial class CampaignView : Form
     {
-        public CampaignDTO varCampaignDTO;
+        public CampaignDTO campaignDTO;
 
         public CampaignView(CampaignDTO pCampaignDTO)
         {
@@ -25,34 +25,33 @@ namespace TPFinal.View
 
             if (pCampaignDTO != null)
             {
-                varCampaignDTO = pCampaignDTO;
+                campaignDTO = pCampaignDTO;
                 loadCampaignInView();
             }
             else
             {
-                varCampaignDTO = new CampaignDTO();
+                campaignDTO = new CampaignDTO();
             }
         }
 
         private void loadCampaignInView()
         {
-            CampaignDTO campaign = varCampaignDTO;
-            campaignNameText.Text = campaign.name;
+            campaignNameText.Text = campaignDTO.name;
 
-            initDateTimePicker.Value = campaign.initDate;
-            endDateTimePicker.Value = campaign.endDate;
+            initDateTimePicker.Value = campaignDTO.initDate;
+            endDateTimePicker.Value = campaignDTO.endDate;
 
-            initTimeHour.Text = campaign.initTime.Hours.ToString();
-            initTimeMinute.Text = campaign.initTime.Minutes.ToString();
+            initTimeHour.Text = campaignDTO.initTime.Hours.ToString();
+            initTimeMinute.Text = campaignDTO.initTime.Minutes.ToString();
 
-            endTimeHour.Text = campaign.endTime.Hours.ToString();
-            endTimeMinute.Text = campaign.endTime.Minutes.ToString();
+            endTimeHour.Text = campaignDTO.endTime.Hours.ToString();
+            endTimeMinute.Text = campaignDTO.endTime.Minutes.ToString();
 
-            TimeSpan interval = new TimeSpan(0, 0, 0, campaign.interval, 0);
+            TimeSpan interval = new TimeSpan(0, 0, 0, campaignDTO.interval, 0);
             intervalMinute.Text = interval.Minutes.ToString();
             intervalSecond.Text = interval.Seconds.ToString();
 
-            IList<ByteImageDTO> imagesAuxDTO = campaign.imagesList.ToList<ByteImageDTO>();
+            IList<ByteImageDTO> imagesAuxDTO = campaignDTO.imagesList.ToList<ByteImageDTO>();
 
             foreach (ByteImageDTO image in imagesAuxDTO)
             {
@@ -65,16 +64,14 @@ namespace TPFinal.View
 
         private void loadCampaignInVariable()
         {
+            campaignDTO.name = campaignNameText.Text;
+            campaignDTO.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
 
-            varCampaignDTO.name = campaignNameText.Text;
-
-            varCampaignDTO.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
-
-            varCampaignDTO.initDate = initDateTimePicker.Value.Date;
-            varCampaignDTO.endDate = endDateTimePicker.Value.Date;
-
-            if (varCampaignDTO.initDate > varCampaignDTO.endDate)
+            if (initDateTimePicker.Value.Date > endDateTimePicker.Value.Date)
                 throw new ArgumentException();
+
+            campaignDTO.initDate = initDateTimePicker.Value.Date;
+            campaignDTO.endDate = endDateTimePicker.Value.Date;
 
             int initHour, endHour, initMinute, endMinute;
 
@@ -86,11 +83,11 @@ namespace TPFinal.View
 
             if (initHour < 0 || initHour > 23 || endHour < 0 || endHour > 23 || ((initHour > endHour) && (initMinute > endMinute)) || initMinute < 0 || initMinute > 59 || endMinute < 0 || endMinute > 59)
             {
-                throw new FormatException();
+                throw new ArgumentException();
             }
 
-            varCampaignDTO.initTime = new TimeSpan(initHour, initMinute, 0);
-            varCampaignDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+            campaignDTO.initTime = new TimeSpan(initHour, initMinute, 0);
+            campaignDTO.endTime = new TimeSpan(endHour, endMinute, 0);
 
 
             IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
@@ -104,12 +101,12 @@ namespace TPFinal.View
                 imagesAuxDTO.Add(imageDTO);
             }
 
-            varCampaignDTO.imagesList = imagesAuxDTO;
+            campaignDTO.imagesList = imagesAuxDTO;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            varCampaignDTO = null;
+            campaignDTO = null;
             this.Close();
         }
 

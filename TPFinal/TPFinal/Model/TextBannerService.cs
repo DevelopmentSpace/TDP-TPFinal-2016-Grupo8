@@ -137,21 +137,5 @@ namespace TPFinal.Model
 
             return textBannersDTO;   
         }
-
-        public int GetLastTextBannerId()
-        {
-            cLogger.Info("Obteniendo id de el ultimo banner de texto");
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
-            IEnumerable<TextBanner> allTextBanner = iUnitOfWork.textBannerRepository.GetAll();
-            if (!allTextBanner.Any())
-            {
-                return (int)1;
-            }
-            else
-            {
-                return (allTextBanner.Last().id + 1);
-            }
-        }
-
     }
 }

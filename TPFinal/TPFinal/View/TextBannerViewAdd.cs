@@ -21,7 +21,6 @@ namespace TPFinal.View
         public TextBannerViewAdd()
         {
             InitializeComponent();
-            idText.Text = iTextBannerService.GetLastTextBannerId().ToString();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

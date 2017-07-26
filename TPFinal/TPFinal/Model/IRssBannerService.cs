@@ -18,7 +18,5 @@ namespace TPFinal.Model
         RssBannerDTO Get(int pId);
 
         IEnumerable<RssBannerDTO> GetAll();
-
-        int GetLastRssTextId();
     }
 }

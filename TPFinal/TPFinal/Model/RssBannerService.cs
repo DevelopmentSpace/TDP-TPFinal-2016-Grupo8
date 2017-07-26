@@ -158,21 +158,6 @@ namespace TPFinal.Model
 
             return rssBannersDTO;
         }
-
-        public int GetLastRssTextId()
-        {
-            cLogger.Info("Obteniendo id de el ultimo banner de Rss");
-            IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            IEnumerable<RssBanner> allRssBanner = iUnitOfWork.rssBannerRepository.GetAll();
-            if (!allRssBanner.Any())
-            {
-                return (int)1;
-            }
-            else
-            {
-                return (allRssBanner.Last().id + 1);
-            }
-        }
     }
 }
 

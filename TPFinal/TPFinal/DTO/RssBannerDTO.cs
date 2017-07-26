@@ -14,15 +14,12 @@ namespace TPFinal.DTO
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
         public String url { get; set; }
-        public String description { get; set; }
-        public IEnumerable<RssItemDTO> items { get; set; }
     }
 
     public class RssBannerMapper : MapperBase<RssBanner, RssBannerDTO>
     {
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
-        private RssItemMapper _rssItemMapper = new RssItemMapper();
         private BannerMapper _bannerMapper = new BannerMapper();
         public override Expression<Func<RssBanner, RssBannerDTO>> SelectorExpression
         {
@@ -33,7 +30,6 @@ namespace TPFinal.DTO
                     ////BCC/ BEGIN CUSTOM CODE SECTION 
                     ////ECC/ END CUSTOM CODE SECTION 
                     url = p.url,
-                    items = p.items.AsQueryable().Select(this._rssItemMapper.SelectorExpression)
                 })).MergeWith(this._bannerMapper.SelectorExpression);
             }
         }

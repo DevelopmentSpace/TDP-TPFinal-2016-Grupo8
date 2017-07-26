@@ -30,12 +30,12 @@
         {
             this.nameTextLabel = new System.Windows.Forms.Label();
             this.dataGridViewRssBanners = new System.Windows.Forms.DataGridView();
-            this.searchText = new System.Windows.Forms.TextBox();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InitDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRssBanners)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,14 +64,7 @@
             this.dataGridViewRssBanners.ReadOnly = true;
             this.dataGridViewRssBanners.Size = new System.Drawing.Size(631, 245);
             this.dataGridViewRssBanners.TabIndex = 8;
-            // 
-            // searchText
-            // 
-            this.searchText.Location = new System.Drawing.Point(372, 8);
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(271, 20);
-            this.searchText.TabIndex = 7;
-            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
+            this.dataGridViewRssBanners.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewRssBanners_KeyPress);
             // 
             // idColumn
             // 
@@ -102,6 +95,14 @@
             this.Url.HeaderText = "URL";
             this.Url.Name = "Url";
             this.Url.ReadOnly = true;
+            // 
+            // searchText
+            // 
+            this.searchText.Location = new System.Drawing.Point(372, 8);
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(271, 20);
+            this.searchText.TabIndex = 7;
+            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             // 
             // RssTextBannerSearch
             // 

@@ -17,10 +17,8 @@ namespace TPFinal.Model
 
         CampaignDTO GetCampaign(int pId);
 
-        IEnumerable<CampaignDTO> GetAllCampaigns();
+        IEnumerable<CampaignDTO> GetAll();
 
         byte[] GetActualImage();
-
-        int GetLastCampaignId();
     }
 }
