@@ -1,3 +1,3 @@
 # TDP-TPFinal-2016-Grupo8
 
-Este programa de publicidad permite mostrar en una pantalla cierta publicidad. Esta aparece en forma de camapañas, las cuales tienen imagenes que se muestran cada cierto periodo de tiempo y tambien en forma de texto plano.
+Este programa permite hacer publicidad mediante el uso de imágenes y textos en pantalla. Las imágenes se organizan en campañas las cuales tienen cierto intervalo de tiempo entre imagen y cierta fechas y hora para mostrarse. Mientras que los textos se muestran simplemente según cada cierto rango de fechas y hora, estos textos se “deslizan” a través de la pantalla. Estos textos pueden extraerse de una fuente de RSS.
