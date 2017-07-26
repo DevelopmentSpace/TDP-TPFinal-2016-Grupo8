@@ -259,7 +259,7 @@
             this.AcceptButton.UseVisualStyleBackColor = true;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
-            // RssTextBannerAdd
+            // RssBannerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -267,8 +267,8 @@
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.bannerBox);
             this.Controls.Add(this.AcceptButton);
-            this.Name = "RssTextBannerAdd";
-            this.Text = "RssTextBannerAdd";
+            this.Name = "RssBannerView";
+            this.Text = "RSS Banner administration";
             this.bannerBox.ResumeLayout(false);
             this.bannerBox.PerformLayout();
             this.textBox.ResumeLayout(false);

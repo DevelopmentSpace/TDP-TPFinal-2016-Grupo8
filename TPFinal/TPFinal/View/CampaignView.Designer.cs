@@ -362,7 +362,7 @@
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.campaingBox);
             this.Name = "CampaignView";
-            this.Text = "CampaignViewDelete";
+            this.Text = "Campaign administration";
             this.campaingBox.ResumeLayout(false);
             this.campaingBox.PerformLayout();
             this.imageBox.ResumeLayout(false);

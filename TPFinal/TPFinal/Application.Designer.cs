@@ -72,7 +72,7 @@
             this.Controls.Add(this.adButton);
             this.Controls.Add(this.adminMenu);
             this.Name = "Application";
-            this.Text = "Ad aplication";
+            this.Text = "Digital Signage Application";
             this.ResumeLayout(false);
 
         }

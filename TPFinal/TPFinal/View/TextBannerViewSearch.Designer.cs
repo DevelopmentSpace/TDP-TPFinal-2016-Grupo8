@@ -135,6 +135,7 @@
             this.Controls.Add(this.dataGridViewTextBanners);
             this.Controls.Add(this.searchText);
             this.Name = "TextBannerViewSearch";
+            this.Text = "Text Banner administration";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTextBanners)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

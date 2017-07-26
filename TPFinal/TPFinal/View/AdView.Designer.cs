@@ -69,7 +69,7 @@
             this.Controls.Add(this.textBanner);
             this.Controls.Add(this.imageBox);
             this.Name = "AdView";
-            this.Text = "AdView";
+            this.Text = "\r\nAd viewer";
             this.Load += new System.EventHandler(this.AdView_Load);
             this.Leave += new System.EventHandler(this.AdView_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();

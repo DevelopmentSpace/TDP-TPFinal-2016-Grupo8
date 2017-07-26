@@ -127,7 +127,7 @@
             this.Controls.Add(this.dataGridViewCampaigns);
             this.Controls.Add(this.searchText);
             this.Name = "CampaignViewSearch";
-            this.Text = "CampaignViewSearch";
+            this.Text = "Campaign administration";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCampaigns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

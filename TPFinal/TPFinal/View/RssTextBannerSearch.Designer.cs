@@ -135,7 +135,7 @@
             this.Controls.Add(this.dataGridViewRssBanners);
             this.Controls.Add(this.searchText);
             this.Name = "RssTextBannerSearch";
-            this.Text = "RssTextBannerSearch";
+            this.Text = "RSS Banner administration";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRssBanners)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

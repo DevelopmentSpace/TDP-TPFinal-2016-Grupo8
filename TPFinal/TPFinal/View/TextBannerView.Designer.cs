@@ -268,7 +268,7 @@
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.bannerBox);
             this.Name = "TextBannerView";
-            this.Text = "BannerViewAdd";
+            this.Text = "Text Banner administration";
             this.bannerBox.ResumeLayout(false);
             this.bannerBox.PerformLayout();
             this.textBox.ResumeLayout(false);
