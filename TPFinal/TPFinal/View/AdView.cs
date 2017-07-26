@@ -48,7 +48,7 @@ namespace TPFinal.View
             image = imageModel.bytes;
             if (image == null)
             {
-                //imageBox.Image =
+                imageBox.Image = Image.FromFile("defaultImage.jpg");
                 return;
             } 
 

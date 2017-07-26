@@ -249,11 +249,15 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="View\defaultImage.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(ProjectDir)Unity.config $(TargetDir)Unity.config
 
-copy $(ProjectDir)log4net.config $(TargetDir)log4net.config</PostBuildEvent>
+copy $(ProjectDir)log4net.config $(TargetDir)log4net.config
+
+copy $(ProjectDir)View\defaultImage.jpg $(TargetDir)defaultImage.jpg</PostBuildEvent>
   </PropertyGroup>
 </Project>
