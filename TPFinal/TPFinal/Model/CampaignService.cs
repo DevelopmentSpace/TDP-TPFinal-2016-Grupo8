@@ -273,7 +273,7 @@ namespace TPFinal.Model
         /******************************************************************/
         /*******************************TIMERS*****************************/
         /******************************************************************/
-        private void StartChangeImageJob(int seconds)
+        private void StartChangeImageJob(int pSeconds)
         {
             IFormatter formatter = new BinaryFormatter();
             Stream campList = new MemoryStream();
@@ -291,7 +291,7 @@ namespace TPFinal.Model
             jobDataMap.Put("updateAvailable", iUpdateAvailable);
 
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddSeconds(seconds))
+                .StartAt(DateTime.Now.AddSeconds(pSeconds))
                 .UsingJobData(jobDataMap)
                 .WithPriority(1)
                 .Build();
@@ -360,7 +360,7 @@ namespace TPFinal.Model
                 {
                     iUpdateDone = false;
                     iUpdateAvailable = false;
-                    iCampaignList = this.DeepCopy(iNewCampaignList);
+                    iCampaignList = CampaignService.DeepCopy(iNewCampaignList);
                     iNewCampaignList.Clear();
                 }
 
@@ -403,12 +403,12 @@ namespace TPFinal.Model
         }
 
 
-        private IList<Campaign> DeepCopy(object objectToCopy)
+        private static IList<Campaign> DeepCopy(IList<Campaign> c)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(memoryStream, objectToCopy);
+                binaryFormatter.Serialize(memoryStream, c);
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 return (IList<Campaign>)binaryFormatter.Deserialize(memoryStream);
             }
