@@ -197,9 +197,7 @@ namespace TPFinal.Model
             try
             {
                 campaignMapper.MapToModel(pCampaignDTO, campaign);
-
                 iUnitOfWork.campaignRepository.Add(campaign);
-
                 iUnitOfWork.Complete();
                 cLogger.Info("Nueva campaña agregada");
             }
