@@ -25,7 +25,6 @@ namespace TPFinal.View
         {
 
             iCampaignService.AddListener(this);
-            iBannerService.AddListener(this);
 
             UpdateImage();
 
@@ -65,13 +64,6 @@ namespace TPFinal.View
             {
                 UpdateImage();
             }
-            else if (des == "Banner")
-            {
-                textBanner.ForeColor = System.Drawing.Color.Red; // - PARA CAMBIAR EL COLOR DEL TEXTO.
-                //textBanner.Text = application.BannerService.GetText();
-                textBanner.ForeColor = System.Drawing.Color.Black;
-
-            }
         }
 
         private void moveTextTimer_Tick(object sender, EventArgs e)
@@ -92,7 +84,6 @@ namespace TPFinal.View
         private void AdView_Leave(object sender, EventArgs e)
         {
             iCampaignService.RemoveListener(this);
-            iBannerService.RemoveListener(this);
         }
     }
 }
