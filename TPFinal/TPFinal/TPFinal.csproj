@@ -103,7 +103,7 @@
     <Compile Include="DAL\IRssBannerRepository.cs" />
     <Compile Include="DAL\ITextBannerRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
-    <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="DAL\EntityFramework\UnitOfWork.cs" />
     <Compile Include="Domain\Banner.cs" />
     <Compile Include="Domain\ByteImage.cs" />
     <Compile Include="Domain\Campaign.cs" />
