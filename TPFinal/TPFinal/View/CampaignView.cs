@@ -28,13 +28,14 @@ namespace TPFinal.View
                 varCampaignDTO = pCampaignDTO;
                 loadCampaignInView();
             }
+            else
+            {
+                varCampaignDTO = new CampaignDTO();
+            }
         }
 
         private void loadCampaignInView()
         {
-            dataGridViewImages.Rows.Clear();
-            dataGridViewImages.Refresh();
-
             CampaignDTO campaign = varCampaignDTO;
             campaignNameText.Text = campaign.name;
 
@@ -64,9 +65,14 @@ namespace TPFinal.View
 
         private void loadCampaignInVariable()
         {
+
             varCampaignDTO.name = campaignNameText.Text;
 
             varCampaignDTO.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
+
+
+            if (varCampaignDTO.initDate >= varCampaignDTO.endDate)
+                throw new ArgumentException();
 
             varCampaignDTO.initDate = initDateTimePicker.Value.Date;
             varCampaignDTO.endDate = endDateTimePicker.Value.Date;
@@ -90,13 +96,26 @@ namespace TPFinal.View
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            varCampaignDTO = null;
             this.Close();
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            loadCampaignInVariable();
-            this.Close();       
+            try
+            {
+                loadCampaignInVariable();
+                this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Bad time format: Insert numbers");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
+            }
+   
         }
 
         private void addButtonImage_Click(object sender, EventArgs e)

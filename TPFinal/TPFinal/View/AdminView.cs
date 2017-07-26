@@ -26,21 +26,17 @@ namespace TPFinal.View
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CampaignView campaignView = new CampaignView(null);
-
             campaignView.ShowDialog();
+
             if (campaignView.varCampaignDTO != null)
             {
                 try
                 {
                     iCampaignService.Create(campaignView.varCampaignDTO);
                 }
-                catch (FormatException)
+                catch (Exception)
                 {
-                    MessageBox.Show("Bad time format: Insert numbers");
-                }
-                catch (ArgumentException)
-                {
-                    MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
+                    MessageBox.Show("Error in database");
                 }
             }
         }
