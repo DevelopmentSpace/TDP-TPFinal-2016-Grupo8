@@ -16,7 +16,15 @@ namespace TPFinal.View
     public partial class RssBannerView : Form
     {
 
-        public RssBannerDTO rssBannerDTO;
+        private RssBannerDTO iRssBannerDTO;
+
+        public RssBannerDTO ViewRssBannerDTO
+        {
+            get
+            {
+                return iRssBannerDTO;
+            }
+        }
 
         public RssBannerView(RssBannerDTO pRssBannerDTO)
         {
@@ -24,12 +32,12 @@ namespace TPFinal.View
 
             if (pRssBannerDTO != null)
             {
-                rssBannerDTO = pRssBannerDTO;
+                iRssBannerDTO = pRssBannerDTO;
                 loadRssBannerInView();
             }
             else
             {
-                rssBannerDTO = new RssBannerDTO();
+                iRssBannerDTO = new RssBannerDTO();
             }
 
         }
@@ -42,29 +50,29 @@ namespace TPFinal.View
 
         private void loadRssBannerInView()
         {
-            bannerNameText.Text = rssBannerDTO.name;
+            bannerNameText.Text = iRssBannerDTO.name;
 
-            initDateTimePicker.Value = rssBannerDTO.initDate;
-            endDateTimePicker.Value = rssBannerDTO.endDate;
+            initDateTimePicker.Value = iRssBannerDTO.initDate;
+            endDateTimePicker.Value = iRssBannerDTO.endDate;
 
-            initTimeHour.Text = rssBannerDTO.initTime.Hours.ToString();
-            initTimeMinute.Text = rssBannerDTO.initTime.Minutes.ToString();
+            initTimeHour.Text = iRssBannerDTO.initTime.Hours.ToString();
+            initTimeMinute.Text = iRssBannerDTO.initTime.Minutes.ToString();
 
-            endTimeHour.Text = rssBannerDTO.endTime.Hours.ToString();
-            endTimeMinute.Text = rssBannerDTO.endTime.Minutes.ToString();
+            endTimeHour.Text = iRssBannerDTO.endTime.Hours.ToString();
+            endTimeMinute.Text = iRssBannerDTO.endTime.Minutes.ToString();
 
-            textBanner.Text = rssBannerDTO.url;
+            textBanner.Text = iRssBannerDTO.url;
         }
 
         private void loadRssBannerInVariable()
         {
-            rssBannerDTO.name = bannerNameText.Text;
+            iRssBannerDTO.name = bannerNameText.Text;
 
             if (initDateTimePicker.Value.Date > endDateTimePicker.Value.Date)
                 throw new ArgumentException();
 
-            rssBannerDTO.initDate = initDateTimePicker.Value.Date;
-            rssBannerDTO.endDate = endDateTimePicker.Value.Date;
+            iRssBannerDTO.initDate = initDateTimePicker.Value.Date;
+            iRssBannerDTO.endDate = endDateTimePicker.Value.Date;
 
             int initHour, endHour, initMinute, endMinute;
 
@@ -79,10 +87,10 @@ namespace TPFinal.View
                 throw new ArgumentException();
             }
 
-            rssBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
-            rssBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+            iRssBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
+            iRssBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
 
-            rssBannerDTO.url = textBanner.Text;
+            iRssBannerDTO.url = textBanner.Text;
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)

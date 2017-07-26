@@ -73,7 +73,6 @@
             this.Controls.Add(this.adminMenu);
             this.Name = "Application";
             this.Text = "Ad aplication";
-            this.Load += new System.EventHandler(this.Application_Load);
             this.ResumeLayout(false);
 
         }

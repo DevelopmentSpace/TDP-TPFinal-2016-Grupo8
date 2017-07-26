@@ -77,7 +77,7 @@ namespace TPFinal.View
                     {
                         TextBannerView textBannerView = new TextBannerView(textBanners.First<TextBannerDTO>(x => x.id == ((int)dataGridViewTextBanners.SelectedRows[0].Cells[0].Value)));
                         textBannerView.ShowDialog();
-                        iTextBannerService.Update(textBannerView.textBannerDTO);
+                        iTextBannerService.Update(textBannerView.ViewTextBannerDTO);
                     }
                     catch (Exception)
                     {

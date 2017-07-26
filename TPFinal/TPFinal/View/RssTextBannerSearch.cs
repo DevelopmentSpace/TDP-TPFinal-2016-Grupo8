@@ -77,7 +77,7 @@ namespace TPFinal.View
                     {
                         RssBannerView rssBannerView = new RssBannerView(rssBanners.First<RssBannerDTO>(x => x.id == ((int)dataGridViewRssBanners.SelectedRows[0].Cells[0].Value)));
                         rssBannerView.ShowDialog();
-                        iRssBannerService.Update(rssBannerView.rssBannerDTO);
+                        iRssBannerService.Update(rssBannerView.ViewRssBannerDTO);
                     }
                     catch (Exception)
                     {

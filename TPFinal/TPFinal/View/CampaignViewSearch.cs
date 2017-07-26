@@ -76,7 +76,7 @@ namespace TPFinal.View
                     {
                         CampaignView campaignView = new CampaignView(campaigns.First<CampaignDTO>(x => x.id == ((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value)));
                         campaignView.ShowDialog();
-                        iCampaignService.Update(campaignView.campaignDTO);
+                        iCampaignService.Update(campaignView.ViewCampaignDTO);
                     }
                     catch (Exception)
                     {

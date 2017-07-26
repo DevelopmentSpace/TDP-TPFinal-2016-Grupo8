@@ -23,6 +23,7 @@ namespace TPFinal
         public Application()
         {
             InitializeComponent();
+            //Agrega los servicios de texto al servicio de banners
             iBannerService.AddService((ITextBanner)iTextBannerService);
             iBannerService.AddService((ITextBanner)iRssBannerService);
         }
@@ -37,11 +38,6 @@ namespace TPFinal
         {
             AdView adview = new AdView();
             adview.Show();
-        }
-
-        private void Application_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void forceUpdate_Click(object sender, EventArgs e)

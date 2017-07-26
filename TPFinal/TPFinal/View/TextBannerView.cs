@@ -16,7 +16,15 @@ namespace TPFinal.View
     public partial class TextBannerView : Form
     {
 
-        public TextBannerDTO textBannerDTO;
+        private TextBannerDTO iTextBannerDTO;
+
+        public TextBannerDTO ViewTextBannerDTO
+        {
+            get
+            {
+                return iTextBannerDTO;
+            }
+        }
 
         public TextBannerView(TextBannerDTO pTextBannerDTO)
         {
@@ -24,40 +32,40 @@ namespace TPFinal.View
 
             if (pTextBannerDTO != null)
             {
-                textBannerDTO = pTextBannerDTO;
+                iTextBannerDTO = pTextBannerDTO;
                 loadTextBannerInView();
             }
             else
             {
-                textBannerDTO = new TextBannerDTO();
+                iTextBannerDTO = new TextBannerDTO();
             }
         }
 
         private void loadTextBannerInView()
         {
-            bannerNameText.Text = textBannerDTO.name;
+            bannerNameText.Text = iTextBannerDTO.name;
 
-            initDateTimePicker.Value = textBannerDTO.initDate;
-            endDateTimePicker.Value = textBannerDTO.endDate;
+            initDateTimePicker.Value = iTextBannerDTO.initDate;
+            endDateTimePicker.Value = iTextBannerDTO.endDate;
 
-            initTimeHour.Text = textBannerDTO.initTime.Hours.ToString();
-            initTimeMinute.Text = textBannerDTO.initTime.Minutes.ToString();
+            initTimeHour.Text = iTextBannerDTO.initTime.Hours.ToString();
+            initTimeMinute.Text = iTextBannerDTO.initTime.Minutes.ToString();
 
-            endTimeHour.Text = textBannerDTO.endTime.Hours.ToString();
-            endTimeMinute.Text = textBannerDTO.endTime.Minutes.ToString();
+            endTimeHour.Text = iTextBannerDTO.endTime.Hours.ToString();
+            endTimeMinute.Text = iTextBannerDTO.endTime.Minutes.ToString();
 
-            textBanner.Text = textBannerDTO.text;
+            textBanner.Text = iTextBannerDTO.text;
         }
 
         private void loadTextBannerInVariable()
         {
-            textBannerDTO.name = bannerNameText.Text;
+            iTextBannerDTO.name = bannerNameText.Text;
 
             if (initDateTimePicker.Value.Date > endDateTimePicker.Value.Date)
                 throw new ArgumentException();
 
-            textBannerDTO.initDate = initDateTimePicker.Value.Date;
-            textBannerDTO.endDate = endDateTimePicker.Value.Date;
+            iTextBannerDTO.initDate = initDateTimePicker.Value.Date;
+            iTextBannerDTO.endDate = endDateTimePicker.Value.Date;
 
             int initHour, endHour, initMinute, endMinute;
 
@@ -72,10 +80,10 @@ namespace TPFinal.View
                 throw new ArgumentException();
             }
 
-            textBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
-            textBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+            iTextBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
+            iTextBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
 
-            textBannerDTO.text = textBanner.Text;
+            iTextBannerDTO.text = textBanner.Text;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
