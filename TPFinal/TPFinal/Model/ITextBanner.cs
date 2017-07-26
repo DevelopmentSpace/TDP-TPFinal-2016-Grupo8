@@ -11,6 +11,6 @@ namespace TPFinal.Model
     {
         String GetText();
 
-        void Update();
+        void UpdateBanners(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo);
     }
 }

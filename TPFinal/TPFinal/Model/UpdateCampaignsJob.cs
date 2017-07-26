@@ -25,8 +25,10 @@ namespace TPFinal.Model
 
             IUnitOfWork uow = new UnitOfWork(dbContext);
             DateTime date = DateTime.Now.Date;
-            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
-            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0,30,0));
+            TimeSpan timeFrom = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute,0);
+            TimeSpan timeTo = context.Trigger.JobDataMap.GetTimeSpan("timeTo");
+
+            context.Trigger.JobDataMap.Put("date",date);
 
 
             //Aqui se obtienen las campañas de la BD, pero no trae la lista de imagenes que tiene cada una

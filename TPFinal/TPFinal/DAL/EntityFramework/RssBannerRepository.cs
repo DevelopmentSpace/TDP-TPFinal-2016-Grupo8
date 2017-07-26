@@ -59,7 +59,6 @@ namespace TPFinal.DAL.EntityFramework
 
             //For debug
             //var sqlString = query.ToString();
-
             return QueryableExtensions.Include(query, "items");
         }
     }

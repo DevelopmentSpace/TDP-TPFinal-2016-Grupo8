@@ -69,13 +69,36 @@ namespace TPFinal.Model
 
             cLogger.Info("Iniciando UpdateBanner Job");
 
-            StartUpdateBannerJob(0);
+            StartUpdateBannerJob(DateTime.Now);
         }
 
-        private void StartUpdateBannerJob(int minutes)
+        private void StartUpdateBannerJob(DateTime pDateTime)
         {
+            //Calculo el proximo intervalo al que voy a ejectuar el timer y hasta el cual voy a traer datos
+            int hours = pDateTime.Hour;
+            int minutes = (pDateTime.Minute / 10 + 1) * 10;
+            TimeSpan timeTo;
+
+            if (minutes == 60 && hours == 23)
+            {
+                timeTo = new TimeSpan(23, 59, 00);
+            }
+            else if (minutes == 60)
+            {
+                timeTo = new TimeSpan(hours + 1, 00, 00);
+            }
+            else
+            {
+                timeTo = new TimeSpan(hours, minutes, 00);
+            }
+
+
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.Put("timeTo", timeTo);
+
             ITrigger updateBannerJobTrigger = TriggerBuilder.Create()
-                .StartAt(DateTime.Now.AddMinutes(minutes))
+                .StartAt(pDateTime)
+                .UsingJobData(jobDataMap)
                 .WithPriority(1)
                 .Build();
 
@@ -139,7 +162,7 @@ namespace TPFinal.Model
         public static bool IsBannerActive(Banner b)
         {
             DateTime date = DateTime.Now.Date;
-            TimeSpan time = DateTime.Now.TimeOfDay;
+            TimeSpan time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
             return (b.initDate <= date && b.endDate >= date)
                     &&
@@ -161,11 +184,22 @@ namespace TPFinal.Model
 
         public void JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException)
         {
-                foreach (ITextBanner textBanner in iTextBannerList)
+            DateTime date = DateTime.Now.Date;
+            TimeSpan timeFrom = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            TimeSpan timeTo = context.Trigger.JobDataMap.GetTimeSpan("timeTo");
+            foreach (ITextBanner textBanner in iTextBannerList)
                 {
-                    textBanner.Update();
+                    textBanner.UpdateBanners(date,timeFrom,timeTo);
                 }
-                StartUpdateBannerJob(1);
+
+            if (timeTo.Minutes == 59)
+            {
+                StartUpdateBannerJob(date.AddDays(1));
+            }
+            else
+            {
+                StartUpdateBannerJob(date.Add(timeTo));
+            }
         }
     }
 }

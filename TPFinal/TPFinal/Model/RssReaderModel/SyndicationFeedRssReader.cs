@@ -43,7 +43,8 @@ namespace TPFinal.Model.RssReaderModel
 
                     //name = bItem.Title.Text,
                     description = bItem.Title.Text,
-                    publishingDate = bItem.LastUpdatedTime.DateTime
+                    publishingDate = bItem.LastUpdatedTime.DateTime,
+                    url = bItem.Links[0].Uri.ToString()
             });
             }
 

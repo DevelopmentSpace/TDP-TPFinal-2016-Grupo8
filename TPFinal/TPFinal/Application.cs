@@ -14,7 +14,6 @@ namespace TPFinal
 {
     public partial class Application : Form
     {
-        int DataBaseRefreshTime; //TODAVIA NO IMPLEMENTADO, SE TIENE QUE SELECCIONAR AL PRINCIPIO.
 
         private TextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<TextBannerService>();
         private RssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<RssBannerService>();

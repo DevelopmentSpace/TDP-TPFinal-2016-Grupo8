@@ -22,7 +22,6 @@ namespace TPFinal.Model
     class CampaignService : IObservable, IJobListener
     {
 
-        private static int UPDATE_TIME = 1;
         private static int DEFAULT_CHANGE_IMAGE_TIME = 5;
 
         private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();
@@ -261,7 +260,7 @@ namespace TPFinal.Model
         public static bool IsCampaignActive(Campaign c)
         {
             DateTime date = DateTime.Now.Date;
-            TimeSpan time = DateTime.Now.TimeOfDay;
+            TimeSpan time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
             return (c.initDate <= date && c.endDate >= date)
                     &&
@@ -318,8 +317,31 @@ namespace TPFinal.Model
 
         private void StartUpdateCampaignsJob(DateTime pDateTime)
         {
+            //Calculo el proximo intervalo al que voy a ejectuar el timer y hasta el cual voy a traer datos
+            int hours = pDateTime.Hour;
+            int minutes = (pDateTime.Minute / 10 + 1) * 10;
+            TimeSpan timeTo;
+
+            if(minutes==60 && hours == 23)
+            {
+                timeTo = new TimeSpan(23, 59, 00);
+            }
+            else if (minutes == 60)
+            {
+                timeTo = new TimeSpan(hours + 1, 00, 00);
+            }
+            else
+            {
+                timeTo = new TimeSpan(hours, minutes, 00);
+            }
+
+
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.Put("timeTo", timeTo);
+
             ITrigger updateCampaignsJobTrigger = TriggerBuilder.Create()
                 .StartAt(pDateTime)
+                .UsingJobData(jobDataMap)
                 .WithPriority(1)
                 .Build();
 
@@ -379,7 +401,16 @@ namespace TPFinal.Model
                     iUpdateAvailable = true;
                 }
 
-                StartUpdateCampaignsJob(DateTime.Now.AddMinutes(CampaignService.UPDATE_TIME));
+                DateTime date = context.Trigger.JobDataMap.GetDateTime("date");
+                TimeSpan timeTo = context.Trigger.JobDataMap.GetTimeSpan("timeTo");
+                if(timeTo.Minutes == 59)
+                {
+                    StartUpdateCampaignsJob(date.AddDays(1));
+                }
+                else
+                {
+                    StartUpdateCampaignsJob(date.Add(timeTo));
+                }
 
             }
 

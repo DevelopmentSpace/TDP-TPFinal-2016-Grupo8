@@ -16,7 +16,7 @@ namespace TPFinal.Model
 
         private static readonly ILog cLogger = LogManager.GetLogger<TextBannerService>();
 
-        IEnumerable<RssBanner> iRssBannerList;
+        IEnumerable<RssBanner> iRssBannerList = new List<RssBanner>() { };
 
         public String GetText()
         {
@@ -38,14 +38,16 @@ namespace TPFinal.Model
             return text;
         }
 
-        public void Update()
+        public void UpdateBanners(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo)
         {
             IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-            DateTime date = DateTime.Now.Date;
-            TimeSpan timeFrom = DateTime.Now.TimeOfDay;
-            TimeSpan timeTo = timeFrom.Add(new TimeSpan(0, 0, 30, 0));
 
-            IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(date, timeFrom, timeTo);
+
+            IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(pDate,pTimeFrom,pTimeTo);
+            if (rssBannerEnum == null)
+            {
+                return;
+            }
             IEnumerator<RssBanner> e = rssBannerEnum.GetEnumerator();
 
             SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
@@ -54,7 +56,9 @@ namespace TPFinal.Model
             {
                 try
                 {
-                    e.Current.items = feed.Read(e.Current.url).ToList();
+                    IEnumerable<RssItem> items = feed.Read(e.Current.url);
+                    e.Current.items = items.ToList();
+                    uow.Complete();
                 }
                 catch (Exception)
                 {
@@ -62,8 +66,6 @@ namespace TPFinal.Model
             }
 
             iRssBannerList = rssBannerEnum;
-
-            uow.Complete();
         }
 
         public void Create(RssBannerDTO pRssBannerDTO)

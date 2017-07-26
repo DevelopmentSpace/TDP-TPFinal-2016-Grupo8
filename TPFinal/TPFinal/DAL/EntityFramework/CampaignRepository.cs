@@ -45,7 +45,7 @@ namespace TPFinal.DAL.EntityFramework
                 throw new ArgumentNullException("pTimeFrom");
             if (pTimeTo == null)
                 throw new ArgumentNullException("pTimeTo");
-            if (pTimeFrom.CompareTo(pTimeTo) > -1)
+            if (pTimeFrom.CompareTo(pTimeTo) > 0)
                 throw new InvalidOperationException("pTimeFrom debe ser menor que pTimeTo");
 
 
