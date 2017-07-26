@@ -18,12 +18,12 @@ namespace TPFinal.View
 
         private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
-        private IEnumerator<CampaignDTO> campaigns;
+        private IEnumerable<CampaignDTO> campaigns;
 
         public CampaignViewSearch()
         {
             InitializeComponent();
-            campaigns = iCampaignService.GetAllCampaigns().GetEnumerator();
+            campaigns = iCampaignService.GetAllCampaigns();
 
             searchText.Text = "";
             searchText_TextChanged(null, EventArgs.Empty);
@@ -33,24 +33,55 @@ namespace TPFinal.View
         {
             int searchLenght = searchText.Text.Length;
             dataGridViewCampaigns.Rows.Clear();
+            IEnumerator<CampaignDTO> campaignsEnumerator = campaigns.GetEnumerator();
 
-            while (campaigns.MoveNext())
+            while (campaignsEnumerator.MoveNext())
             {
-                if (campaigns.Current.name.Length >= searchLenght)
+                if (campaignsEnumerator.Current.name.Length >= searchLenght)
                 {
-                    if (campaigns.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (campaignsEnumerator.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.Date.ToString("dd/MM/yyyy"), campaigns.Current.endDate.Date.ToString("dd/MM/yyyy"));
+                        dataGridViewCampaigns.Rows.Add(campaignsEnumerator.Current.id, campaignsEnumerator.Current.name, campaignsEnumerator.Current.initDate.Date.ToString("dd/MM/yyyy"), campaignsEnumerator.Current.endDate.Date.ToString("dd/MM/yyyy"));
                     }
                 }
              }
-            campaigns.Reset();
+            campaignsEnumerator.Reset();
 
          }
 
         private void dataGridViewCampaigns_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == 'd')
+            {
+                foreach (DataGridViewRow row in dataGridViewCampaigns.SelectedRows)
+                {
+                    try
+                    {
+                        iCampaignService.Delete((int)row.Cells["ID"].Value);
+                        dataGridViewCampaigns.Rows.Remove(row);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error deleting campaigns.");
+                    }
+                }
+            }
+            else if (e.KeyChar == 'm')
+            {
+                if (dataGridViewCampaigns.SelectedRows.Count == 1)
+                {
+                    try
+                    {
+                        CampaignView campaignView = new CampaignView(campaigns.ElementAt((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value));
+                        campaignView.Show();
+                        iCampaignService.Update(campaignView.campaignDTO);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error updating campaign.");
+                    }
+                }
+            }
         }
     }
 }
