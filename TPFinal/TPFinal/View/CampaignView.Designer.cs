@@ -357,7 +357,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 360);
+            this.ClientSize = new System.Drawing.Size(894, 367);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.campaingBox);
