@@ -88,5 +88,11 @@ namespace TPFinal.View
                 }
             }
         }
+
+        private void AdView_Leave(object sender, EventArgs e)
+        {
+            iCampaignService.RemoveListener(this);
+            iBannerService.RemoveListener(this);
+        }
     }
 }

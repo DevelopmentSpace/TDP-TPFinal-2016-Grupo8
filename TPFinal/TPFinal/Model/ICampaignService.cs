@@ -20,5 +20,7 @@ namespace TPFinal.Model
         IEnumerable<CampaignDTO> GetAll();
 
         ByteImageDTO GetActualImage();
+
+        void ForceUpdate();
     }
 }

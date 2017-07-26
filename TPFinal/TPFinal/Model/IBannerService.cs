@@ -11,5 +11,7 @@ namespace TPFinal.Model
         void AddService(ITextBanner textBanner);
 
         String GetText();
+
+        void ForceUpdate();
     }
 }

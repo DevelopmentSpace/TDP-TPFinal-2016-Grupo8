@@ -71,6 +71,7 @@
             this.Name = "AdView";
             this.Text = "AdView";
             this.Load += new System.EventHandler(this.AdView_Load);
+            this.Leave += new System.EventHandler(this.AdView_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

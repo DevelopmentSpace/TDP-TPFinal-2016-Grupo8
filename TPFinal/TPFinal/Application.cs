@@ -43,5 +43,11 @@ namespace TPFinal
         {
 
         }
+
+        private void forceUpdate_Click(object sender, EventArgs e)
+        {
+            iBannerService.ForceUpdate();
+            iCampaignService.ForceUpdate();
+        }
     }
 }

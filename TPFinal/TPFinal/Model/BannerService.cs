@@ -201,5 +201,10 @@ namespace TPFinal.Model
                 StartUpdateBannerJob(date.Add(timeTo));
             }
         }
+
+        public void ForceUpdate()
+        {
+            StartUpdateBannerJob(DateTime.Now);
+        }
     }
 }

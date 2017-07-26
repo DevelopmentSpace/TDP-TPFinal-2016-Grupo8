@@ -239,7 +239,7 @@ namespace TPFinal.Model
         }
 
         /******************************************************************/
-        /*******************************TIMERS*****************************/
+        /*******************************UTILITIES*****************************/
         /******************************************************************/
         /// <summary>
         /// Obtiene la imagen actual de la campaña actual
@@ -283,24 +283,8 @@ namespace TPFinal.Model
         /******************************************************************/
         private void StartChangeImageJob(int pSeconds)
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream campList = new MemoryStream();
-            formatter.Serialize(campList, iCampaignList);
-
-            Stream newCampList = new MemoryStream();
-            formatter.Serialize(newCampList, iNewCampaignList);
-
-
-            JobDataMap jobDataMap = new JobDataMap();
-            jobDataMap.Put("indexCampaign", iActualCampaign);
-            jobDataMap.Put("indexImage", iActualImage);
-            jobDataMap.Put("campList", campList);
-            jobDataMap.Put("newCampList", newCampList);
-            jobDataMap.Put("updateAvailable", iUpdateAvailable);
-
             ITrigger changeImageJobTrigger = TriggerBuilder.Create()
                 .StartAt(DateTime.Now.AddSeconds(pSeconds))
-                .UsingJobData(jobDataMap)
                 .WithPriority(1)
                 .Build();
 
@@ -360,10 +344,64 @@ namespace TPFinal.Model
         {
             if(context.JobDetail.Key == iChangeImageJobKey)
             {
-                cLogger.Info("ChangeImageJob Done");
-                iActualCampaign = context.Trigger.JobDataMap.GetInt("indexCampaign");
-                iActualImage = context.Trigger.JobDataMap.GetInt("indexImage");
-                iUpdateDone = context.Trigger.JobDataMap.GetBoolean("updateDone");
+                //Si habia una imagen y Campaña actual activa y tiene imagenes todavia
+                if (iActualImage > -1 && iActualImage < iCampaignList.ElementAt(iActualCampaign).imagesList.Count - 1
+                    && CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)))
+                {
+                    iActualImage++;
+                }
+                else
+                {
+                    //Pasamos a la campaña siguiente, mientras haya otra y la actual no este activa
+                    do
+                    {
+                        iActualCampaign++;
+                    }
+                    while (iActualCampaign <= iCampaignList.Count - 1 && !CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)));
+
+                    //Si se encontro una campaña activa
+                    if ((iActualCampaign <= iCampaignList.Count - 1))
+                    {
+                        iActualImage = 0;
+                    }
+                    //Si se terminaron las campañas
+                    else
+                    {
+                        //Si hay nueva lista actualizamos
+                        if (iUpdateAvailable)
+                        {
+                            iUpdateDone = true;
+                           
+                            if (!iNewCampaignList.Any(campaign => CampaignService.IsCampaignActive(campaign)))
+                                iActualImage = -1;
+                            else
+                            {
+                                iActualImage = 0;
+                                iActualCampaign = 0;
+                                while (!CampaignService.IsCampaignActive(iNewCampaignList.ElementAt(iActualCampaign)))
+                                {
+                                    iActualCampaign++;
+                                }
+                            }
+                        }
+                        //Sino hay que empezar desde el principio
+                        else
+                        {
+                            if (!iCampaignList.Any(campaign => CampaignService.IsCampaignActive(campaign)))
+                                iActualImage = -1;
+                            else
+                            {
+                                iActualImage = 0;
+                                iActualCampaign = 0;
+                                while (!CampaignService.IsCampaignActive(iCampaignList.ElementAt(iActualCampaign)))
+                                {
+                                    iActualCampaign++;
+                                }
+                            }
+                        }
+                    }
+                }//Fin if-else
+
                 if (iUpdateDone)
                 {
                     iUpdateDone = false;
@@ -420,6 +458,11 @@ namespace TPFinal.Model
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 return (IList<Campaign>)binaryFormatter.Deserialize(memoryStream);
             }
+        }
+
+        public void ForceUpdate()
+        {
+            StartUpdateCampaignsJob(DateTime.Now);
         }
     }
 }
