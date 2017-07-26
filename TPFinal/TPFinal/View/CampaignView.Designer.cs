@@ -1,6 +1,6 @@
 ﻿namespace TPFinal.View
 {
-    partial class CampaignViewAdd
+    partial class CampaignView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,24 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.initDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.campaingBox = new System.Windows.Forms.GroupBox();
-            this.idText = new System.Windows.Forms.TextBox();
-            this.idLabel = new System.Windows.Forms.Label();
             this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
             this.minuteIntervalLabel = new System.Windows.Forms.Label();
             this.imageBox = new System.Windows.Forms.GroupBox();
             this.hintLabel = new System.Windows.Forms.Label();
+            this.addButtonImage = new System.Windows.Forms.Button();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
-            this.addImageButton = new System.Windows.Forms.Button();
             this.dateBox = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
             this.hourLabel = new System.Windows.Forms.Label();
             this.endTimeMinute = new System.Windows.Forms.TextBox();
             this.initTimeMinute = new System.Windows.Forms.TextBox();
             this.InitDateLabel = new System.Windows.Forms.Label();
+            this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.initDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.EndDateLabel = new System.Windows.Forms.Label();
             this.initTimeHour = new System.Windows.Forms.TextBox();
             this.endTimeHour = new System.Windows.Forms.TextBox();
@@ -58,7 +56,6 @@
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
@@ -66,26 +63,8 @@
             this.dateBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // initDateTimePicker
-            // 
-            this.initDateTimePicker.Location = new System.Drawing.Point(101, 26);
-            this.initDateTimePicker.Name = "initDateTimePicker";
-            this.initDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.initDateTimePicker.TabIndex = 4;
-            this.initDateTimePicker.Value = new System.DateTime(2017, 7, 15, 0, 0, 0, 0);
-            // 
-            // endDateTimePicker
-            // 
-            this.endDateTimePicker.Location = new System.Drawing.Point(101, 52);
-            this.endDateTimePicker.Name = "endDateTimePicker";
-            this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.endDateTimePicker.TabIndex = 5;
-            this.endDateTimePicker.Value = new System.DateTime(2017, 7, 22, 0, 0, 0, 0);
-            // 
             // campaingBox
             // 
-            this.campaingBox.Controls.Add(this.idText);
-            this.campaingBox.Controls.Add(this.idLabel);
             this.campaingBox.Controls.Add(this.secondIntervalLabel);
             this.campaingBox.Controls.Add(this.intervalSecond);
             this.campaingBox.Controls.Add(this.minuteIntervalLabel);
@@ -98,28 +77,9 @@
             this.campaingBox.Location = new System.Drawing.Point(12, 12);
             this.campaingBox.Name = "campaingBox";
             this.campaingBox.Size = new System.Drawing.Size(869, 299);
-            this.campaingBox.TabIndex = 14;
+            this.campaingBox.TabIndex = 15;
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
-            // 
-            // idText
-            // 
-            this.idText.Enabled = false;
-            this.idText.Location = new System.Drawing.Point(131, 27);
-            this.idText.Name = "idText";
-            this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 20;
-            this.idText.Text = "Campaign Id";
-            this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(109, 30);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(16, 13);
-            this.idLabel.TabIndex = 19;
-            this.idLabel.Text = "Id";
             // 
             // secondIntervalLabel
             // 
@@ -151,8 +111,8 @@
             // imageBox
             // 
             this.imageBox.Controls.Add(this.hintLabel);
+            this.imageBox.Controls.Add(this.addButtonImage);
             this.imageBox.Controls.Add(this.dataGridViewImages);
-            this.imageBox.Controls.Add(this.addImageButton);
             this.imageBox.Location = new System.Drawing.Point(411, 33);
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(452, 260);
@@ -163,11 +123,21 @@
             // hintLabel
             // 
             this.hintLabel.AutoSize = true;
-            this.hintLabel.Location = new System.Drawing.Point(149, 227);
+            this.hintLabel.Location = new System.Drawing.Point(104, 227);
             this.hintLabel.Name = "hintLabel";
             this.hintLabel.Size = new System.Drawing.Size(269, 13);
-            this.hintLabel.TabIndex = 23;
+            this.hintLabel.TabIndex = 24;
             this.hintLabel.Text = "To delete images you must select the rows and press \'d\'";
+            // 
+            // addButtonImage
+            // 
+            this.addButtonImage.Location = new System.Drawing.Point(23, 220);
+            this.addButtonImage.Name = "addButtonImage";
+            this.addButtonImage.Size = new System.Drawing.Size(75, 23);
+            this.addButtonImage.TabIndex = 11;
+            this.addButtonImage.Text = "Add image";
+            this.addButtonImage.UseVisualStyleBackColor = true;
+            this.addButtonImage.Click += new System.EventHandler(this.addButtonImage_Click);
             // 
             // dataGridViewImages
             // 
@@ -175,7 +145,6 @@
             this.dataGridViewImages.AllowUserToDeleteRows = false;
             this.dataGridViewImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Order,
             this.Image});
             this.dataGridViewImages.Location = new System.Drawing.Point(6, 23);
             this.dataGridViewImages.Name = "dataGridViewImages";
@@ -183,16 +152,6 @@
             this.dataGridViewImages.Size = new System.Drawing.Size(440, 191);
             this.dataGridViewImages.TabIndex = 10;
             this.dataGridViewImages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewImages_KeyPress);
-            // 
-            // addImageButton
-            // 
-            this.addImageButton.Location = new System.Drawing.Point(46, 222);
-            this.addImageButton.Name = "addImageButton";
-            this.addImageButton.Size = new System.Drawing.Size(75, 23);
-            this.addImageButton.TabIndex = 11;
-            this.addImageButton.Text = "Add images";
-            this.addImageButton.UseVisualStyleBackColor = true;
-            this.addImageButton.Click += new System.EventHandler(this.addPictureButton_Click);
             // 
             // dateBox
             // 
@@ -259,6 +218,22 @@
             this.InitDateLabel.Size = new System.Drawing.Size(45, 13);
             this.InitDateLabel.TabIndex = 19;
             this.InitDateLabel.Text = "Init date";
+            // 
+            // endDateTimePicker
+            // 
+            this.endDateTimePicker.Location = new System.Drawing.Point(101, 52);
+            this.endDateTimePicker.Name = "endDateTimePicker";
+            this.endDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.endDateTimePicker.TabIndex = 5;
+            this.endDateTimePicker.Value = new System.DateTime(2017, 7, 22, 0, 0, 0, 0);
+            // 
+            // initDateTimePicker
+            // 
+            this.initDateTimePicker.Location = new System.Drawing.Point(101, 26);
+            this.initDateTimePicker.Name = "initDateTimePicker";
+            this.initDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.initDateTimePicker.TabIndex = 4;
+            this.initDateTimePicker.Value = new System.DateTime(2017, 7, 15, 0, 0, 0, 0);
             // 
             // EndDateLabel
             // 
@@ -343,38 +318,30 @@
             // 
             // AcceptButton
             // 
-            this.AcceptButton.Location = new System.Drawing.Point(359, 317);
+            this.AcceptButton.Location = new System.Drawing.Point(307, 317);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(75, 23);
-            this.AcceptButton.TabIndex = 12;
+            this.AcceptButton.TabIndex = 16;
             this.AcceptButton.Text = "Accept";
             this.AcceptButton.UseVisualStyleBackColor = true;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(596, 317);
+            this.CancelButton.Location = new System.Drawing.Point(544, 317);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 13;
+            this.CancelButton.TabIndex = 17;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // openFileDialog
             // 
-            this.openFileDialog.DefaultExt = "jpg";
-            this.openFileDialog.FileName = "image";
-            this.openFileDialog.Filter = "Imagenes PNG|*.png|Imagenes JPG|*.jpg";
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "Imagenes JPG |*.jpg| Images PNG |*.png";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
-            // 
-            // Order
-            // 
-            this.Order.HeaderText = "Order";
-            this.Order.Name = "Order";
-            this.Order.ReadOnly = true;
-            this.Order.Width = 40;
             // 
             // Image
             // 
@@ -384,16 +351,16 @@
             this.Image.ReadOnly = true;
             this.Image.Width = 370;
             // 
-            // CampaignViewAdd
+            // CampaignView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 359);
+            this.ClientSize = new System.Drawing.Size(933, 360);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.campaingBox);
-            this.Name = "CampaignViewAdd";
-            this.Text = "Add Campaign ";
+            this.Name = "CampaignView";
+            this.Text = "CampaignViewDelete";
             this.campaingBox.ResumeLayout(false);
             this.campaingBox.PerformLayout();
             this.imageBox.ResumeLayout(false);
@@ -407,37 +374,34 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker initDateTimePicker;
-        private System.Windows.Forms.DateTimePicker endDateTimePicker;
         private System.Windows.Forms.GroupBox campaingBox;
-        private System.Windows.Forms.Label InitDateLabel;
-        private System.Windows.Forms.Label EndDateLabel;
-        private System.Windows.Forms.Label EndTimeLabel;
-        private System.Windows.Forms.Label InitTimeLabel;
-        private System.Windows.Forms.TextBox campaignNameText;
-        private System.Windows.Forms.TextBox endTimeHour;
-        private System.Windows.Forms.TextBox initTimeHour;
-        private System.Windows.Forms.Label intervalLabel;
-        private System.Windows.Forms.TextBox intervalMinute;
+        private System.Windows.Forms.Label secondIntervalLabel;
+        private System.Windows.Forms.TextBox intervalSecond;
+        private System.Windows.Forms.Label minuteIntervalLabel;
         private System.Windows.Forms.GroupBox imageBox;
-        private System.Windows.Forms.Button addImageButton;
-        private System.Windows.Forms.GroupBox dateBox;
-        private new System.Windows.Forms.Button AcceptButton;
-        private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.DataGridView dataGridViewImages;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Label hintLabel;
-        private System.Windows.Forms.TextBox endTimeMinute;
-        private System.Windows.Forms.TextBox initTimeMinute;
+        private System.Windows.Forms.GroupBox dateBox;
         private System.Windows.Forms.Label minuteLabel;
         private System.Windows.Forms.Label hourLabel;
-        private System.Windows.Forms.TextBox intervalSecond;
-        private System.Windows.Forms.Label secondIntervalLabel;
-        private System.Windows.Forms.Label minuteIntervalLabel;
-        private System.Windows.Forms.TextBox idText;
-        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.TextBox endTimeMinute;
+        private System.Windows.Forms.TextBox initTimeMinute;
+        private System.Windows.Forms.Label InitDateLabel;
+        private System.Windows.Forms.DateTimePicker endDateTimePicker;
+        private System.Windows.Forms.DateTimePicker initDateTimePicker;
+        private System.Windows.Forms.Label EndDateLabel;
+        private System.Windows.Forms.TextBox initTimeHour;
+        private System.Windows.Forms.TextBox endTimeHour;
+        private System.Windows.Forms.Label EndTimeLabel;
+        private System.Windows.Forms.Label InitTimeLabel;
+        private System.Windows.Forms.TextBox intervalMinute;
+        private System.Windows.Forms.Label intervalLabel;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
+        private System.Windows.Forms.TextBox campaignNameText;
+        private new System.Windows.Forms.Button AcceptButton;
+        private new System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button addButtonImage;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Label hintLabel;
         private System.Windows.Forms.DataGridViewImageColumn Image;
     }
 }

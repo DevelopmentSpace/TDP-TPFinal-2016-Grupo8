@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPFinal.DTO;
+using TPFinal.Model;
+using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
     public partial class AdminView : Form
     {
+
+        private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
+
         public AdminView()
         {
             InitializeComponent();
@@ -19,20 +25,20 @@ namespace TPFinal.View
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CampaignViewAdd campaignViewAdd = new CampaignViewAdd();
-            campaignViewAdd.Show();
-        }
+            CampaignView campaignView = new CampaignView(null);
+            campaignView.ShowDialog();
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CampaignViewDelete campaignViewDelete = new CampaignViewDelete();
-            campaignViewDelete.Show();
-        }
-
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CampaignViewUpdate campaignViewUpdate = new CampaignViewUpdate();
-            campaignViewUpdate.Show();
+            if (campaignView.varCampaignDTO != null)
+            {
+                try
+                {
+                    iCampaignService.Create(campaignView.varCampaignDTO);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error in database");
+                }
+            }
         }
 
         private void listAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,18 +53,6 @@ namespace TPFinal.View
             textBannerViewAdd.Show();
         }
 
-        private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            TextBannerViewDelete textBannerViewDelete = new TextBannerViewDelete();
-            textBannerViewDelete.Show();
-        }
-
-        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            TextBannerViewUpdate textBannerViewUpdate = new TextBannerViewUpdate();
-            textBannerViewUpdate.Show();
-        }
-
         private void listAllToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             TextBannerViewSearch textBannerViewSearch = new TextBannerViewSearch();
@@ -71,22 +65,10 @@ namespace TPFinal.View
             rssBannerViewAdd.Show();
         }
 
-        private void deleteToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            RssTextBannerDelete rssTextBannerDelete = new RssTextBannerDelete();
-            rssTextBannerDelete.Show();
-        }
-
         private void listAllToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             RssTextBannerSearch rssTextBannerSearch = new RssTextBannerSearch();
             rssTextBannerSearch.Show();
-        }
-
-        private void updateToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            RssTextBannerUpdate rssTextBannerUpdate = new RssTextBannerUpdate();
-            rssTextBannerUpdate.Show();
         }
     }
 }
