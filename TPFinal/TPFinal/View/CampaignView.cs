@@ -20,8 +20,14 @@ namespace TPFinal.View
     /// </summary>
     public partial class CampaignView : Form
     {
+        /// <summary>
+        /// Atributo campaignDTO
+        /// </summary>
         private CampaignDTO iCampaignDTO;
 
+        /// <summary>
+        /// Accesor del atributo CampaignDTO
+        /// </summary>
         public CampaignDTO ViewCampaignDTO
         {
             get
@@ -30,10 +36,15 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Constructor de la vista
+        /// </summary>
+        /// <param name="pCampaignDTO">Objeto de tipo campaignDTO</param>
         public CampaignView(CampaignDTO pCampaignDTO)
         {
             InitializeComponent();
 
+            //Si el objeto no es nulo, lo carga en la vista y lo asigna a la variable.
             if (pCampaignDTO != null)
             {
                 iCampaignDTO = pCampaignDTO;
@@ -45,11 +56,12 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Carga la campaña del atributo en la vista
+        /// </summary>
         private void loadCampaignInView()
         {
             campaignNameText.Text = iCampaignDTO.name;
-
-            TimeSpan interval = new TimeSpan(0, 0, 0, iCampaignDTO.interval, 0);
 
             initDateTimePicker.Value = iCampaignDTO.initDate;
             endDateTimePicker.Value = iCampaignDTO.endDate;
@@ -60,6 +72,7 @@ namespace TPFinal.View
             endTimeHour.Text = iCampaignDTO.endTime.Hours.ToString();
             endTimeMinute.Text = iCampaignDTO.endTime.Minutes.ToString();
 
+            TimeSpan interval = new TimeSpan(0, 0, 0, iCampaignDTO.interval, 0);
             intervalMinute.Text = interval.Minutes.ToString();
             intervalSecond.Text = interval.Seconds.ToString();
 
@@ -74,6 +87,9 @@ namespace TPFinal.View
             }
         }
 
+        /// <summary>
+        /// Carga la campaña de la vista en la campaña del atributo
+        /// </summary>
         private void loadCampaignInVariable()
         {
             iCampaignDTO.name = campaignNameText.Text;
@@ -100,18 +116,25 @@ namespace TPFinal.View
 
                 imagesAuxDTO.Add(imageDTO);
             }
+
             if (imagesAuxDTO.Count == 0)
                 throw new ArgumentNullException();
 
             iCampaignDTO.imagesList = imagesAuxDTO;
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de cancelar. Cierra la vista y sale como cancelado.
+        /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se cliquea el boton de aceptar. Intenta cargar la campaña de la vista en el atributo
+        /// </summary>
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             try
@@ -132,15 +155,19 @@ namespace TPFinal.View
             {
                 MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
             }
-
-
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se presiona el boton de agregar imagen. Abre el seleccionador de imagenes.
+        /// </summary>
         private void addButtonImage_Click(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
         }
 
+        /// <summary>
+        /// Se ejecuta cuando se seleccionaron las imagenes. Agrega cada imagen a la lista de la vista.
+        /// </summary>
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             foreach (String dir in openFileDialog.FileNames)
@@ -151,6 +178,9 @@ namespace TPFinal.View
             dataGridViewImages.Refresh();
         }
 
+        /// <summary>
+        /// Se ejecuta cada vez que se presiona la letra d en la lista de la vista y si tiene seleccionada una fila, la elimina.
+        /// </summary>
         private void dataGridViewImages_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 'd')
