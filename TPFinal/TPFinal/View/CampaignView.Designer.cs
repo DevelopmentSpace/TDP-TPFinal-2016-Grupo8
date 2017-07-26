@@ -36,8 +36,6 @@
             this.hintLabel = new System.Windows.Forms.Label();
             this.addButtonImage = new System.Windows.Forms.Button();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
-            this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.dateBox = new System.Windows.Forms.GroupBox();
             this.minuteLabel = new System.Windows.Forms.Label();
             this.hourLabel = new System.Windows.Forms.Label();
@@ -58,6 +56,7 @@
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -146,7 +145,6 @@
             this.dataGridViewImages.AllowUserToDeleteRows = false;
             this.dataGridViewImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Order,
             this.Image});
             this.dataGridViewImages.Location = new System.Drawing.Point(6, 23);
             this.dataGridViewImages.Name = "dataGridViewImages";
@@ -154,21 +152,6 @@
             this.dataGridViewImages.Size = new System.Drawing.Size(440, 191);
             this.dataGridViewImages.TabIndex = 10;
             this.dataGridViewImages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewImages_KeyPress);
-            // 
-            // Order
-            // 
-            this.Order.HeaderText = "Order";
-            this.Order.Name = "Order";
-            this.Order.ReadOnly = true;
-            this.Order.Width = 40;
-            // 
-            // Image
-            // 
-            this.Image.HeaderText = "Image";
-            this.Image.MinimumWidth = 10;
-            this.Image.Name = "Image";
-            this.Image.ReadOnly = true;
-            this.Image.Width = 370;
             // 
             // dateBox
             // 
@@ -360,6 +343,14 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
+            // Image
+            // 
+            this.Image.HeaderText = "Image";
+            this.Image.MinimumWidth = 10;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Width = 370;
+            // 
             // CampaignView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,12 +397,11 @@
         private System.Windows.Forms.Label intervalLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox campaignNameText;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Order;
-        private System.Windows.Forms.DataGridViewImageColumn Image;
         private new System.Windows.Forms.Button AcceptButton;
         private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button addButtonImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label hintLabel;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
     }
 }

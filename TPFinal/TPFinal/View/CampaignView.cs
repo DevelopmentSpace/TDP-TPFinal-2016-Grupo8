@@ -64,16 +64,15 @@ namespace TPFinal.View
 
         private void loadCampaignInVariable()
         {
-            CampaignDTO campaign = new CampaignDTO();
-            campaign.name = campaignNameText.Text;
+            varCampaignDTO.name = campaignNameText.Text;
 
-            campaign.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
+            varCampaignDTO.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
 
-            campaign.initDate = initDateTimePicker.Value.Date;
-            campaign.endDate = endDateTimePicker.Value.Date;
+            varCampaignDTO.initDate = initDateTimePicker.Value.Date;
+            varCampaignDTO.endDate = endDateTimePicker.Value.Date;
 
-            campaign.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
-            campaign.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
+            varCampaignDTO.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
+            varCampaignDTO.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
 
             IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
 
@@ -81,15 +80,12 @@ namespace TPFinal.View
             {
                 ByteImageDTO imageDTO = new ByteImageDTO();
 
-                imageDTO.id = Convert.ToInt32(row.Cells[0].Value);
-                imageDTO.bytes = Utilities.imageToByte((Image)row.Cells[1].Value);
+                imageDTO.bytes = Utilities.imageToByte((Image)row.Cells[0].Value);
 
                 imagesAuxDTO.Add(imageDTO);
             }
 
-            campaign.imagesList = imagesAuxDTO;
-
-            varCampaignDTO = campaign;
+            varCampaignDTO.imagesList = imagesAuxDTO;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -103,12 +99,6 @@ namespace TPFinal.View
             this.Close();       
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            CampaignViewSearch campaignSearch = new CampaignViewSearch();
-            campaignSearch.Show();
-        }
-
         private void addButtonImage_Click(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
@@ -118,7 +108,7 @@ namespace TPFinal.View
         {
             foreach (String dir in openFileDialog.FileNames)
             {
-                dataGridViewImages.Rows.Add(dataGridViewImages.Rows.Count, Bitmap.FromFile(dir));
+                dataGridViewImages.Rows.Add(Bitmap.FromFile(dir));
             }
             dataGridViewImages.Update();
             dataGridViewImages.Refresh();
