@@ -87,8 +87,8 @@ namespace TPFinal_Test
 
             IUnitOfWork uow = new UnitOfWork(new TPFinal.DAL.EntityFramework.DigitalSignageDbContext("DigitalSignageTest"));
 
-            //Campañaa que finalizo antes
-            t = new TextBanner();
+			//Banner que finalizo antes
+			t = new TextBanner();
             t.name = "t1";
             t.initDate = new DateTime(2016, 06, 06, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 06, 0, 0, 0);
@@ -96,8 +96,8 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(10, 30, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campañaa que empezo antes y finaliza en el intervalo
-            t = new TextBanner();
+			//Banner que empezo antes y finaliza en el intervalo
+			t = new TextBanner();
             t.name = "t2";
             t.initDate = new DateTime(2016, 06, 06, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 06, 0, 0, 0);
@@ -105,8 +105,8 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(12, 31, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campañaa que empezo adentro y finaliza adentro del intervalo
-            t = new TextBanner();
+			//Banner que empezo adentro y finaliza adentro del intervalo
+			t = new TextBanner();
             t.name = "t3";
             t.initDate = new DateTime(2016, 06, 06, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 06, 0, 0, 0);
@@ -114,8 +114,8 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(12, 50, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campañaa que empezo adentro y finaliza afuera del intervalo
-            t = new TextBanner();
+			//Banner que empezo adentro y finaliza afuera del intervalo
+			t = new TextBanner();
             t.name = "t4";
             t.initDate = new DateTime(2016, 06, 06, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 06, 0, 0, 0);
@@ -123,8 +123,8 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(16, 50, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campañaa que empieza despues y finaliza despues del intervalo
-            t = new TextBanner();
+			//Banner que empieza despues y finaliza despues del intervalo
+			t = new TextBanner();
             t.name = "t5";
             t.initDate = new DateTime(2016, 06, 06, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 06, 0, 0, 0);
@@ -132,8 +132,8 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(16, 50, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campaña con fecha anterior
-            t = new TextBanner();
+			//Banner con fecha anterior
+			t = new TextBanner();
             t.name = "t6";
             t.initDate = new DateTime(2016, 06, 05, 0, 0, 0);
             t.endDate = new DateTime(2016, 06, 05, 0, 0, 0);
@@ -141,7 +141,7 @@ namespace TPFinal_Test
             t.endTime = new TimeSpan(23, 30, 0);
             uow.textBannerRepository.Add(t);
 
-            //Campañaa con fecha posterior
+            //Banner con fecha posterior
             t = new TextBanner();
             t.name = "t7";
             t.initDate = new DateTime(2016, 06, 07, 0, 0, 0);
