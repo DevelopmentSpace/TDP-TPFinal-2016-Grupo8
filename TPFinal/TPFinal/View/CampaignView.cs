@@ -70,15 +70,28 @@ namespace TPFinal.View
 
             varCampaignDTO.interval = Convert.ToInt32(intervalMinute.Text) * 60 + Convert.ToInt32(intervalSecond.Text);
 
-
-            if (varCampaignDTO.initDate >= varCampaignDTO.endDate)
-                throw new ArgumentException();
-
             varCampaignDTO.initDate = initDateTimePicker.Value.Date;
             varCampaignDTO.endDate = endDateTimePicker.Value.Date;
 
-            varCampaignDTO.initTime = new TimeSpan(Convert.ToInt32(initTimeHour.Text), Convert.ToInt32(initTimeMinute.Text), 0);
-            varCampaignDTO.endTime = new TimeSpan(Convert.ToInt32(endTimeHour.Text), Convert.ToInt32(endTimeMinute.Text), 0);
+            if (varCampaignDTO.initDate > varCampaignDTO.endDate)
+                throw new ArgumentException();
+
+            int initHour, endHour, initMinute, endMinute;
+
+            initHour = Convert.ToInt32(initTimeHour.Text);
+            endHour = Convert.ToInt32(endTimeHour.Text);
+            initMinute = Convert.ToInt32(initTimeMinute.Text);
+            endMinute = Convert.ToInt32(endTimeMinute.Text);
+
+
+            if (initHour < 0 || initHour > 23 || endHour < 0 || endHour > 23 || ((initHour > endHour) && (initMinute > endMinute)) || initMinute < 0 || initMinute > 59 || endMinute < 0 || endMinute > 59)
+            {
+                throw new FormatException();
+            }
+
+            varCampaignDTO.initTime = new TimeSpan(initHour, initMinute, 0);
+            varCampaignDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+
 
             IList<ByteImageDTO> imagesAuxDTO = new List<ByteImageDTO> { };
 

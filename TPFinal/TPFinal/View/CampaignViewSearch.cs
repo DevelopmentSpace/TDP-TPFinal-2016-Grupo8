@@ -68,6 +68,7 @@ namespace TPFinal.View
                     }
                 }
                 campaigns = iCampaignService.GetAllCampaigns();
+                searchText_TextChanged(null, EventArgs.Empty);
             }
             else if (e.KeyChar == 'm')
             {
@@ -84,7 +85,10 @@ namespace TPFinal.View
                         MessageBox.Show("Error updating campaign.");
                     }
                 }
+                campaigns = iCampaignService.GetAllCampaigns();
+                searchText_TextChanged(null, EventArgs.Empty);
             }
+
         }
     }
 }
