@@ -34,7 +34,6 @@
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InitDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.deleteLabel = new System.Windows.Forms.Label();
@@ -59,8 +58,7 @@
             this.idColumn,
             this.NameColumn,
             this.InitDateColumn,
-            this.EndDateColumn,
-            this.Text});
+            this.EndDateColumn});
             this.dataGridViewTextBanners.Location = new System.Drawing.Point(12, 41);
             this.dataGridViewTextBanners.Name = "dataGridViewTextBanners";
             this.dataGridViewTextBanners.ReadOnly = true;
@@ -91,12 +89,6 @@
             this.EndDateColumn.HeaderText = "End date";
             this.EndDateColumn.Name = "EndDateColumn";
             this.EndDateColumn.ReadOnly = true;
-            // 
-            // Text
-            // 
-            this.Text.HeaderText = "Text";
-            this.Text.Name = "Text";
-            this.Text.ReadOnly = true;
             // 
             // searchText
             // 
@@ -151,7 +143,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn InitDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDateColumn;
-        private new System.Windows.Forms.DataGridViewTextBoxColumn Text;
+        //private new System.Windows.Forms.DataGridViewTextBoxColumn Text;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label deleteLabel;
     }
