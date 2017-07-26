@@ -17,7 +17,7 @@ namespace TPFinal.View
     {
 
         private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
-
+        private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
         private IRssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<IRssBannerService>();
 
         public AdminView()
@@ -28,9 +28,8 @@ namespace TPFinal.View
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CampaignView campaignView = new CampaignView(null);
-            campaignView.ShowDialog();
 
-            if (campaignView.campaignDTO != null)
+            if (campaignView.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -51,8 +50,18 @@ namespace TPFinal.View
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextBannerViewAdd textBannerViewAdd = new TextBannerViewAdd();
-            textBannerViewAdd.Show();
+            TextBannerView textBannerView = new TextBannerView(null);
+            if (textBannerView.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    iTextBannerService.Create(textBannerView.textBannerDTO);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error in database");
+                }
+            }
         }
 
         private void listAllToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -64,9 +73,9 @@ namespace TPFinal.View
         private void createToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             RssBannerView rssBannerView = new RssBannerView(null);
-            rssBannerView.ShowDialog();
+            
 
-            if (rssBannerView.rssBannerDTO != null)
+            if (rssBannerView.ShowDialog() == DialogResult.OK)
             {
                 try
                 {

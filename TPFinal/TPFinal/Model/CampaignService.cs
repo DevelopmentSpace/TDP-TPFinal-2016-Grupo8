@@ -245,15 +245,23 @@ namespace TPFinal.Model
         /// Obtiene la imagen actual de la campaña actual
         /// </summary>
         /// <returns>Imagen actual</returns>
-        public byte[] GetActualImage()
+        public ByteImageDTO GetActualImage()
         {
             cLogger.Info("Obteniendo imagen actual.");
-            byte[] b = { };
+            ByteImageDTO b = new ByteImageDTO();
             if (iActualImage > -1)
-                return iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+            {
+                ByteImageMapper imageMapper = new ByteImageMapper();
+                ByteImageDTO imageDTO = new ByteImageDTO();
+                ByteImage image = new ByteImage();
+
+                image.bytes = iCampaignList.ElementAt(iActualCampaign).imagesList.ElementAt(iActualImage).bytes;
+
+                return imageMapper.SelectorExpression.Compile()(image);            
+            }
             else
                 return b;
-        }
+         }
 
 
         /// <summary>

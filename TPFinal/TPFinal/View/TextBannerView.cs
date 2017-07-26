@@ -13,58 +13,51 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
-    public partial class RssBannerView : Form
+    public partial class TextBannerView : Form
     {
 
-        public RssBannerDTO rssBannerDTO;
+        public TextBannerDTO textBannerDTO;
 
-        public RssBannerView(RssBannerDTO pRssBannerDTO)
+        public TextBannerView(TextBannerDTO pTextBannerDTO)
         {
             InitializeComponent();
 
-            if (pRssBannerDTO != null)
+            if (pTextBannerDTO != null)
             {
-                rssBannerDTO = pRssBannerDTO;
-                loadRssBannerInView();
+                textBannerDTO = pTextBannerDTO;
+                loadTextBannerInView();
             }
             else
             {
-                rssBannerDTO = new RssBannerDTO();
+                textBannerDTO = new TextBannerDTO();
             }
-
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void loadTextBannerInView()
         {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
+            bannerNameText.Text = textBannerDTO.name;
+
+            initDateTimePicker.Value = textBannerDTO.initDate;
+            endDateTimePicker.Value = textBannerDTO.endDate;
+
+            initTimeHour.Text = textBannerDTO.initTime.Hours.ToString();
+            initTimeMinute.Text = textBannerDTO.initTime.Minutes.ToString();
+
+            endTimeHour.Text = textBannerDTO.endTime.Hours.ToString();
+            endTimeMinute.Text = textBannerDTO.endTime.Minutes.ToString();
+
+            textBanner.Text = textBannerDTO.text;
         }
 
-        private void loadRssBannerInView()
+        private void loadTextBannerInVariable()
         {
-            bannerNameText.Text = rssBannerDTO.name;
-
-            initDateTimePicker.Value = rssBannerDTO.initDate;
-            endDateTimePicker.Value = rssBannerDTO.endDate;
-
-            initTimeHour.Text = rssBannerDTO.initTime.Hours.ToString();
-            initTimeMinute.Text = rssBannerDTO.initTime.Minutes.ToString();
-
-            endTimeHour.Text = rssBannerDTO.endTime.Hours.ToString();
-            endTimeMinute.Text = rssBannerDTO.endTime.Minutes.ToString();
-
-            textBanner.Text = rssBannerDTO.url;
-        }
-
-        private void loadRssBannerInVariable()
-        {
-            rssBannerDTO.name = bannerNameText.Text;
+            textBannerDTO.name = bannerNameText.Text;
 
             if (initDateTimePicker.Value.Date > endDateTimePicker.Value.Date)
                 throw new ArgumentException();
 
-            rssBannerDTO.initDate = initDateTimePicker.Value.Date;
-            rssBannerDTO.endDate = endDateTimePicker.Value.Date;
+            textBannerDTO.initDate = initDateTimePicker.Value.Date;
+            textBannerDTO.endDate = endDateTimePicker.Value.Date;
 
             int initHour, endHour, initMinute, endMinute;
 
@@ -79,17 +72,23 @@ namespace TPFinal.View
                 throw new ArgumentException();
             }
 
-            rssBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
-            rssBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+            textBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
+            textBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
 
-            rssBannerDTO.url = textBanner.Text;
+            textBannerDTO.text = textBanner.Text;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             try
             {
-                loadRssBannerInVariable();
+                loadTextBannerInVariable();
                 DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -101,6 +100,8 @@ namespace TPFinal.View
             {
                 MessageBox.Show("Bad hour format: Hours must go from 0 to 24, minutes and seconds must go from 0 to 60. Also init-time/date must be greater then end-time/date.");
             }
+
+
         }
     }
 }

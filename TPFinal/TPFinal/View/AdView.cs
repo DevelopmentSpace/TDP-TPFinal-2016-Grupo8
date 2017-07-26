@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
 using TPFinal.Model;
+using TPFinal.DTO;
+using TPFinal.Domain;
 
 namespace TPFinal.View
 {
@@ -38,9 +40,17 @@ namespace TPFinal.View
 
         private void UpdateImage()
         {
-            byte[] image = iCampaignService.GetActualImage();
-            if (image.Length == 0)
+            ByteImageMapper imageMapper = new ByteImageMapper();
+            ByteImage imageModel = new ByteImage();
+            byte[] image;
+
+            imageMapper.MapToModel(iCampaignService.GetActualImage(), imageModel);
+            image = imageModel.bytes;
+            if (image == null)
+            {
+                imageBox.Image = Image.FromFile("defaultImage.jpg");
                 return;
+            } 
 
             MemoryStream stream = new MemoryStream(image);
             Image i = Image.FromStream(stream);

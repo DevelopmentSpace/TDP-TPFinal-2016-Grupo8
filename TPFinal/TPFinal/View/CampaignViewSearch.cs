@@ -38,7 +38,7 @@ namespace TPFinal.View
             {
                 if (campaignsEnumerator.Current.name.Length >= searchLenght)
                 {
-                    if (campaignsEnumerator.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (campaignsEnumerator.Current.name.Substring(0, searchLenght).ToLower() == searchText.Text.ToString().Substring(0, searchLenght).ToLower())
                     {
                         dataGridViewCampaigns.Rows.Add(campaignsEnumerator.Current.id, campaignsEnumerator.Current.name, campaignsEnumerator.Current.initDate.Date.ToString("dd/MM/yyyy"), campaignsEnumerator.Current.endDate.Date.ToString("dd/MM/yyyy"));
                     }
