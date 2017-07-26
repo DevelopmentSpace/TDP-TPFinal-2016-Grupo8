@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quartz.Impl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +20,8 @@ namespace TPFinal
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             System.Windows.Forms.Application.Run(new Application());
             log.Info("Finalizando aplicacion");
-            
+
+            Environment.Exit(Environment.ExitCode);
         }
     }
 }

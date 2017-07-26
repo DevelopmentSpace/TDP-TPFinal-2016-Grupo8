@@ -6,6 +6,8 @@ using Microsoft.Practices.Unity;
 using TPFinal.Model;
 using TPFinal.DTO;
 using TPFinal.Domain;
+using Quartz;
+using Quartz.Impl;
 
 namespace TPFinal.View
 {
