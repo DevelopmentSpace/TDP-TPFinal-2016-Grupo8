@@ -29,7 +29,7 @@ namespace TPFinal
             initMinuteInt = Convert.ToInt32(initMinute);
             endMinuteInt = Convert.ToInt32(endMinute);
 
-            if (initHourInt < 0 || initHourInt > 23 || endHourInt < 0 || endHourInt > 23 || ((initHourInt > endHourInt) && (initMinuteInt > endMinuteInt)) || initMinuteInt < 0 || initMinuteInt > 59 || endMinuteInt < 0 || endMinuteInt > 59)
+            if (initHourInt < 0 || initHourInt > 23 || endHourInt < 0 || endHourInt > 23 || ((initHourInt >= endHourInt) && (initMinuteInt >= endMinuteInt)) || initMinuteInt < 0 || initMinuteInt > 59 || endMinuteInt < 0 || endMinuteInt > 59)
             {
                 throw new ArgumentException();
             }
