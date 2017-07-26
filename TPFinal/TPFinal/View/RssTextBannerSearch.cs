@@ -39,7 +39,7 @@ namespace TPFinal.View
             {
                 if (rssBannersEnumerator.Current.name.Length >= searchLenght)
                 {
-                    if (rssBannersEnumerator.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (rssBannersEnumerator.Current.name.Substring(0, searchLenght).ToLower() == searchText.Text.ToString().Substring(0, searchLenght).ToLower())
                     {
                         dataGridViewRssBanners.Rows.Add(rssBannersEnumerator.Current.id, rssBannersEnumerator.Current.name, rssBannersEnumerator.Current.initDate.Date.ToString("dd/MM/yyyy"), rssBannersEnumerator.Current.endDate.Date.ToString("dd/MM/yyyy"), rssBannersEnumerator.Current.url);
                     }

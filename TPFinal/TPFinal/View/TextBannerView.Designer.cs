@@ -1,6 +1,6 @@
 ﻿namespace TPFinal.View
 {
-    partial class TextBannerViewUpdate
+    partial class TextBannerView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.bannerBox = new System.Windows.Forms.GroupBox();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
-            this.idText = new System.Windows.Forms.TextBox();
-            this.idLabel = new System.Windows.Forms.Label();
             this.textBox = new System.Windows.Forms.GroupBox();
             this.textLabel = new System.Windows.Forms.Label();
             this.textBanner = new System.Windows.Forms.TextBox();
@@ -51,8 +47,8 @@
             this.InitTimeLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.bannerNameText = new System.Windows.Forms.TextBox();
-            this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.AcceptButton = new System.Windows.Forms.Button();
             this.bannerBox.SuspendLayout();
             this.textBox.SuspendLayout();
             this.dateBox.SuspendLayout();
@@ -60,58 +56,16 @@
             // 
             // bannerBox
             // 
-            this.bannerBox.Controls.Add(this.searchButton);
-            this.bannerBox.Controls.Add(this.okButton);
-            this.bannerBox.Controls.Add(this.idText);
-            this.bannerBox.Controls.Add(this.idLabel);
             this.bannerBox.Controls.Add(this.textBox);
             this.bannerBox.Controls.Add(this.dateBox);
             this.bannerBox.Controls.Add(this.nameLabel);
             this.bannerBox.Controls.Add(this.bannerNameText);
-            this.bannerBox.Location = new System.Drawing.Point(9, 12);
+            this.bannerBox.Location = new System.Drawing.Point(12, 12);
             this.bannerBox.Name = "bannerBox";
             this.bannerBox.Size = new System.Drawing.Size(876, 299);
-            this.bannerBox.TabIndex = 25;
+            this.bannerBox.TabIndex = 16;
             this.bannerBox.TabStop = false;
             this.bannerBox.Text = "Banner Data";
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(271, 27);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(60, 20);
-            this.searchButton.TabIndex = 3;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // okButton
-            // 
-            this.okButton.Location = new System.Drawing.Point(222, 27);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(44, 20);
-            this.okButton.TabIndex = 2;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // idText
-            // 
-            this.idText.Location = new System.Drawing.Point(131, 27);
-            this.idText.Name = "idText";
-            this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 1;
-            this.idText.Text = "Banner Id";
-            this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(109, 30);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(16, 13);
-            this.idLabel.TabIndex = 19;
-            this.idLabel.Text = "Id";
             // 
             // textBox
             // 
@@ -281,40 +235,40 @@
             this.bannerNameText.Location = new System.Drawing.Point(131, 53);
             this.bannerNameText.Name = "bannerNameText";
             this.bannerNameText.Size = new System.Drawing.Size(200, 20);
-            this.bannerNameText.TabIndex = 4;
+            this.bannerNameText.TabIndex = 1;
             this.bannerNameText.Text = "Banner Name";
             this.bannerNameText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // AcceptButton
-            // 
-            this.AcceptButton.Location = new System.Drawing.Point(292, 329);
-            this.AcceptButton.Name = "AcceptButton";
-            this.AcceptButton.Size = new System.Drawing.Size(75, 23);
-            this.AcceptButton.TabIndex = 26;
-            this.AcceptButton.Text = "Accept";
-            this.AcceptButton.UseVisualStyleBackColor = true;
-            this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
-            // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(547, 329);
+            this.CancelButton.Location = new System.Drawing.Point(520, 317);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 27;
+            this.CancelButton.TabIndex = 18;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // TextBannerViewUpdate
+            // AcceptButton
+            // 
+            this.AcceptButton.Location = new System.Drawing.Point(283, 317);
+            this.AcceptButton.Name = "AcceptButton";
+            this.AcceptButton.Size = new System.Drawing.Size(75, 23);
+            this.AcceptButton.TabIndex = 17;
+            this.AcceptButton.Text = "Accept";
+            this.AcceptButton.UseVisualStyleBackColor = true;
+            this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
+            // 
+            // TextBannerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 374);
-            this.Controls.Add(this.bannerBox);
-            this.Controls.Add(this.AcceptButton);
+            this.ClientSize = new System.Drawing.Size(919, 358);
             this.Controls.Add(this.CancelButton);
-            this.Name = "TextBannerViewUpdate";
-            this.Text = "TextBannerViewUpdate";
+            this.Controls.Add(this.AcceptButton);
+            this.Controls.Add(this.bannerBox);
+            this.Name = "TextBannerView";
+            this.Text = "BannerViewAdd";
             this.bannerBox.ResumeLayout(false);
             this.bannerBox.PerformLayout();
             this.textBox.ResumeLayout(false);
@@ -328,13 +282,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox bannerBox;
-        private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.TextBox idText;
-        private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.GroupBox textBox;
-        private System.Windows.Forms.Label textLabel;
-        private System.Windows.Forms.TextBox textBanner;
         private System.Windows.Forms.GroupBox dateBox;
         private System.Windows.Forms.Label minuteLabel;
         private System.Windows.Forms.Label hourLabel;
@@ -350,7 +298,9 @@
         private System.Windows.Forms.Label InitTimeLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox bannerNameText;
-        private new System.Windows.Forms.Button AcceptButton;
         private new System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button AcceptButton;
+        private System.Windows.Forms.Label textLabel;
+        private System.Windows.Forms.TextBox textBanner;
     }
 }

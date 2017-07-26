@@ -18,30 +18,75 @@ namespace TPFinal.View
 
         private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
 
-        private IEnumerator<TextBannerDTO> textBanners;
+        private IEnumerable<TextBannerDTO> textBanners;
 
         public TextBannerViewSearch()
         {
             InitializeComponent();
-            textBanners = iTextBannerService.GetAll().GetEnumerator();
+            textBanners = iTextBannerService.GetAll();
+
+            searchText.Text = "";
+            searchText_TextChanged(null, EventArgs.Empty);
         }
 
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             int searchLenght = searchText.Text.Length;
             dataGridViewTextBanners.Rows.Clear();
+            IEnumerator<TextBannerDTO> textBannersEnumerator = textBanners.GetEnumerator();
 
-            while (textBanners.MoveNext())
+            while (textBannersEnumerator.MoveNext())
             {
-                if (textBanners.Current.name.Length >= searchLenght)
+                if (textBannersEnumerator.Current.name.Length >= searchLenght)
                 {
-                    if (textBanners.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
+                    if (textBannersEnumerator.Current.name.Substring(0, searchLenght).ToLower() == searchText.Text.ToString().Substring(0, searchLenght).ToLower())
                     {
-                        dataGridViewTextBanners.Rows.Add(textBanners.Current.id, textBanners.Current.name, textBanners.Current.initDate.Date.ToString(), textBanners.Current.endDate.Date.ToString(),textBanners.Current.text);
+                        dataGridViewTextBanners.Rows.Add(textBannersEnumerator.Current.id, textBannersEnumerator.Current.name, textBannersEnumerator.Current.initDate.Date.ToString("dd/MM/yyyy"), textBannersEnumerator.Current.endDate.Date.ToString("dd/MM/yyyy"),textBannersEnumerator.Current.text);
                     }
                 }
             }
-            textBanners.Reset();
+            textBannersEnumerator.Reset();
+        }
+
+        private void dataGridViewTextBanners_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'd')
+            {
+                foreach (DataGridViewRow row in dataGridViewTextBanners.SelectedRows)
+                {
+                    try
+                    {
+                        iTextBannerService.Delete((int)row.Cells[0].Value);
+                        dataGridViewTextBanners.Rows.Remove(row);
+                        dataGridViewTextBanners.Refresh();
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error deleting TextBanner.");
+                    }
+                }
+                textBanners = iTextBannerService.GetAll();
+                searchText_TextChanged(null, EventArgs.Empty);
+            }
+            else if (e.KeyChar == 'm')
+            {
+                if (dataGridViewTextBanners.SelectedRows.Count == 1)
+                {
+                    try
+                    {
+                        TextBannerView textBannerView = new TextBannerView(textBanners.First<TextBannerDTO>(x => x.id == ((int)dataGridViewTextBanners.SelectedRows[0].Cells[0].Value)));
+                        textBannerView.ShowDialog();
+                        iTextBannerService.Update(textBannerView.textBannerDTO);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error updating TextBanner.");
+                    }
+                }
+                textBanners = iTextBannerService.GetAll();
+                searchText_TextChanged(null, EventArgs.Empty);
+            }
         }
     }
 }

@@ -64,6 +64,7 @@
             this.dataGridViewTextBanners.ReadOnly = true;
             this.dataGridViewTextBanners.Size = new System.Drawing.Size(631, 245);
             this.dataGridViewTextBanners.TabIndex = 5;
+            this.dataGridViewTextBanners.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewTextBanners_KeyPress);
             // 
             // idColumn
             // 

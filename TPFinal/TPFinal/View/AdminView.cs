@@ -17,7 +17,7 @@ namespace TPFinal.View
     {
 
         private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
-
+        private ITextBannerService iTextBannerService = IoCContainerLocator.Container.Resolve<ITextBannerService>();
         private IRssBannerService iRssBannerService = IoCContainerLocator.Container.Resolve<IRssBannerService>();
 
         public AdminView()
@@ -51,8 +51,20 @@ namespace TPFinal.View
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextBannerViewAdd textBannerViewAdd = new TextBannerViewAdd();
-            textBannerViewAdd.Show();
+            TextBannerView textBannerView = new TextBannerView(null);
+            textBannerView.ShowDialog();
+
+            if (textBannerView.textBannerDTO != null)
+            {
+                try
+                {
+                    iTextBannerService.Create(textBannerView.textBannerDTO);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error in database");
+                }
+            }
         }
 
         private void listAllToolStripMenuItem1_Click(object sender, EventArgs e)

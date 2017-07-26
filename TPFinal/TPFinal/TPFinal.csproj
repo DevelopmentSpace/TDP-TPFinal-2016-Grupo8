@@ -161,11 +161,11 @@
     <Compile Include="View\RssTextBannerSearch.Designer.cs">
       <DependentUpon>RssTextBannerSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\TextBannerViewAdd.cs">
+    <Compile Include="View\TextBannerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\TextBannerViewAdd.Designer.cs">
-      <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
+    <Compile Include="View\TextBannerView.Designer.cs">
+      <DependentUpon>TextBannerView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CampaignView.cs">
       <SubType>Form</SubType>
@@ -185,23 +185,11 @@
     <Compile Include="View\RssBannerView.Designer.cs">
       <DependentUpon>RssBannerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\TextBannerViewDelete.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\TextBannerViewDelete.Designer.cs">
-      <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\TextBannerViewSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\TextBannerViewSearch.Designer.cs">
       <DependentUpon>TextBannerViewSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\TextBannerViewUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\TextBannerViewUpdate.Designer.cs">
-      <DependentUpon>TextBannerViewUpdate.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Application.resx">
       <DependentUpon>Application.cs</DependentUpon>
@@ -228,8 +216,8 @@
     <EmbeddedResource Include="View\RssTextBannerSearch.resx">
       <DependentUpon>RssTextBannerSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TextBannerViewAdd.resx">
-      <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
+    <EmbeddedResource Include="View\TextBannerView.resx">
+      <DependentUpon>TextBannerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignView.resx">
       <DependentUpon>CampaignView.cs</DependentUpon>
@@ -237,14 +225,8 @@
     <EmbeddedResource Include="View\CampaignViewSearch.resx">
       <DependentUpon>CampaignViewSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TextBannerViewDelete.resx">
-      <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\TextBannerViewSearch.resx">
       <DependentUpon>TextBannerViewSearch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\TextBannerViewUpdate.resx">
-      <DependentUpon>TextBannerViewUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="job_scheduling_data_2_0.xsd">

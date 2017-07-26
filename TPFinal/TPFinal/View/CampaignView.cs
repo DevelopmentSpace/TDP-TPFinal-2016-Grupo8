@@ -38,6 +38,8 @@ namespace TPFinal.View
         {
             campaignNameText.Text = campaignDTO.name;
 
+            TimeSpan interval = new TimeSpan(0, 0, 0, campaignDTO.interval, 0);
+
             initDateTimePicker.Value = campaignDTO.initDate;
             endDateTimePicker.Value = campaignDTO.endDate;
 
@@ -47,7 +49,6 @@ namespace TPFinal.View
             endTimeHour.Text = campaignDTO.endTime.Hours.ToString();
             endTimeMinute.Text = campaignDTO.endTime.Minutes.ToString();
 
-            TimeSpan interval = new TimeSpan(0, 0, 0, campaignDTO.interval, 0);
             intervalMinute.Text = interval.Minutes.ToString();
             intervalSecond.Text = interval.Seconds.ToString();
 
