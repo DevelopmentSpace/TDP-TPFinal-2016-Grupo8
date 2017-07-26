@@ -37,7 +37,7 @@ namespace TPFinal.View
         }
 
         /// <summary>
-        /// Constructor de la vista
+        /// Constructor de la vista de campañas. Se le pasa un objeto segun es para crear uno nuevo o para editarlo
         /// </summary>
         /// <param name="pCampaignDTO">Objeto de tipo campaignDTO</param>
         public CampaignView(CampaignDTO pCampaignDTO)

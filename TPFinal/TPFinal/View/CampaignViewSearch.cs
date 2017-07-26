@@ -13,21 +13,38 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.View
 {
+    /// <summary>
+    /// Vista de busqueda de campañas
+    /// </summary>
     public partial class CampaignViewSearch : Form
     {
+        /// <summary>
+        /// Servicio de campañas
+        /// </summary>
         private ICampaignService iCampaignService = IoCContainerLocator.Container.Resolve<ICampaignService>();
 
+        /// <summary>
+        /// Enumerable con todas las campañasDTO
+        /// </summary>
         private IEnumerable<CampaignDTO> campaigns;
 
+        /// <summary>
+        /// Constructor de la vista de busqueda de campañas
+        /// </summary>
         public CampaignViewSearch()
         {
             InitializeComponent();
+            //Se obtienen todas las campañas en el enumerable
             campaigns = iCampaignService.GetAll();
 
+            //Se ejecuta por primera para actualizar la lista de imagenes.
             searchText.Text = "";
             searchText_TextChanged(null, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Se ejecuta cuando cambia el texto en pantalla. Muestra las campañas que cumplan con el texto ingresado.
+        /// </summary>
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             int searchLenght = searchText.Text.Length;
@@ -47,6 +64,9 @@ namespace TPFinal.View
             campaignsEnumerator.Reset();
          }
 
+        /// <summary>
+        /// En el caso de estar seleccionando la lista y presionar la 'd' o la 'm'. Elimina o modifica imagenes segun corresponda.
+        /// </summary>
         private void dataGridViewCampaigns_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 'd')
