@@ -54,7 +54,8 @@ namespace TPFinal.DAL.EntityFramework.Mappings
                                         .HasMaxLength(1));
 
             Map<RssBanner>(x => x.Requires("Type")
-                                            .HasValue("R"));
+                                          .HasValue("R")
+                            );
 
         }
     }

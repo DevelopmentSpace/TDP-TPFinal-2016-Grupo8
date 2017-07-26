@@ -18,10 +18,12 @@ namespace TPFinal.DAL.EntityFramework
         where TDbContext : DbContext
     {
 
-        private static readonly ILog cLogger = LogManager.GetLogger<EFRepository<TEntity, TDbContext>>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        //Contexto a utilizar
-        DbContext iDbContext;
+		/// <summary>
+		/// Contexto a utilizar
+		/// </summary>
+		DbContext iDbContext;
 
         /// <summary>
         /// Constructor

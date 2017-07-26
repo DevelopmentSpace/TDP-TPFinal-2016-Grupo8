@@ -9,7 +9,6 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un banner cuya fuente de text es RSS
     /// </summary>
-    [Serializable]
     public class RssBanner : Banner
     {
         /// <summary>
@@ -20,6 +19,6 @@ namespace TPFinal.Domain
         /// <summary>
         /// Lista de Items RSS
         /// </summary>
-        public virtual IList<RssItem> items { get; set; }
+        virtual public IList<RssItem> items { get; set; }
     }
 }

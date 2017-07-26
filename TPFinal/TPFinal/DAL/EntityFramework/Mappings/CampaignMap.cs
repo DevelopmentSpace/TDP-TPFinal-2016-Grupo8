@@ -59,7 +59,7 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             // El nombre de la columna de la FK se nombra 'CampaignId'.
             this.HasMany<ByteImage>(pCampaign => pCampaign.imagesList)
                 .WithRequired()
-                .Map(pMapping => pMapping.MapKey("CampaignId"))
+                .HasForeignKey<int>(b=>b.campaignId)         
                 .WillCascadeOnDelete();
         }
     }

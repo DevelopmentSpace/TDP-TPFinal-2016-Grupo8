@@ -9,13 +9,17 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un item RSS de un banner RSS
     /// </summary>
-    [Serializable]
     public class RssItem
     {
         /// <summary>
         /// Clave unica del item RSS
         /// </summary>
         public int id { get; set; }
+
+        /// <summary>
+        /// Foreign key de la imagen en relacion al RssBanner
+        /// </summary>
+        public int rssBannerId { get; set; }
 
         /// <summary>
         /// Descripcion del Item RSS

@@ -21,15 +21,17 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             // Nombre de la tabla que tendrá la entidad, en este caso 'ByteImage'.
             this.ToTable("ByteImage");
 
-            // Clave primaria de la entidad, indicando que la columna se llama 'byteImageId' y que es autoincremental.
-            this.HasKey(byteImage => byteImage.id)
+            // Clave primaria de la entidad,compuesta por la de la camapaña y la de la imagen, autoincremental la de la imagen.
+            this.HasKey(byteImage => new { byteImage.campaignId, byteImage.id })
                 .Property(byteImage => byteImage.id)
                 .HasColumnName("byteImageId")
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+
             // Se establece la columna obligatoria (NOT NULL) 'bytes'.
             this.Property(byteImage => byteImage.bytes)
                 .IsRequired();
+
 
         }
     }

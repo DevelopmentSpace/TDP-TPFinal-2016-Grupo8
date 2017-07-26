@@ -103,7 +103,7 @@ namespace TPFinal.Model
             oldRssBanner.endTime = banner.endTime;
             oldRssBanner.initDate = banner.initDate;
             oldRssBanner.endDate = banner.endDate;
-            oldRssBanner.items = banner.items;
+            oldRssBanner.items.Clear();
             oldRssBanner.url = banner.url;
            
             iUnitOfWork.Complete();

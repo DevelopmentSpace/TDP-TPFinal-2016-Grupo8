@@ -18,8 +18,8 @@ namespace TPFinal.DAL.EntityFramework.Mappings
             // Nombre de la tabla que tendrá la entidad, en este caso 'RssItem'.
             this.ToTable("RssItem");
 
-            // Clave primaria de la entidad, indicando que la columna se llama 'RssItemId' y que es autoincremental.
-            this.HasKey(pRssItem => pRssItem.id)
+            // Clave primaria de la entidad, formada por la clave del item y del banner asociado, autoincremental la del item
+            this.HasKey(pRssItem => new { pRssItem.rssBannerId, pRssItem.id })
                 .Property(pRssItem => pRssItem.id)
                 .HasColumnName("RssItemId")
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
