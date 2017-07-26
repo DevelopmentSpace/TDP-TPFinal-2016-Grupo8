@@ -67,21 +67,10 @@ namespace TPFinal.View
             iTextBannerDTO.initDate = initDateTimePicker.Value.Date;
             iTextBannerDTO.endDate = endDateTimePicker.Value.Date;
 
-            int initHour, endHour, initMinute, endMinute;
+            IList<TimeSpan> listSpan = Utilities.createTimeSpans(initTimeHour.Text, initTimeMinute.Text, endTimeHour.Text, endTimeMinute.Text);
 
-            initHour = Convert.ToInt32(initTimeHour.Text);
-            endHour = Convert.ToInt32(endTimeHour.Text);
-            initMinute = Convert.ToInt32(initTimeMinute.Text);
-            endMinute = Convert.ToInt32(endTimeMinute.Text);
-
-
-            if (initHour < 0 || initHour > 23 || endHour < 0 || endHour > 23 || ((initHour > endHour) && (initMinute > endMinute)) || initMinute < 0 || initMinute > 59 || endMinute < 0 || endMinute > 59)
-            {
-                throw new ArgumentException();
-            }
-
-            iTextBannerDTO.initTime = new TimeSpan(initHour, initMinute, 0);
-            iTextBannerDTO.endTime = new TimeSpan(endHour, endMinute, 0);
+            iTextBannerDTO.initTime = listSpan.ElementAt(0);
+            iTextBannerDTO.endTime = listSpan.ElementAt(1);
 
             iTextBannerDTO.text = textBanner.Text;
         }
