@@ -7,6 +7,9 @@ using TPFinal.DTO;
 
 namespace TPFinal.Model
 {
+	/// <summary>
+	/// Interfaz para uso de las campañas de imagenes
+	/// </summary>
     interface ICampaignService : IObservable
     {
 		/// <summary>

@@ -19,6 +19,9 @@ using log4net;
 
 namespace TPFinal.Model
 {
+	/// <summary>
+	/// Servicio encargado de administrar campaña de imagenes y su actualizacion.
+	/// </summary>
     class CampaignService : ICampaignService, IJobListener
     {
 		/// <summary>
