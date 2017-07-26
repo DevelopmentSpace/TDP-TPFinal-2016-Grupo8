@@ -16,15 +16,23 @@ namespace TPFinal.Model
     {
         private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Enumerable que contiene todos los textos activos en ese momento.
+        /// </summary>
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
-        public TextBannerService()
-        {
-        }
+        /******************************************************************/
+        /***********************TEXTBANNER INTERFACE***********************/
+        /******************************************************************/
 
+        /// <summary>
+        /// Funcion que se encarga de obtener todos los textos activos de la lista de textos
+        /// </summary>
+        /// <returns>Cadena de caracteres de todos los TextBanners activos</returns>
         public String GetText()
         {
             String text = "";
+            cLogger.Info("Comenzando pedido de texto");
             foreach (TextBanner textBanner in iTextBannerList)
             {
                 if (BannerService.IsBannerActive(textBanner))
@@ -32,11 +40,19 @@ namespace TPFinal.Model
                     text = text + " - " + textBanner.text;
                 }
             }
+            cLogger.Info("Enviando texto solicitado");
             return text;
         }
 
+        /// <summary>
+        /// Funcion que se encarga de actualizar todos los TextBanner en la lista de textos
+        /// </summary>
+        /// <param name="pDate">Fecha desde donde se lo quiere obtener</param>
+        /// <param name="pTimeFrom">Tiempo desde</param>
+        /// <param name="pTimeTo">Tiempo hasta</param>
         public void UpdateBanners(DateTime pDate,TimeSpan pTimeFrom,TimeSpan pTimeTo)
         {
+            cLogger.Info("Actualizando banners");
             IUnitOfWork uow = new UnitOfWork(new DigitalSignageDbContext());
 
             IEnumerable<TextBanner> textBannerEnum = uow.textBannerRepository.GetActives(pDate, pTimeFrom, pTimeTo);
@@ -44,11 +60,21 @@ namespace TPFinal.Model
                 return;
 
             iTextBannerList = textBannerEnum;
-
             uow.Complete();
+
+            cLogger.Info("Banners actualizados");
 
         }
 
+        /******************************************************************/
+        /********************************CRUD******************************/
+        /******************************************************************/
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pTextBannerDTO"></param>
         public void Create(TextBannerDTO pTextBannerDTO)
         {
             IUnitOfWork iUnitOfWork = new UnitOfWork(new DigitalSignageDbContext());
