@@ -14,10 +14,10 @@ namespace TPFinal.DAL
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<CampaignRepository>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        //Almacena el Contexto a utilizar en los repositorios
-        private readonly DigitalSignageDbContext iDbContext;
+		//Almacena el Contexto a utilizar en los repositorios
+		private readonly DigitalSignageDbContext iDbContext;
 
         /// <summary>
         /// Constructor

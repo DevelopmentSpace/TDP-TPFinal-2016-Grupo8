@@ -16,9 +16,12 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class CampaignRepository : EFRepository<Campaign, DigitalSignageDbContext>, ICampaignRespository
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<CampaignRepository>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        DbContext iDbContext;
+		/// <summary>
+		/// Contexto a utilizar
+		/// </summary>
+		DbContext iDbContext;
 
         /// <summary>
         /// Constructor

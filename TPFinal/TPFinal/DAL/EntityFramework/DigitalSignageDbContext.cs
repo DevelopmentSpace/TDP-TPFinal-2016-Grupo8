@@ -16,12 +16,12 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     public class DigitalSignageDbContext:DbContext
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<DigitalSignageDbContext>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        /// <summary>
-        /// DbSet para Campañas
-        /// </summary>
-        public DbSet<Campaign> campaigns { get; set; }
+		/// <summary>
+		/// DbSet para Campañas
+		/// </summary>
+		public DbSet<Campaign> campaigns { get; set; }
 
         /// <summary>
         /// DbSet para banners

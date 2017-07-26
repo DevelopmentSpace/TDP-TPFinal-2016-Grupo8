@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,12 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class TextBannerRepository : EFRepository<TextBanner, DigitalSignageDbContext>, ITextBannerRepository
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<TextBannerRepository>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        //Contexto a utilizar
-        DigitalSignageDbContext iDbContext;
+		/// <summary>
+		/// Contexto a utilizar
+		/// </summary>
+		DbContext iDbContext;
 
         /// <summary>
         /// Constructor

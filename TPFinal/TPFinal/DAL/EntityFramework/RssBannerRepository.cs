@@ -14,10 +14,12 @@ namespace TPFinal.DAL.EntityFramework
     /// </summary>
     class RssBannerRepository : EFRepository<RssBanner, DigitalSignageDbContext>, IRssBannerRepository
     {
-        private static readonly ILog cLogger = LogManager.GetLogger<RssBannerRepository>();
+		private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        //contexto a utilizar
-        DigitalSignageDbContext iDbContext;
+		/// <summary>
+		/// Contexto a utilizar
+		/// </summary>
+		DbContext iDbContext;
 
         /// <summary>
         /// Constructor
