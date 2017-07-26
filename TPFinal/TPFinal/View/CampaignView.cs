@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPFinal.DTO;
-using TPFinal.Model;
-using Microsoft.Practices.Unity;
 using System.IO;
 
 
 namespace TPFinal.View
-{   
+{
     /// <summary>
     /// Vista de campañas
     /// </summary>
