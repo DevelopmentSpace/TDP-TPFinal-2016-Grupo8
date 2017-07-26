@@ -19,6 +19,6 @@ namespace TPFinal.Model
 
         IEnumerable<CampaignDTO> GetAll();
 
-        byte[] GetActualImage();
+        ByteImageDTO GetActualImage();
     }
 }
