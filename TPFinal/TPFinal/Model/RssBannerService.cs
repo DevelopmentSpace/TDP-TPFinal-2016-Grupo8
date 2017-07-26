@@ -36,6 +36,7 @@ namespace TPFinal.Model
 			RssBannerMapper RssBannerMapper = new RssBannerMapper();
 			RssBanner banner = new RssBanner();
 
+			cLogger.Info("Creando RssBanner");
 			try
 			{
 				RssBannerMapper.MapToModel(pRssBannerDTO, banner);
@@ -61,6 +62,8 @@ namespace TPFinal.Model
 			RssBanner oldRssBanner = new RssBanner();
 
 			RssBannerMapper.MapToModel(pRssBannerDTO, banner);
+
+			cLogger.Info("Actualizando rss Banner");
 
 			oldRssBanner = iUnitOfWork.rssBannerRepository.Get(banner.id);
 
@@ -108,6 +111,7 @@ namespace TPFinal.Model
 			RssBannerMapper textRssBannerMapper = new RssBannerMapper();
 			RssBanner TextBanner = new RssBanner();
 
+			cLogger.Info("Obteniendo rss Banner por id");
 			try
 			{
 				return textRssBannerMapper.SelectorExpression.Compile()(iUnitOfWork.rssBannerRepository.Get(pId));
@@ -128,6 +132,8 @@ namespace TPFinal.Model
 			RssBannerMapper textRssBannerMapper = new RssBannerMapper();
 			IEnumerator<RssBanner> rssBanners = iUnitOfWork.rssBannerRepository.GetAll().GetEnumerator();
 			IList<RssBannerDTO> rssBannersDTO = new List<RssBannerDTO> { };
+
+			cLogger.Info("Obteniendo todos los rss Banner");
 
 			while (rssBanners.MoveNext())
 			{
@@ -177,8 +183,8 @@ namespace TPFinal.Model
         {
             IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
 
-
-            IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(pDate,pTimeFrom,pTimeTo);
+			cLogger.Info("Actualizando rss Banner desde la base de datos");
+			IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(pDate,pTimeFrom,pTimeTo);
             if (rssBannerEnum == null)
             {
                 return;
