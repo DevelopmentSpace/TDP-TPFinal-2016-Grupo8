@@ -12,6 +12,9 @@ using System.IO;
 
 namespace TPFinal.Model
 {
+	/// <summary>
+	/// Trabajo a ejecutar para actualizar los banners
+	/// </summary>
     [PersistJobDataAfterExecutionAttribute()]
     [DisallowConcurrentExecution()]
     class UpdateBannerJob : IJob
