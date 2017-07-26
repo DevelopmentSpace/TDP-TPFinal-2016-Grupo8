@@ -15,7 +15,7 @@ using TPFinal.Domain;
 using TPFinal.DTO;
 using Microsoft.Practices.Unity;
 using System.Collections;
-using Common.Logging;
+using log4net;
 
 namespace TPFinal.Model
 {
@@ -24,7 +24,7 @@ namespace TPFinal.Model
 
         private static int DEFAULT_CHANGE_IMAGE_TIME = 5;
 
-        private static readonly ILog cLogger = LogManager.GetLogger<CampaignService>();
+        private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Lista de escuchadores
