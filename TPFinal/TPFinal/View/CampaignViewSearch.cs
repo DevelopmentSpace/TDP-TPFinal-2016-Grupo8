@@ -24,6 +24,9 @@ namespace TPFinal.View
         {
             InitializeComponent();
             campaigns = iCampaignService.GetAllCampaigns().GetEnumerator();
+
+            searchText.Text = "";
+            searchText_TextChanged(null, EventArgs.Empty);
         }
 
         private void searchText_TextChanged(object sender, EventArgs e)
@@ -37,12 +40,17 @@ namespace TPFinal.View
                 {
                     if (campaigns.Current.name.Substring(0, searchLenght) == searchText.Text.ToString().Substring(0, searchLenght))
                     {
-                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.Date.ToString(), campaigns.Current.endDate.Date.ToString());
+                        dataGridViewCampaigns.Rows.Add(campaigns.Current.id, campaigns.Current.name, campaigns.Current.initDate.Date.ToString("dd/MM/yyyy"), campaigns.Current.endDate.Date.ToString("dd/MM/yyyy"));
                     }
                 }
              }
             campaigns.Reset();
 
          }
+
+        private void dataGridViewCampaigns_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

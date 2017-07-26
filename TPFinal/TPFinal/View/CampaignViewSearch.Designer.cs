@@ -61,6 +61,7 @@
             this.dataGridViewCampaigns.ReadOnly = true;
             this.dataGridViewCampaigns.Size = new System.Drawing.Size(631, 245);
             this.dataGridViewCampaigns.TabIndex = 2;
+            this.dataGridViewCampaigns.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewCampaigns_KeyPress);
             // 
             // idColumn
             // 

@@ -141,6 +141,7 @@
     <Compile Include="Model\UpdateCampaignsJob.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="View\AdminView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,29 +179,17 @@
     <Compile Include="View\TextBannerViewAdd.Designer.cs">
       <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\CampaignViewAdd.cs">
+    <Compile Include="View\CampaignView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\CampaignViewAdd.Designer.cs">
-      <DependentUpon>CampaignViewAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CampaignViewDelete.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CampaignViewDelete.Designer.cs">
-      <DependentUpon>CampaignViewDelete.cs</DependentUpon>
+    <Compile Include="View\CampaignView.Designer.cs">
+      <DependentUpon>CampaignView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CampaignViewSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\CampaignViewSearch.Designer.cs">
       <DependentUpon>CampaignViewSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CampaignViewUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CampaignViewUpdate.Designer.cs">
-      <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="View\RssTextBannerAdd.cs">
       <SubType>Form</SubType>
@@ -260,17 +249,11 @@
     <EmbeddedResource Include="View\TextBannerViewAdd.resx">
       <DependentUpon>TextBannerViewAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\CampaignViewAdd.resx">
-      <DependentUpon>CampaignViewAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CampaignViewDelete.resx">
-      <DependentUpon>CampaignViewDelete.cs</DependentUpon>
+    <EmbeddedResource Include="View\CampaignView.resx">
+      <DependentUpon>CampaignView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CampaignViewSearch.resx">
       <DependentUpon>CampaignViewSearch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CampaignViewUpdate.resx">
-      <DependentUpon>CampaignViewUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\TextBannerViewDelete.resx">
       <DependentUpon>TextBannerViewDelete.cs</DependentUpon>
