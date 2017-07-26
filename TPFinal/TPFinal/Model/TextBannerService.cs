@@ -12,6 +12,9 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
+    /// <summary>
+    /// Servicio encargado de administrar banners de texto
+    /// </summary>
     class TextBannerService : ITextBannerService, ITextBanner
     {
         private static readonly ILog cLogger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -22,7 +25,7 @@ namespace TPFinal.Model
         private IEnumerable<TextBanner> iTextBannerList = new List<TextBanner> { };
 
         /******************************************************************/
-        /***********************TEXT BANNER INTERFACE***********************/
+        /***********************TEXT BANNER INTERFACE**********************/
         /******************************************************************/
 
         /// <summary>

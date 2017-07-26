@@ -26,11 +26,86 @@ namespace TPFinal.Model
 		/// </summary>
         IEnumerable<RssBanner> iRssBannerList = new List<RssBanner>() { };
 
-		/// <summary>
-		/// Agrega un banner
-		/// </summary>
-		/// <param name="pRssBannerDTO">Banner a agregar</param>
-		public void Create(RssBannerDTO pRssBannerDTO)
+
+        /******************************************************************/
+        /***********************TEXT BANNER INTERFACE***********************/
+        /******************************************************************/
+
+        /// <summary>
+        /// Obtiene el texto actual a mostrar
+        /// </summary>
+        /// <returns>String de texto</returns>
+        public String GetText()
+        {
+            String text = "";
+
+            if (iRssBannerList == null)
+                return text;
+
+            //por cada banner
+            foreach (RssBanner rssBanner in iRssBannerList)
+            {
+                //activo..
+                if (BannerService.IsBannerActive(rssBanner))
+                {
+                    //concatena la descripcion del los items
+                    foreach (RssItem item in rssBanner.items)
+                    {
+                        text = text + " - " + item.description;
+                    }
+                }
+            }
+            return text;
+        }
+
+        /// <summary>
+        /// Actualiza los banners con la base de datos
+        /// </summary>
+        /// <param name="pDate">Fecha a considerar</param>
+        /// <param name="pTimeFrom">Hora de inicio</param>
+        /// <param name="pTimeTo">Hora de fin</param>
+        public void UpdateBanners(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo)
+        {
+            IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
+
+            cLogger.Info("Actualizando rss Banner desde la base de datos");
+            IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(pDate, pTimeFrom, pTimeTo);
+            if (rssBannerEnum == null)
+            {
+                return;
+            }
+            IEnumerator<RssBanner> e = rssBannerEnum.GetEnumerator();
+
+            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
+
+            //Por cada elemento
+            while (e.MoveNext())
+            {
+                //Intenta obtener nuevos feeds
+                try
+                {
+                    IEnumerable<RssItem> items = feed.Read(e.Current.url);
+                    e.Current.items.Clear();
+                    e.Current.items = items.ToList();
+                    uow.Complete();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            iRssBannerList = rssBannerEnum;
+        }
+
+        /******************************************************************/
+        /********************************CRUD******************************/
+        /******************************************************************/
+
+        /// <summary>
+        /// Agrega un banner
+        /// </summary>
+        /// <param name="pRssBannerDTO">Banner a agregar</param>
+        public void Create(RssBannerDTO pRssBannerDTO)
 		{
 			IUnitOfWork iUnitOfWork = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
 			RssBannerMapper RssBannerMapper = new RssBannerMapper();
@@ -100,8 +175,8 @@ namespace TPFinal.Model
 				throw new IndexOutOfRangeException();
 			}
 		}
-
-		/// Obtiene un baner
+        /// <summary>
+		/// Obtiene un banner
 		/// </summary>
 		/// <param name="pId">Id del banner a obtener</param>
 		/// <returns>Banner con Id dado</returns>
@@ -141,78 +216,7 @@ namespace TPFinal.Model
 			}
 
 			return rssBannersDTO;
-		}
-
-
-
-
-		/// <summary>
-		/// Obtiene el texto actual a mostrar
-		/// </summary>
-		/// <returns>String de texto</returns>
-		public String GetText()
-        {
-            String text = "";
-
-            if (iRssBannerList == null)
-                return text;
-
-			//por cada banner
-            foreach (RssBanner rssBanner in iRssBannerList)
-            {
-				//activo..
-                if (BannerService.IsBannerActive(rssBanner))
-                    { 
-						//concatena la descripcion del los items
-                        foreach (RssItem item in rssBanner.items)
-                        {
-                            text = text + " - " + item.description;
-                        }
-                }
-            }
-            return text;
-        }
-
-		/// <summary>
-		/// Actualiza los banners con la base de datos
-		/// </summary>
-		/// <param name="pDate">Fecha a considerar</param>
-		/// <param name="pTimeFrom">Hora de inicio</param>
-		/// <param name="pTimeTo">Hora de fin</param>
-        public void UpdateBanners(DateTime pDate, TimeSpan pTimeFrom, TimeSpan pTimeTo)
-        {
-            IUnitOfWork uow = new UnitOfWork(new DAL.EntityFramework.DigitalSignageDbContext());
-
-			cLogger.Info("Actualizando rss Banner desde la base de datos");
-			IEnumerable<RssBanner> rssBannerEnum = uow.rssBannerRepository.GetActives(pDate,pTimeFrom,pTimeTo);
-            if (rssBannerEnum == null)
-            {
-                return;
-            }
-            IEnumerator<RssBanner> e = rssBannerEnum.GetEnumerator();
-
-            SyndicationFeedRssReader feed = new SyndicationFeedRssReader();
-
-			//Por cada elemento
-            while (e.MoveNext())
-            {
-				//Intenta obtener nuevos feeds
-                try
-                {
-                    IEnumerable<RssItem> items = feed.Read(e.Current.url);
-					e.Current.items.Clear();
-                    e.Current.items = items.ToList();
-                    uow.Complete();
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            iRssBannerList = rssBannerEnum;
-        }
-
-        
+		}        
     }
 }
 
