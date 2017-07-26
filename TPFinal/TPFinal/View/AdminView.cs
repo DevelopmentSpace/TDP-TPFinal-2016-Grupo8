@@ -25,13 +25,14 @@ namespace TPFinal.View
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CampaignView campaignView = new CampaignView(new CampaignDTO());
-            campaignView.Show();
-            if (!(campaignView.campaignDTO == null))
+            CampaignView campaignView = new CampaignView(null);
+
+            campaignView.ShowDialog();
+            if (campaignView.varCampaignDTO != null)
             {
                 try
                 {
-                    iCampaignService.Create(campaignView.campaignDTO);
+                    iCampaignService.Create(campaignView.varCampaignDTO);
                 }
                 catch (FormatException)
                 {

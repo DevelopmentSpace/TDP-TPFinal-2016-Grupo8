@@ -57,14 +57,17 @@ namespace TPFinal.View
                 {
                     try
                     {
-                        iCampaignService.Delete((int)row.Cells["ID"].Value);
+                        iCampaignService.Delete((int)row.Cells[0].Value);
                         dataGridViewCampaigns.Rows.Remove(row);
+                        dataGridViewCampaigns.Refresh();
+
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Error deleting campaigns.");
                     }
                 }
+                campaigns = iCampaignService.GetAllCampaigns();
             }
             else if (e.KeyChar == 'm')
             {
@@ -72,9 +75,9 @@ namespace TPFinal.View
                 {
                     try
                     {
-                        CampaignView campaignView = new CampaignView(campaigns.ElementAt((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value));
+                        CampaignView campaignView = new CampaignView(campaigns.First<CampaignDTO>(x => x.id == ((int)dataGridViewCampaigns.SelectedRows[0].Cells[0].Value)));
                         campaignView.Show();
-                        iCampaignService.Update(campaignView.campaignDTO);
+                        iCampaignService.Update(campaignView.varCampaignDTO);
                     }
                     catch (Exception)
                     {

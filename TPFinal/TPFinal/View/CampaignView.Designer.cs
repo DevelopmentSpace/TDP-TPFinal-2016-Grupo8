@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.campaingBox = new System.Windows.Forms.GroupBox();
-            this.idText = new System.Windows.Forms.TextBox();
-            this.idLabel = new System.Windows.Forms.Label();
             this.secondIntervalLabel = new System.Windows.Forms.Label();
             this.intervalSecond = new System.Windows.Forms.TextBox();
             this.minuteIntervalLabel = new System.Windows.Forms.Label();
             this.imageBox = new System.Windows.Forms.GroupBox();
+            this.hintLabel = new System.Windows.Forms.Label();
+            this.addButtonImage = new System.Windows.Forms.Button();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
             this.Order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
@@ -58,8 +58,6 @@
             this.AcceptButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.addButtonImage = new System.Windows.Forms.Button();
-            this.hintLabel = new System.Windows.Forms.Label();
             this.campaingBox.SuspendLayout();
             this.imageBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImages)).BeginInit();
@@ -68,8 +66,6 @@
             // 
             // campaingBox
             // 
-            this.campaingBox.Controls.Add(this.idText);
-            this.campaingBox.Controls.Add(this.idLabel);
             this.campaingBox.Controls.Add(this.secondIntervalLabel);
             this.campaingBox.Controls.Add(this.intervalSecond);
             this.campaingBox.Controls.Add(this.minuteIntervalLabel);
@@ -85,24 +81,6 @@
             this.campaingBox.TabIndex = 15;
             this.campaingBox.TabStop = false;
             this.campaingBox.Text = "Campaign Data";
-            // 
-            // idText
-            // 
-            this.idText.Location = new System.Drawing.Point(131, 27);
-            this.idText.Name = "idText";
-            this.idText.Size = new System.Drawing.Size(85, 20);
-            this.idText.TabIndex = 20;
-            this.idText.Text = "ID";
-            this.idText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(109, 30);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(16, 13);
-            this.idLabel.TabIndex = 19;
-            this.idLabel.Text = "Id";
             // 
             // secondIntervalLabel
             // 
@@ -142,6 +120,25 @@
             this.imageBox.TabIndex = 15;
             this.imageBox.TabStop = false;
             this.imageBox.Text = "Images Data";
+            // 
+            // hintLabel
+            // 
+            this.hintLabel.AutoSize = true;
+            this.hintLabel.Location = new System.Drawing.Point(104, 227);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(269, 13);
+            this.hintLabel.TabIndex = 24;
+            this.hintLabel.Text = "To delete images you must select the rows and press \'d\'";
+            // 
+            // addButtonImage
+            // 
+            this.addButtonImage.Location = new System.Drawing.Point(23, 220);
+            this.addButtonImage.Name = "addButtonImage";
+            this.addButtonImage.Size = new System.Drawing.Size(75, 23);
+            this.addButtonImage.TabIndex = 11;
+            this.addButtonImage.Text = "Add image";
+            this.addButtonImage.UseVisualStyleBackColor = true;
+            this.addButtonImage.Click += new System.EventHandler(this.addButtonImage_Click);
             // 
             // dataGridViewImages
             // 
@@ -359,26 +356,9 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "Imagenes JPG |*.jpg| Images PNG |*.png";
+            this.openFileDialog.Multiselect = true;
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
-            // 
-            // addButtonImage
-            // 
-            this.addButtonImage.Location = new System.Drawing.Point(23, 220);
-            this.addButtonImage.Name = "addButtonImage";
-            this.addButtonImage.Size = new System.Drawing.Size(75, 23);
-            this.addButtonImage.TabIndex = 11;
-            this.addButtonImage.Text = "Add image";
-            this.addButtonImage.UseVisualStyleBackColor = true;
-            this.addButtonImage.Click += new System.EventHandler(this.addButtonImage_Click);
-            // 
-            // hintLabel
-            // 
-            this.hintLabel.AutoSize = true;
-            this.hintLabel.Location = new System.Drawing.Point(104, 227);
-            this.hintLabel.Name = "hintLabel";
-            this.hintLabel.Size = new System.Drawing.Size(269, 13);
-            this.hintLabel.TabIndex = 24;
-            this.hintLabel.Text = "To delete images you must select the rows and press \'d\'";
             // 
             // CampaignView
             // 
@@ -404,8 +384,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox campaingBox;
-        private System.Windows.Forms.TextBox idText;
-        private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Label secondIntervalLabel;
         private System.Windows.Forms.TextBox intervalSecond;
         private System.Windows.Forms.Label minuteIntervalLabel;

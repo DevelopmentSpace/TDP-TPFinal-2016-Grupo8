@@ -17,13 +17,17 @@ namespace TPFinal.View
 {
     public partial class CampaignView : Form
     {
-        public CampaignDTO campaignDTO;
+        public CampaignDTO varCampaignDTO;
 
         public CampaignView(CampaignDTO pCampaignDTO)
         {
             InitializeComponent();
-            campaignDTO = pCampaignDTO;
-            loadCampaignInView();
+
+            if (pCampaignDTO != null)
+            {
+                varCampaignDTO = pCampaignDTO;
+                loadCampaignInView();
+            }
         }
 
         private void loadCampaignInView()
@@ -31,7 +35,7 @@ namespace TPFinal.View
             dataGridViewImages.Rows.Clear();
             dataGridViewImages.Refresh();
 
-            CampaignDTO campaign = campaignDTO;
+            CampaignDTO campaign = varCampaignDTO;
             campaignNameText.Text = campaign.name;
 
             initDateTimePicker.Value = campaign.initDate;
@@ -46,7 +50,6 @@ namespace TPFinal.View
             TimeSpan interval = new TimeSpan(0, 0, 0, campaign.interval, 0);
             intervalMinute.Text = interval.Minutes.ToString();
             intervalSecond.Text = interval.Seconds.ToString();
-
 
             IList<ByteImageDTO> imagesAuxDTO = campaign.imagesList.ToList<ByteImageDTO>();
 
@@ -85,6 +88,8 @@ namespace TPFinal.View
             }
 
             campaign.imagesList = imagesAuxDTO;
+
+            varCampaignDTO = campaign;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
