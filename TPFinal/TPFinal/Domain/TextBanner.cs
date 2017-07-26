@@ -9,7 +9,6 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un banner con texto estático
     /// </summary>
-    [Serializable]
     public class TextBanner : Banner
     {
         /// <summary>

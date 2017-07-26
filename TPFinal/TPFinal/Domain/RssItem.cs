@@ -9,7 +9,6 @@ namespace TPFinal.Domain
     /// <summary>
     /// Representa un item RSS de un banner RSS
     /// </summary>
-    [Serializable]
     public class RssItem
     {
         /// <summary>
