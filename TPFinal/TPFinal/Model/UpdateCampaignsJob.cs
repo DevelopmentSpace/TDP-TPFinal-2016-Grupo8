@@ -15,6 +15,9 @@ using Microsoft.Practices.Unity;
 
 namespace TPFinal.Model
 {
+	/// <summary>
+	/// Trabajo a realizar para actualizar las campañas
+	/// </summary>
     [PersistJobDataAfterExecutionAttribute()]
     [DisallowConcurrentExecution()]
     class UpdateCampaignsJob : IJob
@@ -31,13 +34,16 @@ namespace TPFinal.Model
             context.Trigger.JobDataMap.Put("date",date);
 
 
-            //Aqui se obtienen las campañas de la BD, pero no trae la lista de imagenes que tiene cada una
+            //Obtiene las campañas
             IEnumerable<Campaign> enume = uow.campaignRepository.GetActives(date, timeFrom, timeTo);
             List<Campaign> x = enume.ToList<Campaign>();
+
+			//Si no hay envia null
             if (x.Count == 0)
             {
                 context.Trigger.JobDataMap.Put("listCampaign", null);
             }
+			//Sino envia la lista serializada
             else
             {
                 IFormatter formatter = new BinaryFormatter();

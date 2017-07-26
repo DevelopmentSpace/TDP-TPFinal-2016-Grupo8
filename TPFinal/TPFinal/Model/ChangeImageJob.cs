@@ -11,6 +11,10 @@ using TPFinal.Domain;
 
 namespace TPFinal.Model
 {
+	
+	/// <summary>
+	/// Trabajo a ejecutar para cambiar de imagen
+	/// </summary>
     [PersistJobDataAfterExecutionAttribute()]
     [DisallowConcurrentExecution()]
     class ChangeImageJob : IJob
